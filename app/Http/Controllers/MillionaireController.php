@@ -400,4 +400,64 @@ class MillionaireController extends Controller
         $millionaire->save();
         return response()->json($millionaire);
     }
+
+    public function importQuestions(Request $request, Millionaire $millionaire)
+    {
+        $request->validate([
+            'replace_questions' => 'required|boolean',
+            'questions' => 'required|array',
+        ]);
+        $valuesToImport = $request->json()->all();
+
+        if($valuesToImport['replace_questions']){ //flag
+            $millionaire->questions = [];
+            $millionaire->save();
+        }
+
+        $questions = $millionaire->questions;
+        $success = [];
+        $questions_fail = [];
+
+
+        foreach($valuesToImport['questions'] as $value) {
+            $count_fail = count($questions_fail);
+            if(!isset($value['question']) || !isset($value['time_limit']) || !isset($value['type']) || !isset($value['answers'])) {
+                array_push($questions_fail, $value);
+            }
+            if($value['type'] != 'text' && $value['type'] != 'image') {
+                array_push($questions_fail, $value);
+            }
+
+            $new_answers = [];
+            foreach($value['answers'] as $answer) {
+                if(!isset($answer['answer']) || !isset($answer['is_correct']) || !isset($answer['is_true_or_false']) || !isset($answer['type'])) {
+                    array_push($questions_fail, $value);
+                }
+                if($answer['type'] != 'text' && $answer['type'] != 'image') {
+                    array_push($questions_fail, $value);
+                }
+                $answer['id'] = uniqid();
+                array_push($new_answers, $answer);
+            }
+
+            if($count_fail == count($questions_fail)) {
+                $value[ 'id' ] = uniqid();
+                $value[ 'answers' ] = $new_answers;
+                array_push($questions, $value);
+                array_push($success, $value);
+            }
+        }
+
+        $millionaire->questions = $questions;
+        $millionaire->save();
+
+        return response()->json(
+            [
+            'success' => $success,
+            'count_success' => count($success),
+            'fail' => $questions_fail,
+            'count_fail' => count($questions_fail)
+            ], 201
+        );
+    }
 }
