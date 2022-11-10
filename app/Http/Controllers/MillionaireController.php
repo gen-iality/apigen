@@ -244,7 +244,8 @@ class MillionaireController extends Controller
     {
         //comprobar si la pregunta esta asignada a una etapa
         foreach($millionaire->stages as $stage) {
-            if($stage['question']['id'] == $question_id) {
+            $stage_question = $stage['question'] ? $stage['question'] : null;
+            if($stage_question == $question_id) {
                 return response()->json(['error' => 'The question is assigned to a stage'], 400);
             }
         }
@@ -378,24 +379,13 @@ class MillionaireController extends Controller
     public function assignQuestionToStage(Millionaire $millionaire, $stage_id, $question_id)
     {
         $stages = $millionaire->stages;
-        $questions = $millionaire->questions;
-        $assing_question = null;
-        foreach ($questions as $question) {
-            if ($question['id'] == $question_id) {
-                $assing_question = $question;
-                //dd($assing_question);
-            }
-        }
-
         $new_stages = [];
         foreach ($stages as $stage) {
             if ($stage['id'] == $stage_id) {
-                //$stage['question_id'] = $question_id;
-                $stage['question'] = $assing_question;
+                $stage['question'] = $question_id;
             }
             array_push($new_stages, $stage);
         }
-        //dd($new_stages);
         $millionaire->stages = $new_stages;
         $millionaire->save();
         return response()->json($millionaire);
