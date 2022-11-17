@@ -10,6 +10,11 @@ use App\Event;
 use App\Http\Resources\BingoResource;
 use App\evaLib\Services\UserEventService;
 
+/**
+ * @group Bingos
+ *
+ * Dinamic bingo
+ */
 class BingoController extends Controller
 {
     /**
@@ -230,6 +235,10 @@ class BingoController extends Controller
      * @param event The event ID
      * @param Bingo bingo The Bingo model instance
      * 
+     * @bodyParam carton_value.type string required Carton value: Type Example: text | image
+     * @bodyParam carton_value.value  string required Carton value: Value Example: 'Carton-Value' | 'https://image.png'
+     * @bodyParam ballot_value.type  string required  Ballot value: Type Example: text | image
+     * @bodyParam ballot_value.value  string required  Ballot value: Value Example: 'Ballot-Value' | 'https://image.png'
      * @return The bingo object is being returned.
      */
     public function addBingoValue(Request $request, $event, Bingo $bingo)
@@ -257,6 +266,20 @@ class BingoController extends Controller
       return response()->json($bingo);
     }
 
+    /**
+     * Edit bingo values: Change value of your bingo.
+     * Please note that this will change the cards of the participants to have
+     * the updated bingo values
+     *
+     * @urlParam event string required event id Example: 61ccd3551c821b765a312864
+     * @urlParam bingo string required bingo id Example: 6373ca6c9adb543d3766b342
+     * @urlParam value_id string required value id id Example: 63438ec40dd765.50315118
+     *
+     * @bodyParam carton_value.type string Carton value: Type Example: text | image
+     * @bodyParam carton_value.value  string Carton value: Value Example: 'Carton-Value' | 'https://image.png'
+     * @bodyParam ballot_value.type  string  Ballot value: Type Example: text | image
+     * @bodyParam ballot_value.value  string  Ballot value: Value Example: 'Ballot-Value' | 'https://image.png'
+     */
     public function editBingoValues(Request $request, $event, Bingo $bingo, $value_id)
     {
         $request->validate([

@@ -162,7 +162,7 @@ class MeetingsController extends Controller
                 $attendees = [];
                 foreach($data['attendees'] as $attendee){
                     $a = Attendee::find($attendee);                    
-                    $attendees[] = isset($a)? isset($a->_id) ? $a->_id :"-" :"-".",".isset($a)? isset($a['properties']['email']) ? $a['properties']['email'] : "--": "--";
+                    //$attendees[] = isset($a)? isset($a->_id) ? $a->_id :"-" :"-".",".isset($a)? isset($a['properties']['email']) ? $a['properties']['email'] : "--": "--";
                   
                 }
                 $time = new Carbon($data['timestamp_start']);
