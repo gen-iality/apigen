@@ -12,8 +12,10 @@ class MillionaireController extends Controller
     /**
      * It creates a new Millionaire object and saves it to the database
      *
-     * @param Request request The request object.
-     * @param Event event The event that the bingo belongs to.
+     * @urlParam event_id required The id of the event to add the millionaire to.
+     * 
+     * @bodyParam name string required The name of the millionaire. Example: John Doe
+     * @bodyParam number_of_questions int required The number of questions the millionaire has. Example: 10
      *
      * @return A JSON object with the bingo created.
      */
@@ -57,9 +59,17 @@ class MillionaireController extends Controller
     /**
      * It takes a request, an event, and a bingo, and updates the bingo with the data from the request
      *
-     * @param Request request The request object.
-     * @param event The event ID
-     * @param Millionaire bingo The Millionaire model instance
+     * @urlParam event_id required The id of the event to add the millionaire to.
+     * @urlParam millionaire_id required The id of the millionaire to update.
+     * 
+     * @bodyParam name string required The name of the millionaire. Example: John Doe
+     * @bodyParam number_of_questions int required The number of questions the millionaire has. Example: 10
+     * @bodyParam time_per_question int required The time per question the millionaire has. Example: 10
+     * @bodyParam rules string required The rules of the millionaire. Example: Rules
+     * @bodyParam event_id string required The event id. Example: 5f1f1f1f1f1f1f1f1f1f1f1f
+     * @bodyParam appearance string required The appearance of the millionaire. Example: Appearance
+     * @bodyParam stages string required The stages of the millionaire. Example: Stages
+     * @bodyParam questions string required The questions of the millionaire. Example: Questions
      *
      * @return The updated bingo object.
      */
@@ -75,8 +85,8 @@ class MillionaireController extends Controller
     /**
      * It deletes a bingo and all its cards
      *
-     * @param Event event The event that the bingo belongs to.
-     * @param Millionaire bingo The Millionaire object that will be deleted.
+     * @urlParam event_id required The id of the event to add the millionaire to.
+     * @urlParam millionaire_id required The id of the millionaire to delete.
      *
      * @return 204 No Content
      */
@@ -97,8 +107,11 @@ class MillionaireController extends Controller
     /**
      * It adds a new stage to the stages array of a millionaire
      * 
-     * @param Request request The request object.
-     * @param Millionaire millionaire The id of the millionaire game
+     * @urlParam millionaire_id required The id of the millionaire to add the stage to.
+     * 
+     * @bodyParam number int required The number of the stage. Example: 1
+     * @bodyParam life_save boolean required If the stage has a life save. Example: true
+     * @bodyParam score int required The score of the stage. Example: 100
      * 
      * @return The millionaire object with the new stage added.
      */
@@ -124,9 +137,12 @@ class MillionaireController extends Controller
      * the stages array, merges the data with the stage at the index, saves the millionaire model, and
      * returns the millionaire model
      * 
-     * @param Request request The request object.
-     * @param Millionaire millionaire The id of the millionaire you want to update.
-     * @param stage_id The id of the stage you want to update.
+     * @urlParam millionaire_id required The id of the millionaire to update the stage of.
+     * @urlParam stage_id required The id of the stage to update.
+     * 
+     * @bodyParam number int required The number of the stage. Example: 1
+     * @bodyParam life_save boolean required If the stage has a life save. Example: true
+     * @bodyParam score int required The score of the stage. Example: 100
      * 
      * @return The updated millionaire object.
      */
@@ -150,8 +166,8 @@ class MillionaireController extends Controller
     /**
      * > Remove a stage from a millionaire's stages array
      * 
-     * @param Millionaire millionaire The millionaire object that you want to add the stage to.
-     * @param stage_id The id of the stage to be removed
+     * @urlParam millionaire_id required The id of the millionaire to remove the stage from.
+     * @urlParam stage_id required The id of the stage to remove.
      * 
      * @return The millionaire object is being returned.
      */
@@ -173,8 +189,12 @@ class MillionaireController extends Controller
      * It takes a request, validates it, adds a unique id to the question and answers, adds the
      * question to the questions array, and saves the millionaire
      * 
-     * @param Request request The request object
-     * @param Millionaire millionaire The id of the millionaire game
+     * @urlParam millionaire_id required The id of the millionaire to add the question to.
+     * 
+     * @bodyParam question string required The question. Example: What is the capital of France?
+     * @bodyParam time_limit int required The time limit of the question in seconds. Example: 10
+     * @bodyParam type string required The type of the question. Example: text || image
+     * @bodyParam answers array required The answers of the question. Example: [{"answer": "Paris", "is_correct": true, "is_true_or_false": true, "type": "text"}, {"answer": "London", "is_correct": false, "is_true_or_false": true, "type": "text"}]
      * 
      * @return The response is a JSON object containing the updated millionaire object.
      */
@@ -209,9 +229,12 @@ class MillionaireController extends Controller
      * question id in the questions array, merges the data with the question at the index, saves the
      * millionaire object, and returns the millionaire object
      * 
-     * @param Request request The request object.
-     * @param Millionaire millionaire The Millionaire model instance
-     * @param question_id The id of the question you want to update.
+     * @urlParam millionaire_id required The id of the millionaire to update the question of.
+     * @urlParam question_id required The id of the question to update.
+     * 
+     * @bodyParam question string required The question. Example: What is the capital of France?
+     * @bodyParam time_limit int required The time limit of the question in seconds. Example: 10
+     * @bodyParam type string required The type of the question. Example: text || image
      * 
      * @return The updated millionaire object.
      */
@@ -235,8 +258,8 @@ class MillionaireController extends Controller
     /**
      * > Remove a question from the questions array of a millionaire object
      * 
-     * @param Millionaire millionaire The Millionaire object that we're working with.
-     * @param question_id the id of the question to be removed
+     * @urlParam millionaire_id required The id of the millionaire to remove the question from.
+     * @urlParam question_id required The id of the question to remove.
      * 
      * @return The millionaire object with the new questions array.
      */
@@ -266,9 +289,13 @@ class MillionaireController extends Controller
     /**
      * It adds an answer to a question in a millionaire game
      * 
-     * @param Request request The request object.
-     * @param Millionaire millionaire The millionaire object that we want to add the answer to.
-     * @param question_id The id of the question to which the answer will be added.
+     * @urlParam millionaire_id required The id of the millionaire to add the answer to.
+     * @urlParam question_id required The id of the question to add the answer to.
+     * 
+     * @bodyParam answer string required The answer. Example: Paris
+     * @bodyParam is_correct boolean required The answer. Example: true
+     * @bodyParam is_true_or_false boolean required The answer. Example: false
+     * @bodyParam type string required The answer. Example: text || image
      * 
      * @return The millionaire object with the new answer added to the question.
      */
@@ -301,10 +328,14 @@ class MillionaireController extends Controller
     /**
      * It updates an answer of a question of a millionaire
      * 
-     * @param Request request The request object.
-     * @param Millionaire millionaire The millionaire object that we want to update.
-     * @param question_id The id of the question that the answer belongs to.
-     * @param answer_id The id of the answer to be updated.
+     * @urlParam millionaire_id required The id of the millionaire to update the answer of.
+     * @urlParam question_id required The id of the question to update the answer of.
+     * @urlParam answer_id required The id of the answer to update.
+     * 
+     * @bodyParam answer string required The answer. Example: Paris
+     * @bodyParam is_correct boolean required The answer. Example: true
+     * @bodyParam is_true_or_false boolean required The answer. Example: false
+     * @bodyParam type string required The answer. Example: text || image
      * 
      * @return The millionaire object with the updated answer.
      */
@@ -338,9 +369,9 @@ class MillionaireController extends Controller
     /**
      * It removes an answer from a question in a millionaire game
      * 
-     * @param Millionaire millionaire the millionaire object
-     * @param question_id The id of the question that the answer belongs to.
-     * @param answer_id The id of the answer to be removed.
+     * @urlParam millionaire_id required The id of the millionaire to remove the answer from.
+     * @urlParam question_id required The id of the question to remove the answer from.
+     * @urlParam answer_id required The id of the answer to remove.
      * 
      * @return The millionaire object with the updated questions.
      */
@@ -370,9 +401,9 @@ class MillionaireController extends Controller
     /**
      * It assigns a question to a stage.
      * 
-     * @param Millionaire millionaire The Millionaire object that you want to assign the question to.
-     * @param stage_id The id of the stage you want to assign the question to.
-     * @param question_id The id of the question you want to assign to the stage.
+     * @urlParam millionaire_id required The id of the millionaire to assign the question to.
+     * @urlParam stage_id required The id of the stage to assign the question to.
+     * @urlParam question_id required The id of the question to assign.
      * 
      * @return The question is being returned.
      */
@@ -391,6 +422,27 @@ class MillionaireController extends Controller
         return response()->json($millionaire);
     }
 
+    /**
+     * It takes a request, validates it, and then adds the questions to the database
+     * 
+     * @urlParam millionaire_id required The id of the millionaire to add the questions to.
+     * 
+     * @bodyParam replace_questions boolean required If you want to replace the questions or not. Example: true
+     * @bodyParam questions array required The questions to be imported. Example: [
+     *  {"question":"¿Cuál es la capital de Francia?","answers":[
+     *      {"answer":"Paris","is_correct":true,"is_true_or_false":false,"type":"text"},
+     *      {"answer":"Madrid","is_correct":false,"is_true_or_false":false,"type":"text"},
+     *      {"answer":"Londres","is_correct":false,"is_true_or_false":false,"type":"text"},
+     *      {"answer":"Roma","is_correct":false,"is_true_or_false":false,"type":"text"}
+     *  ]},
+     * ]
+     * 
+     * @return The response is a JSON object with the following properties:
+     * - success: an array of the questions that were successfully imported
+     * - count_success: the number of questions that were successfully imported
+     * - fail: an array of the questions that were not successfully imported
+     * - count_fail: the number of questions that were not successfully imported
+     */
     public function importQuestions(Request $request, Millionaire $millionaire)
     {
         $request->validate([
