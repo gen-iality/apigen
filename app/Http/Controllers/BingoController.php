@@ -15,8 +15,12 @@ class BingoController extends Controller
     /**
      * It creates a new Bingo object and saves it to the database
      * 
-     * @param Request request The request object.
-     * @param Event event The event that the bingo belongs to.
+     * @urlParam event_id required The id of the event to add the bingo to.
+     * 
+     * @bodyParam name string required The name of the bingo.
+     * @bodyParam dimensions.format string required The format of the bingo. Example: 3x3, 4x4, 5x5
+     * @bodyParam dimensions.amount int required The amount of cells in the bingo. Example: 9, 16, 25
+     * @bodyParam dimensions.minimun_values int required The minimun amount of values in the bingo. Example: 5, 7, 9
      * 
      * @return A JSON object with the bingo created.
      */
@@ -65,30 +69,38 @@ class BingoController extends Controller
     /**
      * It takes a request, an event, and a bingo, and updates the bingo with the data from the request
      * 
-     * @param Request request The request object.
-     * @param event The event ID
-     * @param Bingo bingo The Bingo model instance
+     * @urlParam event_id required The id of the event to add the bingo to.
+     * @urlParam bingo_id required The id of the bingo to update.
+     * 
+     * @bodyParam name string required The name of the bingo.
+     * @bodyParam event_id string required The id of the event to add the bingo to.
+     * @bodyParam bingo_appearance string required The appearance of the bingo.
+     * @bodyParam amount_of_bingo int required The amount of bingos.
+     * @bodyParam regulation string required The regulation of the bingo.
+     * @bodyParam bingo_values array required The values of the bingo.
+     * @bodyParam random_bingo_values array required The random values of the bingo.
+     * @bodyParam dimensions array required The dimensions of the bingo.
      * 
      * @return The updated bingo object.
      */
     public function update(Request $request, $event, Bingo $bingo)
     {
-	$data = $request->json()->all();
-	$bingo->fill($data);
-	$bingo->save();
+	    $data = $request->json()->all();
+      $bingo->fill($data);
+      $bingo->save();
 
-	if ($request->query('reset_bingo') === "yes") {
-	    UserEventService::resetBingoCardsForAttendees($bingo);
-	}
+      if ($request->query('reset_bingo') === "yes") {
+          UserEventService::resetBingoCardsForAttendees($bingo);
+      }
 
-	return response()->json($bingo);
+      return response()->json($bingo);
     }
 
     /**
      * It deletes a bingo and all its cards
      * 
-     * @param Event event The event that the bingo belongs to.
-     * @param Bingo bingo The Bingo object that will be deleted.
+     * @urlParam event_id required The id of the event to add the bingo to.
+     * @urlParam bingo_id required The id of the bingo to delete.
      * 
      * @return 204 No Content
      */
@@ -122,8 +134,8 @@ class BingoController extends Controller
     /**
      * It generates a random array of values from the original array of values
      * 
-     * @param event The event that triggered the listener.
-     * @param Bingo bingo The Bingo model instance.
+     * @urlParam event_id required The id of the event to add the bingo to.
+     * @urlParam bingo_id required The id of the bingo to generate the random values for.
      * 
      * @return A JSON object with the Bingo object.
      */
@@ -144,20 +156,29 @@ class BingoController extends Controller
       return response()->json($bingo);
     }
 
+    /**
+     * > Reset all bingo cards for all attendees of a bingo event
+     * 
+     * @urlParam event_id required The id of the event to add the bingo to.
+     * @urlParam bingo_id required The id of the bingo to reset the cards for.
+     * 
+     * @return A JSON response with a message and a 200 status code.
+     */
     public function resetBingoCards($event, Bingo $bingo)
     {
-	UserEventService::resetBingoCardsForAttendees($bingo);
-
-	return response()->json(['message' => 'New bingo cards generated for all attendees'], 200);
+	    UserEventService::resetBingoCardsForAttendees($bingo);
+	    return response()->json(['message' => 'New bingo cards generated for all attendees'], 200);
     }
 
     /**
      * It takes a JSON array of objects, each object containing a `carton_value` and a `ballot_value`
      * property, and saves them to the database
      * 
-     * @param Request request The request object.
-     * @param event The event ID
-     * @param Bingo bingo The Bingo model instance.
+     * @urlParam event_id required The id of the event to add the bingo to.
+     * @urlParam bingo_id required The id of the bingo to add the bingo cards to.
+     * 
+     * @bodyParam replace_data boolean required Whether to replace the existing data or not.
+     * @bodyParam data array required The array of objects to save.
      * 
      * @return The response is a json object with the following structure:
      * ```
@@ -226,19 +247,23 @@ class BingoController extends Controller
     /**
      * It adds a value to the bingo values array
      * 
-     * @param Request request The request object
-     * @param event The event ID
-     * @param Bingo bingo The Bingo model instance
+     * @urlParam event_id required The id of the event to add the bingo to.
+     * @urlParam bingo_id required The id of the bingo to add the bingo values to.
+     * 
+     * @bodyParam carton_value.type string required The type of the carton value.
+     * @bodyParam carton_value.value string required The value of the carton value.
+     * @bodyParam ballot_value.type string required The type of the ballot value.
+     * @bodyParam ballot_value.value string required The value of the ballot value.
      * 
      * @return The bingo object is being returned.
      */
     public function addBingoValue(Request $request, $event, Bingo $bingo)
     {
       $request->validate([
-	'carton_value.type' => 'required|string|in:text,image',
-	'carton_value.value' => 'required|string',
-	'ballot_value.type' =>  'required|string|in:text,image',
-	'ballot_value.value' =>  'required|string',
+	      'carton_value.type' => 'required|string|in:text,image',
+	      'carton_value.value' => 'required|string',
+	      'ballot_value.type' =>  'required|string|in:text,image',
+	      'ballot_value.value' =>  'required|string',
       ]);
 
       $value = $request->json()->all();
@@ -257,37 +282,56 @@ class BingoController extends Controller
       return response()->json($bingo);
     }
 
+    /**
+     * > This function updates a bingo value in a bingo game
+     * 
+     * @urlParam event_id required The id of the event to add the bingo to.
+     * @urlParam bingo_id required The id of the bingo to update the bingo values to.
+     * @urlParam value_id required The id of the bingo value to update.
+     * 
+     * @bodyParam carton_value.type string required The type of the carton value. Example: text || image
+     * @bodyParam carton_value.value string required The value of the carton value. Example: "value"
+     * @bodyParam ballot_value.type string required The type of the ballot value. Example: text || image
+     * @bodyParam ballot_value.value string required The value of the ballot value. Example: "value"
+     * 
+     * @return The bingo object is being returned.
+     */
     public function editBingoValues(Request $request, $event, Bingo $bingo, $value_id)
     {
-        $request->validate([
-          'carton_value.type' => 'string|in:text,image',
-          'carton_value.value' => 'string',
-          'ballot_value.type' =>  'string|in:text,image',
-          'ballot_value.value' =>  'string',
-        ]);
+      $request->validate([
+        'carton_value.type' => 'string|in:text,image',
+        'carton_value.value' => 'string',
+        'ballot_value.type' =>  'string|in:text,image',
+        'ballot_value.value' =>  'string',
+      ]);
 
-        $value = $request->json()->all();
-        $value['id'] = $value_id;
-
-        //if(in_array($value, $bingo->bingo_values, true)) {
-                //return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
-        //}
-	UserEventService::updateBingoValues($bingo, $value);
-
-        $bingoValues = [];
-        foreach($bingo->bingo_values as $bingoValue) {
-                if(isset($bingoValue['id']) && $bingoValue['id'] === $value_id) {
-                  $bingoValue = $value;
-                }
-                array_push($bingoValues, $bingoValue);
-        }
-
-        $bingo->bingo_values = $bingoValues;
-        $bingo->save();
-
-        return response()->json($bingo);
+      $value = $request->json()->all();
+      $value['id'] = $value_id;
+      //if(in_array($value, $bingo->bingo_values, true)) {
+              //return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
+      //}
+	    UserEventService::updateBingoValues($bingo, $value);
+      $bingoValues = [];
+      foreach($bingo->bingo_values as $bingoValue) {
+              if(isset($bingoValue['id']) && $bingoValue['id'] === $value_id) {
+                $bingoValue = $value;
+              }
+              array_push($bingoValues, $bingoValue);
+      }
+      $bingo->bingo_values = $bingoValues;
+      $bingo->save();
+      return response()->json($bingo);
     }
 
+    /**
+     * It deletes a value from the Bingo model
+     * 
+     * @urlParam event_id required The id of the event to add the bingo to.
+     * @urlParam bingo_id required The id of the bingo to delete the bingo values to.
+     * @urlParam value_id required The id of the bingo value to delete.
+     * 
+     * @return The bingo object with the updated bingo_values array.
+     */
     public function deleteBingoValue($event, Bingo $bingo, $value_id)
     {
       $bingoValues = $bingo->bingo_values;
