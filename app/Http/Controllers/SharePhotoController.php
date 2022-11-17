@@ -10,12 +10,26 @@ use Illuminate\Http\Request;
 class SharePhotoController extends Controller
 {
 
+    /**
+     * It returns all the share photos in the database
+     * 
+     * @return All the share_photos in the database.
+     */
     public function index()
     {
         $share_photos = SharePhoto::all();
         return response()->json($share_photos);
     }
 
+    /**
+     * It takes a request, validates it, and then saves it to the database
+     * 
+     * 
+     * @bodyParam title string required The title of the share_photo.
+     * @bodyParam event_id int required The id of the event to add the share_photo to.
+     * 
+     * @return A JSON object with the share_photo data.
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -41,12 +55,25 @@ class SharePhotoController extends Controller
         return response()->json($share_photo, 201);
     }
 
+    /**
+     * It returns the share photo of the event.
+     * 
+     * @urlParam event_id string required The id of the event to get the share photo of.
+     */
     public function SharePhotobyEvent(string $event_id)
     {
         $share_photo = SharePhoto::where('event_id', $event_id)->first();
         return $share_photo;
     }
 
+    /**
+     * It finds the share_photo by id and returns it.
+     * 
+     * @urlParam id string required The id of the share_photo to get.
+     *
+     * 
+     * @return The share_photo object
+     */
     public function show($share_photo)
     {
         $share_photo = SharePhoto::findOrFail($share_photo);
@@ -54,6 +81,21 @@ class SharePhotoController extends Controller
         return $share_photo;
     }
 
+    /**
+     * It updates the share_photo with the data from the request.
+     * 
+     * @urlParam id string required The id of the share_photo to update.
+     * 
+     * @bodyParam title string required The title of the share_photo.
+     * @bodyParam event_id int required The id of the event to add the share_photo to.
+     * @bodyParam tematic string required The tematic of the share_photo.
+     * @bodyParam published boolean required The published status of the share_photo.
+     * @bodyParam active boolean required The active status of the share_photo.
+     * @bodyParam points_per_like int required The points per like of the share_photo.
+     * @bodyParam posts array required The posts of the share_photo.
+     * 
+     * @return The updated share_photo object.
+     */
     public function update(Request $request, $share_photo)
     {
         $data = $request->json()->all();
@@ -63,6 +105,18 @@ class SharePhotoController extends Controller
         return response()->json($share_photo, 200);
     }
 
+    /**
+     * It adds a post to a share photo
+     * 
+     * @urlParam id string required The id of the share_photo to add the post to.
+     * 
+     * @bodyParam event_user_id string required The id of the event user.
+     * @bodyParam image string required The image of the post.
+     * @bodyParam thumb string required The thumb of the post.
+     * @bodyParam title string required The title of the post.
+     * 
+     * @return The response is a json with the share_photo object
+     */
     public function addOnePost(Request $request, SharePhoto $share_photo)
     {
         $request->validate([
@@ -106,6 +160,14 @@ class SharePhotoController extends Controller
         return response()->json($share_photo, 200);
     }
 
+    /**
+     * It removes a post from a share photo
+     * 
+     * @urlParam id string required The id of the share_photo to remove the post from.
+     * @urlParam post_id string required The id of the post to remove.
+     * 
+     * @return A JSON object of the updated SharePhoto object.
+     */
     public function removePost(SharePhoto $share_photo, $post_id)
     {
         $posts = isset($share_photo->posts) ? $share_photo->posts : [];
@@ -121,6 +183,16 @@ class SharePhotoController extends Controller
         return response()->json($share_photo, 200);
     }
 
+    /**
+     * It adds a like to a post in a share photo
+     * 
+     * @urlParam id string required The id of the share_photo to add the like to.
+     * @urlParam post_id string required The id of the post to add the like to.
+     * 
+     * @bodyParam event_user_id string required The id of the event user.
+     * 
+     * @return The updated share_photo object
+     */
     public function addOneLike(Request $request, SharePhoto $share_photo, $post_id)
     {
         $request->validate([
@@ -153,6 +225,17 @@ class SharePhotoController extends Controller
         return response()->json($share_photo, 200);
     }
 
+    /**
+     * It takes a post id and an event user id, finds the post with the given id, removes the like with
+     * the given event user id, and saves the updated post
+     * 
+     * @urlParam id string required The id of the share_photo to remove the like from.
+     * @urlParam post_id string required The id of the post to remove the like from.
+     * 
+     * @bodyParam event_user_id string required The id of the event user.
+     * 
+     * @return The updated share_photo object.
+     */
     public function unlike(Request $request, SharePhoto $share_photo, $post_id)
     {
         $request->validate([
@@ -180,6 +263,13 @@ class SharePhotoController extends Controller
         return response()->json($share_photo, 200);
     }
 
+    /**
+     * It deletes the share photo from the database.
+     * 
+     * @urlParam id string required The id of the share_photo to delete.
+     * 
+     * @return 204
+     */
     public function destroy($share_photo)
     {
 
