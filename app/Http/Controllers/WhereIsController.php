@@ -7,10 +7,16 @@ use App\Event;
 use App\WhereIs;
 use Illuminate\Http\Request;
 
+/**
+ * @group WhereIs
+ *
+ */
+
 class WhereIsController extends Controller
 {
 
     /**
+     * _index:_ It returns all the where_is in the database
      * It returns all the rows in the `where_is` table as a JSON object
      * 
      * @return All the data from the WhereIs table.
@@ -22,6 +28,7 @@ class WhereIsController extends Controller
     }
 
     /**
+     * _store:_ It takes a request, validates it, and then saves it to the database
      * It takes the event_id from the request, finds the event in the database, and then adds a new key
      * to the event's dynamics array
      * 
@@ -56,6 +63,8 @@ class WhereIsController extends Controller
     }
 
     /**
+     * 
+     * _whereisByEvent:_ It takes an event_id and returns all the where_is objects associated with that event
      * It returns the where_is object for the event_id passed in.
      * 
      * @urlParam event_id string required The id of the event to get the where_is for.
@@ -69,6 +78,7 @@ class WhereIsController extends Controller
     }
 
     /**
+     * _show:_ It returns the where_is object for the id passed in.
      * It shows the where_is
      * 
      * @urlParam where_is_id string required The id of the where_is to show.
@@ -83,6 +93,7 @@ class WhereIsController extends Controller
     }
 
     /**
+     * _update:_ It takes a request, validates it, and then updates the where_is object in the database
      * It updates the where_is table with the data from the request.
      * 
      * @urlParam where_is_id string required The id of the where_is to update.
@@ -104,6 +115,7 @@ class WhereIsController extends Controller
     }
 
     /**
+     * _addOneResponse:_ Add one response to the where_is object
      * It adds a response to a WhereIs
      * 
      * @urlParam where_is_id string required The id of the where_is to add the response to.
@@ -144,6 +156,7 @@ class WhereIsController extends Controller
     }
 
     /**
+     * _removeOneResponse:_ Remove one response from the where_is object
      * > Remove a response from a where is
      * 
      * @urlParam where_is_id string required The id of the where_is to remove the response from.
@@ -166,6 +179,7 @@ class WhereIsController extends Controller
     }
 
     /**
+     * _destroy:_ It deletes the where_is object from the database
      * > This function deletes a where_is object and sets the where_is boolean in the event object to
      * false
      * 

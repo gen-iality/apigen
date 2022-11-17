@@ -10,6 +10,11 @@ use App\Event;
 use App\Http\Resources\BingoResource;
 use App\evaLib\Services\UserEventService;
 
+/**
+ * @group Bingo
+ *
+ */
+
 class BingoController extends Controller
 {
     /**
