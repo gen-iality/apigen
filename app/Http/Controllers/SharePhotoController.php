@@ -16,7 +16,7 @@ class SharePhotoController extends Controller
 {
 
     /**
-     * _index:_ It returns all the share_photos in the database
+     * _index_: It returns all the share_photos in the database
      * It returns all the share photos in the database
      * 
      * @return All the share_photos in the database.
@@ -28,7 +28,7 @@ class SharePhotoController extends Controller
     }
 
     /**
-     * _store:_ It takes a request, validates it, and then saves it to the database
+     * _store_: It takes a request, validates it, and then saves it to the database
      * It takes a request, validates it, and then saves it to the database
      * 
      * 
@@ -63,7 +63,7 @@ class SharePhotoController extends Controller
     }
 
     /**
-     * _sharePhotoByEvent:_ It takes an event_id and returns all the share_photos associated with that event
+     * _sharePhotoByEvent_: It takes an event_id and returns all the share_photos associated with that event
      * It returns the share photo of the event.
      * 
      * @urlParam event_id string required The id of the event to get the share photo of.
@@ -75,7 +75,7 @@ class SharePhotoController extends Controller
     }
 
     /**
-     * _show:_ It takes a share_photo_id and returns the share_photo associated with that id
+     * _show_: It takes a share_photo_id and returns the share_photo associated with that id
      * It finds the share_photo by id and returns it.
      * 
      * @urlParam id string required The id of the share_photo to get.
@@ -91,7 +91,7 @@ class SharePhotoController extends Controller
     }
 
     /**
-     * _update:_ It takes a request, validates it, and then updates the share_photo in the database
+     * _update_: It takes a request, validates it, and then updates the share_photo in the database
      * It updates the share_photo with the data from the request.
      * 
      * @urlParam id string required The id of the share_photo to update.
@@ -116,7 +116,7 @@ class SharePhotoController extends Controller
     }
 
     /**
-     * _addOnePost:_ It takes a request, validates it, and then adds a post to the share_photo in the database
+     * _addOnePost_: It takes a request, validates it, and then adds a post to the share_photo in the database
      * It adds a post to a share photo
      * 
      * @urlParam id string required The id of the share_photo to add the post to.
@@ -172,7 +172,7 @@ class SharePhotoController extends Controller
     }
 
     /**
-     * _removePost:_ It takes a request, validates it, and then removes a post from the share_photo in the database
+     * _removePost_: It takes a request, validates it, and then removes a post from the share_photo in the database
      * It removes a post from a share photo
      * 
      * @urlParam id string required The id of the share_photo to remove the post from.
@@ -196,7 +196,7 @@ class SharePhotoController extends Controller
     }
 
     /**
-     * _addOneLike:_ It takes a request, validates it, and then adds a like to the share_photo in the database
+     * _addOneLike_: It takes a request, validates it, and then adds a like to the share_photo in the database
      * It adds a like to a post in a share photo
      * 
      * @urlParam id string required The id of the share_photo to add the like to.
@@ -239,7 +239,7 @@ class SharePhotoController extends Controller
     }
 
     /**
-     * _unlikePost:_ It takes a request, validates it, and then removes a like from the share_photo in the database
+     * _unlikePost_: It takes a request, validates it, and then removes a like from the share_photo in the database
      * It takes a post id and an event user id, finds the post with the given id, removes the like with
      * the given event user id, and saves the updated post
      * 
@@ -278,7 +278,7 @@ class SharePhotoController extends Controller
     }
 
     /**
-     * _destroy:_ It takes a request, validates it, and then removes a share_photo from the database
+     * _destroy_: It takes a request, validates it, and then removes a share_photo from the database
      * It deletes the share photo from the database.
      * 
      * @urlParam id string required The id of the share_photo to delete.

@@ -18,6 +18,7 @@ use App\evaLib\Services\UserEventService;
 class BingoController extends Controller
 {
     /**
+     * _index_: It returns all the bingos in the database
      * It creates a new Bingo object and saves it to the database
      * 
      * @urlParam event_id required The id of the event to add the bingo to.
@@ -72,6 +73,7 @@ class BingoController extends Controller
     }
 
     /**
+     * _update_: It takes a request, validates it, and then updates it to the database
      * It takes a request, an event, and a bingo, and updates the bingo with the data from the request
      * 
      * @urlParam event_id required The id of the event to add the bingo to.
@@ -102,6 +104,7 @@ class BingoController extends Controller
     }
 
     /**
+     * _destroy_: It takes a bingo and deletes it from the database
      * It deletes a bingo and all its cards
      * 
      * @urlParam event_id required The id of the event to add the bingo to.
@@ -137,6 +140,7 @@ class BingoController extends Controller
     }
 
     /**
+     * _createRandomBingoValues_: It takes a bingo and creates random values for it
      * It generates a random array of values from the original array of values
      * 
      * @urlParam event_id required The id of the event to add the bingo to.
@@ -162,6 +166,7 @@ class BingoController extends Controller
     }
 
     /**
+     * _resetBingoCards_: It takes a bingo and resets all the cards for it
      * > Reset all bingo cards for all attendees of a bingo event
      * 
      * @urlParam event_id required The id of the event to add the bingo to.
@@ -176,6 +181,7 @@ class BingoController extends Controller
     }
 
     /**
+     * _importBingoValues_: It takes a request, validates it, and then imports the values to the database
      * It takes a JSON array of objects, each object containing a `carton_value` and a `ballot_value`
      * property, and saves them to the database
      * 
@@ -250,6 +256,7 @@ class BingoController extends Controller
     }
 
     /**
+     * _addBingoValue_: It takes a request, validates it, and then adds the value to the database
      * It adds a value to the bingo values array
      * 
      * @urlParam event_id required The id of the event to add the bingo to.
@@ -288,7 +295,9 @@ class BingoController extends Controller
     }
 
     /**
-     * > This function updates a bingo value in a bingo game
+     * _editBingoValues_: It takes a request, validates it, and then edits the values in the database
+     * 
+     * This function updates a bingo value in a bingo game
      * 
      * @urlParam event_id required The id of the event to add the bingo to.
      * @urlParam bingo_id required The id of the bingo to update the bingo values to.
@@ -329,6 +338,7 @@ class BingoController extends Controller
     }
 
     /**
+     * _deleteBingoValues_: It takes a request, validates it, and then deletes the values in the database
      * It deletes a value from the Bingo model
      * 
      * @urlParam event_id required The id of the event to add the bingo to.
