@@ -100,7 +100,7 @@ class EventUserController extends Controller
                 'properties' => [
                     'names' => $eventUser->properties['names'],
                     'email' => $eventUser->properties['email'],
-                    'picture' => $userImage->picture,
+                    'picture' => isset($userImage->picture) ? $userImage->picture : 'https://www.gravatar.com/avatar/?d=mp&f=y',
                 ],
                 'bingo' => null,
             ];
