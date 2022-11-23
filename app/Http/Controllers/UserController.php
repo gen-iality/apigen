@@ -117,13 +117,13 @@ class UserController extends UserControllerWeb
         $result->save();
         $result = Account::find($result->_id);
 
-        Mail::to($result)
-            ->queue(
-                new  \App\Mail\UserRegistrationMail($result)
-            );
-        //generate notification
-        app('App\Http\Controllers\NotificationController')
-        ->addNotification('Tienes un plan free activo', $result->_id);
+        // Mail::to($result)
+        //     ->queue(
+        //         new  \App\Mail\UserRegistrationMail($result)
+        //     );
+        // //generate notification
+        // app('App\Http\Controllers\NotificationController')
+        // ->addNotification('Tienes un plan free activo', $result->_id);
         return $result;
     }
 
