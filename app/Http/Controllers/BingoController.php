@@ -267,6 +267,10 @@ class BingoController extends Controller
      * @bodyParam ballot_value.type string required The type of the ballot value.
      * @bodyParam ballot_value.value string required The value of the ballot value.
      * 
+     * @bodyParam carton_value.type string required Carton value: Type Example: text | image
+     * @bodyParam carton_value.value  string required Carton value: Value Example: 'Carton-Value' | 'https://image.png'
+     * @bodyParam ballot_value.type  string required  Ballot value: Type Example: text | image
+     * @bodyParam ballot_value.value  string required  Ballot value: Value Example: 'Ballot-Value' | 'https://image.png'
      * @return The bingo object is being returned.
      */
     public function addBingoValue(Request $request, $event, Bingo $bingo)

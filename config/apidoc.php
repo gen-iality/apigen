@@ -201,7 +201,10 @@ return [
                         '*/documents/*', 
                     // Notifications
                         '*/notifications',
-                        '*/notifications/*'
+                        '*/notifications/*',
+		    // Bingos
+                        '*/bingos',
+                        '*/bingos/*'
                 ],  
 
                 /*
