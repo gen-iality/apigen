@@ -476,12 +476,12 @@ class EventUserController extends Controller
         // }
 
         if (empty($noSendMail)) {
-            $urlOrigin = $request->header('origin');
-            Mail::to($email)
-                ->queue(
-                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
-                    new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name, $urlOrigin)
-                );
+            // $urlOrigin = $request->header('origin');
+            // Mail::to($email)
+            //     ->queue(
+            //         //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+            //         new \App\Mail\InvitationMailSimple("", $event, $eventUser, $image, "", $event->name, $urlOrigin)
+            //     );
         }
 
         if ($event_id == '61a8443fa3023d1c117f9e13') {
