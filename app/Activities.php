@@ -119,6 +119,7 @@ class Activities extends Moloquent
         "password_meeting",     
         "latitude",
         "length" , 
-        "activity_type"
+        "activity_type",
+        "discount"
     ];
 }
