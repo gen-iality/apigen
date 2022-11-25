@@ -22,6 +22,7 @@ use DateTime;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Pagination\Paginator;
 use Log;
 use Mail;
 use Validator;
@@ -121,7 +122,9 @@ class EventUserController extends Controller
             array_push($attendeesist, $dataEventUser);
         }
 
-        return $attendeesist;
+	$response = new Paginator($attendeesist, 10);
+
+        return $response;
     }
 
     /**
