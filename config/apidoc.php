@@ -204,8 +204,11 @@ return [
                         '*/notifications/*',
 		    // Bingos
                         '*/bingos',
-                        '*/bingos/*'
-                ],  
+                        '*/bingos/*',
+		    // Bingo cards
+                        '*/bingocards',
+                        '*/bingocards/*'
+                ],
 
                 /*
                  * Match only routes registered under this version. This option is ignored for Laravel router.
