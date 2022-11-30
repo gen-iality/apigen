@@ -21,11 +21,23 @@ class MillionaireController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:250',
-            'number_of_questions' => 'required|numeric',
+            'number_of_stages' => 'required|numeric',
         ]);
 
         $data = $request->json()->all();
         $data['event_id'] = $event->_id;
+        //crear numero de etapas 
+        $data['stages'] = [];
+        $score_base = 100;
+        for ($i = 0; $i < $data['number_of_stages']; $i++) {
+            $data['stages'][$i] = [
+                'id' => uniqid(),
+                'number' => ($i + 1),
+                'life_save' => false,
+                'score' => $score_base * ($i + 1),
+                'question' => null
+            ];
+        }
         $millionaire = Millionaire::create($data);
 
         //Nuevo atributo para el bingo creado. $event->dynamics.
@@ -65,11 +77,39 @@ class MillionaireController extends Controller
      */
     public function update(Request $request, $event, Millionaire $millionaire)
     {
+        $request->validate([
+            'number_of_stages' => 'required|numeric',
+        ]);
         $data = $request->json()->all();
+        //comprobar si la cantidad de etapas es la misma
+        switch ($data['number_of_stages']) {
+            case $data['number_of_stages'] > $millionaire->number_of_stages:
+                $score_base = 100;
+                $stages = $millionaire->stages;
+                for ($i = $millionaire->number_of_stages; $i < $data['number_of_stages']; $i++) {
+                    $stages[$i] = [
+                        'id' => uniqid(),
+                        'number' => ($i + 1),
+                        'life_save' => false,
+                        'score' => $score_base * ($i + 1),
+                        'question' => null
+                    ];
+                }
+                $millionaire->stages = $stages;
+                break;
+            case $data['number_of_stages'] < $millionaire->number_of_stages:
+                $stages = $millionaire->stages;
+                for ($i = $millionaire->number_of_stages; $i > $data['number_of_stages']; $i--) {
+                    unset($stages[$i - 1]);
+                }
+                $millionaire->stages = $stages;
+            break;
+        }
+        
         $millionaire->fill($data);
         $millionaire->save();
 
-        return response()->json($millionaire);
+        return response()->json($millionaire, 200);
     }
 
     /**
