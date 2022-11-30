@@ -152,17 +152,17 @@ class RSVPController extends Controller implements ShouldQueue
         $data = $request->json()->all();
 	$message->raw_data = $data; // Necesario para reenviar mails en caso de fallos
 
-        if($data['eventUsersIds'] === 'all')
-        {               
+	// Enviar correos a todos los asistentes
+        if($data['eventUsersIds'] === 'all') {
             $query = Attendee::where("event_id", $event->_id)->pluck('_id')->toArray();
             $data['eventUsersIds'] = $query;
         }
-        
+
         $data["message"] = $data["message"] == "" || $data["message"] == null ? "  " : $data["message"];
         //Si esto no existe que?
         $eventUsersIds = $data['eventUsersIds'];
 
-        
+
         //~~~~~~~~~~~~~~~~~~~~~~
         //Create RSVP
         $subject = $data['subject'];
@@ -173,7 +173,7 @@ class RSVPController extends Controller implements ShouldQueue
         $message->footer = isset($data['footer']) ? $data['footer'] : "";
 
         // $image   = "https://storage.googleapis.com/herba-images/evius/events/8KOZm7ZxYVst444wIK7V9tuELDRTRwqDUUDAnWzK.png";
-      
+
         $message->image = isset($data['image']) ? $data['image'] : "";
         $message->event_id = $event->id;
         // $message->number_of_recipients = count($eventUsersIds);
@@ -241,7 +241,7 @@ class RSVPController extends Controller implements ShouldQueue
                 'user_id' => $eventUser->id,
                 'event_user_id' => $eventUser->id,
             ]
-            );            
+            );
             // $message->messageUsers()->save($messageUser);
 
             $messageLog = Message::find($message->id);
@@ -258,9 +258,9 @@ class RSVPController extends Controller implements ShouldQueue
                 $include_date = $data["include_date"];
             }
 
-            $data["include_ical_calendar"] = isset($data["include_ical_calendar"]) ? $data["include_ical_calendar"]  : true; 
+            $data["include_ical_calendar"] = isset($data["include_ical_calendar"]) ? $data["include_ical_calendar"]  : true;
             $data["include_login_button"] = isset($data["include_login_button"]) ? $data["include_login_button"]  : true;
-            
+
             //$anonymus = isset($eventUser->anonymus) ? $eventUser->anonymus : false;
             if (!$eventUser->anonymous) {
                 // sino existe la propiedad names lo más posible es que el usuario tenga un error
@@ -271,11 +271,9 @@ class RSVPController extends Controller implements ShouldQueue
             $urlOrigin = $request->header('origin');
             Mail::to($email)
                 ->queue(
-                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer, 
+                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer,
                     $message->subject, $urlOrigin, $image_header, $content_header, $image_footer, $include_date, $data, $messageLog)
                 );
-                
- 
         }
     }
 
