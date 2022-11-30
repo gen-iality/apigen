@@ -352,6 +352,10 @@ class UserController extends UserControllerWeb
         return $Account;
     }
 
+    /**
+     * _validateEmail_: Validate Email for create a new user
+     * @bodyParam email string required Example: test@test.com
+     */
     public function validateEmail(Request $request)
     {
         $request->validate([
