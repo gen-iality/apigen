@@ -254,28 +254,26 @@ class RSVP extends Mailable implements ShouldQueue
         $from = !empty($organization) ? $organization->name : "Evius Event ";        
         $emailOrganization = !empty($organization->email) ? $organization->email : "alerts@evius.co";
 
-        $gfService = new GoogleFiles();
         $event = $this->event;
         
         try {
-
-            ob_start(); 
-            $qr = QRCode::text($this->eventUser->_id)->setSize(8)->setMargin(4)->png();
-            $page = ob_get_contents();
-            ob_end_clean();
-            $type = "png";
-            $image = $page;
-            $url = $gfService->storeFile($image, "".$this->eventUser->_id.".".$type);
-
-            $this->qr = (string) $url;
-            $this->logo = url($logo_evius);
-
-
+	    if($event->type_event == "physicalEvent" || $event->type_event == "hybridEvent") {
+		$gfService = new GoogleFiles();
+            	ob_start();
+            	$qr = QRCode::text($this->eventUser->_id)->setSize(8)->setMargin(4)->png();
+            	$page = ob_get_contents();
+            	ob_end_clean();
+            	$type = "png";
+            	$image = $page;
+            	$url = $gfService->storeFile($image, "".$this->eventUser->_id.".".$type);
+            	$this->qr = (string) $url;
+	    }
         } catch (\Exception $e) {
             Log::debug("error: " . $e->getMessage());
             var_dump($e->getMessage());
         }
 
+        $this->logo = url($logo_evius);
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
         $from = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id)->name : "Evius Event ";
