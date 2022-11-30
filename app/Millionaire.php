@@ -9,6 +9,7 @@ class Millionaire extends MyBaseModel
   protected $fillable = [
     'name',
     'number_of_questions',
+    'number_of_stages', // number of stages
     'time_per_question',
     'rules',
     'event_id',
