@@ -516,7 +516,7 @@ class MillionaireController extends Controller
             $millionaire->save();
         }
 
-        $questions = $millionaire->questions;
+        $questions = $millionaire->questions ? $millionaire->questions : [];
         $success = [];
         $questions_fail = [];
 
