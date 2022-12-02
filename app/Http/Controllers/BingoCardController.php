@@ -19,9 +19,9 @@ class BingoCardController extends Controller
      * _show_: Get a event user with bingo card
      * @urlParam bingocard required The id of the bingo card to retrive this and the owner's data.
     */
-    public function show(string $bingo_card)
+    public function show(string $code)
     {
-        $bingo_card = BingoCard::findOrFail($bingo_card);
+        $bingo_card = BingoCard::where('code', $code)->first();
         $eventUser = Attendee::findOrFail($bingo_card->event_user_id);
         return ["bingo_card" => $bingo_card, "name_owner"=> $eventUser["properties"]["names"]];
     }
