@@ -631,3 +631,8 @@ Route::put('millionaires/{millionaire}/import-questions', 'MillionaireController
 Route::post('millionaires/{millionaire}/questions/{question}/answers', 'MillionaireController@addOneAnswer');
 Route::put('millionaires/{millionaire}/questions/{question}/answers/{answer}', 'MillionaireController@updateAnswer');
 Route::delete('millionaires/{millionaire}/questions/{question}/answers/{answer}', 'MillionaireController@removeOneAnswer');
+
+//ROUTES TEMPLATES BINGO
+Route::apiResource('bingotemplates', 'TemplateBingosController');
+//get templates by format
+Route::get('bingotemplates/format/{format}', 'TemplateBingosController@getTemplatesByFormat');
