@@ -56,7 +56,7 @@ class Event extends ModelsEvent
         'minimum_age', // edad minima para comprar boletos int
         'view_price_list', // boolean para saber si se muestra la lista de precios
         'view_range_price', // boolean para saber si se muestra el rango de precios
-
+        'redirect_activity', // string para redireccionar a una actividad
 
     ];
 
