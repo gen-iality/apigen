@@ -627,7 +627,7 @@ Route::delete('millionaires/{millionaire}/questions/{question}', 'MillionaireCon
 Route::put('millionaires/{millionaire}/stages/{stage}/questions/{question}', 'MillionaireController@assignQuestionToStage');
 //Import questions
 Route::put('millionaires/{millionaire}/import-questions', 'MillionaireController@importQuestions');
-//Add || update || delete => answer
+//Add || update || delete => answer 
 Route::post('millionaires/{millionaire}/questions/{question}/answers', 'MillionaireController@addOneAnswer');
 Route::put('millionaires/{millionaire}/questions/{question}/answers/{answer}', 'MillionaireController@updateAnswer');
 Route::delete('millionaires/{millionaire}/questions/{question}/answers/{answer}', 'MillionaireController@removeOneAnswer');
