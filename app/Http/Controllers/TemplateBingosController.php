@@ -21,6 +21,7 @@ class TemplateBingosController extends Controller
             'format' => 'required|string',
             'image' => 'required|string',
             'index_to_validate' => 'required|array',
+            'category' => 'required|string',
         ]);
         $data = $request->json()->all();
         $templateBingo = TemplateBingo::create($data);
@@ -31,13 +32,9 @@ class TemplateBingosController extends Controller
 
     public function update(Request $request, TemplateBingo $templateBingo)
     {
-        $request->validate([
-            'title' => 'required|string',
-            'format' => 'required|string',
-            'index_to_validate' => 'required|integer',
-        ]);
         $data = $request->json()->all();
-        $templateBingo->update($data);
+        $templateBingo->fill($data);
+        $templateBingo->save();
 
         return response()->json($templateBingo, 200);
     }
