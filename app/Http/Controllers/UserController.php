@@ -583,6 +583,7 @@ class UserController extends UserControllerWeb
         $email = $data["email"];
         
 
+	$urlOrigin = $request->header('origin');
         $link = '';
         $event_id = null;
         if(isset($data['event_id']))
@@ -594,7 +595,7 @@ class UserController extends UserControllerWeb
             $link = $auth->getSignInWithEmailLink(
                 $email,
                 [
-                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event_id,
+                    "url" => $urlOrigin . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event_id,
                 ]    
             );
 
@@ -603,7 +604,7 @@ class UserController extends UserControllerWeb
             $link = $auth->getSignInWithEmailLink(
                 $email,
                 [
-                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($email),
+                    "url" => $urlOrigin . "/loginWithCode?email=". urlencode($email),
                 ]    
             );
 
