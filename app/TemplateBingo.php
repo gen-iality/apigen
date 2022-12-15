@@ -14,6 +14,7 @@ class TemplateBingo extends MyBaseModel
         'format',
         'image',
         'index_to_validate',
+        'category'
     ];
 
 }

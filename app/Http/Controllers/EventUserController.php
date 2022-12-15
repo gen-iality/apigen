@@ -1081,6 +1081,15 @@ class EventUserController extends Controller
     {
         $attendee = Attendee::findOrFail($eventUserId);
         Log::info("Anulando suscrpción del usuario  " . $attendee->account_id . " del evento " . $eventId);
+        //check if the user has bingo cards
+        $bingoCard = BingoCard::where('event_user_id', $eventUserId)->get();
+        if ($bingoCard->count() > 0) {
+            Log::info("El usuario tiene cartones de bingo");
+            $bingoCard->each(function ($card) {
+                $card->delete();
+            });
+        }
+        Log::debug("eliminando suscripción del usuario  " . $attendee->account_id . " del evento " . $eventId);
         return (string) $attendee->delete();
     }
 

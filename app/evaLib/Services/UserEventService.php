@@ -464,19 +464,23 @@ string(10) "1030522402"
             && array_push($randomBingoCardValues, $randomValue);
       }
 
-      //generar ramdom code para el carton - alfanumerico de 5 caracteres
+        //generar ramdom code para el carton - alfanumerico de 5 caracteres
         $randomCode = substr(str_shuffle(str_repeat($x='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(5/strlen($x)) )),1,5);
-        //dd($event_user_id, $randomCode);
+        //verificar que el codigo no se repita
+        $bingoCard = BingoCard::where('code', $randomCode)->first();
+        if($bingoCard) {
+            $randomCode = substr(str_shuffle(str_repeat($x='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(5/strlen($x)) )),1,5);
+        }
 
-      $bingoCard = BingoCard::create(
-        [
-          'event_user_id' => $event_user_id,
-          'event_id' => $event_id,
-          'bingo_id' => $bingo->_id,
-          'values_bingo_card' => $randomBingoCardValues,
-            'code' => $randomCode
-        ]
-      );
+        $bingoCard = BingoCard::create(
+            [
+                'event_user_id' => $event_user_id,
+                'event_id' => $event_id,
+                'bingo_id' => $bingo->_id,
+                'values_bingo_card' => $randomBingoCardValues,
+                'code' => $randomCode
+            ]
+        );
 
       return $bingoCard;
     }
