@@ -695,7 +695,7 @@ class UserController extends UserControllerWeb
         }
         //Algunos clientes prefieren que su marca este en todos los correos por eso se coloca la opción de evento     
         $event = null;
-        $url = $request->headers->get('referer'); // url front dinamica
+        $url = $data['hostName'] ? $data['hostName'] : $request->headers->get('referer'); // url front dinamica
         if(isset($data['event_id']))
         {
             $event = Event::find($data['event_id']);
