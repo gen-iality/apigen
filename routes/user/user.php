@@ -41,3 +41,6 @@ Route::put("changeuserpassword", "UserController@changeUserPassword");
 Route::put("changeOneuserpassword/{user_id}", "UserController@updateOneUserPassword");
 //Change many user passwords
 Route::put("updatepasswordsbyevent/{event}", "UserController@updatePasswordsByEvent");
+
+//Get magic link to signIn
+Route::post('events/{event}/magicLink', 'UserController@getMagicLink');
