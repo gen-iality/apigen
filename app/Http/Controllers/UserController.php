@@ -26,6 +26,9 @@ use Log;
 use RealRashid\SweetAlert\Facades\Alert;
 use Redirect;
 use Illuminate\Support\Facades\DB;
+//magicLink
+use App\Url;
+use PUGX\Shortid\Shortid;
 
 
 
@@ -575,6 +578,7 @@ class UserController extends UserControllerWeb
     {
         $auth = resolve('Kreait\Firebase\Auth');
 
+        $urlOrigin = $request->header('origin');
         $request->validate([
             "email" => "required|email:rfc,dns",            
         ]);
@@ -588,8 +592,6 @@ class UserController extends UserControllerWeb
         $event_id = null;
         if(isset($data['event_id']))
         {   
-            
-
             $event_id = $data['event_id'];
 
             $link = $auth->getSignInWithEmailLink(
@@ -735,4 +737,28 @@ class UserController extends UserControllerWeb
         ]);
     }
 
+    public function getMagicLink(Request $request, Event $event)
+    {
+        $request->validate([
+            "email" => "required|email:rfc,dns",            
+        ]);
+        $email = $request->email;
+        $host = $request->host;
+        $auth = resolve('Kreait\Firebase\Auth');
+        //obtener el link de inicio de sesión con correo electrónico
+        $link = $auth->getSignInWithEmailLink(
+            $email,
+            [
+                "url" => $host . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
+            ]    
+        );
+        $code = Shortid::generate();
+        $code = strval($code);
+        $newUrl["long_url"] = $link; 
+        $newUrl["code"] =  $code; 
+        $newUrl["short_url"] = config('app.evius_api') . '/invitation/' .$code;
+        $saveUrl = Url::create($newUrl);
+
+        return $saveUrl->short_url;
+    }
 }
