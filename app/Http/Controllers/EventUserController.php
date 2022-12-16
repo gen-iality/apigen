@@ -90,7 +90,7 @@ class EventUserController extends Controller
      */
     public function ListEventUsersWithBingoCards($event)
     {
-        $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email', 'account_id')->get();
+        $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email', 'account_id')->paginate(5);
 
         $attendeesist = [];
         foreach ($eventUsers as $eventUser) {
