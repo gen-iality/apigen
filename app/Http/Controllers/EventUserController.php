@@ -90,7 +90,7 @@ class EventUserController extends Controller
      */
     public function ListEventUsersWithBingoCards($event)
     {
-        $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email', 'account_id')->paginate(5);
+        $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email', 'account_id')->paginate(10);
 
         $attendeesist = [];
         foreach ($eventUsers as $eventUser) {
@@ -124,7 +124,15 @@ class EventUserController extends Controller
 
 	//$response = new Paginator($attendeesist, 10);
 
-        return $attendeesist;
+	return response()->json([
+	    'data' => $attendeesist,
+	    'current_page' => $eventUsers->currentPage(),
+	    //'first_page_url' => $eventUsers->firstPage(),
+	    'last_page_url' => $eventUsers->lastPage(),
+	    'next_page_url' => $eventUsers->nextPageUrl(),
+	    'prev_page_url' => $eventUsers->previousPageUrl(),
+	    'total' => $eventUsers->total()
+	]);
     }
 
     /**
