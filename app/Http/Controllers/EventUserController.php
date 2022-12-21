@@ -88,9 +88,12 @@ class EventUserController extends Controller
      * @urlParam event required  event_id
      *
      */
-    public function ListEventUsersWithBingoCards($event)
+    public function ListEventUsersWithBingoCards(Request $request, $event)
     {
-        $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email', 'account_id')->paginate(10);
+	// Cantidad de elementos que se quieren paginar
+	$numberItems = $request->query('numberItems') ? $request->query('numberItems'): 10;
+
+        $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email', 'account_id')->paginate($numberItems);
 
         $attendeesist = [];
         foreach ($eventUsers as $eventUser) {
