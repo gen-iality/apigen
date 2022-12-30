@@ -318,9 +318,9 @@ class BingoController extends Controller
     {
       $request->validate([
         'carton_value.type' => 'string|in:text,image',
-        'carton_value.value' => 'string',
+        //'carton_value.value' => 'string',
         'ballot_value.type' =>  'string|in:text,image',
-        'ballot_value.value' =>  'string',
+        //'ballot_value.value' =>  'string',
       ]);
 
       $value = $request->json()->all();
