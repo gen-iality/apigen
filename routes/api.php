@@ -636,3 +636,9 @@ Route::delete('millionaires/{millionaire}/questions/{question}/answers/{answer}'
 Route::apiResource('bingotemplates', 'TemplateBingosController');
 //get templates by format
 Route::get('bingotemplates/format/{format}', 'TemplateBingosController@getTemplatesByFormat');
+
+/****************
+ * Boleteria
+ ****************/
+Route::post('events/{event}/boleterias', 'BoleteriaController@store');
+Route::put('events/{event}/boleterias/{boleteria}', 'BoleteriaController@update');

@@ -57,6 +57,7 @@ class Event extends ModelsEvent
         'view_price_list', // boolean para saber si se muestra la lista de precios
         'view_range_price', // boolean para saber si se muestra el rango de precios
         'redirect_activity', // string para redireccionar a una actividad
+	'boleteria_id' // boolean para saber si un evento tiene boleteria
 
     ];
 
