@@ -7,7 +7,14 @@ namespace App;
 class TicketCategory extends MyBaseModel
 {
     protected $table = "ticket_category";
-    protected static $unguarded = true;
+    protected $fillable = [
+	'name',
+	'amount',
+	'cost',
+	'event_id',
+	'activity_id'
+    ];
+
     protected $dates = ['created_at', 'updated_at'];
 
     //protected $with = ['user'];
@@ -27,5 +34,10 @@ class TicketCategory extends MyBaseModel
     public function event()
     {
         return $this->belongsTo('App\User', 'event_id');
+    }
+
+    public function activity()
+    {
+        return $this->belongsTo('App\Activities', 'activity_id');
     }
 }

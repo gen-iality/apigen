@@ -640,5 +640,10 @@ Route::get('bingotemplates/format/{format}', 'TemplateBingosController@getTempla
 /****************
  * Boleteria
  ****************/
-Route::post('events/{event}/boleterias', 'BoleteriaController@store');
-Route::put('events/{event}/boleterias/{boleteria}', 'BoleteriaController@update');
+Route::group(
+    ['middleware' => 'auth:token'],
+    function() {
+        Route::post('events/{event}/boleterias', 'BoleteriaController@store');
+        Route::put('events/{event}/boleterias/{boleteria}', 'BoleteriaController@update');
+    }
+);
