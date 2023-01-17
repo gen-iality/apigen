@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Account;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use \App\Models\Ticket;
@@ -77,5 +78,13 @@ class TicketController extends Controller
     {
         $model = Ticket::findOrFail($id);
         return (string) $model->delete();
+    }
+
+    public function assingTicketToUser(Request $request, Account $user, Ticket $ticket)
+    {
+	$ticket->owner_user = $user->_id;
+	$ticket->save();
+
+	return $ticket;
     }
 }

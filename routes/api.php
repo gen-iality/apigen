@@ -266,6 +266,7 @@ Route::group(
 
 Route::apiResource('events/{event}/tickets', 'TicketController');
 Route::get('ticket/event/{event}', 'TicketController@index');
+Route::put('users/{user}/tickets/{ticket}/assign', 'TicketController@assingTicketToUser');
 
 //Route::get('ajustarticketid', 'API\EventTicketsAPIController@ajustarticketid');
 // }
