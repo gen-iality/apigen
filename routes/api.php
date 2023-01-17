@@ -646,6 +646,8 @@ Route::group(
     ['middleware' => 'auth:token'],
     function() {
         Route::post('events/{event}/boleterias', 'BoleteriaController@store');
+        Route::get('events/{event}/boleterias/{boleteria}', 'BoleteriaController@show');
         Route::put('events/{event}/boleterias/{boleteria}', 'BoleteriaController@update');
+        Route::delete('events/{event}/boleterias/{boleteria}', 'BoleteriaController@destroy');
     }
 );

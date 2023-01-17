@@ -47,9 +47,9 @@ class BoleteriaController extends Controller
      * @param  \App\Boleteria  $boleteria
      * @return \Illuminate\Http\Response
      */
-    public function show(Boleteria $boleteria)
+    public function show($event, Boleteria $boleteria)
     {
-        //
+	return $boleteria;
     }
 
     /**
@@ -74,8 +74,12 @@ class BoleteriaController extends Controller
      * @param  \App\Boleteria  $boleteria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Boleteria $boleteria)
+    public function destroy($event, Boleteria $boleteria)
     {
-        //
+	// decidir lo que se borrara asociado
+	// a la boleteria
+	$boleteria->delete();
+
+	return response()->json([], 204);
     }
 }
