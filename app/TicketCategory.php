@@ -9,8 +9,9 @@ class TicketCategory extends MyBaseModel
     protected $table = "ticket_category";
     protected $fillable = [
 	'name',
-	'amount',
+	'color',
 	'cost',
+	'amount',
 	'event_id',
 	'activity_id'
     ];

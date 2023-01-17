@@ -564,6 +564,7 @@ Route::get('guess-pass', 'UserController@guessPassword');
  * Ticket Categories
  */
 
+Route::post('events/{event}/ticket-categories', 'TicketCategoryController@store');
 Route::apiResource('ticketCategory', 'TicketCategoryController');
 Route::get('events/{event}/ticketCategory', 'TicketCategoryController@TicketCategorybyEvent');
 

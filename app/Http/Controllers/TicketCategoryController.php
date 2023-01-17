@@ -35,20 +35,18 @@ class TicketCategoryController extends Controller
      * @bodyParam amount numeric required amount related to ticketCategory Example: 20
      * @bodyParam event_id string required event id related to ticketCategory Example: 628fdc698b89a10b9d464793
      */
-    public function store(Request $request)
+    public function store(Request $request, $event)
     {
         $request->validate([
             'name' => 'required|string',
             'color' => 'required|string',
             'cost' => 'required|numeric',
             'amount' => 'required|numeric',
-            'availables' => 'required|numeric',
-            'event_id' => 'required|string'
         ]);
 
         $data = $request->json()->all();
-        $ticketCategory = new TicketCategory($data);
-        $ticketCategory->save();
+	$data = array_merge($data, compact('event'));
+        $ticketCategory = TicketCategory::create($data);
 
         return response()->json($ticketCategory, 201);
     }
