@@ -7,8 +7,13 @@ use Illuminate\Support\Facades\DB;
 
 class Ticket extends MyBaseModel
 {
-    //use SoftDeletes;
-    protected $fillable = ['title', 'event_id', 'allowed_to_vote'];
+    protected $fillable = [
+	'name',
+	'event_id',
+	'allowed_to_vote',
+	'ticket_category_id'
+    ];
+
     //protected $with = ['activities'];
     //protected $dates = ['start_sale_date', 'end_sale_date', 'deleted_at'];
 

@@ -28,11 +28,15 @@ class TicketController extends Controller
      */
     public function store(Request $request, $event_id)
     {
+	$request->validate([
+	    'name' => 'required|string'
+	]);
+
         $data = $request->json()->all();
         $data["event_id"] = $event_id;
-        $activity = new Ticket($data);
-        $activity->save();
-        return $activity;
+        $ticket = Ticket::create($data);
+
+        return $ticket;
     }
 
     /**
