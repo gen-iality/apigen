@@ -18,10 +18,13 @@ class TicketCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Event $event)
     {
-        $ticketCategories = TicketCategory::all();
-        return response()->json($ticketCategories);
+        return TicketCategoryResource::collection(
+            TicketCategory::where('event_id', $event->_id)
+                ->latest()
+                ->paginate(config('app.page_size'))
+        );
     }
 
     /**
@@ -57,14 +60,14 @@ class TicketCategoryController extends Controller
      * @urlParam event required  event_id
      *
      */
-    public function TicketCategorybyEvent(string $event_id)
-    {
-        return TicketCategoryResource::collection(
-            TicketCategory::where('event_id', $event_id)
-                ->latest()
-                ->paginate(config('app.page_size'))
-        );
-    }
+    //public function TicketCategorybyEvent(string $event_id)
+    //{
+        //return TicketCategoryResource::collection(
+            //TicketCategory::where('event_id', $event_id)
+                //->latest()
+                //->paginate(config('app.page_size'))
+        //);
+    //}
 
     /**
      * _show_: display information about a specific ticketCategory.
@@ -96,17 +99,22 @@ class TicketCategoryController extends Controller
      * @param  \App\TicketCategory  $ticketCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $event_id)
+    public function update(Request $request, Event $event, TicketCategory $ticketCategory)
     {
-        $event = Event::findOrFail($event_id);
-        $event['total_tickets'] = $request->total_tickets;
-        $event->save();
-        foreach ($request->categories as $category) {
-            $ticketCategory  = TicketCategory::findOrFail($category['_id']);
-            $ticketCategory->fill($category);
-            $ticketCategory->save();
-        }
-        return response()->json(["message"=>"Ok"]);
+	$data = $request->json()->all();
+	$ticketCategory->fill($data);
+	$ticketCategory->save();
+
+	return $ticketCategory;
+        //$event = Event::findOrFail($event_id);
+        //$event['total_tickets'] = $request->total_tickets;
+        //$event->save();
+        //foreach ($request->categories as $category) {
+            //$ticketCategory  = TicketCategory::findOrFail($category['_id']);
+            //$ticketCategory->fill($category);
+            //$ticketCategory->save();
+        //}
+        //return response()->json(["message"=>"Ok"]);
     }
 
     /**
