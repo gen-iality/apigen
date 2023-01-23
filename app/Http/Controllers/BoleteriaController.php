@@ -30,7 +30,7 @@ class BoleteriaController extends Controller
 	if($event->allow_register == true && $event->visibility == 'PUBLIC') {
 	    // crear boleteria y asociarla el evento
 	    $data = $request->json()->all();
-	    $data = array_merge($data, ['event_id' => $event->_id]);
+	    $data['event_id'] = $event->_id;
 	    $boleteria = Boleteria::create($data);
 	    $event->boleteria_id = $boleteria->_id;
 	    $event->save();
