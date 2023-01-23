@@ -12,8 +12,8 @@ class Boleteria extends MyBaseModel
 	'datetime_from',
 	'datetime_to',
 	'event_id',
-	'IVA',
-	'IVA%'
+	'iva_in', //Especifica en donde va el IVA, includo en el precio o añadido
+	'iva_porcentage'
     ];
 
     protected $table = 'boleterias';

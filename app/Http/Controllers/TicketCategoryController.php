@@ -34,21 +34,21 @@ class TicketCategoryController extends Controller
      * @return \Illuminate\Http\Response
      * @bodyParam name string required name to ticketCategory Example: Category one
      * @bodyParam color string required color of ticketCategory Example: #FFFFFF
-     * @bodyParam cost double required cost related to ticketCategory Example: 25.000
+     * @bodyParam price double required price related to ticketCategory Example: 25.000
      * @bodyParam amount numeric required amount related to ticketCategory Example: 20
      * @bodyParam event_id string required event id related to ticketCategory Example: 628fdc698b89a10b9d464793
      */
-    public function store(Request $request, $event)
+    public function store(Request $request, $event_id)
     {
         $request->validate([
             'name' => 'required|string',
             'color' => 'required|string',
-            'cost' => 'required|numeric',
+            'price' => 'required|numeric',
             'amount' => 'required|numeric',
         ]);
 
         $data = $request->json()->all();
-	$data = array_merge($data, ['event_id' => $event]);
+	$data['event_id'] = $event_id;
         $ticketCategory = TicketCategory::create($data);
 
         return response()->json($ticketCategory, 201);
@@ -78,7 +78,7 @@ class TicketCategoryController extends Controller
      *   "_id": "6298cb08f8d427d2570e8382",
 	 *   "name": "Test",
 	 *   "color": "$FFFFFF",
-	 *   "cost": 25.000,
+	 *   "price": 25.000,
 	 *   "amount": 20,
 	 *   "event_id": "628fdc698b89a10b9d464793",
 	 *   "updated_at": "2022-06-02 14:39:27",

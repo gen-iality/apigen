@@ -6,11 +6,11 @@ namespace App;
 
 class TicketCategory extends MyBaseModel
 {
-    protected $table = "ticket_category";
+    protected $table = "ticket_categories";
     protected $fillable = [
 	'name',
 	'color',
-	'cost',
+	'price',
 	'amount',
 	'event_id',
 	'activity_id'

@@ -42,7 +42,7 @@ class TicketController extends Controller
         $data = $request->json()->all();
 	$data = array_merge($data, [
 	    'event_id' => $ticketCategory->event_id,
-	    'ticket_category_id' => $ticketCategory->ticket_category_id,
+	    'ticket_category_id' => $ticketCategory->_id,
 	]);
         $ticket = Ticket::create($data);
 
