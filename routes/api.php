@@ -567,9 +567,11 @@ Route::get('guess-pass', 'UserController@guessPassword');
  * Ticket Categories
  */
 
-Route::get('events/{event}/ticket-categories', 'TicketCategoryController@index');
-Route::post('events/{event}/ticket-categories', 'TicketCategoryController@store');
-Route::put('events/{event}/ticket-categories/{ticketCategory}', 'TicketCategoryController@update');
+Route::get('boleterias/{boleteria}/ticket-categories', 'TicketCategoryController@index');
+Route::post('boleterias/{boleteria}/ticket-categories', 'TicketCategoryController@store');
+Route::get('boleterias/{boleteria}/ticket-categories/{ticketCategory}', 'TicketCategoryController@show');
+Route::put('boleterias/{boleteria}/ticket-categories/{ticketCategory}', 'TicketCategoryController@update');
+Route::delete('boleterias/{boleteria}/ticket-categories/{ticketCategory}', 'TicketCategoryController@destroy');
 
 // Bingo
 Route::post('events/{event}/bingos', 'BingoController@store');

@@ -13,7 +13,7 @@ class TicketCategory extends MyBaseModel
 	'price',
 	'amount',
 	'event_id',
-	'activity_id'
+	'boleteria_id'
     ];
 
     protected $dates = ['created_at', 'updated_at'];

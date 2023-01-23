@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Boleteria;
 use App\TicketCategory;
-use App\Event;
 use Illuminate\Http\Request;
 use App\Http\Resources\TicketCategoryResource;
 use Log;
@@ -18,10 +18,10 @@ class TicketCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Event $event)
+    public function index(Boleteria $boleteria)
     {
         return TicketCategoryResource::collection(
-            TicketCategory::where('event_id', $event->_id)
+            TicketCategory::where('boleteria_id', $boleteria->_id)
                 ->latest()
                 ->paginate(config('app.page_size'))
         );
@@ -38,7 +38,7 @@ class TicketCategoryController extends Controller
      * @bodyParam amount numeric required amount related to ticketCategory Example: 20
      * @bodyParam event_id string required event id related to ticketCategory Example: 628fdc698b89a10b9d464793
      */
-    public function store(Request $request, $event_id)
+    public function store(Request $request, Boleteria $boleteria)
     {
         $request->validate([
             'name' => 'required|string',
@@ -48,10 +48,13 @@ class TicketCategoryController extends Controller
         ]);
 
         $data = $request->json()->all();
-	$data['event_id'] = $event_id;
+	$data = array_merge($data, [
+	    'boleteria_id' => $boleteria->_id,
+	    'event_id' => $boleteria->event_id
+	]);
         $ticketCategory = TicketCategory::create($data);
 
-        return response()->json($ticketCategory, 201);
+        return response()->json(compact('ticketCategory'), 201);
     }
 
     /**
@@ -71,7 +74,7 @@ class TicketCategoryController extends Controller
 
     /**
      * _show_: display information about a specific ticketCategory.
-     * 
+     *
      * @authenticated
      * @urlParam ticketCategory required id of the ticketCategory you want to consult. Example: 6298cb08f8d427d2570e8382
      * @response{
@@ -85,11 +88,9 @@ class TicketCategoryController extends Controller
 	 *   "created_at": "2022-06-02 14:36:56"
      * }
      */
-    public function show($ticketCategory)
+    public function show($boleteria, TicketCategory$ticketCategory)
     {
-        $ticketCategory = TicketCategory::findOrFail($ticketCategory);
-
-        return $ticketCategory;
+	return compact('ticketCategory');
     }
 
     /**
@@ -99,22 +100,13 @@ class TicketCategoryController extends Controller
      * @param  \App\TicketCategory  $ticketCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event, TicketCategory $ticketCategory)
+    public function update(Request $request, $boleteria_id, TicketCategory $ticketCategory)
     {
 	$data = $request->json()->all();
 	$ticketCategory->fill($data);
 	$ticketCategory->save();
 
-	return $ticketCategory;
-        //$event = Event::findOrFail($event_id);
-        //$event['total_tickets'] = $request->total_tickets;
-        //$event->save();
-        //foreach ($request->categories as $category) {
-            //$ticketCategory  = TicketCategory::findOrFail($category['_id']);
-            //$ticketCategory->fill($category);
-            //$ticketCategory->save();
-        //}
-        //return response()->json(["message"=>"Ok"]);
+	return compact('ticketCategory');
     }
 
     /**
@@ -123,9 +115,8 @@ class TicketCategoryController extends Controller
      * @urlParam ticketCategory required id of the ticketCategory to be eliminated
      * 
      */
-    public function destroy($ticketCategory)
+    public function destroy($boleteria_id, TicketCategory $ticketCategory)
     {
-        $ticketCategory = TicketCategory::findOrFail($ticketCategory);
         $ticketCategory->delete();
 
         return response()->json([], 204);
