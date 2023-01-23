@@ -28,6 +28,9 @@ class BoleteriaController extends Controller
      */
     public function store(Request $request, Event $event)
     {
+	$request->validate([
+	    'title' => 'string|required'
+	]);
 	// traer evento y validar su tipo de acceso
 	if($event->allow_register == true && $event->visibility == 'PUBLIC') {
 	    // crear boleteria y asociarla el evento
@@ -51,7 +54,7 @@ class BoleteriaController extends Controller
      */
     public function show($event, Boleteria $boleteria)
     {
-	return $boleteria;
+	return compact('boleteria');
     }
 
     /**
