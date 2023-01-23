@@ -10,6 +10,7 @@ class Boleteria extends MyBaseModel
 	'title',
 	'datetime_from',
 	'datetime_to',
+	'event_id',
 	'IVA',
 	'IVA%'
     ];
