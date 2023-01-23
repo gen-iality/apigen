@@ -13,9 +13,11 @@ class BoleteriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Event $event)
     {
-        //
+	$boleteria = Boleteria::where('event_id', $event->_id)->first();
+
+	return $boleteria;
     }
 
     /**

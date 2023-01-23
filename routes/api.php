@@ -645,6 +645,7 @@ Route::get('bingotemplates/format/{format}', 'TemplateBingosController@getTempla
 Route::group(
     ['middleware' => 'auth:token'],
     function() {
+        Route::get('events/{event}/boleterias', 'BoleteriaController@index');
         Route::post('events/{event}/boleterias', 'BoleteriaController@store');
         Route::get('events/{event}/boleterias/{boleteria}', 'BoleteriaController@show');
         Route::put('events/{event}/boleterias/{boleteria}', 'BoleteriaController@update');
