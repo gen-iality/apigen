@@ -11,8 +11,16 @@ class Ticket extends MyBaseModel
 	'name',
 	'event_id',
 	'allowed_to_vote',
-	'ticket_category_id'
+	'price',
+	'ticket_category_id', // Categoria a la cual pertenece
+	'buyer_id', // Usuario quien compro el ticket
+	'user_id', // Persona a la cual pertenece el ticket, por defecto es el comprador
+	'billing_id', // Compra a la que pertenece el ticket
+	'redeemed', // false o true, validacion de ticket redimido
+	'checkedin_at'
     ];
+
+    protected $dates = ['checkedin_at', 'created_at', 'updated_at'];
 
     //protected $with = ['activities'];
     //protected $dates = ['start_sale_date', 'end_sale_date', 'deleted_at'];

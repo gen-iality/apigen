@@ -8,6 +8,7 @@ class Boleteria extends MyBaseModel
 {
     protected $fillable = [
 	'title',
+	'event_id',
 	'datetime_from',
 	'datetime_to',
 	'event_id',

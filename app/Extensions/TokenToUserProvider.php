@@ -58,7 +58,7 @@ class TokenToUserProvider implements UserProvider
                     throw new Exception($e->getMessage());
                 }
 
-                $claims = $e->getToken()->getClaims();
+                $claims = $e->getToken()->claims()->get('sub');
                 $claims = ((array) $claims);
                 $user_id = $claims['user_id'];
 

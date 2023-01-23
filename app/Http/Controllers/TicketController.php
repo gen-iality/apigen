@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Billing;
+use App\Boleteria;
+use App\Event;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use \App\Models\Ticket;
+use App\TicketCategory;
 
 class TicketController extends Controller
 {
@@ -27,17 +31,54 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $event_id)
+    public static function store(Request $request, TicketCategory $ticketCategory)
     {
+	// Un ticket siempre debe ir
+	// relacionado con un ticket category
 	$request->validate([
 	    'name' => 'required|string'
 	]);
 
         $data = $request->json()->all();
-        $data["event_id"] = $event_id;
+	$data = array_merge($data, [
+	    'event_id' => $ticketCategory->event_id,
+	    'ticket_category_id' => $ticketCategory->ticket_category_id,
+	]);
         $ticket = Ticket::create($data);
 
-        return $ticket;
+        return response()->json(compact('ticket'), 201);
+    }
+
+
+    /**
+     * Crear tickets cuando factura de compra
+     * es aprovada
+     *
+     */
+    public function createTicketByBilling(Request $request, Account $user, Billing $billing)
+    {
+	// En caso de que el ticket no pertenesca a
+	// una categoria se toma la configuracion de la
+	// boleteria
+	$tickets = $billing->billing['details']['tickets'];
+	$additionalData = [
+	    'buyer_id' => $user->_id, // Usuario quien compro el ticket
+	    'user_id' => $user->_id, // Persona a la cual pertenece el ticket, por defecto es el comprador
+	    'billing_id' => $billing->_id, // Compra a la que pertenece el ticket
+	    'redeemed' => false
+	];
+
+	$newTickets = [];
+	foreach($tickets as $ticket){
+	    $data = array_merge($ticket, $additionalData);
+	    $newTicket = Ticket::create($data);
+	    array_push($newTickets, $newTicket);
+	}
+
+	// Enviar correo con Billing y tickets
+	// Generar qr a cada ticket
+
+	return response()->json(compact('newTickets'),201);
     }
 
     /**
@@ -86,5 +127,18 @@ class TicketController extends Controller
 	$ticket->save();
 
 	return $ticket;
+    }
+
+    public function redeemTicket($event, Ticket $ticket)
+    {
+	if($ticket->redeemed) {
+	    return response()->json(['message' => 'invalid ticket'], 403);
+	}
+
+	$ticket->redeemed = true;
+	$ticket->checkedin_at = time();
+	$ticket->save();
+
+	return response()->json(compact('ticket'), 200);
     }
 }

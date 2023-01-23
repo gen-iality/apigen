@@ -264,9 +264,11 @@ Route::group(
 //Route::group(
 //['middleware' => 'auth:token'], function () {
 
-Route::apiResource('events/{event}/tickets', 'TicketController');
-Route::get('ticket/event/{event}', 'TicketController@index');
+Route::apiResource('events/{event}/tickets', 'TicketController', ['except' => ['store']]);
+Route::post('ticket-categories/{ticketCategory}/tickets', 'TicketController@store');
 Route::put('users/{user}/tickets/{ticket}/assign', 'TicketController@assingTicketToUser');
+Route::post('users/{user}/billings/{billing}/tickets', 'TicketController@createTicketByBilling');
+Route::put('events/{event}/tickets/{ticket}/redeem', 'TicketController@redeemTicket');
 
 //Route::get('ajustarticketid', 'API\EventTicketsAPIController@ajustarticketid');
 // }
