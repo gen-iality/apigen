@@ -13,7 +13,13 @@ class Boleteria extends MyBaseModel
 	'datetime_to',
 	'event_id',
 	'iva_in', //Especifica en donde va el IVA, includo en el precio o añadido
-	'iva_porcentage'
+	'iva_percentage',
+	'states_sales', // String: Venta abierta || Cerrrada
+	'min_tickets_per_user', // Number
+	'max_tickets_per_user', // Number
+	'valid_age', // Number
+	'list_landing', // Boolean
+	'range_prices_landing' // Boolean
     ];
 
     protected $table = 'boleterias';
