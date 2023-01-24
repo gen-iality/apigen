@@ -23,5 +23,7 @@ class Boleteria extends MyBaseModel
     ];
 
     protected $table = 'boleterias';
+
+    protected $dates = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
     //protected static $unguarded = true;
 }
