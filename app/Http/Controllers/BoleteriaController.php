@@ -4,10 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Boleteria;
 use App\Event;
+use App\TicketCategory;
 use Illuminate\Http\Request;
 
 class BoleteriaController extends Controller
 {
+    /**
+     * Validate tickets capacity on boleteria.
+     * El numero de aforo total debe ser igual o mayor
+     * a la cantidad total de aforo por categoria.
+     * No debe ser menor porque no serian coherentes los datos
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public static function _validateTicketCapacityBoleteria($boleteria, $ticketCapacity)
+    {
+	// Siempre debe existir ticket_capacity en las categorias
+	$ticketCategories = TicketCategory::where('boleteria_id', $boleteria->_id)->pluck('ticket_capacity')->toArray();
+	$totalTickets = array_reduce($ticketCategories, function($carry, $item){
+	    return $carry += $item;
+	});
+
+	return $ticketCapacity < $totalTickets ? false : true;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -67,6 +88,17 @@ class BoleteriaController extends Controller
     public function update(Request $request, Event $event, Boleteria $boleteria)
     {
 	$data = $request->json()->all();
+
+	// Validar cantidad de aforo
+	if($data[ 'ticket_capacity' ]) {
+	    $isValid = self::_validateTicketCapacityBoleteria($boleteria, $data['ticket_capacity']);
+	    if(!$isValid) {
+		return response()->json([
+		    'message'=> 'Invalid ticket_capacity: Must be greater than or equal to the number of total tickets already assigned in the categories.'
+		], 400);
+	    }
+	}
+
 	$boleteria->fill($data);
 	$boleteria->save();
 

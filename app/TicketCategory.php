@@ -11,9 +11,9 @@ class TicketCategory extends MyBaseModel
 	'name',
 	'color',
 	'price',
-	'amount',
 	'event_id',
-	'boleteria_id'
+	'boleteria_id',
+	'ticket_capacity' // Number: Aforo de personas/tickets
     ];
 
     protected $dates = ['created_at', 'updated_at'];

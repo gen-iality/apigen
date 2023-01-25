@@ -44,7 +44,7 @@ class TicketCategoryController extends Controller
             'name' => 'required|string',
             'color' => 'required|string',
             'price' => 'required|numeric',
-            'amount' => 'required|numeric',
+            'ticket_capacity' => 'required|numeric',
         ]);
 
         $data = $request->json()->all();
