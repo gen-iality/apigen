@@ -123,8 +123,12 @@ class TicketCategoryController extends Controller
 	 *   "created_at": "2022-06-02 14:36:56"
      * }
      */
-    public function show($boleteria, TicketCategory$ticketCategory)
+    public function show($boleteria, TicketCategory $ticketCategory)
     {
+	$usedTickets =  Ticket::where('ticket_category_id', $ticketCategory->_id)->count();
+	$ticketCategory['used_tickets'] = $usedTickets;
+	$ticketCategory['available_tickets'] = $ticketCategory->ticket_capacity - $usedTickets;
+
 	return compact('ticketCategory');
     }
 
