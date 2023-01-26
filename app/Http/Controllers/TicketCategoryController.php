@@ -3,16 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Boleteria;
+use App\Event;
 use App\TicketCategory;
 use Illuminate\Http\Request;
 use App\Http\Resources\TicketCategoryResource;
+use App\Models\Ticket;
 use Log;
+use App\Http\Controllers\BoleteriaController;
+
 /**
  * @group TicketCategory
  *
  */
 class TicketCategoryController extends Controller
 {
+    /**
+     * Validate tickets capacity on ticket Category.
+     *
+     * 1.El aforo debe ser igual o mayor a la cantidad
+     * de tickets que ya esten vendidos para esa categoria.
+     *
+     * 2.El aforo no puede ser mayor a la cantidad de tickets
+     * disponibles a asignar de la boleteria.
+     */
+    public static function _validateTicketCapacityCategory($ticketCategory, $ticketCapacity)
+    {
+	$isValid  = ['correct' => true];
+
+	// 1
+	$allTicketsSold =  Ticket::where('ticket_category_id', $ticketCategory->_id)->count();
+	if($ticketCapacity < $allTicketsSold) {
+	    $isValid['correct']  = false;
+	    $isValid['message'] = 'Invalid ticket_capacity: Must be greater than or equal to the number of total tickets sold';
+	}
+
+	// 2
+	$event = Event::findOrFail($ticketCategory->event_id);
+	$boleteria = BoleteriaController::index($event);
+	if($ticketCapacity > $boleteria->available_tickets){
+	    $isValid['correct']  = false;
+	    $isValid['message'] = 'Invalid ticket_capacity: Must be less than or equal to the available capacity of the box office';
+	}
+
+	return $isValid;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -103,6 +138,17 @@ class TicketCategoryController extends Controller
     public function update(Request $request, $boleteria_id, TicketCategory $ticketCategory)
     {
 	$data = $request->json()->all();
+
+	// Validar cantidad de aforo
+	if($data[ 'ticket_capacity' ]) {
+	    $isValid = self::_validateTicketCapacityCategory($ticketCategory, $data['ticket_capacity']);
+	    if(!$isValid['correct']) {
+		return response()->json([
+		    'message' => $isValid[ 'message' ]
+		], 400);
+	    }
+	}
+
 	$ticketCategory->fill($data);
 	$ticketCategory->save();
 

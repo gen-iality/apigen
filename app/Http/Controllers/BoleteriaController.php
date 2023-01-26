@@ -11,12 +11,10 @@ class BoleteriaController extends Controller
 {
     /**
      * Validate tickets capacity on boleteria.
+     *
      * El numero de aforo total debe ser igual o mayor
      * a la cantidad total de aforo por categoria.
      * No debe ser menor porque no serian coherentes los datos
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public static function _validateTicketCapacityBoleteria($boleteria, $ticketCapacity)
     {
@@ -34,7 +32,7 @@ class BoleteriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Event $event)
+    public static function index(Event $event)
     {
 	$boleteria = Boleteria::where('event_id', $event->_id)->first();
 
