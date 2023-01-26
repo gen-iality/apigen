@@ -85,8 +85,10 @@ class TicketCategoryController extends Controller
         $data = $request->json()->all();
 	$data = array_merge($data, [
 	    'boleteria_id' => $boleteria->_id,
-	    'event_id' => $boleteria->event_id
+	    'event_id' => $boleteria->event_id,
+	    'remaining_tickets' => $data[ 'ticket_capacity' ]
 	]);
+
         $ticketCategory = TicketCategory::create($data);
 
         return response()->json(compact('ticketCategory'), 201);
