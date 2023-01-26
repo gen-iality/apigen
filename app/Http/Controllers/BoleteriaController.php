@@ -38,6 +38,14 @@ class BoleteriaController extends Controller
     {
 	$boleteria = Boleteria::where('event_id', $event->_id)->first();
 
+	// Tickets disponibles
+	$ticketCategories = TicketCategory::where('boleteria_id', $boleteria->_id)->pluck('ticket_capacity')->toArray();
+	$totalTickets = array_reduce($ticketCategories, function($carry, $item){
+	    return $carry += $item;
+	});
+	$boleteria['used_tickets'] = $totalTickets;
+	$boleteria['available_tickets'] = $boleteria->ticket_capacity - $totalTickets;
+
 	return $boleteria;
     }
 
@@ -94,7 +102,8 @@ class BoleteriaController extends Controller
 	    $isValid = self::_validateTicketCapacityBoleteria($boleteria, $data['ticket_capacity']);
 	    if(!$isValid) {
 		return response()->json([
-		    'message'=> 'Invalid ticket_capacity: Must be greater than or equal to the number of total tickets already assigned in the categories.'
+		    'message' =>
+		    'Invalid ticket_capacity: Must be greater than or equal to the number of total tickets already assigned in the categories.'
 		], 400);
 	    }
 	}
