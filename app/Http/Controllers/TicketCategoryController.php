@@ -157,7 +157,7 @@ class TicketCategoryController extends Controller
     public function update(Request $request, Boleteria $boleteria, TicketCategory $ticketCategory)
     {
 	$request->validate([
-            'name' => 'string|unique:ticket_categories,name',// debe ser unico
+            'name' => 'string|unique:ticket_categories,name,id_to_ignore',// debe ser unico
 	]);
 
 	$data = $request->json()->all();
