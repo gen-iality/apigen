@@ -20,7 +20,8 @@ class Boleteria extends MyBaseModel
 	'valid_age', // Number
 	'list_landing', // Boolean
 	'range_prices_landing', // Boolean
-	'ticket_capacity' // Number: Aforo de personas/tickets
+	'ticket_capacity', // Number: Aforo de personas/tickets
+	'capacity_is_active' // Boolean
     ];
 
     protected $table = 'boleterias';
