@@ -26,21 +26,21 @@ class TicketCategoryController extends Controller
      * 2.El aforo no puede ser mayor a la cantidad de tickets
      * disponibles a asignar de la boleteria.
      */
-    public static function _validateTicketCapacityCategory($ticketCategory, $ticketCapacity)
+    public static function _validateTicketCapacityCategory($ticketCategory, $ticketCapacityToSet)
     {
 	$isValid  = ['correct' => true];
 
-	// 1
-	$allTicketsSold =  Ticket::where('ticket_category_id', $ticketCategory->_id)->count();
-	if($ticketCapacity < $allTicketsSold) {
-	    $isValid['correct']  = false;
-	    $isValid['message'] = 'Invalid ticket_capacity: Must be greater than or equal to the number of total tickets sold';
-	}
+	// 1 OPTIMIZAR REQUEST
+	//$allTicketsSold =  Ticket::where('ticket_category_id', $ticketCategory->_id)->count();
+	//if($ticketCapacityToSet < $allTicketsSold) {
+	    //$isValid['correct']  = false;
+	    //$isValid['message'] = 'Invalid ticket_capacity: Must be greater than or equal to the number of total tickets sold';
+	//}
 
 	// 2
 	$event = Event::findOrFail($ticketCategory->event_id);
 	$boleteria = BoleteriaController::index($event);
-	if($ticketCapacity > $boleteria->available_tickets && $ticketCapacity > $ticketCategory->ticket_capacity){
+	if($ticketCapacityToSet > $boleteria->available_tickets && $ticketCapacityToSet > $ticketCategory->ticket_capacity){
 	    $isValid['correct']  = false;
 	    $isValid['message'] = 'Invalid ticket_capacity: Must be less than or equal to the available capacity of the box office';
 	}
@@ -82,7 +82,6 @@ class TicketCategoryController extends Controller
             'ticket_capacity' => 'required|numeric',
         ]);
 
-	// validar cantidad disponible de aforo
         $data = $request->json()->all();
 	$data = array_merge($data, [
 	    'boleteria_id' => $boleteria->_id,
@@ -90,7 +89,20 @@ class TicketCategoryController extends Controller
 	    'remaining_tickets' => $data[ 'ticket_capacity' ]
 	]);
 
-        $ticketCategory = TicketCategory::create($data);
+        $ticketCategory = new TicketCategory($data);
+
+	// validar cantidad disponible de aforo
+	if($boleteria->capacity_is_active) {
+	    $isValid = self::_validateTicketCapacityCategory($ticketCategory, $data['ticket_capacity']);
+	    if(!$isValid['correct']) {
+		return response()->json([
+		    'message' => $isValid[ 'message' ]
+		], 400);
+	    }
+	}
+
+	$ticketCategory->save();
+
 
         return response()->json(compact('ticketCategory'), 201);
     }
@@ -142,7 +154,7 @@ class TicketCategoryController extends Controller
      * @param  \App\TicketCategory  $ticketCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $boleteria_id, TicketCategory $ticketCategory)
+    public function update(Request $request, Boleteria $boleteria, TicketCategory $ticketCategory)
     {
 	$request->validate([
             'name' => 'string|unique:ticket_categories,name',// debe ser unico
@@ -151,13 +163,14 @@ class TicketCategoryController extends Controller
 	$data = $request->json()->all();
 
 	// Validar cantidad de aforo
-	if(isset($data[ 'ticket_capacity' ])) {
+	if(isset($data['ticket_capacity']) && $boleteria->capacity_is_active) {
 	    $isValid = self::_validateTicketCapacityCategory($ticketCategory, $data['ticket_capacity']);
 	    if(!$isValid['correct']) {
 		return response()->json([
 		    'message' => $isValid[ 'message' ]
 		], 400);
 	    }
+	    // Modificar cantidad de ticket disponibles
 	}
 
 	$ticketCategory->fill($data);
