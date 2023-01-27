@@ -96,7 +96,7 @@ class BoleteriaController extends Controller
 	$data = $request->json()->all();
 
 	// Validar cantidad de aforo
-	if($data[ 'ticket_capacity' ]) {
+	if(isset($data[ 'ticket_capacity' ])) {
 	    $isValid = self::_validateTicketCapacityBoleteria($boleteria, $data['ticket_capacity']);
 	    if(!$isValid) {
 		return response()->json([

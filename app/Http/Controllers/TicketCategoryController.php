@@ -76,12 +76,13 @@ class TicketCategoryController extends Controller
     public function store(Request $request, Boleteria $boleteria)
     {
         $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string',// debe ser unico
             'color' => 'required|string',
             'price' => 'required|numeric',
             'ticket_capacity' => 'required|numeric',
         ]);
 
+	// validar cantidad disponible de aforo
         $data = $request->json()->all();
 	$data = array_merge($data, [
 	    'boleteria_id' => $boleteria->_id,
@@ -146,7 +147,7 @@ class TicketCategoryController extends Controller
 	$data = $request->json()->all();
 
 	// Validar cantidad de aforo
-	if($data[ 'ticket_capacity' ]) {
+	if(isset($data[ 'ticket_capacity' ])) {
 	    $isValid = self::_validateTicketCapacityCategory($ticketCategory, $data['ticket_capacity']);
 	    if(!$isValid['correct']) {
 		return response()->json([
