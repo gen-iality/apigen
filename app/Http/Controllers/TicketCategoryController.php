@@ -40,7 +40,7 @@ class TicketCategoryController extends Controller
 	// 2
 	$event = Event::findOrFail($ticketCategory->event_id);
 	$boleteria = BoleteriaController::index($event);
-	if($ticketCapacity > $boleteria->available_tickets){
+	if($ticketCapacity > $boleteria->available_tickets && $ticketCapacity > $ticketCategory->ticket_capacity){
 	    $isValid['correct']  = false;
 	    $isValid['message'] = 'Invalid ticket_capacity: Must be less than or equal to the available capacity of the box office';
 	}
