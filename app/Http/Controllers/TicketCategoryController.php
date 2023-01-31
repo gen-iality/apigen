@@ -76,7 +76,7 @@ class TicketCategoryController extends Controller
     public function store(Request $request, Boleteria $boleteria)
     {
         $request->validate([
-            'name' => 'required|string|unique:ticket_categories,name',// debe ser unico
+            //'name' => 'required|string|unique:ticket_categories,name',// debe ser unico solo por boleteria
             'color' => 'required|string',
             'price' => 'required|numeric',
             'ticket_capacity' => 'required|numeric',
