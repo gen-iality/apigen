@@ -1367,6 +1367,10 @@ class EventUserController extends Controller
         $fieldsRequired = $event->user_properties;
 
         foreach ($fieldsRequired as $field) {
+	    if($field->visibleByAdmin) {
+		continue;
+	    }
+
             $isRequired = $field['mandatory'];
             $fieldName = $field['name'];
 
