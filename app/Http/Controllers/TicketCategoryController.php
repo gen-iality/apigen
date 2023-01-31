@@ -167,10 +167,18 @@ class TicketCategoryController extends Controller
 	    $isValid = self::_validateTicketCapacityCategory($ticketCategory, $data['ticket_capacity']);
 	    if(!$isValid['correct']) {
 		return response()->json([
-		    'message' => $isValid[ 'message' ]
+		    'message' => $isValid['message']
 		], 400);
 	    }
+
 	    // Modificar cantidad de ticket disponibles
+	    if($data['ticket_capacity'] >= $ticketCategory->ticket_capacity) {
+		$difference = $data['ticket_capacity'] - $ticketCategory->ticket_capacity;
+		$data['remaining_tickets'] = $ticketCategory->remaining_tickets + $difference;
+	    } else {
+		$difference = $ticketCategory->ticket_capacity - $data['ticket_capacity'];
+		$data['remaining_tickets'] = $ticketCategory->remaining_tickets - $difference;
+	    }
 	}
 
 	$ticketCategory->fill($data);
