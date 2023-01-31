@@ -35,6 +35,9 @@ class BoleteriaController extends Controller
     public static function index(Event $event)
     {
 	$boleteria = Boleteria::where('event_id', $event->_id)->first();
+	if(!isset($boleteria)) {
+	    return response()->json(['message' => 'Boleteria not found'],404);
+	}
 
 	// Tickets disponibles
 	$ticketCategories = TicketCategory::where('boleteria_id', $boleteria->_id)->pluck('ticket_capacity')->toArray();
