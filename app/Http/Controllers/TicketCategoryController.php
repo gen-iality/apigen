@@ -171,14 +171,15 @@ class TicketCategoryController extends Controller
 		], 400);
 	    }
 
-	    // Modificar cantidad de ticket disponibles
-	    if($data['ticket_capacity'] >= $ticketCategory->ticket_capacity) {
-		$difference = $data['ticket_capacity'] - $ticketCategory->ticket_capacity;
-		$data['remaining_tickets'] = $ticketCategory->remaining_tickets + $difference;
-	    } else {
-		$difference = $ticketCategory->ticket_capacity - $data['ticket_capacity'];
-		$data['remaining_tickets'] = $ticketCategory->remaining_tickets - $difference;
-	    }
+	}
+
+        // Modificar cantidad de ticket disponibles
+        if($data['ticket_capacity'] >= $ticketCategory->ticket_capacity) {
+	    $difference = $data['ticket_capacity'] - $ticketCategory->ticket_capacity;
+	    $data['remaining_tickets'] = $ticketCategory->remaining_tickets + $difference;
+	} else {
+	    $difference = $ticketCategory->ticket_capacity - $data['ticket_capacity'];
+	    $data['remaining_tickets'] = $ticketCategory->remaining_tickets - $difference;
 	}
 
 	$ticketCategory->fill($data);
