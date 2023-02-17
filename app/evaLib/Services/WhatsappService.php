@@ -46,9 +46,9 @@ class WhatsappService
     {
         $code = Shortid::generate();
         $code = strval($code);
-        $newUrl["long_url"] = $url; 
-        $newUrl["code"] =  $code; 
-        $newUrl["short_url"] = config('app.evius_api') . '/invitation/' .$code;
+        $newUrl["long_url"] = $url;
+        $newUrl["code"] =  $code;
+	$newUrl["short_url"] = config('app.evius_api') . '/invitation/' .$code;
 
         $saveUrl = Url::create($newUrl);
 
