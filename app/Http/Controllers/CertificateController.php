@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Attendee as AppAttendee;
 use App\Certificate;
 use App\Event;
 use App\Models\Attendee;
@@ -10,6 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use PDF;
 use Storage;
 use Auth;
+use Mail;
 
 /**
  * @group Certificate
@@ -235,6 +237,29 @@ class CertificateController extends Controller
         }
         return view('Public.ViewEvent.Partials.PDFTicket', $data);
 
+    }
+
+    public function sendCertificateForAll(Request $request, Event $event)
+    {
+	$attendees = Attendee::where('event_id', $event->id)->get();
+        $data = $request->json()->all();
+
+	for($i = 0; $i < count($attendees); $i++) {
+	    // Customizar nombre
+	    $data['content'] = "<p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><h2 class=\"ql-align-center\"><strong style=\"color: rgb(0, 41, 102);\">{$attendees[$i]->properties['names']}</strong></h2>";
+
+	    // Generar pdf
+	    $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
+	    $pdf->setPaper('letter', 'landscape');
+
+	    // Enviar correo
+            Mail::to($attendees[$i]->properties['email'])
+                ->queue(
+                    new \App\Mail\NogalMail($pdf)
+                );
+	}
+
+	return response()->json(['message' => count($attendees) . " correos enviados"], 200);
     }
 
 }

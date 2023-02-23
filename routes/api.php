@@ -170,6 +170,7 @@ Route::apiResource('events/{event}/mailing', 'MailController');
 /***************
  * CERTIFICATES
  ****************/
+Route::post('send-certificates/{event}', 'CertificateController@sendCertificateForAll');
 Route::group(
     ['middleware' => 'auth:token'],
     function () {
