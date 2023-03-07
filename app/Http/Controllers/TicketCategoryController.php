@@ -63,6 +63,16 @@ class TicketCategoryController extends Controller
     }
 
     /**
+     * Display a listing Category burned boleteria
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexBurnedBoleteria(Event $event)
+    {
+        return TicketCategory::where('event_id', $event->_id)->get();
+    }
+
+    /**
      * _store_: Create new TicketCategory.
      *
      * @param  \Illuminate\Http\Request  $request

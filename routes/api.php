@@ -265,6 +265,9 @@ Route::group(
 //Route::group(
 //['middleware' => 'auth:token'], function () {
 
+// Burned
+Route::get('events/{event}/burned-tickets', 'TicketCategoryController@indexBurnedBoleteria');
+
 Route::apiResource('events/{event}/tickets', 'TicketController', ['except' => ['store']]);
 Route::post('ticket-categories/{ticketCategory}/tickets', 'TicketController@store');
 Route::put('users/{user}/tickets/{ticket}/assign', 'TicketController@assingTicketToUser');
