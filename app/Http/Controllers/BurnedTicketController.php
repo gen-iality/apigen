@@ -15,7 +15,7 @@ class BurnedTicketController extends Controller
      */
     public function index(Event $event)
     {
-        return BurnedTicket::where("event_id", $event->_id)->get();
+        return BurnedTicket::where("event_id", $event->_id)->latest()->paginate();
     }
 
     /**
