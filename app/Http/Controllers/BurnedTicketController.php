@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BurnedTicket;
 use App\Event;
+use App\TicketCategory;
 use Illuminate\Http\Request;
 
 class BurnedTicketController extends Controller
@@ -19,6 +20,29 @@ class BurnedTicketController extends Controller
 	$numberItems =  $request->query('numberItems') ? $request->query('numberItems') : 10;
 
         return BurnedTicket::where("event_id", $event->_id)->latest()->paginate($numberItems);
+    }
+
+    /**
+     * Email debe ser unico para la persona que
+     * se le asignara el ticket.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\TicketCategory  $ticketCategory
+     * @return \Illuminate\Http\Response
+     */
+    public function validateUserDataToTicket(Request $request, TicketCategory $ticketCategory)
+    {
+	// Validar que el email sea unico en esa categoria
+	$data = $request->json()->all();
+
+	// Array de email existentes
+	$emailTicketsByCategory = BurnedTicket::where('ticket_category_id', $ticketCategory->_id)->pluck('assigned_to.email')->toArray();
+
+	if(in_array($data['email'], $emailTicketsByCategory)) {
+	    return response()->json(['message' => 'Email already exists'], 400);
+	}
+
+	return response()->json(['message' => 'Email valid'], 200);
     }
 
     /**
