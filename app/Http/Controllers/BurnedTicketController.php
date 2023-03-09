@@ -13,9 +13,12 @@ class BurnedTicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Event $event)
+    public function index(Request $request, Event $event)
     {
-        return BurnedTicket::where("event_id", $event->_id)->latest()->paginate();
+	// Cantidad de elementos que se quieren paginar
+	$numberItems =  $request->query('numberItems') ? $request->query('numberItems') : 10;
+
+        return BurnedTicket::where("event_id", $event->_id)->latest()->paginate($numberItems);
     }
 
     /**
