@@ -13,6 +13,8 @@ class BurnedTicket extends MyBaseModel
 	'ticket_category_id', // String: Identificador de categoria
     ];
 
+    protected static $unguarded = true;
+
     protected $dates = ['created_at', 'updated_at'];
 
     protected $with = ["user","ticketCategory"];

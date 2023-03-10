@@ -663,3 +663,8 @@ Route::group(
         Route::delete('events/{event}/boleterias/{boleteria}', 'BoleteriaController@destroy');
     }
 );
+
+/****************
+ * WebHook
+ ****************/
+Route::post('wompi/transactions', 'WebHookController@mainHandler');
