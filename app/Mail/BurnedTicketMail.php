@@ -52,13 +52,13 @@ class BurnedTicketMail extends Mailable
 	$this->qr = $qr;
 
 	// Mail config
-        $mail = $this->from('alerts@evius.co');
-        $mail->subject('Pago exitoso');
+        $mail = $this->from('alerts@evius.co', $event->name);
+        $mail->subject('Compra exitosa');
 
 	// PDF
         $pdf = PDF::loadview('rsvp.pdfQR', compact('qr', 'burnedTicket'));
         $pdf->setPaper([0.0, 0.0, 300, 150], 'portrait');
-        $mail->attachData($pdf->download(), "ticket.pdf");
+        $mail->attachData($pdf->download(), "ticket-{$burnedTicket->code}.pdf");
 
         return $mail->view('rsvp.burnedTicket');
     }

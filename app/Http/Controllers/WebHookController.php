@@ -53,7 +53,13 @@ class WebHookController extends Controller
 	$burnedTicket = BurnedTicket::create($ticketData);
 
 	// Enviar ticket
-        Mail::to($params['assigned_to_email'])
+	// Si la persona que compra es la misma
+	// que se le asignara el ticket solo se envia un correo
+	$emails = $params['assigned_to_email'] != $transaction['customer_email'] ?
+	    [$params['assigned_to_email'], $transaction['customer_email']] :
+	    $params['assigned_to_email'];
+
+        Mail::to($emails)
             ->queue(
                 new \App\Mail\BurnedTicketMail($burnedTicket)
             );
