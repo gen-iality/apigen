@@ -7,6 +7,7 @@ use Mail;
 
 // Models
 use App\BurnedTicket;
+use App\Billing;
 
 class WebHookController extends Controller
 {
@@ -81,6 +82,12 @@ class WebHookController extends Controller
 	if($burned) {
 	    $this->createBurnedTicket($data['data']['transaction'], $params);
 	}
+
+	// Crear Billing asocido al usuario
+	// Este user_id es sacado de user que tiene
+	// cuenta iniciada en evius cuando hace el pago
+	$data['user_id'] = $params['user_id'];
+	Billing::create($data);
 
 	return response()->json(['message' => 'ok']);
     }
