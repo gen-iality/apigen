@@ -57,7 +57,8 @@ class BurnedTicketMail extends Mailable
 
 	// Mail config
         $mail = $this->from('alerts@evius.co', $event->name);
-        $mail->subject('Compra exitosa');
+	$subject = $lang === 'es' ? 'Compra exitosa' : 'Successful purchase';
+        $mail->subject($subject);
 
 	// PDF
         $pdf = PDF::loadview('rsvp.pdfQR', compact('qr', 'burnedTicket', 'lang'));

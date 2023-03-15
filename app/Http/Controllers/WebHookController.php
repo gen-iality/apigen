@@ -59,9 +59,13 @@ class WebHookController extends Controller
 	    [$params['assigned_to_email'], $transaction['customer_email']] :
 	    $params['assigned_to_email'];
 
+	$langAllowed = ['es', 'en'];
+	$lang = in_array($params['lang'], $langAllowed) ?
+	    $params['lang'] : 'es';
+
         Mail::to($emails)
             ->queue(
-                new \App\Mail\BurnedTicketMail($burnedTicket, $params['lang'])
+                new \App\Mail\BurnedTicketMail($burnedTicket, $lang)
             );
     }
 
