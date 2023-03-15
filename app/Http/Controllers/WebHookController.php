@@ -61,7 +61,7 @@ class WebHookController extends Controller
 
         Mail::to($emails)
             ->queue(
-                new \App\Mail\BurnedTicketMail($burnedTicket)
+                new \App\Mail\BurnedTicketMail($burnedTicket, $params['lang'])
             );
     }
 

@@ -200,12 +200,16 @@
 
     <div class="item-left">
       <p class="event">{{ $burnedTicket['event']['name'] }}</p>
-      <h2 class="title">{{ $burnedTicket['ticket_category']['name']['es'] }}</h2>
+      <h2 class="title">{{ $burnedTicket['ticket_category']['name'][$lang] }}</h2>
 
       <div class="sce">
         <div class="icon">
 	  <i class="fa fa-duotone fa-calendar"></i>
-	  <p>Início: {{ $burnedTicket['event']['datetime_from'] }} <br/>Fín: {{ $burnedTicket['event']['datetime_to'] }}</p>
+	    @if($lang === 'es')
+	    <p>Início: {{ $burnedTicket['event']['datetime_from'] }} <br/>Fín: {{ $burnedTicket['event']['datetime_to'] }}</p>
+	    @elseif($lang === 'en')
+	    <p>Start: {{ $burnedTicket['event']['datetime_from'] }} <br/>End: {{ $burnedTicket['event']['datetime_to'] }}</p>
+	    @endif
         </div>
       </div>
   </div>

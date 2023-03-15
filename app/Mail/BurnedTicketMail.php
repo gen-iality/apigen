@@ -18,15 +18,18 @@ class BurnedTicketMail extends Mailable
 
     public $burnedTicket;
     public $qr;
+    public $lang;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($burnedTicket)
+    public function __construct($burnedTicket, $lang)
     {
 	$this->burnedTicket = $burnedTicket;
+	// Enviar correo dependiendo del idioma
+	$this->lang = $lang;
     }
 
     /**
@@ -40,6 +43,7 @@ class BurnedTicketMail extends Mailable
 	$event = Event::findOrFail($this->burnedTicket['event_id']);
 
 	$burnedTicket = $this->burnedTicket;
+	$lang = $this->lang;
 	$burnedTicket['ticket_category'] = $ticketCategory;
 	$burnedTicket['event'] = $event;
 
@@ -56,7 +60,7 @@ class BurnedTicketMail extends Mailable
         $mail->subject('Compra exitosa');
 
 	// PDF
-        $pdf = PDF::loadview('rsvp.pdfQR', compact('qr', 'burnedTicket'));
+        $pdf = PDF::loadview('rsvp.pdfQR', compact('qr', 'burnedTicket', 'lang'));
         $pdf->setPaper([0.0, 0.0, 300, 150], 'portrait');
         $mail->attachData($pdf->download(), "ticket-{$burnedTicket->code}.pdf");
 
