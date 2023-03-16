@@ -56,6 +56,25 @@ class BurnedTicketController extends Controller
     }
 
     /**
+     * Validar que este codigo exista
+     *
+     * @param  \App\Event  $event
+     * @param  $code
+     * @return \Illuminate\Http\Response
+     */
+    public function validateTicketCode(Event $event, $code)
+    {
+	$burnedTicket = BurnedTicket::where('event_id', $event->_id)
+	    ->where('code', $code)->first();
+
+	if($burnedTicket) {
+	    return $burnedTicket;
+	}
+
+	return response()->json(['message' => 'Ticket not found'], 404);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

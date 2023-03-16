@@ -267,6 +267,7 @@ Route::group(
 
 // Burned
 Route::get('events/{event}/burned-tickets', 'BurnedTicketController@index');
+Route::get('events/{event}/burned-tickets/codes/{code}', 'BurnedTicketController@validateTicketCode');
 Route::post('attendees/ticket-category/{ticketCategory}/validate', 'BurnedTicketController@validateUserDataToTicket');
 Route::get('events/{event}/burned-categories', 'TicketCategoryController@indexBurnedBoleteria');
 
