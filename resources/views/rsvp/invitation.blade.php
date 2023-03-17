@@ -15,6 +15,17 @@
 {{ __ ('Mail.greeting')}} {{$eventUser_name}}, {{ __ ('Mail.successful_enrollment')}}:
 <b>{{$event->name}}</b>
 </div>
+
+@if($event->_id === "64074725abdc1ea2c80b5062")
+<br>
+<div class="centered"  style="font-size: 20px;color">
+  <h2>Bienvenidos a Zona Gamer.</h2>
+  <p>Con este código QR tendrás la oportunidad de disfrutar una experiencia única.</p>
+</div>
+@endif
+
+
+
 {{-- Mensaje configurable desde el CMS en la sección configuración asistentes --}}
 @if($event->registration_message )
 
@@ -50,6 +61,19 @@
 	</div>
 	
 </div>
+
+
+@if($event->_id === "64074725abdc1ea2c80b5062")
+<br>
+<div class="centered"  style="font-size: 20px;color">
+  <h2><strong>IMPORTANTE</strong></h2>
+  <ul>
+    <li>Aforo limitado. Se recomienda llegar temprano para asegurar su ingreso.</li>
+    <li>Si no alcanzas a ingresar al Teatro Ripio debido a que se ha alcanzado el aforo máximo en sitio, recuerda que podrás disfrutar del evento de manera virtual y en vivo en <a href="www.zonagamerlg.com">www.zonagamerlg.com</a></li>
+    <li>Nos reservamos el derecho de admisión.</li>
+  </ul>
+</div>
+@endif
 
 <div style="text-align: center">
 	@if($event->type_event == "physicalEvent")
