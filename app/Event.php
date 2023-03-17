@@ -57,6 +57,7 @@ class Event extends ModelsEvent
         'view_price_list', // boolean para saber si se muestra la lista de precios
         'view_range_price', // boolean para saber si se muestra el rango de precios
         'redirect_activity', // string para redireccionar a una actividad
+        'redirect_landing', // Boolean: Saltar la prelanding
 	'boleteria_id', // boolean para saber si un evento tiene boleteria
 	'is_custom_password_label', // Boolean: Determina si evento tiene password name personalizado
 	'custom_password_label', // String: Nombre del campo password
