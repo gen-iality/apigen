@@ -91,9 +91,9 @@ class BurnedTicketController extends Controller
      * @param  \App\BurnedTicket  $burnedTicket
      * @return \Illuminate\Http\Response
      */
-    public function show(BurnedTicket $burnedTicket)
+    public function show($event, BurnedTicket $burnedTicket)
     {
-        //
+	return $burnedTicket;
     }
 
     /**
