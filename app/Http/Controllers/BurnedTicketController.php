@@ -19,7 +19,8 @@ class BurnedTicketController extends Controller
 	// Cantidad de elementos que se quieren paginar
 	$numberItems =  $request->query('numberItems') ? $request->query('numberItems') : 10;
 
-	// Listar por usuario
+	// Listar por usuario, esto funciona desde el lado del usuario
+	// para ver sus tickets
 	$user_id =  $request->query('user_id') ? $request->query('user_id') : false;
 	if($user_id){
 	    return BurnedTicket::where("event_id", $event->_id)
@@ -28,8 +29,16 @@ class BurnedTicketController extends Controller
 		->paginate($numberItems);
 	}
 
-	return BurnedTicket::where("event_id", $event->_id)->latest()->paginate($numberItems);
+	// Filtros desde el CMS
+	$code =  $request->query('code') ? $request->query('code') : false;
+	if($code){
+	    return BurnedTicket::where("event_id", $event->_id)
+		->where('code', 'regex', "/{$code}/i")
+		->latest()
+		->paginate($numberItems);
+	}
 
+	return BurnedTicket::where("event_id", $event->_id)->latest()->paginate($numberItems);
     }
 
     /**
