@@ -10,6 +10,17 @@ use Illuminate\Http\Request;
 class BurnedTicketController extends Controller
 {
     /**
+     * @urlParam  \Illuminate\Http\Request  $request
+     * @urlParam  \App\Event  $event
+     * @queyParam  numberItems Number of item to get
+     * @queyParam  user_id Get user's tickets
+     *  Filtros de CMS
+     * @queyParam  code
+     * @queyParam  state
+     * @queyParam  assigned_to.name
+     * @queyParam  assigned_to.email
+     * @queyParam  assigned_to.document.type_doc
+     * @queyParam  assigned_to.document.value
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -19,8 +30,7 @@ class BurnedTicketController extends Controller
 	// Cantidad de elementos que se quieren paginar
 	$numberItems =  $request->query('numberItems') ? $request->query('numberItems') : 10;
 
-	// Listar por usuario, esto funciona desde el lado del usuario
-	// para ver sus tickets
+	// Listar por usuario, vista para usuario para ver sus tickets
 	$user_id =  $request->query('user_id') ? $request->query('user_id') : false;
 	if($user_id){
 	    return BurnedTicket::where("event_id", $event->_id)
@@ -29,15 +39,17 @@ class BurnedTicketController extends Controller
 		->paginate($numberItems);
 	}
 
-	// Filtros desde el CMS
-	$code =  $request->query('code') ? $request->query('code') : false;
-	if($code){
+	// Filtros desde el CMS: por email, codigo, nombre, etc
+	$searchBy =  $request->query('search_by') ? $request->query('search_by') : false;
+	$searchValue =  $request->query('search_value') ? $request->query('search_value') : false;
+	if($searchBy && $searchValue){
 	    return BurnedTicket::where("event_id", $event->_id)
-		->where('code', 'regex', "/{$code}/i")
+		->where($searchBy, 'regex', "/{$searchValue}/i") // insesible a lower y upper
 		->latest()
 		->paginate($numberItems);
 	}
 
+	// Listar todos por defecto
 	return BurnedTicket::where("event_id", $event->_id)->latest()->paginate($numberItems);
     }
 
