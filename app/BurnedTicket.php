@@ -8,6 +8,7 @@ class BurnedTicket extends MyBaseModel
 {
     protected $table = "burned_tickets";
     protected $fillable = [
+	'state', // String: ACTIVE | CANCEL | USED
 	'code', // String: Identificador de 6 caracteres
 	'billing_id', // String: Identificador de factura relacionada
 	'ticket_category_id', // String: Identificador de categoria

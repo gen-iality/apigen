@@ -124,9 +124,12 @@ class BurnedTicketController extends Controller
      * @param  \App\BurnedTicket  $burnedTicket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BurnedTicket $burnedTicket)
+    public function update(Request $request, Event $event, BurnedTicket $burnedTicket)
     {
-        //
+	$data = $request->json()->all();
+	$burnedTicket->update($data);
+
+	return $burnedTicket;
     }
 
     /**
