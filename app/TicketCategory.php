@@ -42,4 +42,9 @@ class TicketCategory extends MyBaseModel
     {
         return $this->belongsTo('App\Activities', 'activity_id');
     }
+
+    public function burnedTickets()
+    {
+	return $this->hasMany('App\BurnedTicket');
+    }
 }

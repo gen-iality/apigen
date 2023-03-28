@@ -30,9 +30,10 @@ class WebHookController extends Controller
 	return $status === "APPROVED" ? true : false;
     }
 
-    private function createBurnedTicket($transaction, $params)
+    private function createBurnedTicket($transaction, $params, $billing)
     {
 	$ticketData = [
+	    'billing_id' => $billing->_id,
 	    'user_id' => $params['user_id'],
 	    'code' => $this->generateCode(),
 	    'state' => 'ACTIVE',
@@ -89,17 +90,17 @@ class WebHookController extends Controller
 	// Obtener query params
 	parse_str($queryString, $params);
 
-	$burned = !empty($params['burned']) ?
-	    filter_var($params['burned'], FILTER_VALIDATE_BOOLEAN) : false;
-	if($burned) {
-	    $this->createBurnedTicket($data['data']['transaction'], $params);
-	}
-
 	// Crear Billing asocido al usuario
 	// Este user_id es sacado de user que tiene
 	// cuenta iniciada en evius cuando hace el pago
 	$data['user_id'] = $params['user_id'];
-	Billing::create($data);
+	$billing = Billing::create($data);
+
+	$burned = !empty($params['burned']) ?
+	    filter_var($params['burned'], FILTER_VALIDATE_BOOLEAN) : false;
+	if($burned) {
+	    $this->createBurnedTicket($data['data']['transaction'], $params, $billing);
+	}
 
 	return response()->json(['message' => 'ok']);
     }

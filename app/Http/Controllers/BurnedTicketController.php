@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\BurnedTicket;
 use App\Event;
+use App\Exports\BurnedTicketsExport;
 use App\TicketCategory;
 use Illuminate\Http\Request;
+// Excel
+use Maatwebsite\Excel\Facades\Excel;
 
 class BurnedTicketController extends Controller
 {
@@ -142,4 +145,16 @@ class BurnedTicketController extends Controller
     {
         //
     }
+
+    /**
+     * Descargar excel con tickets
+     *
+     * @param  \App\Event $event
+     * @return \Illuminate\Http\Response
+     */
+    public function exportExcelWithBurnedTickets(Event $event)
+    {
+	return Excel::download(new BurnedTicketsExport($event) , 'tickets.xlsx');
+    }
+
 }

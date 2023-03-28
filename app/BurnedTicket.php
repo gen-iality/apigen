@@ -18,7 +18,7 @@ class BurnedTicket extends MyBaseModel
 
     protected $dates = ['created_at', 'updated_at'];
 
-    protected $with = ["user","ticketCategory"];
+    protected $with = ["user","ticketCategory", "billing"];
 
     public function user()
     {
@@ -28,5 +28,10 @@ class BurnedTicket extends MyBaseModel
     public function ticketCategory()
     {
         return $this->belongsTo('App\TicketCategory');
+    }
+
+    public function billing()
+    {
+        return $this->belongsTo('App\Billing');
     }
 }

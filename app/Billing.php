@@ -34,4 +34,9 @@ class Billing extends MyBaseModel
     {
         return $this->belongsTo('App\Payment', 'payment_id');
     }
+
+    public function burnedTickets()
+    {
+	return $this->hasMany('App\BurnedTicket');
+    }
 }

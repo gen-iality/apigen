@@ -7,21 +7,21 @@ namespace App;
 class Boleteria extends MyBaseModel
 {
     protected $fillable = [
-	'title',
+	'name',
 	'event_id',
-	'datetime_from',
-	'datetime_to',
-	'event_id',
-	'iva_in', //Especifica en donde va el IVA, includo en el precio o añadido
-	'iva_percentage',
-	'states_sales', // String: Venta abierta || Cerrrada
-	'min_tickets_per_user', // Number
-	'max_tickets_per_user', // Number
-	'valid_age', // Number
+	//'datetime_from',
+	//'datetime_to',
+	//'event_id',
+	//'iva_in', //Especifica en donde va el IVA, includo en el precio o añadido
+	//'iva_percentage',
+	'states_sales', // String: Venta | Abierta | Cerrrada
+	//'min_tickets_per_user', // Number
+	'ticket_sale_limit', // Number: 0 puede comprar los que quiera
+	//'valid_age', // Number
 	'list_landing', // Boolean
-	'range_prices_landing', // Boolean
-	'ticket_capacity', // Number: Aforo de personas/tickets
-	'capacity_is_active' // Boolean
+	//'range_prices_landing', // Boolean
+	//'ticket_capacity', // Number: Aforo de personas/tickets
+	//'capacity_is_active' // Boolean
     ];
 
     protected $table = 'boleterias';
