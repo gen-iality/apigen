@@ -16,6 +16,7 @@ class BurnedTicketController extends Controller
      * @urlParam  \Illuminate\Http\Request  $request
      * @urlParam  \App\Event  $event
      * @queyParam  numberItems Number of item to get
+     * @queyParam  query Type of query regex | equal
      * @queyParam  user_id Get user's tickets
      *  Filtros de CMS
      * @queyParam  code
@@ -43,11 +44,20 @@ class BurnedTicketController extends Controller
 	}
 
 	// Filtros desde el CMS: por email, codigo, nombre, etc
+	$typeQuery = $request->query('query') ? $request->query('query') : 'regex';
 	$searchBy =  $request->query('search_by') ? $request->query('search_by') : false;
 	$searchValue =  $request->query('search_value') ? $request->query('search_value') : false;
+
+	// Especificar tipo de busqueda regex o igual
+	if($typeQuery === 'equal') {
+	    $typeQuery = '=';
+	} else { // En caso de que sea por regex
+	    $searchValue = "/{$searchValue}/i";
+	}
+
 	if($searchBy && $searchValue){
 	    return BurnedTicket::where("event_id", $event->_id)
-		->where($searchBy, 'regex', "/{$searchValue}/i") // insesible a lower y upper
+		->where($searchBy, $typeQuery, $searchValue) // insesible a lower y upper
 		->latest()
 		->paginate($numberItems);
 	}
