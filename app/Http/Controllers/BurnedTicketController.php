@@ -175,9 +175,9 @@ class BurnedTicketController extends Controller
 	$burnedTickets = [];
 
 	// recibir el numero de tickets que seran creados
-	for($i = 0; $i < $data['codeQty']; $i++) {
+	for($i = 0; $i < $data['code_qty']; $i++) {
 	    $dataBurnedTicket = $data;
-	    unset($dataBurnedTicket['codeQty']);
+	    unset($dataBurnedTicket['code_qty']);
 	    $dataBurnedTicket['event_id'] = $event->_id;
 	    $dataBurnedTicket['code'] = $this->generateCode();
 	    // setear si este tickets es ganador o no
