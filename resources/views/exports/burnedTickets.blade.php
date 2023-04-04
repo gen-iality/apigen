@@ -23,7 +23,7 @@
                 <td>{{ $burnedTicket->ticketCategory->name['es'] }}</td>
                 <td>{{ $burnedTicket->code }}</td>
                 <td>{{ $burnedTicket->state }}</td>
-                <td>${{ $burnedTicket->price_usd / 100 }}</td>
+                <td>${{ $burnedTicket->price_usd }}</td>
                 <td>${{ $burnedTicket->amount_in_cents / 100 }}</td>
                 <td>{{ $burnedTicket->assigned_to['document']['type_doc'] }}</td>
                 <td>{{ $burnedTicket->assigned_to['document']['value'] }}</td>
