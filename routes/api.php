@@ -274,6 +274,9 @@ Route::put('events/{event}/burned-tickets/{burnedTicket}', 'BurnedTicketControll
 Route::post('attendees/ticket-category/{ticketCategory}/validate', 'BurnedTicketController@validateUserDataToTicket');
 Route::get('events/{event}/burned-categories', 'TicketCategoryController@indexBurnedBoleteria');
 
+// LUKER
+Route::post('events/{event}/luker/tickets', 'BurnedTicketController@createLukerTickets');
+
 Route::apiResource('events/{event}/tickets', 'TicketController', ['except' => ['store']]);
 Route::post('ticket-categories/{ticketCategory}/tickets', 'TicketController@store');
 Route::put('users/{user}/tickets/{ticket}/assign', 'TicketController@assingTicketToUser');
