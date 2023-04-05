@@ -100,7 +100,8 @@ class MeetingsController extends Controller
         $data = $request->json()->all();
         $meeting_id = $data['request_id'];
 
-        $path = "event_agendas/{$event_id}/agendas/{$meeting_id}";
+        //$path = "event_agendas/{$event_id}/agendas/{$meeting_id}";
+        $path = "networkingByEventId/{$event_id}/meeting_request/{$meeting_id}";
         $d = $this->database->document($path);
         if (!$d->snapshot()->exists()) {
             throw new ModelNotFoundException("Model doesn't exists");
@@ -108,11 +109,11 @@ class MeetingsController extends Controller
 
         $meeting = $d->snapshot()->data();
 
-        $data['timestamp_start'] = $meeting['timestamp_start']; 
-        
+        $data['timestamp_start'] = $meeting['timestamp_start'];
+
         self::buildMeetingRequestMessage($data, $event_id);
 
-    }   
+    }
 
     public function buildMeetingRequestMessage($data, String $event_id)
     {
