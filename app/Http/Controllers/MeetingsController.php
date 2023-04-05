@@ -109,7 +109,7 @@ class MeetingsController extends Controller
 
         $meeting = $d->snapshot()->data();
 
-        $data['timestamp_start'] = $meeting['timestamp_start'];
+        $data['timestamp_start'] = $meeting['date'];
 
         self::buildMeetingRequestMessage($data, $event_id);
 
