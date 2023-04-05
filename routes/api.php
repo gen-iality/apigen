@@ -275,7 +275,7 @@ Route::post('attendees/ticket-category/{ticketCategory}/validate', 'BurnedTicket
 Route::get('events/{event}/burned-categories', 'TicketCategoryController@indexBurnedBoleteria');
 
 // LUKER
-Route::post('events/{event}/luker/tickets', 'BurnedTicketController@createLukerTickets');
+Route::post('events/{event}/luker/tickets', 'LukerTicketController@store');
 
 Route::apiResource('events/{event}/tickets', 'TicketController', ['except' => ['store']]);
 Route::post('ticket-categories/{ticketCategory}/tickets', 'TicketController@store');

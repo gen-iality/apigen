@@ -145,50 +145,6 @@ class BurnedTicketController extends Controller
 	return $burnedTicket;
     }
 
-    // LUKER TICKETS
-    private function validateWinner($burnedTicket)
-    {
-	// poner numero de ticket correspondiente
-	$codeQty = BurnedTicket::where('event_id', $burnedTicket['event_id'])->count();
-	$burnedTicket['ticket_number'] = $codeQty + 1;
-	// validar si es ganador
-	$burnedTicket['is_winner'] = $burnedTicket['ticket_number'] % 10 == 0;
-
-	return $burnedTicket;
-    }
-
-    private function generateCode()
-    {
-        $randomCode = substr(str_shuffle(str_repeat($x='0123456789', ceil(6/strlen($x)) )),1,6);
-        //verificar que el codigo no se repita
-        $burnedTicket = BurnedTicket::where('code', $randomCode)->first();
-        if(!empty( $burnedTicket )) {
-	    $this->generateCode();
-        }
-
-	return $randomCode;
-    }
-
-    public function createLukerTickets(Request $request, Event $event)
-    {
-	$data = $request->json()->all();
-	$burnedTickets = [];
-
-	// recibir el numero de tickets que seran creados
-	for($i = 0; $i < $data['code_qty']; $i++) {
-	    $dataBurnedTicket = $data;
-	    unset($dataBurnedTicket['code_qty']);
-	    $dataBurnedTicket['event_id'] = $event->_id;
-	    $dataBurnedTicket['code'] = $this->generateCode();
-	    // setear si este tickets es ganador o no
-	    $dataBurnedTicket = $this->validateWinner($dataBurnedTicket);
-	    $newBurnedTicker = BurnedTicket::create($dataBurnedTicket);
-	    array_push($burnedTickets, $newBurnedTicker);
-	}
-
-	return response()->json(compact('burnedTickets'), 201);
-    }
-
     /**
      * Remove the specified resource from storage.
      *
