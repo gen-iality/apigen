@@ -6,6 +6,7 @@ use App;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
 use App\Organization;
+use DateTime;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;use Illuminate\Queue\SerializesModels;
@@ -38,7 +39,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
     public $activity;
     public $event_location;
     public $logo;
-    public $ical = "";
+    public $ical = [];
     public $changePassword;
     public $onlylink;
     public $onetimelogin;
@@ -198,10 +199,10 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         }
 
         //Definición de horario de inicio y fin del evento.Se le agrega -05:00 para que quede hora Colombia
-        $date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start . "-05:00") : \Carbon\Carbon::parse($event->datetime_from . "-05:00");
-        $date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end . "-05:00") : \Carbon\Carbon::parse($event->datetime_to . "-05:00");
-        $date_time_from = $date_time_from->setTimezone("UTC");
-        $date_time_to = $date_time_to->setTimezone("UTC");
+	$date_time_from = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_start)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_start . "-05:00") : \Carbon\Carbon::parse($event->datetime_from . "-05:00");
+	$date_time_to = (isset($eventUser->ticket) && isset($eventUser->ticket->activities) && isset($eventUser->ticket->activities->datetime_end)) ? \Carbon\Carbon::parse($eventUser->ticket->activities->datetime_end . "-05:00") : \Carbon\Carbon::parse($event->datetime_to . "-05:00");
+	$date_time_from = $date_time_from->setTimezone("UTC");
+	$date_time_to = $date_time_to->setTimezone("UTC");
 
         $this->subject = $subject;
         // $descripcion = "<div><a href='{$link}'>Evento Virtual,  ir a la plataforma virtual del evento  </a></div>";
@@ -210,27 +211,51 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         $descripcion = $event->name . " Ver el evento en: " . $this->link;
 
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
-        $this->ical = iCalCalendar::create($event->name)
-            ->appendProperty(
-                TextPropertyType::create('URL', $this->urlconfirmacion)
-            )
-            ->appendProperty(
-                TextPropertyType::create('METHOD', "REQUEST")
-            )
-            ->event(iCalEvent::create($event->name)
-                    ->startsAt($date_time_from)
-                    ->endsAt($date_time_to)
-                    ->description($descripcion)
-                    ->uniqueIdentifier($event->_id)
-                    ->createdAt(new \DateTime())
-                    ->address(($event->address) ? $event->address : $this->urlconfirmacion)
-                // ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
-                //->coordinates(51.2343, 4.4287)
-                    ->organizer('soporte@evius.co', $event->organizer->name)
-                    ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
-            )->get();
-        // var_dump($date_time_from);die;
+	if(!empty($event->dates)) {
+	    foreach($event->dates as $date) {
+            $cal = iCalCalendar::create($event->name)
+                ->appendProperty(
+                    TextPropertyType::create('URL', $this->urlconfirmacion)
+                )
+                ->appendProperty(
+                    TextPropertyType::create('METHOD', "REQUEST")
+                )
+                ->event(iCalEvent::create($event->name)
+                        ->startsAt(new DateTime($date['start']))
+                        ->endsAt(new DateTime($date['end']))
+                        ->description($descripcion)
+                        ->uniqueIdentifier("$event->_id ${date['start']}")
+                        ->createdAt(new DateTime())
+                        ->address(($event->address) ? $event->address : $this->urlconfirmacion)
+                    // ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
+                    //->coordinates(51.2343, 4.4287)
+                        ->organizer('soporte@evius.co', $event->organizer->name)
+                        ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
+                )->get();
 
+	    array_push($this->ical, $cal);
+	    }
+	} else {
+	    // Cuando no especifican fechas del evento
+	    $this->ical = iCalCalendar::create($event->name)->appendProperty(
+                    TextPropertyType::create('URL', $this->urlconfirmacion)
+                )
+                ->appendProperty(
+                    TextPropertyType::create('METHOD', "REQUEST")
+                )
+                ->event(iCalEvent::create($event->name)
+                        ->startsAt($date_time_from)
+                        ->endsAt($date_time_to)
+                        ->description($descripcion)
+                        ->uniqueIdentifier($event->name)
+                        ->createdAt(new DateTime())
+                        ->address(($event->address) ? $event->address : $this->urlconfirmacion)
+                    // ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
+                    //->coordinates(51.2343, 4.4287)
+                        ->organizer('soporte@evius.co', $event->organizer->name)
+                        ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
+                )->get();
+	}
     }
 
     private function encryptdata($string)
@@ -278,6 +303,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
 
     public function build()
     {
+	$icals = $this->ical;
         $logo_evius = 'images/logo.png';
         $this->logo = url($logo_evius);
 
@@ -353,12 +379,24 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
                 ->subject($this->subject)
                 ->markdown('rsvp.invitation');
         }
-        return $this->from($emailOrganization, $from)
-            ->subject($this->subject)
-            ->attachData($this->ical, 'ical.ics', [
-                'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
-            ])
-            ->markdown('rsvp.invitation');
 
+	$mail = $this->from($emailOrganization, $from)
+            ->subject($this->subject);
+
+	$i = 0;
+	if(is_array($icals)) {
+	    $i++;
+	    foreach($icals as $ical) {
+	        $mail->attachData($ical, "ical$i.ics", [
+	    	'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
+	        ]);
+	    }
+	} else {
+	    $mail->attachData($this->ical, "ical.ics", [
+	    'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',
+	    ]);
+	}
+
+	return $mail->markdown('rsvp.invitation');
     }
 }
