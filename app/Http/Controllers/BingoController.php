@@ -176,8 +176,8 @@ class BingoController extends Controller
      */
     public function resetBingoCards($event, Bingo $bingo)
     {
-	    UserEventService::resetBingoCardsForAttendees($bingo);
-	    return response()->json(['message' => 'New bingo cards generated for all attendees'], 200);
+	UserEventService::resetBingoCardsForAttendees($bingo);
+	return response()->json(['message' => 'New bingo cards generated for all attendees'], 200);
     }
 
     /**

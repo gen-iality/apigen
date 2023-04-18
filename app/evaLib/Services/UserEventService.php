@@ -444,6 +444,41 @@ string(10) "1030522402"
         return $rol_id;
     }
 
+    private static function generateBingoCode()
+    {
+	$randomCode = substr(str_shuffle(str_repeat($x='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(5/strlen($x)) )),1,5);
+        //verificar que el codigo no se repita
+        $bingoCard = BingoCard::where('code', $randomCode)->first();
+        if(!empty( $bingoCard )) { // si existe ya un carton con ese codigo
+	    self::generateBingoCode();
+        }
+
+	return $randomCode;
+    }
+
+    public static function createBingoCardToAttendee($eventUser, $bingo, $bingoValues)
+    {
+      $randomBingoCardValues = [];
+      // asignacion de valores al carton segun las dimensiones del bingo
+      while(count($randomBingoCardValues) < $bingo->dimensions['amount']) {
+        $randomValue = $bingoValues[rand(0, count($bingoValues) -1)];
+        !in_array($randomValue, $randomBingoCardValues, true)
+            && array_push($randomBingoCardValues, $randomValue);
+      }
+
+      $bingoCard = BingoCard::create(
+          [
+              'event_user_id' => $eventUser->_id,
+              'event_id' => $bingo->event_id,
+              'bingo_id' => $bingo->_id,
+              'values_bingo_card' => $randomBingoCardValues,
+              'code' => self::generateBingoCode()
+          ]
+      );
+
+      return $bingoCard;
+    }
+
     public static function generateBingoCardForAttendee($event_id, $event_user_id)
     {
       $bingo = Bingo::where('event_id', $event_id)->first();
@@ -456,33 +491,18 @@ string(10) "1030522402"
 	  return ['message' => 'Not enough values to generate bingo cards'];
       }
 
-      $randomBingoCardValues = [];
-      // asignacion de valores al carton segun las dimensiones del bingo
-      while(count($randomBingoCardValues) < $bingo->dimensions['amount']) {
-        $randomValue = $bingoValues[rand(0, count($bingoValues) -1)];
-        !in_array($randomValue, $randomBingoCardValues, true)
-            && array_push($randomBingoCardValues, $randomValue);
+      // Crear cantidad de cartones segun usuario, por defecto es 1
+      $eventUser = Attendee::findOrFail($event_user_id);
+      $qtyBingoCards = isset($eventUser->properties['qty_bingo_cards']) ?
+	  $eventUser->properties['qty_bingo_cards'] : 1;
+
+      $bingoCardCreated = []; // Cartones creados
+      for($i = 0; $i < $qtyBingoCards; $i++) {
+	$bingoCard = self::createBingoCardToAttendee($eventUser, $bingo, $bingoValues);
+	array_push($bingoCardCreated, $bingoCard);
       }
 
-        //generar ramdom code para el carton - alfanumerico de 5 caracteres
-        $randomCode = substr(str_shuffle(str_repeat($x='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(5/strlen($x)) )),1,5);
-        //verificar que el codigo no se repita
-        $bingoCard = BingoCard::where('code', $randomCode)->first();
-        if($bingoCard) {
-            $randomCode = substr(str_shuffle(str_repeat($x='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(5/strlen($x)) )),1,5);
-        }
-
-        $bingoCard = BingoCard::create(
-            [
-                'event_user_id' => $event_user_id,
-                'event_id' => $event_id,
-                'bingo_id' => $bingo->_id,
-                'values_bingo_card' => $randomBingoCardValues,
-                'code' => $randomCode
-            ]
-        );
-
-      return $bingoCard;
+      return $bingoCardCreated;
     }
 
     /**
