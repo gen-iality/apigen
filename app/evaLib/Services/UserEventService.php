@@ -511,15 +511,15 @@ string(10) "1030522402"
      * se debe crear/modificar nuevos cartones
      * con estas nuevas especificaciones
      */
-    public static function resetBingoCardsForAttendees($bingo)
+    public static function resetBingoCardsForAttendees(Bingo $bingo)
     {
 	$eventUsers = Attendee::where('event_id', $bingo->event_id)->get();
 
 	foreach($eventUsers as $eventUser) {
-	    // Eliminar carton
-	    $bingoCard = BingoCard::where('event_user_id', $eventUser->_id)->first();
-	    isset($bingoCard) && $bingoCard->delete();
-	    // crear carton nuevo
+	    // Eliminar cartones
+	    $bingoCards = BingoCard::where('event_user_id', $eventUser->_id)->pluck('_id')->toArray();
+	    !empty($bingoCards) && BingoCard::destroy($bingoCards);
+	    // crear cartones nuevos
 	    self::generateBingoCardForAttendee($eventUser->event_id, $eventUser->_id);
 	}
     }

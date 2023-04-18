@@ -92,15 +92,15 @@ class BingoController extends Controller
      */
     public function update(Request $request, $event, Bingo $bingo)
     {
-	    $data = $request->json()->all();
-      $bingo->fill($data);
-      $bingo->save();
+	$data = $request->json()->all();
+	$bingo->fill($data);
+	$bingo->save();
 
-      if ($request->query('reset_bingo') === "yes") {
-          UserEventService::resetBingoCardsForAttendees($bingo);
-      }
+        if ($request->query('reset_bingo') === "yes") {
+            UserEventService::resetBingoCardsForAttendees($bingo);
+        }
 
-      return response()->json($bingo);
+        return response()->json($bingo);
     }
 
     /**
