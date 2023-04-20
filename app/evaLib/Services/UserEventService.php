@@ -468,7 +468,7 @@ string(10) "1030522402"
 
       $bingoCard = BingoCard::create(
           [
-              'event_user_id' => $eventUser->_id,
+              'event_user_id' => isset($eventUser->_id) ? $eventUser->_id : null,
               'event_id' => $bingo->event_id,
               'bingo_id' => $bingo->_id,
               'values_bingo_card' => $randomBingoCardValues,
@@ -492,17 +492,24 @@ string(10) "1030522402"
       }
 
       // Crear cantidad de cartones segun usuario, por defecto es 1
-      $eventUser = Attendee::findOrFail($event_user_id);
-      $qtyBingoCards = isset($eventUser->properties['qty_bingo_cards']) ?
-	  $eventUser->properties['qty_bingo_cards'] : 1;
+      if($event_user_id) {
+	$eventUser = Attendee::findOrFail($event_user_id);
+      	$qtyBingoCards = isset($eventUser->properties['qty_bingo_cards']) ?
+      	    $eventUser->properties['qty_bingo_cards'] : 1;
 
-      $bingoCardCreated = []; // Cartones creados
-      for($i = 0; $i < $qtyBingoCards; $i++) {
-	$bingoCard = self::createBingoCardToAttendee($eventUser, $bingo, $bingoValues);
-	array_push($bingoCardCreated, $bingoCard);
+      	$bingoCardCreated = []; // Cartones creados
+      	for($i = 0; $i < $qtyBingoCards; $i++) {
+      	  $bingoCard = self::createBingoCardToAttendee($eventUser, $bingo, $bingoValues);
+      	  array_push($bingoCardCreated, $bingoCard);
+      	}
+
+	return $bingoCardCreated;
       }
 
-      return $bingoCardCreated;
+      // Crear bingo cards sin asignar asistentes
+      $bingoCard = self::createBingoCardToAttendee($eventUser=null, $bingo, $bingoValues);
+
+      return $bingoCard;
     }
 
     /**

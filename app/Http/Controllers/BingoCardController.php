@@ -7,6 +7,8 @@ use PDF;
 // models
 use App\BingoCard;
 use App\Attendee;
+use App\Bingo;
+use App\evaLib\Services\UserEventService;
 
 /**
  * @group BingoCard
@@ -45,4 +47,21 @@ class BingoCardController extends Controller
 
         //return $pdf->download('carton-bingo.pdf');
     //}
+
+    public function createBingoCardsWithoutAtteendes(Request $request, Bingo $bingo)
+    {
+      $request->validate([
+	'qty_bingo_cards' => 'required|numeric'
+      ]);
+
+      $qtyBingoCards  = $request->json('qty_bingo_cards');
+      $bingoCardCreated = [];
+
+      for($i = 0; $i < $qtyBingoCards; $i++) {
+	$bingoCard = UserEventService::generateBingoCardForAttendee($bingo->event_id, $event_user_id=null);
+	array_push($bingoCardCreated, $bingoCard);
+      }
+
+      return response()->json($bingoCardCreated, 201);
+    }
 }
