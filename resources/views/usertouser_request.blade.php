@@ -45,13 +45,6 @@
 @component('mail::button', ['url' => $link_authenticatedalevento, 'color' => 'evius'])
 Ver Solicitudes en el Evento
 @endcomponent
-<div>	
-	<p>
-		<a href="{{$linkUnsubscribe}}">{{ __('Mail.unsubscribe')}}</a>
-	</p>	
-</div>
-
-
 
 <!-- Click aqui
 @component('mail::button', ['url' => url('/api/rsvp/confirmrsvp/5bb64a02c065863d470263a8'), 'color' => 'evius'])
