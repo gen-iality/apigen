@@ -600,6 +600,7 @@ Route::put('events/{event}/bingos/{bingo}/import-values', 'BingoController@impor
 Route::get('events/{event}/bingos', 'BingoController@BingobyEvent');
 
 //BINGOCARD
+Route::get('bingos/{bingo}/bingocards', 'BingoCardController@index');
 Route::get('bingocards/{code}', 'BingoCardController@show');
 Route::get('bingocards/{bingocard}/download', 'BingoCardController@downloadBingoCard');
 Route::post('bingos/{bingo}/bingocards', 'BingoCardController@createBingoCardsWithoutAtteendes');

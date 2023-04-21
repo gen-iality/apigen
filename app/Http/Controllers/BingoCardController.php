@@ -16,6 +16,15 @@ use App\evaLib\Services\UserEventService;
 
 class BingoCardController extends Controller
 {
+    /**
+     * _index_: Get all bingo cards by bingo
+     * @urlParam bingo required The id of the bingo to retrive all bingo cards.
+    */
+    public function index(Bingo $bingo)
+    {
+        $bingoCards = BingoCard::where('bingo_id', $bingo->_id)->get();
+	return response()->json($bingoCards, 200);
+    }
 
     /**
      * _show_: Get a event user with bingo card
@@ -27,26 +36,6 @@ class BingoCardController extends Controller
         $eventUser = Attendee::findOrFail($bingo_card->event_user_id);
         return ["bingo_card" => $bingo_card, "name_owner"=> $eventUser["properties"]["names"]];
     }
-
-    /**
-     * _destroy_: Delete a attendee's bingo card
-     * @urlParam bingocard required The id of the bingo card to find this.
-     *
-     * @return 204 No Content
-    */
-    public function destroy(string $bingo_card)
-    {
-        $bingo_card = BingoCard::findOrFail($bingo_card);
-        $bingo_card->delete();
-        return response()->json([], 204);
-    }
-
-    //public function downloadBingoCard(BingoCard $bingocard)
-    //{
-        //$pdf = PDF::loadview('BingoCard', compact('bingocard'));
-
-        //return $pdf->download('carton-bingo.pdf');
-    //}
 
     public function createBingoCardsWithoutAtteendes(Request $request, Bingo $bingo)
     {
@@ -64,4 +53,25 @@ class BingoCardController extends Controller
 
       return response()->json($bingoCardCreated, 201);
     }
+
+    /**
+     * _destroy_: Delete a attendee's bingo card
+     * @urlParam bingocard required The id of the bingo card to find this.
+     *
+     * @return 204 No Content
+    */
+
+    public function destroy(string $bingo_card)
+    {
+        $bingo_card = BingoCard::findOrFail($bingo_card);
+        $bingo_card->delete();
+        return response()->json([], 204);
+    }
+
+    //public function downloadBingoCard(BingoCard $bingocard)
+    //{
+        //$pdf = PDF::loadview('BingoCard', compact('bingocard'));
+
+        //return $pdf->download('carton-bingo.pdf');
+    //}
 }
