@@ -14,34 +14,7 @@
 	{!!$desc !!}			
 </div>
 
-<div>
-	@if ($request_type == 'friendship' && $response)
-		<div style="text-align: center">
-			@component('mail::button', ['url' => $link . "&response=accepted" , 'color' => 'evius'])
-			Aceptar solicitud
-			@endcomponent
-		</div>
-		<div style="text-align: center">
-			@component('mail::button', ['url' => $link . "&response=rejected" , 'color' => 'evius'])
-			Rechazar solicitud
-			@endcomponent
-		</div>
-	@endif
-</div>
-<div>
-	@if ($request_type == 'meeting' && $response && $status != "accepted" && $status != "rejected")
-		<div style="text-align: center">
-			@component('mail::button', ['url' => $link . "/accept" , 'color' => 'evius'])
-				Aceptar solicitud
-			@endcomponent
-		</div>
-		<div style="text-align: center">
-			@component('mail::button', ['url' => $link . "/reject" , 'color' => 'evius'])
-				Rechazar solicitud
-			@endcomponent
-		</div>
-	@endif
-</div>
+
 @component('mail::button', ['url' => $link_authenticatedalevento, 'color' => 'evius'])
 Ver Solicitudes en el Evento
 @endcomponent

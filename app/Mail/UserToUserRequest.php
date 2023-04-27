@@ -84,7 +84,16 @@ class UserToUserRequest extends Mailable implements ShouldQueue
             $link_authenticated = config('app.api_evius') . "/singinwithemail?email=" . urlencode($email) . '&event_id=' . $event_id . "&innerpath=". $innerpath . "&pass=" . $pass;
         }
         $linkalevento = config('app.api_evius') . "/singinwithemail?email=" . urlencode($subject) . '&event_id=' . $event_id . "&pass=" . $pass;
-        $link_authenticatedalevento = config('app.api_evius') . "/singinwithemail?email=" .  urlencode($email) . '&event_id=' . $event->_id . "&innerpath=". $innerpath . "&pass=" . $pass;
+
+        $auth = resolve('Kreait\Firebase\Auth');
+        //obtener el link de inicio de sesión con correo electrónico
+        $link_authenticatedalevento = $auth->getSignInWithEmailLink(
+            $email,
+            [
+                "url" => config('app.front_url'). "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
+            ]
+        );
+        // $link_authenticatedalevento = config('app.api_evius') . "/singinwithemail?email=" .  urlencode($email) . '&event_id=' . $event->_id . "&innerpath=". $innerpath . "&pass=" . $pass;
         $linkUnsubscribe =config('app.api_evius'). '/events/' .$event->_id . '/eventusers/' . $event_id .'/unsubscribe';
         
 
