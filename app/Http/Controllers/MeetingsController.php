@@ -37,13 +37,12 @@ class MeetingsController extends Controller
      */
     public function accept(Request $request, String $event_id, String $meeting_id)
     {
-
         $status = SELF::ACEPTED_STATUS;
         $meeting = $this->changestatus($event_id, $meeting_id, $status);
         $innerpath = "/networking";
         $this->sendResponseMessage($meeting, $meeting_id, $event_id, $innerpath, $status);
 
-        $attendee = Attendee::find(last($meeting["attendees"]));
+        $attendee = Attendee::findOrFail($meeting['user_to']['id']);
         $pass = isset($attendee->properties['password']) ? $attendee->properties['password'] : null;
         return app('App\Http\Controllers\InvitationController')->generateLoginLinkAndRedirect($attendee->properties["email"], $pass, $event_id, $innerpath);
     }
@@ -69,11 +68,11 @@ class MeetingsController extends Controller
 
     private function sendResponseMessage($meeting, $meeting_id, $event_id, $innerpath, $status){
         $data = [
-            "id_user_requesting" => $meeting["owner_id"],
-            "id_user_requested" => last($meeting["attendees"]),
+            "id_user_requesting" => $meeting["user_from"]["id"],
+            "id_user_requested" => $meeting["user_to"]["id"],
             "request_id" => $meeting_id,
             "response" => $status,
-            "timestamp_start" => $meeting["timestamp_start"],
+            "timestamp_start" => $meeting["dateStartTimestamp"],
 
         ];
         app('App\Http\Controllers\InvitationController')->buildMeetingResponseMessage($data, $event_id, $innerpath);
@@ -82,7 +81,8 @@ class MeetingsController extends Controller
     private function changestatus($event_id, $meeting_id, $status)
     {
 
-        $path = "event_agendas/{$event_id}/agendas/{$meeting_id}";
+        // $path = "event_agendas/{$event_id}/agendas/{$meeting_id}";
+        $path = "networkingByEventId/{$event_id}/meeting_request/{$meeting_id}";
         $d = $this->database->document($path);
         if (!$d->snapshot()->exists()) {
             throw new ModelNotFoundException("Model doesn't exists");
@@ -96,7 +96,6 @@ class MeetingsController extends Controller
 
     public function meetingrequestnotify(Request $request, $event_id)
     {
-
         $data = $request->json()->all();
         $meeting_id = $data['request_id'];
 
@@ -133,7 +132,8 @@ class MeetingsController extends Controller
 
         $meetingStartDate = (isset($data["timestamp_start"])) ? $data["timestamp_start"] : "";
         $meetingStartTime = (isset($data["start_time"])) ? $data["start_time"] : "";
-
+        // Solucion temporal para fechas, en el correo saldra invalid date
+        $meetingStartDate = strtotime($meetingStartDate);
         $meetingStartDate = date_format(Carbon::parse($meetingStartDate),'Y-m-d');
         
         $innetpath = "/networking";
