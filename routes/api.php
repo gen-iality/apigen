@@ -677,3 +677,10 @@ Route::group(
  * WebHook
  ****************/
 Route::post('wompi/transactions', 'WebHookController@mainHandler');
+
+
+/****************
+ * Subasta
+ ****************/
+Route::get('events/{event}/subastas', 'SubastaController@SubastaByEvent');
+Route::post('events/{event}/subastas', 'SubastaController@store');
