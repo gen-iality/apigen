@@ -23,7 +23,7 @@ class BingoCardController extends Controller
     public function index(Request $request, Bingo $bingo)
     {
 	$numberItems = $request->query('numberItems') ? $request->query('numberItems'): 10;
-	$bingoCards = BingoCard::where('bingo_id', $bingo->_id)->paginte($numberItems);
+	$bingoCards = BingoCard::where('bingo_id', $bingo->_id)->paginate($numberItems);
 
 	return response()->json($bingoCards, 200);
     }
