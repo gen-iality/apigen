@@ -20,7 +20,7 @@ class BingoCardController extends Controller
      * _index_: Get all bingo cards by bingo
      * @urlParam bingo required The id of the bingo to retrive all bingo cards.
     */
-    public function index(Bingo $bingo)
+    public function index(Request $request, Bingo $bingo)
     {
 	$numberItems = $request->query('numberItems') ? $request->query('numberItems'): 10;
 	$bingoCards = BingoCard::where('bingo_id', $bingo->_id)->paginte($numberItems);
