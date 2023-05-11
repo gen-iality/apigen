@@ -48,4 +48,20 @@ class SubastaController extends Controller
 
         return response()->json($subasta, 201);
     }
+
+    public function update(Request $request, $event, Subasta $subasta)
+    {
+	$data = $request->json()->all();
+	$subasta->fill($data);
+	$subasta->save();
+
+        return response()->json($subasta, 201);
+    }
+
+    public function destroy($event, Subasta $subasta)
+    {
+	$subasta->delete();
+
+        return response()->json($subasta, 204);
+    }
 }

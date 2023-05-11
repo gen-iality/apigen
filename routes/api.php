@@ -684,3 +684,5 @@ Route::post('wompi/transactions', 'WebHookController@mainHandler');
  ****************/
 Route::get('events/{event}/subastas', 'SubastaController@SubastaByEvent');
 Route::post('events/{event}/subastas', 'SubastaController@store');
+Route::put('events/{event}/subastas/{subasta}', 'SubastaController@update');
+Route::delete('events/{event}/subastas/{subasta}', 'SubastaController@destroy');
