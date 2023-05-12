@@ -26,13 +26,13 @@ class ProductController extends Controller
     {
 	$numberItems =  $request->query('numberItems') ?
 	    $request->query('numberItems') : 10;
+	$type = $request->query('type');
 
 	// Listar productos de una subasta
-	$subasta = $request->query('subasta_id') ?
-	    $request->query('subasta_id') : false;
-	if($subasta) {
+	if($type === 'just-auction') {
 	    return JsonResource::collection(
-		Product::where('subasta_id', $subasta)
+		Product::where('event_id', $event_id)
+		    ->where('type', $type)
                     ->paginate($numberItems)
             );
 	}
@@ -72,17 +72,10 @@ class ProductController extends Controller
 	    'end_price' => 'numeric',
 	    'state' => 'string|in:waiting:progress:auctioned'
         ]);
-
         $data = $request->json()->all();
+
 	// Asociar a evento
         $data['event_id'] =  $event->_id;
-
-	// Asociar producto a subasta
-	$subasta = $request->query('subasta_id') ?
-	    $request->query('subasta_id') : false;
-	if($subasta && $data['type'] === 'just-auction') {
-	    $data['subasta_id'] = $subasta;
-	}
 
         $product = Product::create($data);
 
