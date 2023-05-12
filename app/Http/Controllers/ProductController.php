@@ -17,16 +17,30 @@ use Mail;
  * Endpoint that manages event products.
  */
 class ProductController extends Controller
-{   
+{
     /**
      * _index_: list product by event.
      * @urlParam event required
      */
-    public function index($event_id)
-    {   
+    public function index(Request $request, $event_id)
+    {
+	$numberItems =  $request->query('numberItems') ?
+	    $request->query('numberItems') : 10;
+
+	// Listar productos de una subasta
+	$subasta = $request->query('subasta_id') ?
+	    $request->query('subasta_id') : false;
+	if($subasta) {
+	    return JsonResource::collection(
+		Product::where('subasta_id', $subasta)
+                    ->paginate($numberItems)
+            );
+	}
+
+	// Listar products de forma normal
         return JsonResource::collection(
             Product::where('event_id', $event_id)
-                ->paginate(config('app.page_size'))
+                ->paginate($numberItems)
         );
     }
 
