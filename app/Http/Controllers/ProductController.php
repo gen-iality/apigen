@@ -8,6 +8,7 @@ use App\Product;
 use App\ModelHasRole;
 use App\evaLib\Services\OrdersServices;
 use App\Account;
+use App\Event;
 use App\Order;
 use Auth;
 use Mail;
@@ -16,16 +17,30 @@ use Mail;
  * Endpoint that manages event products.
  */
 class ProductController extends Controller
-{   
+{
     /**
      * _index_: list product by event.
      * @urlParam event required
      */
-    public function index($event_id)
-    {   
+    public function index(Request $request, $event_id)
+    {
+	$numberItems =  $request->query('numberItems') ?
+	    $request->query('numberItems') : 10;
+
+	// Listar productos de una subasta
+	$subasta = $request->query('subasta_id') ?
+	    $request->query('subasta_id') : false;
+	if($subasta) {
+	    return JsonResource::collection(
+		Product::where('subasta_id', $subasta)
+                    ->paginate($numberItems)
+            );
+	}
+
+	// Listar products de forma normal
         return JsonResource::collection(
             Product::where('event_id', $event_id)
-                ->paginate(config('app.page_size'))
+                ->paginate($numberItems)
         );
     }
 
@@ -44,18 +59,34 @@ class ProductController extends Controller
      * @bodyParam position number position of the product to order them. Example: 11111  
      *  
      */
-    public function store(Request $request, $event_id)
+    public function store(Request $request, Event $event)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'image' => 'required'                    
+        $request->validate([
+	    'name' => 'required|string|max:100',
+	    'type' => 'required|string|in:just-auction,just-store',
+	    'description' => 'string',
+	    'price' => 'numeric',
+	    'images' => 'required',
+	    // Subasta
+	    'start_price' => 'numeric',
+	    'end_price' => 'numeric',
+	    'state' => 'string|in:waiting:progress:auctioned'
         ]);
 
         $data = $request->json()->all();
-        $data['event_id'] =  $event_id;
-        $result = new Product($data);
-        $result->save();
-        return $result;
+	// Asociar a evento
+        $data['event_id'] =  $event->_id;
+
+	// Asociar producto a subasta
+	$subasta = $request->query('subasta_id') ?
+	    $request->query('subasta_id') : false;
+	if($subasta && $data['type'] === 'just-auction') {
+	    $data['subasta_id'] = $subasta;
+	}
+
+        $product = Product::create($data);
+
+	return response()->json(compact('product'), 201);
     }
 
     /**
@@ -81,16 +112,27 @@ class ProductController extends Controller
      * @bodyParam name string name of image. Example: Arbol
      * @bodyParam description string  description of image. Example: Esta pintura es de un arbol.
      * @bodyParam image string route of image. Example: https://storage.googleapis.com/eviusauth.appspot.com/evius/events/87Pxr9PYNfBEDMbX19CeTU8wwTFHpb2XB3n2bnak.jpg
-     * @bodyParam price number Example: 10000  
-     * @bodyParam by string author or brands of the product. Example: Evius    
-     * @bodyParam short_description string Example: Pintura de arbol 1x2m 
+     * @bodyParam price number Example: 10000
+     * @bodyParam by string author or brands of the product. Example: Evius
+     * @bodyParam short_description string Example: Pintura de arbol 1x2m
      */
-    public function update(Request $request, $event_id, $product_id)
+    public function update(Request $request, $event, Product $product)
     {
+        $request->validate([
+	    'name' => 'string|max:100',
+	    'type' => 'string|in:just-auction,just-store',
+	    'description' => 'string',
+	    'price' => 'numeric',
+	    // Subasta
+	    'start_price' => 'numeric',
+	    'end_price' => 'numeric',
+	    'state' => 'string|in:waiting:progress:auctioned'
+        ]);
+
         $data = $request->json()->all();
-        $product = Product::find($product_id);        
         $product->fill($data);
         $product->save();
+
         return $data;
     }
 
@@ -101,10 +143,11 @@ class ProductController extends Controller
      * @urlParam event required Example: 5ea23acbd74d5c4b360ddde2
      * @urlParam product required id of the event to be eliminated
      */
-    public function destroy($event_id ,  $id)
+    public function destroy($event_id ,  Product $product)
     {
-        $product = Product::findOrFail($id);
-        return (string) $product->delete();
+	$product->delete();
+
+        return response()->json([], 204);
     }
 
     /**
