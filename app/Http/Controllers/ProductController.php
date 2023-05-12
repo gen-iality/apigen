@@ -8,6 +8,7 @@ use App\Product;
 use App\ModelHasRole;
 use App\evaLib\Services\OrdersServices;
 use App\Account;
+use App\Event;
 use App\Order;
 use Auth;
 use Mail;
@@ -44,18 +45,34 @@ class ProductController extends Controller
      * @bodyParam position number position of the product to order them. Example: 11111  
      *  
      */
-    public function store(Request $request, $event_id)
+    public function store(Request $request, Event $event)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'image' => 'required'                    
+        $request->validate([
+	    'name' => 'required|string|max:100',
+	    'type' => 'required|string|in:just-auction,just-store',
+	    'description' => 'required|string',
+	    'price' => 'numeric',
+	    'images' => 'required',
+	    // Subasta
+	    'start_price' => 'numeric',
+	    'end_price' => 'numeric',
+	    'state' => 'string|in:waiting:progress:auctioned'
         ]);
 
         $data = $request->json()->all();
-        $data['event_id'] =  $event_id;
-        $result = new Product($data);
-        $result->save();
-        return $result;
+	// Asociar a evento
+        $data['event_id'] =  $event->_id;
+
+	// Asociar producto a subasta
+	$subasta = $request->query('subasta_id') ?
+	    $request->query('subasta_id') : false;
+	if($subasta && $data['type'] === 'just-auction') {
+	    $data['subasta_id'] = $subasta;
+	}
+
+        $product = Product::create($data);
+
+	return response()->json(compact('product'), 201);
     }
 
     /**

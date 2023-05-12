@@ -16,7 +16,6 @@ class Product extends Moloquent
         'by',
         'short_description',
         'position',
-        'start_price',
 	'type', // String: Dependiendo de donde se cree el producto |just-auction, just-store, auction-store
 
 	// Producto de subasta
