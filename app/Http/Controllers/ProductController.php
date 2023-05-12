@@ -64,7 +64,7 @@ class ProductController extends Controller
         $request->validate([
 	    'name' => 'required|string|max:100',
 	    'type' => 'required|string|in:just-auction,just-store',
-	    'description' => 'required|string',
+	    'description' => 'string',
 	    'price' => 'numeric',
 	    'images' => 'required',
 	    // Subasta
@@ -112,16 +112,27 @@ class ProductController extends Controller
      * @bodyParam name string name of image. Example: Arbol
      * @bodyParam description string  description of image. Example: Esta pintura es de un arbol.
      * @bodyParam image string route of image. Example: https://storage.googleapis.com/eviusauth.appspot.com/evius/events/87Pxr9PYNfBEDMbX19CeTU8wwTFHpb2XB3n2bnak.jpg
-     * @bodyParam price number Example: 10000  
-     * @bodyParam by string author or brands of the product. Example: Evius    
-     * @bodyParam short_description string Example: Pintura de arbol 1x2m 
+     * @bodyParam price number Example: 10000
+     * @bodyParam by string author or brands of the product. Example: Evius
+     * @bodyParam short_description string Example: Pintura de arbol 1x2m
      */
-    public function update(Request $request, $event_id, $product_id)
+    public function update(Request $request, $event, Product $product)
     {
+        $request->validate([
+	    'name' => 'string|max:100',
+	    'type' => 'string|in:just-auction,just-store',
+	    'description' => 'string',
+	    'price' => 'numeric',
+	    // Subasta
+	    'start_price' => 'numeric',
+	    'end_price' => 'numeric',
+	    'state' => 'string|in:waiting:progress:auctioned'
+        ]);
+
         $data = $request->json()->all();
-        $product = Product::find($product_id);        
         $product->fill($data);
         $product->save();
+
         return $data;
     }
 
@@ -132,10 +143,11 @@ class ProductController extends Controller
      * @urlParam event required Example: 5ea23acbd74d5c4b360ddde2
      * @urlParam product required id of the event to be eliminated
      */
-    public function destroy($event_id ,  $id)
+    public function destroy($event_id ,  Product $product)
     {
-        $product = Product::findOrFail($id);
-        return (string) $product->delete();
+	$product->delete();
+
+        return response()->json([], 204);
     }
 
     /**
