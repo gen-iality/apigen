@@ -436,10 +436,11 @@ Route::get("organization/{organization}/ordersUsersPoints",  "OrganizationContro
 ****************/
 Route::group(
     ['middleware' => 'auth:token'], function () {
-        Route::post('events/{event}/products', 'ProductController@store')->middleware('permission:create');
-        Route::put('events/{event}/products/{product}', 'ProductController@update')->middleware('permission:update');
-        Route::delete('events/{event}/products/{product}', 'ProductController@destroy')->middleware('permission:destroy');
-        Route::post('events/{event}/products/{product}/silentauctionmail', 'ProductController@createSilentAuction')->middleware('permission:send_products_silentauctiomail');
+	// Se debe poner permisos de crud con middleware
+        Route::post('events/{event}/products', 'ProductController@store');
+        Route::put('events/{event}/products/{product}', 'ProductController@update');
+        Route::delete('events/{event}/products/{product}', 'ProductController@destroy');
+        Route::post('events/{event}/products/{product}/silentauctionmail', 'ProductController@createSilentAuction');
     }
 );
 
