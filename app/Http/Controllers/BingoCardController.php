@@ -63,10 +63,9 @@ class BingoCardController extends Controller
      * @return 204 No Content
     */
 
-    public function destroy(string $bingo_card)
+    public function destroy(string $event, BingoCard $bingocard)
     {
-        $bingo_card = BingoCard::findOrFail($bingo_card);
-        $bingo_card->delete();
+        $bingocard->delete();
         return response()->json([], 204);
     }
 

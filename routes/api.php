@@ -605,6 +605,7 @@ Route::get('bingos/{bingo}/bingocards', 'BingoCardController@index');
 Route::get('bingocards/{code}', 'BingoCardController@show');
 Route::get('bingocards/{bingocard}/download', 'BingoCardController@downloadBingoCard');
 Route::post('bingos/{bingo}/bingocards', 'BingoCardController@createBingoCardsWithoutAtteendes');
+Route::delete('bingos/{bingo}/bingocards/{bingocard}', 'BingoCardController@destroy');
 
 //eliminar despues, esto es un favor para mocion
 Route::post('correos-mocion', 'EventUserController@correosMocion');
