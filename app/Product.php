@@ -15,7 +15,8 @@ class Product extends Moloquent
         'price',
         'by',
         'short_description',
-        'position',
+	'position',
+	'discount', // Number: Porcentaje de descuento del producto
 	'type', // String: Dependiendo de donde se cree el producto |just-auction, just-store, auction-store
 
 	// Producto de subasta
