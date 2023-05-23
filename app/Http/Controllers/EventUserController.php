@@ -846,6 +846,12 @@ class EventUserController extends Controller
         $image = null;
         //url front dinamica
         $urlOrigin = $request->header('origin');
+
+	// Quitar esta validacion
+	if($event->_id === '64623516d0f7f7b59e0f77e2') {
+	    return new EventUserResource($eventUser);
+	}
+
         Mail::to($eventUser->properties["email"])
             ->queue(
                 //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
