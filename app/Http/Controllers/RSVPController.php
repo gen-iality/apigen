@@ -231,7 +231,7 @@ class RSVPController extends Controller implements ShouldQueue
 
         foreach ($eventUsers as &$eventUser) {
             Log::info('foreach');
-            $eventUser->changeToInvite();
+            //$eventUser->changeToInvite();
 
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
             $email = (isset($eventUser->properties["email"])) ? $eventUser->properties["email"] : $eventUser->email ;
@@ -244,7 +244,7 @@ class RSVPController extends Controller implements ShouldQueue
             );
             // $message->messageUsers()->save($messageUser);
 
-            $messageLog = Message::find($message->id);
+            $messageLog = $message;
             $image_header = !empty($data["image_header"]) ? $data["image_header"] : null;
             $image_footer = !empty($data["image_footer"]) ? $data["image_footer"] : null;
             $content_header = !empty($data["content_header"]) ? $data["content_header"] : null;
