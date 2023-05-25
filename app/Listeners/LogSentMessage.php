@@ -48,9 +48,8 @@ class LogSentMessage
             
             $sesMessageId = $event->message
                                 ->getHeaders()
-                                ->get('X-SES-Message-ID');
-				//->getValue();
-
+                                ->get('X-SES-Message-ID')
+				->getValue();
                                 
             
             if(isset($event->data["messageLog"]))
