@@ -342,16 +342,34 @@ class UserController extends UserControllerWeb
      *
      * @urlParam email required email del usuario buscado. Example: correo@evius.co
      */
-    public function findByEmail($email)
+    public function findByEmail(Request $request, $email)
     {
-        try {
-            $Account = Account::where('email', '=', $email)
-                ->get(['id', 'email', 'names', 'name', 'Nombres', 'displayName']);
-            $response = new UsersResource($Account);
+	$allData = $request->query('all-data') ?
+	    filter_var($request->query('all-data'), FILTER_VALIDATE_BOOLEAN)
+	    : false;
 
+        try {
+	    // En caso de necesitar toda la data
+	    if($allData) {
+		$account = Account::where('email', $email)->first();
+
+		return $account;
+	    }
+
+            $Account = Account::where('email', '=', $email)
+		->get([
+		    'id',
+		    'email',
+		    'names',
+		    'name',
+		    'Nombres',
+		    'displayName'
+		]);
+            //$response = new UsersResource($Account);
         } catch (\Exception $e) {
             return ["error" => $e->getMessage()];
         }
+
         return $Account;
     }
 
