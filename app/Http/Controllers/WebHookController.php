@@ -8,6 +8,7 @@ use Mail;
 // Models
 use App\BurnedTicket;
 use App\Billing;
+use App\Attendee;
 
 class WebHookController extends Controller
 {
@@ -72,6 +73,23 @@ class WebHookController extends Controller
             );
     }
 
+    public function createEventUser($params, $billing)
+    {
+	// Sacar la data del usuario
+	$eventUserData = [
+	    'billing_id' => $billing->_id,
+	    'account_id' => $params['user_id'],
+	    'event_id' => $params['event_id'],
+	    'properties' => [
+		'names' => urldecode($params['assigned_to_names']),
+		'email' => $params['assigned_to_email']
+	    ]
+	];
+
+	// Crear event user
+	$eventUser = Attendee::create($eventUserData);
+    }
+
     public function mainHandler(Request $request)
     {
 	$data = $request->json()->all();
@@ -98,8 +116,11 @@ class WebHookController extends Controller
 
 	$burned = !empty($params['burned']) ?
 	    filter_var($params['burned'], FILTER_VALIDATE_BOOLEAN) : false;
+
 	if($burned) {
 	    $this->createBurnedTicket($data['data']['transaction'], $params, $billing);
+	} else {
+	    $this->createEventUser($params, $billing);
 	}
 
 	return response()->json(['message' => 'ok']);
