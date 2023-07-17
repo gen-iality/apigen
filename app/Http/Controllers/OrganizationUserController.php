@@ -137,11 +137,12 @@ class OrganizationUserController extends Controller
      * 
      */
     public function update(Request $request, $organization_id, $organization_user_id)
-    {        
+    {
         $data = $request->json()->all();
         $userOrganization = OrganizationUser::findOrFail($organization_user_id);
-        $userOrganization->properties = $data;
+        $userOrganization->fill($data);
         $userOrganization->save();
+
         return $userOrganization;
     }
 
