@@ -30,6 +30,7 @@ class Certificate extends Moloquent
         'content', 
         'background', 
         'event_id',
-        'rol'
+	'rol',
+	'userTypes'
     ];
 }
