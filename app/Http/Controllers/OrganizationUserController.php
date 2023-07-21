@@ -92,19 +92,19 @@ class OrganizationUserController extends Controller
         $email = $data['properties']['email'];
         //Se valida si ya existe el usurio
         $user = Account::where("email" , $email)->first();  
-        $password = isset($eventUserData["properties"]["password"]) ? $eventUserData["properties"]["password"] : $email;  
+        $password = isset($data["properties"]["password"]) ? $data["properties"]["password"] : $email;
         if(empty($user))
-        {   
+        {
             $user = Account::create([
                 "email" => $email,
-                "names" => $eventUserData["properties"]["names"],
+                "names" => $data["properties"]["names"],
                 "password" => $password
-            ]); 
-        }  
+            ]);
+        }
 
-         /* ya con el usuario actualizamos o creamos el organizationUser */         
+         /* ya con el usuario actualizamos o creamos el organizationUser */
         $matchAttributes = ["organization_id" => $organization_id, "account_id" => $user->_id];
-        $data += $matchAttributes;                          
+        $data += $matchAttributes;
         $model = OrganizationUser::where($matchAttributes)->first();
 
         //Account rol assigned by default
@@ -115,7 +115,7 @@ class OrganizationUserController extends Controller
         if ($model) {
             //Si algun campo no se envia para importar, debe mantener los datos ya guardados en la base de datos
             $data["properties"] = array_merge($model->properties, $data["properties"]);
-            $model->update($data);        
+            $model->update($data);
         } else {
             $model = OrganizationUser::create($data);
         }
@@ -126,7 +126,7 @@ class OrganizationUserController extends Controller
         // $response = new OrganizationUserResource($organizationUser);
         return $model;
     }
-  
+
     /**
      * _update_: update a register user in organization.
      * 
