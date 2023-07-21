@@ -18,6 +18,7 @@ use Validator;
 use App\DiscountCodeMarinela;
 use App\DiscountCodeTemplate;
 use App\evaLib\Services\OrganizationServices;
+use App\OrganizationUser;
 
 /**
  * @group Organization
@@ -337,5 +338,48 @@ class OrganizationController extends Controller
         }
 
     }
-    
+
+    public function validateExistenceOfMembersByEvents(Request $request, Organization $organization, Event $event)
+    {
+	// Cantidad de elementos que se quieren paginar
+	$numberItems = $request->query('numberItems') ? $request->query('numberItems'): 10;
+
+	// Traer miembros de la organizacion
+	$organizationUsers = OrganizationUser::where('organization_id', $organization->_id)->paginate($numberItems);
+	// Traer ids de cuenta de usuario
+	$eventUserAccountIds = Attendee::where('event_id', $event->_id)->pluck('account_id')->toArray();
+
+	$listOrganizationUsers = [];
+	// Validar si un miembro esta inscrito al evento
+	foreach($organizationUsers as $organizationUser) {
+	    // Crear estructura de informacion del miembro
+	    $dataOrganizarionUser = [
+		'_id' => $organizationUser->_id,
+		'properties' => [
+		    'names' => $organizationUser->properties['names'],
+		    'email' => $organizationUser->properties['email']
+		],
+		'existsInEvent' => null
+	    ];
+
+	    // Si account_id existe en el array significa que esta en el eventp
+	    in_array($organizationUser->account_id, $eventUserAccountIds ) ?
+		// Cambiar propiedad si existe el miembro en el evento
+		$dataOrganizarionUser['existsInEvent'] = true :
+		$dataOrganizarionUser['existsInEvent'] = false;
+
+	    // agregar miembro a la lista
+	    array_push($listOrganizationUsers, $dataOrganizarionUser);
+	}
+
+	return response()->json([
+	    'data' => $listOrganizationUsers,
+	    'current_page' => $organizationUsers->currentPage(),
+	    //'first_page_url' => $organizationUsers->firstPage(),
+	    'last_page_url' => $organizationUsers->lastPage(),
+	    'next_page_url' => $organizationUsers->nextPageUrl(),
+	    'prev_page_url' => $organizationUsers->previousPageUrl(),
+	    'total' => $organizationUsers->total()
+	]);
+    }
 }

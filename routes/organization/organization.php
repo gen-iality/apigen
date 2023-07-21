@@ -18,6 +18,7 @@ Route::group(
     ['middleware' => 'auth:token'],
     function () {                
         Route::post('organizations' , 'OrganizationController@store');
+	Route::get('organizations/{organization}/event/{event}/validate-existence-members-by-events' , 'OrganizationController@validateExistenceOfMembersByEvents');
         Route::put('organizations/{organization}' , 'OrganizationController@update')->middleware('permission:update');
         Route::delete('organizations/{organization}' , 'OrganizationController@destroy')->middleware('permission:destroy');        
     }
