@@ -693,3 +693,9 @@ Route::group(
 	Route::delete('events/{event}/subastas/{subasta}', 'SubastaController@destroy');
     }
 );
+
+/****************
+ * Vimeo
+ ****************/
+Route::post("vimeo/upload", "VimeoVideoController@uploadVideo");
+Route::get("vimeo/status", "VimeoVideoController@videoStatus");
