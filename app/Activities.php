@@ -120,6 +120,7 @@ class Activities extends Moloquent
         "latitude",
         "length" , 
         "activity_type",
-        "discount"
+	"discount",
+	"userTypes" // Array: Tipos de usuario en la activididad
     ];
 }
