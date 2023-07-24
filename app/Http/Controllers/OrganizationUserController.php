@@ -121,7 +121,11 @@ class OrganizationUserController extends Controller
         }
 
         //Add the member in all Events of the orgnization
-        OrganizationServices::createMembers($model);
+	$createIntoEvents = $request->query('createIntoEvents') === 'true' ?
+	    true : false;
+	if($createIntoEvents) {
+	    OrganizationServices::createMembers($model);
+	}
 
         // $response = new OrganizationUserResource($organizationUser);
         return $model;
