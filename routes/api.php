@@ -676,7 +676,7 @@ Route::group(
 );
 
 /****************
- * WebHook
+ * WebHooks
  ****************/
 Route::post('wompi/transactions', 'WebHookController@mainHandler');
 
