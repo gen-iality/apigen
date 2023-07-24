@@ -10,7 +10,7 @@ use Log;
 class VimeoVideoController extends Controller
 {
     //
-    protected $folder_id = "16219131"; // For the GEN.iality folder
+    protected $folder_id = "17085501"; // For the GEN.iality folder
 
     private function uploadVideoToVimeo($file, $file_name, $file_description) {
         $client = new Vimeo(
@@ -42,15 +42,24 @@ class VimeoVideoController extends Controller
         $embed_link = $video['embed']['html'];
         Log::debug("embeding link: ".$embed_link);
 
-        $regex = '/src="(.*?)"/';
-        $matches = array();
-        if (preg_match($regex, $embed_link, $matches)) {
-            $src = $matches[1];
-            Log::debug('final url for embeding: '.$src);
-            return $src;
-        }
+	$videoId = explode('/', $video['uri'] );
 
-        return $uri;
+	$regex = '/src="(.*?)"/';
+	$matches = array();
+	if (preg_match($regex, $embed_link, $matches)) {
+	    $src = $matches[1];
+	    Log::debug('final url for embeding: '.$src);
+
+	    return [
+	        'uri' => str_replace('\/', '/', $src),
+	        'video_id' => $videoId[2] // Id esta en este index
+	    ];
+	}
+
+	return [
+	    'uri' => str_replace('\/', '/', $video['player_embed_url']),
+	    'video_id' => $videoId[2] // Id esta en este index
+	];
     }
 
 
@@ -80,8 +89,8 @@ class VimeoVideoController extends Controller
             $message = "No file found in field '" . $field_name . "' to be uploded";
             return response()->json(['error' => $message], $statusCode);
         }
-        $files = $request->file($field_name);
-        $files = is_array($files) ? $files : [$files];
+        $file = $request->file($field_name);
+        //$files = is_array($files) ? $files : [$files];
 
         // We need this the description or not, we don't care
         $file_description = $request->query('description');
@@ -89,8 +98,8 @@ class VimeoVideoController extends Controller
 
         // For each video, we will upload and save the vimeo uri in an array
         $all_good = true;
-        $uri_list = [];
-        foreach ($files as $file) {
+        //$uri_list = [];
+	//foreach ($files as $file) {
             //name
             $file_name = time();
             if (is_object($file) && isset($file->getClientOriginalName)) {
@@ -102,19 +111,19 @@ class VimeoVideoController extends Controller
             }
             Log::debug("will upload as ".$file_name);
 
-            $uri = $this->uploadVideoToVimeo($file->getPathname(), $file_name, $file_description);
+            $video = $this->uploadVideoToVimeo($file->getPathname(), $file_name, $file_description);
 
-            if ($uri) {
-                array_push($uri_list, $uri);
-            } else {
-                Log::error('Cannot upload this video: '.$file);
-                $all_good = false;
-            }
-        }
+            //if ($uri) {
+                //array_push($uri_list, $uri);
+            //} else {
+                //Log::error('Cannot upload this video: '.$file);
+                //$all_good = false;
+            //}
+        //}
 
         if (!$all_good) {
             return response()->json(['error' => 'Cannot upload the files and nobody knows the reason :c']);
         }
-        return response()->json(['uri_list' => $uri_list]);
+        return response()->json(compact('video'));
     }
 }
