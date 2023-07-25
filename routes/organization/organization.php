@@ -55,6 +55,7 @@ Route::group(
 
     }
 );
+Route::get('organizations/{organization}/organizationusers/{organizationUser}/events', 'OrganizationUserController@listEventsByOrganizationUser');
 Route::post('organizations/{organization}/addorganizationuser', 'OrganizationUserController@store');
 Route::get('organizations/{organization}/events', 'EventController@EventbyOrganizations');
 Route::get('organizations/{organization}/eventsstadistics', 'EventStatisticsController@eventsstadistics');

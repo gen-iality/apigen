@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Attendee;
 use App\Rol;
 use App\Organization;
 use App\Http\Resources\OrganizationUserResource;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Validator;
 use Auth;
 use App\evaLib\Services\OrganizationServices;
+use App\Event;
 
 /** 
  * @group Organization User
@@ -218,5 +220,31 @@ class OrganizationUserController extends Controller
                     ->paginate(config('app.page_size'));
 
         return $query;
+    }
+
+
+    /**
+     * _listEventsByOrganizationUser_: Lista de eventos que pertenescan a una
+     * organizacion y que el organization user este registrado
+     *
+     * @urlParam organization The id of the organization
+     * @urlParam organization_user_id The id of the orgnization user
+     */
+    public function listEventsByOrganizationUser(Organization $organization, OrganizationUser $organizationUser)
+    {
+	// Cambiar a una query mas optimizada
+	$eventsByOrganization = Event::where('organizer_id', $organization->_id)->get();
+
+	$events = [];
+	// Buscar en que eventos esta registrado el orgnization user
+	foreach($eventsByOrganization as $event) {
+	    $eventUserExists = Attendee::where('event_id', $event->_id)
+		->where('account_id', $organizationUser->account_id)
+		->first();
+
+	    $eventUserExists && array_push($events, $event);
+	}
+
+	return response()->json(compact('events'), 200);
     }
 }
