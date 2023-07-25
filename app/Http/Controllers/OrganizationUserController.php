@@ -230,7 +230,7 @@ class OrganizationUserController extends Controller
      * @urlParam organization The id of the organization
      * @urlParam organization_user_id The id of the orgnization user
      */
-    public function listEventsByOrganizationUser(Organization $organization, OrganizationUser $organizationUser)
+    public function listEventsByOrganizationUser(Organization $organization, Account $user)
     {
 	// Cambiar a una query mas optimizada
 	$eventsByOrganization = Event::where('organizer_id', $organization->_id)->get();
@@ -239,7 +239,7 @@ class OrganizationUserController extends Controller
 	// Buscar en que eventos esta registrado el orgnization user
 	foreach($eventsByOrganization as $event) {
 	    $eventUserExists = Attendee::where('event_id', $event->_id)
-		->where('account_id', $organizationUser->account_id)
+		->where('account_id', $user->_id)
 		->first();
 
 	    $eventUserExists && array_push($events, $event);

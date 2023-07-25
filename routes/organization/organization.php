@@ -46,7 +46,7 @@ Route::group(
 Route::group(
     ['middleware' => 'auth:token'],
     function () {
-	Route::get('organizations/{organization}/organizationusers/{organizationUser}/events', 'OrganizationUserController@listEventsByOrganizationUser');
+	 Route::get('organizations/{organization}/user/{user}/events', 'OrganizationUserController@listEventsByOrganizationUser');
         Route::get('organizations/{organization}/organizationusers', 'OrganizationUserController@index');
         Route::get('organizations/{organization}/organizationusers/{organizationuser}', 'OrganizationUserController@show');
         Route::put('organizations/{organization}/organizationusers/{organizationuser}', 'OrganizationUserController@update')->middleware('permissionUser:update');;
