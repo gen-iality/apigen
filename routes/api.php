@@ -698,4 +698,5 @@ Route::group(
  * Vimeo
  ****************/
 Route::post("vimeo/videos/upload", "VimeoVideoController@uploadVideo");
-Route::get("vimeo/videos/{videoId}/status", "VimeoVideoController@videoStatus");
+Route::get("vimeo/videos/{videoId}", "VimeoVideoController@show");
+Route::delete("vimeo/videos/{videoId}", "VimeoVideoController@destroy");
