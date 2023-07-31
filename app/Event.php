@@ -61,7 +61,8 @@ class Event extends ModelsEvent
 	'boleteria_id', // boolean para saber si un evento tiene boleteria
 	'is_custom_password_label', // Boolean: Determina si evento tiene password name personalizado
 	'custom_password_label', // String: Nombre del campo password
-	'payment' // Boolean: si el evento tiene pago activado
+	'payment', // Boolean: si el evento tiene pago activado
+	'show_event_date' // Boolean: mostrar la fecha del evento
     ];
 
     protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
