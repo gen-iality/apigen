@@ -64,23 +64,18 @@ class VimeoVideoController extends Controller
     }
 
 
-    public function videoStatus(Request $request, string $video_id = null)
+    public function videoStatus(Request $request, string $videoId)
     {
-        // First, take the file sent
         $client = new Vimeo(
             "4f529fcb6e53b1d98128f422b0da074c4e5dcd3d",
             "5bMw/derPE1J2RtkiNCOLZFh0zORhFOOR3VCLnuSkm6uMqEsW+cOeE3xO5xYOcdFoIGpUQE7/QP9ITPpLSkVx1k2eYid8iUEOnhipTkbkymYf5IxwDsbWNxYREFDhYEk",
             "0deea97a5f2f0316ef84de0a33d83421",
         );
 
-        $videoId = $request->query('video_id');
-
         //$uri = '/videos/'.$video_id.'?fields=uri,upload.status,transcode.status';
+        $video = $client->request("/videos/$videoId");
 
-        $response = $client->request("/videos/$videoId");
-	return $response['body'];
-        $body = $response['body'];
-        return response()->json(['status' => json_encode( $body) ]);
+	return response()->json(['video' => $video['body']], 200);
     }
 
     //public function uploadVideo(Request $request)
