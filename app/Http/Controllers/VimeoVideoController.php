@@ -64,7 +64,7 @@ class VimeoVideoController extends Controller
     }
 
 
-    public function videoStatus(Request $request, string $videoId)
+    public function show(Request $request, string $videoId)
     {
         $client = new Vimeo(
             "4f529fcb6e53b1d98128f422b0da074c4e5dcd3d",
@@ -158,5 +158,16 @@ class VimeoVideoController extends Controller
 	    //return response()->json(['error' => 'Cannot upload the files and nobody knows the reason :c']);
 	//}
 	//return response()->json(compact('video'));
+    }
+
+    public function destroy(string $videoId)
+    {
+        $client = new Vimeo(
+            "4f529fcb6e53b1d98128f422b0da074c4e5dcd3d",
+            "5bMw/derPE1J2RtkiNCOLZFh0zORhFOOR3VCLnuSkm6uMqEsW+cOeE3xO5xYOcdFoIGpUQE7/QP9ITPpLSkVx1k2eYid8iUEOnhipTkbkymYf5IxwDsbWNxYREFDhYEk",
+            "0deea97a5f2f0316ef84de0a33d83421",
+        );
+
+	$client->request("/videos/$videoId", array(), 'DELETE');
     }
 }
