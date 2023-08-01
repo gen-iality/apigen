@@ -119,7 +119,7 @@ class ProductController extends Controller
 	    // Subasta
 	    'start_price' => 'numeric',
 	    'end_price' => 'numeric',
-	    'state' => 'string|in:waiting:progress:auctioned'
+	    'state' => 'string|in:waiting,progress,auctioned'
         ]);
 
         $data = $request->json()->all();
