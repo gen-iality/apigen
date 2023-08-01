@@ -20,16 +20,11 @@ class VimeoVideoController extends Controller
 	return $client;
     }
 
-    private function uploadVideoToVimeo($file, $file_name, $file_description) {
+    private function uploadVideoToVimeo($file, $file_name, $file_description)
+    {
         $client = $this->createClientVimeo();
 	// Folder donde se guardaran los videos
 	$folderId = config('app.vimeo_folder');
-
-        // $new_file = '/var/www/public/uploaded/uploaded_'.$file_name;
-        // if (!copy($file, $new_file)) {
-        //     Log::error("Cannot copy the file ".$file." to ".$new_file);
-        //     return;
-        // }
 
         $uri = $client->upload($file, array(
             "name" => $file_name,
@@ -37,16 +32,15 @@ class VimeoVideoController extends Controller
             "folder_uri" => "https://vimeo.com/manage/folders/$folderId",
         ));
 
-        Log::debug("Your video URI is: " . $uri);
-
-        $response = $client->request($uri . '?fields=link');
-        Log::debug("Your video link is: " . $response['body']['link']);
+        //Log::debug("Your video URI is: " . $uri);
+        //$response = $client->request($uri . '?fields=link');
+        //Log::debug("Your video link is: " . $response['body']['link']);
 
         $response = $client->request($uri);
         $video = $response['body'];
 
         $embed_link = $video['embed']['html'];
-        Log::debug("embeding link: ".$embed_link);
+        //Log::debug("embeding link: ".$embed_link);
 
 	$videoId = explode('/', $video['uri'] );
 
@@ -54,8 +48,7 @@ class VimeoVideoController extends Controller
 	$matches = array();
 	if (preg_match($regex, $embed_link, $matches)) {
 	    $src = $matches[1];
-	    Log::debug('final url for embeding: '.$src);
-
+	    //Log::debug('final url for embeding: '.$src);
 	    return [
 	        'uri' => str_replace('\/', '/', $src),
 	        'video_id' => $videoId[2] // Id esta en este index
