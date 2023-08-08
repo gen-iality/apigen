@@ -37,6 +37,7 @@ class BingoController extends Controller
 	      'dimensions.format' => 'required|string|in:3x3,4x4,5x5',
 	      'dimensions.amount' => 'required|numeric|in:9,16,25',
 	      'dimensions.minimun_values' => 'required|numeric',
+	      'type' => 'string|in:traditional'
       ]);
 
       $data = $request->json()->all();
