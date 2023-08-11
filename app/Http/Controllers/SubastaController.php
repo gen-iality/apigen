@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Product;
 use Illuminate\Http\Request;
 use App\Subasta;
 
@@ -56,6 +57,24 @@ class SubastaController extends Controller
 	$subasta->save();
 
         return response()->json($subasta, 201);
+    }
+
+    public function resetProducts(Event $event)
+    {
+	$products = Product::where('event_id', $event->_id)
+	    ->where('type', 'just-auction')
+	    ->where('state', 'auctioned')
+	    ->get();
+
+	foreach($products as $product) {
+	    // Volver a estado inicial productos de subasta
+	    $product->state = 'waiting';
+	    // Reiniciar a precio inicial
+	    $product->price = $product->start_price;
+	    $product->save();
+	}
+
+	return response()->json(['message' => count($products) . ' updated products']);
     }
 
     public function destroy($event, Subasta $subasta)
