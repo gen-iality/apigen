@@ -540,12 +540,20 @@ class EventUserController extends Controller
         $email = $eventUserData["email"];
 
         try {
-
-            $user = Account::where("email", $email)->first();
             // crear cuenta de usuario si no existe
+            $user = Account::where("email", $email)->first();
             if (!isset($user)) {
-                // Si no tiene password, se le asigna el email como password
-                $pass = isset($eventUserData["password"]) ? $eventUserData["password"] : $eventUserData["email"];
+		// crear password a partir del document checkInField
+		if(isset($eventUserData['checkInField'])) {
+		    $pass = $eventUserData['checkInField'];
+		} elseif (isset($eventUserData["password"])) {
+		    $pass = isset($eventUserData["password"]);
+		} else {
+		    // Si no tiene password, se le asigna el email como password
+		    $pass = $eventUserData['email'];
+		}
+
+		// crear nuevo usuario
                 $user = Account::create([
                     "email" => $email,
                     "names" => $eventUserData["names"],
