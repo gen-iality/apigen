@@ -26,6 +26,7 @@ use Illuminate\Pagination\Paginator;
 use Log;
 use Mail;
 use Validator;
+use Auth;
 
 /**
  * @group EventUser
@@ -533,6 +534,8 @@ class EventUserController extends Controller
             'password' => 'string|min:6',
             'rol_name' => 'exists:roles,name|string', // por default se asigna rol asistente
         ]);
+	$overwritePassword = $request->query('overwritePassword') === 'true' ?
+	    true : false;
 
         $eventUserData = $request->json()->all();
         $eventUserData["email"] = strtolower($eventUserData["email"]);
@@ -541,25 +544,35 @@ class EventUserController extends Controller
 
         try {
             // crear cuenta de usuario si no existe
-            $user = Account::where("email", $email)->first();
-            if (!isset($user)) {
-		// crear password a partir del document checkInField
-		if(isset($eventUserData['checkInField'])) {
-		    $pass = $eventUserData['checkInField'];
-		} elseif (isset($eventUserData["password"])) {
-		    $pass = isset($eventUserData["password"]);
-		} else {
-		    // Si no tiene password, se le asigna el email como password
-		    $pass = $eventUserData['email'];
-		}
+	    $user = Account::where("email", $email)->first();
 
+	    if(isset($eventUserData['checkInField'])) {
+	        $pass = $eventUserData['checkInField'];
+	    } elseif (isset($eventUserData["password"])) {
+	        $pass = isset($eventUserData["password"]);
+	    } else {
+	        // Si no tiene password, se le asigna el email como password
+	        $pass = $eventUserData['email'];
+	    }
+
+	    if($overwritePassword  && isset($user)) {
+		$auth = resolve('Kreait\Firebase\Auth');
+        	$this->auth = $auth;
 		// crear nuevo usuario
+		//$user->fill([
+		    //"email" => $email,
+		    //"names" => $eventUserData["names"],
+		    //"password" => $pass,
+		//]);
+		// Paso extra para cambiar password
+        	$this->auth->changeUserPassword($user['uid'], $pass);
+	    } elseif(!isset($user)) {
                 $user = Account::create([
                     "email" => $email,
                     "names" => $eventUserData["names"],
                     "password" => $pass,
                 ]);
-            }
+	    }
 
             // assign rol_id to attendee
             $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
