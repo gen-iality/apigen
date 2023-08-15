@@ -105,9 +105,18 @@ class TraditionalBingoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($event, TraditionalBingo $traditionalBingo)
+    public function destroy(Event $event, TraditionalBingo $traditionalBingo)
     {
+	// Eliminar todos los cartones de ese bingo
+	BingoCard::where('event_id', $event->_id)
+      	  ->where('tradicional_bingo_id', $bingo->_id)
+      	  ->delete();
+
 	$traditionalBingo->delete();
+
+        //Cambiar estado del bingo en el evento
+        $event->bingo = null;
+        $event->save();
 
 	return response()->json([], 204);
     }

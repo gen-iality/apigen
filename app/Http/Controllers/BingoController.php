@@ -36,8 +36,7 @@ class BingoController extends Controller
 	      'name' => 'required|string|max:250',
 	      'dimensions.format' => 'required|string|in:3x3,4x4,5x5',
 	      'dimensions.amount' => 'required|numeric|in:9,16,25',
-	      'dimensions.minimun_values' => 'required|numeric',
-	      'type' => 'string|in:traditional'
+	      'dimensions.minimun_values' => 'required|numeric'
       ]);
 
       $data = $request->json()->all();
@@ -118,14 +117,15 @@ class BingoController extends Controller
      */
     public function destroy(Event $event, Bingo $bingo)
     {
-      $bingoCards = BingoCard::where('event_id', $event->_id)
+      // Eliminar todos los cartones de ese bingo
+      BingoCard::where('event_id', $event->_id)
         ->where('bingo_id', $bingo->_id)
-        ->get();
-      if (isset($bingoCards)) {
-        foreach ($bingoCards as $bingoCard) {
-          $bingoCard->delete();
-        }
-      }
+        ->delete();
+      //if (isset($bingoCards)) {
+        //foreach ($bingoCards as $bingoCard) {
+          //$bingoCard->delete();
+        //}
+      //}
 
       if(isset($event->dynamics)){
         $dynamics = $event->dynamics;
