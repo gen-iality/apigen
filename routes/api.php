@@ -599,7 +599,7 @@ Route::delete('events/{event}/bingos/{bingo}/values/{value}', 'BingoController@d
 Route::put('events/{event}/bingos/{bingo}/reset-bingo-cards', 'BingoController@resetBingoCards');
 Route::put('events/{event}/bingos/{bingo}/import-values', 'BingoController@importBingoValues');
 //BingobyEvent
-Route::get('events/{event}/bingos', 'BingoController@BingobyEvent');
+Route::get('events/{event}/bingos', 'BingoController@bingobyEvent');
 
 //BINGOCARD
 Route::get('bingos/{bingo}/bingocards', 'BingoCardController@index');
