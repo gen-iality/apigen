@@ -6,6 +6,7 @@ include "roles/rolesAttendee.php";
 include "organization/organization.php";
 include "user/user.php";
 include "user/userEvent.php";
+include "traditionalBingo/traditionalBingoRoutes.php";
 include "mail.php";
 include "test.php";
 include "web.php";

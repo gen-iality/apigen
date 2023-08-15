@@ -11,7 +11,7 @@
  * Traditional Bingo
  ****************/
 
-Route::get('events/{event}/traditional-bingos', 'TraditionalBingoController@');
+Route::get('events/{event}/traditional-bingos', 'TraditionalBingoController@traditionalBingobyEvent');
 Route::post('events/{event}/traditional-bingos', 'TraditionalBingoController@store');
 Route::put('events/{event}/traditional-bingos/{traditionalBingo}', 'TraditionalBingoController@update');
 Route::delete('events/{event}/traditional-bingos/{traditionalBingo}', 'TraditionalBingoController@destroy');
