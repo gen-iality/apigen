@@ -230,9 +230,12 @@ class OrganizationUserController extends Controller
      * @urlParam organization The id of the organization
      * @urlParam organization_user_id The id of the orgnization user
      */
-    public function listEventsByOrganizationUser(Organization $organization, Account $user)
+    public function listEventsByOrganizationUser(Request $request, Organization $organization, Account $user)
     {
-	// Cambiar a una query mas optimizada
+	// devolver evento con event_user
+	$eventUser = $request->query('event_user') === 'true' ?
+	    true : false;
+
 	$eventsByOrganization = Event::where('organizer_id', $organization->_id)->get();
 
 	$events = [];
@@ -242,9 +245,12 @@ class OrganizationUserController extends Controller
 		->where('account_id', $user->_id)
 		->first();
 
-	    $eventUserExists && array_push($events, $event);
+	    $eventUserExists && array_push($events, [
+	        'event' => $event,
+	        'event_user' => $eventUser ? $eventUserExists : null
+	    ]);
 	}
 
-	return response()->json(compact('events'), 200);
+	return response()->json(['data' => $events], 200);
     }
 }
