@@ -61,15 +61,18 @@ class BingoController extends Controller
     }
 
     /**
-     * BingobyEvent_: search of Bingo by event.
+     * bingobyEvent_: search of Bingo by event.
      *
      * @urlParam event required  event_id
      *
      */
 
-    public function BingobyEvent(string $event_id)
+    public function bingobyEvent(string $event_id)
     {
       $bingo =  Bingo::where('event_id', $event_id)->first();
+      if(!$bingo) {
+	    return response()->json(['message' => 'Bingo not found'], 404);
+      }
       return $bingo;
     }
 
