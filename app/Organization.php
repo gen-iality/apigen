@@ -28,7 +28,9 @@ class Organization extends Organiser
         'properties',
         'styles',
         'itemsMenu',
-        'type_event'
+        'type_event',
+	 'show_my_certificates', // Boolean: Mostrar boton de certificados
+	 'social_networks' // Object: Redes sociales de la organizacion
     ];
 
     protected $hidden = ['account_ids'];
