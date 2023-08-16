@@ -10,12 +10,20 @@ use App\TraditionalBingo;
 class TraditionalBingoController extends Controller
 {
     // Valores bingo tradicional
-    private const traditionalBingoValues = [
-	'B' => [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
-	'I' => [16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
-	'N' => [31,32,33,34,35,36,37,38,39,40,41,42,43,44,45],
-	'G' => [46,47,48,49,50,51,52,53,54,55,56,57,58,59,60],
-	'O' => [61,62,63,64,65,66,67,68,69,70,71,72,73,74,75],
+    private const traditionalBingoData = [
+	'type' => 'tradicional',
+	'dimensions' =>  [
+	    "amount" => 25,
+    	    "format" => "5x5",
+    	    "minimun_values" => 50
+	],
+	'bingo_values' => [
+	    'B' => [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+	    'I' => [16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+	    'N' => [31,32,33,34,35,36,37,38,39,40,41,42,43,44,45],
+	    'G' => [46,47,48,49,50,51,52,53,54,55,56,57,58,59,60],
+	    'O' => [61,62,63,64,65,66,67,68,69,70,71,72,73,74,75],
+	]
     ];
 
     /**
@@ -53,11 +61,13 @@ class TraditionalBingoController extends Controller
     public function store(Request $request, Event $event)
     {
 	$request->validate([
-	    'name' => 'required|string|max:255',
+	    'name' => 'required|string|max:255'
 	]);
 
 	$data = $request->json()->all();
-	$data['bingo_values'] = self::traditionalBingoValues;
+
+	// Datos default para bingo tradicional
+	$data = array_merge($data, self::traditionalBingoData);
 	$data['event_id'] = $event->_id;
 
 	$traditionalBingo = TraditionalBingo::create($data);
@@ -95,6 +105,7 @@ class TraditionalBingoController extends Controller
 
 	$data = $request->json()->all();
 	$traditionalBingo->fill($data);
+	$traditionalBingo->save();
 
 	return response()->json(compact('traditionalBingo'), 200);
     }
@@ -105,9 +116,18 @@ class TraditionalBingoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($event, TraditionalBingo $traditionalBingo)
+    public function destroy(Event $event, TraditionalBingo $traditionalBingo)
     {
+	// Eliminar todos los cartones de ese bingo
+	BingoCard::where('event_id', $event->_id)
+      	  ->where('tradicional_bingo_id', $bingo->_id)
+      	  ->delete();
+
 	$traditionalBingo->delete();
+
+        //Cambiar estado del bingo en el evento
+        $event->bingo = null;
+        $event->save();
 
 	return response()->json([], 204);
     }
