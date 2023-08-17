@@ -24,7 +24,7 @@ class TraditionalBingoCardController extends Controller
 	$numberItems = $request->query('numberItems') ?
 	    $request->query('numberItems') : 10;
 
-	$bingoCards = TraditionalBingo::where('bingo_id', $bingo->_id)
+	$bingoCards = BingoCard::where('bingo_id', $bingo->_id)
 				->where('type', 'traditional')
 		    		->paginate($numberItems);
 
@@ -45,8 +45,44 @@ class TraditionalBingoCardController extends Controller
         return ["bingo_card" => $bingo_card, "name_owner"=> $eventUser["properties"]["names"]];
     }
 
-    public function store(Request $request, TraditionalBingo $bingo, Attendee $eventuser)
+    private function generateBingoValues($bingoValues)
     {
+	// Modificar esta vaina
+	$colums = [
+	    'B', 'I', 'N', 'G', 'O',
+	    'B', 'I', 'N', 'G', 'O',
+	    'B', 'I', 'N', 'G', 'O',
+	    'B', 'I', 'N', 'G', 'O',
+	    'B', 'I', 'N', 'G', 'O'
+	];
+
+	$bingoCardValues = [];
+	foreach($colums as $colum) {
+	    $num = $bingoValues[$colum][rand(0, 4)];
+	    while(in_array([$colum => $num], $bingoCardValues)) {
+		$num = $bingoValues[$colum][rand(0, 4)];
+	    }
+	    array_push($bingoCardValues, [$colum => $num]);
+	}
+
+	$bingoCardValues[12]['N'] = 'comodin';
+
+	return $bingoCardValues;
+    }
+
+    public function createBingoCardToAttendee(Request $request, TraditionalBingo $bingo, $eventuser)
+    {
+	$dataBingoCard = [
+	    'code' => UserEventService::generateBingoCode(),
+	    'event_id' => $bingo->event_id,
+	    'event_user_id' => $eventuser,
+	    'type' => 'traditional',
+	    'values_bingo_card' => $this->generateBingoValues($bingo->bingo_values),
+	];
+
+	$bingoCard = BingoCard::create($dataBingoCard);
+
+	return response()->json(compact('bingoCard'), 201);
     }
 
     /**
