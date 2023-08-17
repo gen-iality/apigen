@@ -14,8 +14,7 @@ class Bingo extends MyBaseModel
         'regulation',
         'bingo_values',
         'random_bingo_values',
-        'dimensions', // cantidad celda bingo:  int 3, 4, 5
-	'type' // String: traditional
+        'dimensions' // cantidad celda bingo:  int 3, 4, 5
     ];
 
     protected $with = ["template", "template"];

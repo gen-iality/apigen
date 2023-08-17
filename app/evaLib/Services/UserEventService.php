@@ -444,7 +444,7 @@ string(10) "1030522402"
         return $rol_id;
     }
 
-    private static function generateBingoCode()
+    public static function generateBingoCode()
     {
 	$randomCode = substr(str_shuffle(str_repeat($x='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(5/strlen($x)) )),1,5);
         //verificar que el codigo no se repita
