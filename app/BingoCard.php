@@ -10,9 +10,10 @@ class BingoCard extends MyBaseModel
   protected $fillable = [
     'event_user_id',
     'event_id',
-    'bingo_id',
+    'bingo_id', // Puede ser tradicional bingo o special bingo
     'values_bingo_card',
-    'code'
+    'code',
+    'type' // String: traditional | special
   ];
 
   public function attendee()
