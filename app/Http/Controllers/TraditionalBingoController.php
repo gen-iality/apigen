@@ -51,7 +51,7 @@ class TraditionalBingoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Event $event)
+    public function store(Request $request, $event)
     {
 	$request->validate([
 	    'name' => 'required|string|max:255'
@@ -61,12 +61,9 @@ class TraditionalBingoController extends Controller
 
 	// Datos default para bingo tradicional
 	$data['bingo_values'] = self::traditionalBingoValues;
-	$data['event_id'] = $event->_id;
+	$data['event_id'] = $event;
 
 	$traditionalBingo = TraditionalBingo::create($data);
-
-	$event->bingo = true;
-	$event->save();
 
 	return response()->json(compact('traditionalBingo'), 201);
     }
