@@ -79,7 +79,12 @@ class SubastaController extends Controller
 
     public function destroy($event, Subasta $subasta)
     {
-	$subasta->delete();
+	    $subasta->delete();
+
+        // Eliminar productos de la subasta
+        Product::where('event_id', $event)
+            ->where('type', 'just-auction')
+            ->delete();
 
         return response()->json($subasta, 204);
     }
