@@ -129,6 +129,7 @@
 
 <body style="background-color: #FFFFFF; font-family: Rock Sans Bold, Arial, Helvetica, sans-serif;">
 
+    @if (!$many)
     <img class="imagen" src="{{ $image }}" />
 
     <div class="">
@@ -138,6 +139,22 @@
             <!--centre-align-->
         </div>
     </div>
+    @else
+    @foreach ($certificates as $key => $certificate)
+    <img class="imagen" src="{{ $image }}" />
+
+    <div class="">
+        <!--containing-table-->
+
+        <div class="">{!! $certificate['content'] !!}
+        </div>
+    </div>
+    <!--Crear siguiente pagina si no es el ultimo elemento-->
+    @if(!$key === key(array_slice($certificates, -1, 1, true)))
+    <div style="page-break-before: always;"></div>
+    @endif
+    @endforeach
+    @endif
 </body>
 
 </html>

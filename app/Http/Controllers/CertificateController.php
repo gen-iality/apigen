@@ -16,7 +16,7 @@ use Mail;
 /**
  * @group Certificate
  * En algunos eventos se dan certificados de asistencia, este api es el encargado de administrarlos.
-*/
+ */
 class CertificateController extends Controller
 {
 
@@ -32,8 +32,8 @@ class CertificateController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, string $event_id)
-    {   
-        $query = Certificate::where('event_id' , $event_id)->paginate(config('app.page_size'));
+    {
+        $query = Certificate::where('event_id', $event_id)->paginate(config('app.page_size'));
         return JsonResource::collection($query);
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
@@ -54,7 +54,6 @@ class CertificateController extends Controller
         $result = new Certificate($data);
         $result->save();
         return $result;
-
     }
 
     /**
@@ -105,7 +104,6 @@ class CertificateController extends Controller
     {
         $Certificate = Certificate::find($id);
         return (string) $Certificate->delete();
-
     }
 
     /**
@@ -117,17 +115,16 @@ class CertificateController extends Controller
      * @return void
      */
     public function indexByEvent(String $event_id)
-    {  
+    {
         $auth = Auth::user();
 
-        $eventUser = Attendee::where("event_id", $event_id)->where('account_id' , $auth->_id)->first();
+        $eventUser = Attendee::where("event_id", $event_id)->where('account_id', $auth->_id)->first();
 
 
-        $certificates = Certificate::where("event_id", $event_id)->where('rol_id' , $eventUser->rol_id )->first();
-        
-        if(isset($certificates) && !empty($certificates))
-        {
-            return $certificates; 
+        $certificates = Certificate::where("event_id", $event_id)->where('rol_id', $eventUser->rol_id)->first();
+
+        if (isset($certificates) && !empty($certificates)) {
+            return $certificates;
         }
         return JsonResource::collection(
             Certificate::where("event_id", $event_id)->paginate(config('app.page_size'))
@@ -175,7 +172,8 @@ class CertificateController extends Controller
             $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
 
             $pdf->setPaper(
-                'letter', 'landscape'
+                'letter',
+                'landscape'
             );
 
             //Busca en el content la identificacion, la separa con funciones de string y luego busca la cedula en la base de datos
@@ -208,7 +206,9 @@ class CertificateController extends Controller
             return $pdf->download('Tickets.pdf');
         }
         return view(
-            'Public.ViewEvent.Partials.certificate', $data);
+            'Public.ViewEvent.Partials.certificate',
+            $data
+        );
     }
     //return view('Public.ViewEvent.Partials.PDFTicket', $data);
 
@@ -236,30 +236,40 @@ class CertificateController extends Controller
             return $pdf->download('Tickets.pdf');
         }
         return view('Public.ViewEvent.Partials.PDFTicket', $data);
+    }
 
+    public function generateCertificates(Request $request)
+    {
+        $data = $request->json()->all();
+        // marcar si se generan varias pdfs
+        $data['many'] = true;
+
+        $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
+        $pdf->setPaper('letter', 'landscape');
+
+        return $pdf->download('Tickets.pdf');
     }
 
     public function sendCertificateForAll(Request $request, Event $event)
     {
-	$attendees = Attendee::where('event_id', $event->id)->get();
+        $attendees = Attendee::where('event_id', $event->id)->get();
         $data = $request->json()->all();
 
-	for($i = 0; $i < count($attendees); $i++) {
-	    // Customizar nombre
-	    $data['content'] = "<p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><h2 class=\"ql-align-center\"><strong style=\"color: rgb(0, 41, 102);\">{$attendees[$i]->properties['names']}</strong></h2>";
+        for ($i = 0; $i < count($attendees); $i++) {
+            // Customizar nombre
+            $data['content'] = "<p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><h2 class=\"ql-align-center\"><strong style=\"color: rgb(0, 41, 102);\">{$attendees[$i]->properties['names']}</strong></h2>";
 
-	    // Generar pdf
-	    $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
-	    $pdf->setPaper('letter', 'landscape');
+            // Generar pdf
+            $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $data);
+            $pdf->setPaper('letter', 'landscape');
 
-	    // Enviar correo
+            // Enviar correo
             Mail::to($attendees[$i]->properties['email'])
                 ->queue(
                     new \App\Mail\NogalMail($pdf)
                 );
-	}
+        }
 
-	return response()->json(['message' => count($attendees) . " correos enviados"], 200);
+        return response()->json(['message' => count($attendees) . " correos enviados"], 200);
     }
-
 }

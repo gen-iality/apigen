@@ -54,9 +54,9 @@ Route::apiResource('events', 'EventController');
 Route::post('events/{event}/restore', 'EventController@restore');
 Route::group(
     ['middleware' => 'auth:token'],
-    function () {        
-        Route::post ('events/{event}', 'EventController@store')->middleware('permission:create');        
-        Route::put ('events/{event}', 'EventController@update')->middleware('permission:update');
+    function () {
+        Route::post('events/{event}', 'EventController@store')->middleware('permission:create');
+        Route::put('events/{event}', 'EventController@update')->middleware('permission:update');
         Route::delete('events/{event}', 'EventController@destroy')->middleware('permission:destroy');
         Route::get('me/events', 'EventController@currentUserindex');
         //this routes should be erased after front migration
@@ -172,16 +172,17 @@ Route::apiResource('events/{event}/mailing', 'MailController');
  * CERTIFICATES
  ****************/
 Route::post('send-certificates/{event}', 'CertificateController@sendCertificateForAll');
+Route::post('generatecertificate', 'CertificateController@generateCertificate');
+Route::post('generatecertificates', 'CertificateController@generateCertificates');
 Route::group(
     ['middleware' => 'auth:token'],
     function () {
         Route::apiResource('certificates', 'CertificateController', ['except' => ['index', 'show']]);
-        Route::get ('events/{event}/certificates', 'CertificateController@index');
-        Route::post ('events/{event}/certificates', 'CertificateController@store')->middleware('permission:create');
-        Route::get ('events/{event}/certificates/{certificate}', 'CertificateController@show');
-        Route::put ('events/{event}/certificates/{certificate}', 'CertificateController@update')->middleware('permission:update');
+        Route::get('events/{event}/certificates', 'CertificateController@index');
+        Route::post('events/{event}/certificates', 'CertificateController@store')->middleware('permission:create');
+        Route::get('events/{event}/certificates/{certificate}', 'CertificateController@show');
+        Route::put('events/{event}/certificates/{certificate}', 'CertificateController@update')->middleware('permission:update');
         Route::delete('events/{event}/certificates/{certificate}', 'CertificateController@destroy')->middleware('permission:destroy');
-        Route::post('generatecertificate', 'CertificateController@generateCertificate');
     }
 );
 
@@ -310,7 +311,8 @@ Route::apiResource('events/{event}/sessions', 'EventSessionController');
  * Orders Events
  ****************/
 Route::group(
-    ['middleware' => 'auth:token'], function () {
+    ['middleware' => 'auth:token'],
+    function () {
         Route::post('events/{event}/orders/create-preorder', 'ApiOrdersController@createPreOrder');
         Route::put('orders/{order}/create-tickets', 'ApiOrdersController@updateOrderAndAddTickets');
         Route::post('events/{event}/orders/create-order-to-partner', 'ApiOrdersController@createOrderToPartner');
@@ -433,11 +435,12 @@ Route::get("organization/{organization}/ordersUsersPoints",  "OrganizationContro
 
 
 /****************
-* Product
-****************/
+ * Product
+ ****************/
 Route::group(
-    ['middleware' => 'auth:token'], function () {
-	// Se debe poner permisos de crud con middleware
+    ['middleware' => 'auth:token'],
+    function () {
+        // Se debe poner permisos de crud con middleware
         Route::post('events/{event}/products', 'ProductController@store');
         Route::put('events/{event}/products/{product}', 'ProductController@update');
         Route::delete('events/{event}/products/{product}', 'ProductController@destroy');
@@ -490,7 +493,7 @@ Route::group(
         Route::delete('events/{event}/documentusers/{documentuser}', 'DocumentUserController@destroy')->middleware('permission:destroy');
         // retorna todos los documentos de un usuario de un evento
         Route::get('events/{event}/me/documentusers', 'DocumentUserController@documentsUserByUser');
-        Route::put('events/{event}/adddocumentuser', 'EventController@addDocumentUserToEvent');        
+        Route::put('events/{event}/adddocumentuser', 'EventController@addDocumentUserToEvent');
     }
 );
 
@@ -506,7 +509,7 @@ Route::group(
 /** 
  *  ROUTES RESTRICCION */
 
- /*****
+/*****
  * Coupons
  */
 
@@ -667,7 +670,7 @@ Route::get('bingotemplates/format/{format}', 'TemplateBingosController@getTempla
  ****************/
 Route::group(
     ['middleware' => 'auth:token'],
-    function() {
+    function () {
         Route::get('events/{event}/boleterias', 'BoleteriaController@index');
         Route::post('events/{event}/boleterias', 'BoleteriaController@store');
         Route::get('events/{event}/boleterias/{boleteria}', 'BoleteriaController@show');
@@ -687,12 +690,12 @@ Route::post('wompi/transactions', 'WebHookController@mainHandler');
  ****************/
 Route::group(
     ['middleware' => 'auth:token'],
-    function() {
-	Route::get('events/{event}/subastas', 'SubastaController@SubastaByEvent');
-	Route::post('events/{event}/subastas', 'SubastaController@store');
-	Route::put('events/{event}/subastas/reset-products', 'SubastaController@resetProducts');
-	Route::put('events/{event}/subastas/{subasta}', 'SubastaController@update');
-	Route::delete('events/{event}/subastas/{subasta}', 'SubastaController@destroy');
+    function () {
+        Route::get('events/{event}/subastas', 'SubastaController@SubastaByEvent');
+        Route::post('events/{event}/subastas', 'SubastaController@store');
+        Route::put('events/{event}/subastas/reset-products', 'SubastaController@resetProducts');
+        Route::put('events/{event}/subastas/{subasta}', 'SubastaController@update');
+        Route::delete('events/{event}/subastas/{subasta}', 'SubastaController@destroy');
     }
 );
 /****************
