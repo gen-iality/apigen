@@ -72,6 +72,16 @@
             display: inline-block;
             vertical-align: middle;
         }
+        .content-multy {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+        }
+
+        .content-inter {
+            padding-right: 200px;
+            padding-left: 200px;
+        }
 
         .ql-align-center {
             text-align: center !important;
@@ -129,6 +139,7 @@
 
 <body style="background-color: #FFFFFF; font-family: Rock Sans Bold, Arial, Helvetica, sans-serif;">
 
+    <!--Crear solo un certificado-->
     @if (!$many)
     <img class="imagen" src="{{ $image }}" />
 
@@ -143,10 +154,10 @@
     @foreach ($certificates as $key => $certificate)
     <img class="imagen" src="{{ $image }}" />
 
-    <div class="">
+    <div class="content-multy">
         <!--containing-table-->
 
-        <div class="">{!! $certificate['content'] !!}
+        <div class="content-inter">{!! $certificate['content'] !!}
         </div>
     </div>
     <!--Crear siguiente pagina si no es el ultimo elemento-->
