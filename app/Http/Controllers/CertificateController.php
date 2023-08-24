@@ -226,6 +226,7 @@ class CertificateController extends Controller
     {
         $data = $request->json()->all();
 
+        $data['many'] = false;
         if ($request->get('download') == '1') {
             //return view('Public.ViewEvent.Partials.PDFTicket', $data);
             //return view('Public.ViewEvent.Partials.certificate', $data);
