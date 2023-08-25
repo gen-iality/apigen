@@ -438,6 +438,11 @@ class EventUserController extends Controller
 
         $noSendMail = $request->query('no_send_mail');
 
+        // 🟠🟠🟠 ELIMINAR 25/08/23 🟠🟠🟠
+        if($event_id === '64e676ab1ff4cdc604097852') {
+            $noSendMail = true;
+        }
+
         $eventUserData['event_id'] = $event_id;
         //Se buscan usuarios existentes con el correo que se está ingresando
         $userexists = Attendee::where("event_id", $event_id)->where("properties.email", $email)->first();
