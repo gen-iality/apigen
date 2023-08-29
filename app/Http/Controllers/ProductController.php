@@ -12,6 +12,7 @@ use App\Event;
 use App\Order;
 use Auth;
 use Mail;
+
 /**
  * @group Product
  * Endpoint that manages event products.
@@ -24,20 +25,20 @@ class ProductController extends Controller
      */
     public function index(Request $request, $event_id)
     {
-	$numberItems =  $request->query('numberItems') ?
-	    $request->query('numberItems') : 10;
-	$type = $request->query('type');
+        $numberItems =  $request->query('numberItems') ?
+            $request->query('numberItems') : 10;
+        $type = $request->query('type');
 
-	// Listar productos de una subasta
-	if($type === 'just-auction') {
-	    return JsonResource::collection(
-		Product::where('event_id', $event_id)
-		    ->where('type', $type)
+        // Listar productos de una subasta
+        if ($type === 'just-auction') {
+            return JsonResource::collection(
+                Product::where('event_id', $event_id)
+                    ->where('type', $type)
                     ->paginate($numberItems)
             );
-	}
+        }
 
-	// Listar products de forma normal
+        // Listar products de forma normal
         return JsonResource::collection(
             Product::where('event_id', $event_id)
                 ->paginate($numberItems)
@@ -62,24 +63,24 @@ class ProductController extends Controller
     public function store(Request $request, Event $event)
     {
         $request->validate([
-	    'name' => 'required|string|max:100',
-	    'type' => 'required|string|in:just-auction,just-store',
-	    'description' => 'string',
-	    'price' => 'numeric',
-	    'images' => 'required',
-	    // Subasta
-	    'start_price' => 'numeric',
-	    'end_price' => 'numeric',
-	    'state' => 'string|in:waiting,progress,auctioned'
+            'name' => 'required|string|max:100',
+            'type' => 'required|string|in:just-auction,just-store',
+            //'description' => 'string',
+            'price' => 'numeric',
+            'images' => 'required',
+            // Subasta
+            'start_price' => 'numeric',
+            'end_price' => 'numeric',
+            'state' => 'string|in:waiting,progress,auctioned'
         ]);
         $data = $request->json()->all();
 
-	// Asociar a evento
+        // Asociar a evento
         $data['event_id'] =  $event->_id;
 
         $product = Product::create($data);
 
-	return response()->json(compact('product'), 201);
+        return response()->json(compact('product'), 201);
     }
 
     /**
@@ -89,7 +90,7 @@ class ProductController extends Controller
      * @urlParam product required product 
      * 
      */
-    public function show($event_id ,  $id)
+    public function show($event_id,  $id)
     {
         $product = Product::find($id);
         $response = new JsonResource($product);
@@ -112,14 +113,14 @@ class ProductController extends Controller
     public function update(Request $request, $event, Product $product)
     {
         $request->validate([
-	    'name' => 'string|max:100',
-	    'type' => 'string|in:just-auction,just-store',
-	    'description' => 'string',
-	    'price' => 'numeric',
-	    // Subasta
-	    'start_price' => 'numeric',
-	    'end_price' => 'numeric',
-	    'state' => 'string|in:waiting,progress,auctioned'
+            'name' => 'string|max:100',
+            'type' => 'string|in:just-auction,just-store',
+            'description' => 'string',
+            'price' => 'numeric',
+            // Subasta
+            'start_price' => 'numeric',
+            'end_price' => 'numeric',
+            'state' => 'string|in:waiting,progress,auctioned'
         ]);
 
         $data = $request->json()->all();
@@ -136,9 +137,9 @@ class ProductController extends Controller
      * @urlParam event required Example: 5ea23acbd74d5c4b360ddde2
      * @urlParam product required id of the event to be eliminated
      */
-    public function destroy($event_id ,  Product $product)
+    public function destroy($event_id,  Product $product)
     {
-	$product->delete();
+        $product->delete();
 
         return response()->json([], 204);
     }
@@ -155,21 +156,21 @@ class ProductController extends Controller
      */
     public function createSilentAuction(Request $request, $event_id, $product_id)
     {
-        
+
         $user = Auth::user();
         $data = $request->json()->all();
-        
+
         //Se obtienen los colaboradores o admins para enviar el correo de subasta silenciosa
-        $contributors = ModelHasRole::where('event_id' , $event_id)->pluck('model_id');
-        $admins = Account::whereIn('_id' , $contributors)->get(['email']);
-            
+        $contributors = ModelHasRole::where('event_id', $event_id)->pluck('model_id');
+        $admins = Account::whereIn('_id', $contributors)->get(['email']);
+
         self::minimumAuctionValue($event_id, $product_id);
         //Crear la orde de cada puja, esto ayuda a llevar el control de en cuanto va la puja.
         $order = Order::updateOrCreate(
             [
                 "account_id" => $user->_id,
                 "items" => [$product_id]
-            ]                
+            ]
 
         );
         //Se grega de esta forma porque solo el updateOrCreate por alguna exatraña razon solo crea el registro con fecha de creación
@@ -186,14 +187,13 @@ class ProductController extends Controller
 
         //Se actualiza el valor minimo del producto
         $product = Product::find($product_id);
-        $typePrice = explode(' $ ' , $product->price);
+        $typePrice = explode(' $ ', $product->price);
 
-        if(!isset($product->start_price))
-        {
+        if (!isset($product->start_price)) {
             $product->start_price = $product->price;
             $product->save();
         }
-        
+
 
         $product->price = $order->amount;
         $product->save();
@@ -201,22 +201,20 @@ class ProductController extends Controller
         $data['by'] = isset($data['by']) ? $data['by'] : 'Evius';
 
         //Este Email informa a los administadores que usuarios han subastado
-        foreach($admins as $admin)
-        {   
-            
+        foreach ($admins as $admin) {
+
             Mail::to($admin->email)
-            ->queue(
-                new \App\Mail\SilentAuctionMail($data, $event_id, $user, $product , true)
-            );
-        }  
+                ->queue(
+                    new \App\Mail\SilentAuctionMail($data, $event_id, $user, $product, true)
+                );
+        }
 
         //Este es el correo de copnmfirmación para el usuario que realiza la puja
         Mail::to($user->email)
-        ->queue(
-            new \App\Mail\SilentAuctionMail($data, $event_id, $user, $product, false)
-        );
+            ->queue(
+                new \App\Mail\SilentAuctionMail($data, $event_id, $user, $product, false)
+            );
         return 'Silent Auction';
-
     }
 
 
@@ -227,15 +225,13 @@ class ProductController extends Controller
      * @urlParam event required event id Example: 5ea23acbd74d5c4b360ddde2
      * @urlParam product required product id Example: 60e8cd558c421b004f2ff082
      */
-    public function minimumAuctionValue($event_id , $product_id)
-    {   
-        $minValueAuction =  Order::where('event_id' , $event_id)->where('items' , $product_id )->max('amount');  
-        $product = $product = Product::find($product_id);    
-        $typePrice = explode(' $ ' , $product->price);
+    public function minimumAuctionValue($event_id, $product_id)
+    {
+        $minValueAuction =  Order::where('event_id', $event_id)->where('items', $product_id)->max('amount');
+        $product = $product = Product::find($product_id);
+        $typePrice = explode(' $ ', $product->price);
         //Este cambio es temporar porque lo registros se crearon con precio tipo string              
         $minValue = isset($minValueAuction) ? $minValueAuction : $product->price;
         return $minValue;
     }
-
-
 }
