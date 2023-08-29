@@ -18,14 +18,14 @@ use App\Event;
 /** 
  * @group Organization User
  * This model is the 
-*/
+ */
 class OrganizationUserController extends Controller
 {
     /**
      * _index_: List all user of a organization  
      */
     public function index(Request $request, String $organization_id)
-    {   
+    {
         $OrganizationUsers = OrganizationUserResource::collection(
             OrganizationUser::where('organization_id', $organization_id)
                 ->paginate(config('app.page_size'))
@@ -43,7 +43,7 @@ class OrganizationUserController extends Controller
         $user = Auth::user();
 
         return OrganizationUserResource::collection(
-            OrganizationUser::where('userid', $user->id)->where('organization_id',$organization_id)
+            OrganizationUser::where('userid', $user->id)->where('organization_id', $organization_id)
                 ->paginate(config('app.page_size'))
         );
     }
@@ -57,7 +57,7 @@ class OrganizationUserController extends Controller
      * @bodyParam names string required user names Example: test
      * 
      */
-    public function store(Request $request,String $organization_id)
+    public function store(Request $request, String $organization_id)
     {
         $data = $request->json()->all();
 
@@ -75,10 +75,9 @@ class OrganizationUserController extends Controller
 
         $organization = Organization::findOrFail($organization_id);
         $user_properties = $organization->user_properties;
-        
+
         //Se validan los campos que no aceptan datos, si no informativos
-        foreach ($user_properties as $user_property) 
-        {
+        foreach ($user_properties as $user_property) {
             if ($user_property['mandatory'] !== true || $user_property['type'] == "tituloseccion") {
                 continue;
             }
@@ -93,10 +92,9 @@ class OrganizationUserController extends Controller
         }
         $email = $data['properties']['email'];
         //Se valida si ya existe el usurio
-        $user = Account::where("email" , $email)->first();  
+        $user = Account::where("email", $email)->first();
         $password = isset($data["properties"]["password"]) ? $data["properties"]["password"] : $email;
-        if(empty($user))
-        {
+        if (empty($user)) {
             $user = Account::create([
                 "email" => $email,
                 "names" => $data["properties"]["names"],
@@ -104,7 +102,7 @@ class OrganizationUserController extends Controller
             ]);
         }
 
-         /* ya con el usuario actualizamos o creamos el organizationUser */
+        /* ya con el usuario actualizamos o creamos el organizationUser */
         $matchAttributes = ["organization_id" => $organization_id, "account_id" => $user->_id];
         $data += $matchAttributes;
         $model = OrganizationUser::where($matchAttributes)->first();
@@ -123,11 +121,11 @@ class OrganizationUserController extends Controller
         }
 
         //Add the member in all Events of the orgnization
-	$createIntoEvents = $request->query('createIntoEvents') === 'true' ?
-	    true : false;
-	if($createIntoEvents) {
-	    OrganizationServices::createMembers($model);
-	}
+        $createIntoEvents = $request->query('createIntoEvents') === 'true' ?
+            true : false;
+        if ($createIntoEvents) {
+            OrganizationServices::createMembers($model);
+        }
 
         // $response = new OrganizationUserResource($organizationUser);
         return $model;
@@ -186,9 +184,9 @@ class OrganizationUserController extends Controller
      * 
      */
     public function meOrganizations(Request $request)
-    {   
+    {
         $user = Auth::user();
-        $query =  OrganizationUser::where('account_id' , $user->_id)->paginate(config('app.page_size'));
+        $query =  OrganizationUser::where('account_id', $user->_id)->paginate(config('app.page_size'));
 
         return OrganizationUserResource::collection($query);
     }
@@ -201,7 +199,7 @@ class OrganizationUserController extends Controller
      * @urlParam organizationuser The id of the organization
      */
     public function show($organizaton_id, $orgUser)
-    {   
+    {
         $query = OrganizationUser::findOrFail($orgUser);
         return $query;
     }
@@ -215,9 +213,9 @@ class OrganizationUserController extends Controller
     public function meInOrganization($organizaton_id)
     {
         $user = Auth::user();
-        $query =  OrganizationUser::where('account_id' , $user->_id)
-                    ->where('organization_id' , $organizaton_id)
-                    ->paginate(config('app.page_size'));
+        $query =  OrganizationUser::where('account_id', $user->_id)
+            ->where('organization_id', $organizaton_id)
+            ->paginate(config('app.page_size'));
 
         return $query;
     }
@@ -232,25 +230,31 @@ class OrganizationUserController extends Controller
      */
     public function listEventsByOrganizationUser(Request $request, Organization $organization, Account $user)
     {
-	// devolver evento con event_user
-	$eventUser = $request->query('event_user') === 'true' ?
-	    true : false;
+        // devolver event_user en respuesta
+        $eventUser = $request->query('event_user') === 'true' ?
+            true : false;
+        // Orden del listado
+        $order = $request->query('order') === 'latest' ?
+            'latest' : 'oldest';
 
-	$eventsByOrganization = Event::where('organizer_id', $organization->_id)->get();
+        $eventsByOrganization = Event::where('organizer_id', $organization->_id)
+            ->$order() // listar ascendente o descendente
+            ->get();
 
-	$events = [];
-	// Buscar en que eventos esta registrado el orgnization user
-	foreach($eventsByOrganization as $event) {
-	    $eventUserExists = Attendee::where('event_id', $event->_id)
-		->where('account_id', $user->_id)
-		->first();
+        $events = [];
+        // Buscar en que eventos esta registrado el orgnization user
+        foreach ($eventsByOrganization as $event) {
+            $eventUserExists = Attendee::where('event_id', $event->_id)
+                ->where('account_id', $user->_id)
+                ->first();
 
-	    $eventUserExists && array_push($events, [
-	        'event' => $event,
-	        'event_user' => $eventUser ? $eventUserExists : null
-	    ]);
-	}
+            $eventUserExists && array_push($events, [
+                'event' => $event,
+                'event_user' => $eventUser ?
+                    $eventUserExists : null // devolver event_user en respuesta
+            ]);
+        }
 
-	return response()->json(['data' => $events], 200);
+        return response()->json(['data' => $events], 200);
     }
 }

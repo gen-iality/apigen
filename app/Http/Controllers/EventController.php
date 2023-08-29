@@ -30,7 +30,7 @@ use Mail;
 
 class EventController extends Controller
 {
-    
+
     /**
      *
      *  _index:_ Listing of all events
@@ -114,7 +114,7 @@ class EventController extends Controller
         $currentDate = new \Carbon\Carbon();
 
         $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
-            ->whereNotNull('visibility') 
+            ->whereNotNull('visibility')
             ->orderBy('datetime_from', 'ASC');
 
         $input = $request->all();
@@ -161,9 +161,8 @@ class EventController extends Controller
         $input = $request->all();
         $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
         return EventResource::collection($results);
-
     }
-    
+
     /**
      * _currentUserindex_: list of events of the organizer who is logged in 
      * @authenticated
@@ -212,10 +211,15 @@ class EventController extends Controller
      * @param string $id
      * @return void
      */
-    public function EventbyOrganizations(string $id)
+    public function EventbyOrganizations(Request $request, string $id)
     {
+        // Orden del listado
+        $order = $request->query('order') === 'latest' ?
+            'latest' : 'oldest';
+
         return EventResource::collection(
             Event::where('organizer_id', $id)
+                ->$order() // listar ascendente o descendente
                 ->paginate(config('app.page_size'))
         );
     }
@@ -285,7 +289,7 @@ class EventController extends Controller
         $user = Auth::user();
         $data = $request->except(['user_properties', 'token']);
         $dataUserProperties = $request->only('user_properties');
-        
+
         //este validador pronto se va a su clase de validacion no pude ponerlo aún no se como se hace esta fue la manera altera que encontre
         $validator = Validator::make(
             $data,
@@ -333,10 +337,10 @@ class EventController extends Controller
 
         $Properties = new UserProperties();
 
-	// Days after the live landing event
-	//if(isset($user->plan['availables']['later_days'])) {
-	  //$data[ 'later_days' ] = $user->plan['availables']['later_days'];
-	//}
+        // Days after the live landing event
+        //if(isset($user->plan['availables']['later_days'])) {
+        //$data[ 'later_days' ] = $user->plan['availables']['later_days'];
+        //}
 
         $result = new Event($data);
 
@@ -369,11 +373,11 @@ class EventController extends Controller
             }
         }
         $styles = $data['styles'];
-        EventService::AddDefaultStyles($styles,$result);
-        
+        EventService::AddDefaultStyles($styles, $result);
+
         //Persist the model to database
         $result->save();
-        
+
         /*categories*/
         if (isset($data['category_ids'])) {
             $result->categories()->sync($data['category_ids']);
@@ -387,7 +391,7 @@ class EventController extends Controller
                 $event->user_properties()->save($model);
             }
         }
-        
+
         //Configuracione spor defecto de todos los eventos
         // EventService::addEventMenu($result);
         EventService::addOwnerAsAdminColaborator($user, $result);
@@ -398,7 +402,7 @@ class EventController extends Controller
     }
 
 
-        
+
 
     /**
      * _show_: display information about a specific event.
@@ -569,7 +573,7 @@ class EventController extends Controller
         return new EventResource($event);
     }
 
-    
+
     /**
      * _destroy_: delete event and related data.
      * @authenticated
@@ -578,16 +582,16 @@ class EventController extends Controller
      */
     public function destroy(String $id)
     {
-	// borrar evento
-	Event::findOrFail($id)->delete();
+        // borrar evento
+        Event::findOrFail($id)->delete();
 
-	// borrar documentos que posean referencia al evento
-	$models = ["App\Attendee", "App\Activities", "App\Host", "App\Space", "App\Message", "App\ModelHasRole", "App\Order"];
-	foreach ($models as $model) {
-	  $model::where('event_id', $id)->delete();
-	}
+        // borrar documentos que posean referencia al evento
+        $models = ["App\Attendee", "App\Activities", "App\Host", "App\Space", "App\Message", "App\ModelHasRole", "App\Order"];
+        foreach ($models as $model) {
+            $model::where('event_id', $id)->delete();
+        }
 
-	return response()->json([], 204);
+        return response()->json([], 204);
     }
 
     /**
@@ -598,15 +602,15 @@ class EventController extends Controller
      */
     public function restore(String $event_id)
     {
-	Event::withTrashed()->findOrFail($event_id)->restore();
+        Event::withTrashed()->findOrFail($event_id)->restore();
 
-	// restaurar documentos que posean referencia al evento
-	$models = ["App\Attendee", "App\Activities", "App\Host", "App\Space", "App\Message", "App\ModelHasRole", "App\Order"];
-	foreach ($models as $model) {
-	  $model::withTrashed()->where('event_id', $event_id)->restore();
-	}
+        // restaurar documentos que posean referencia al evento
+        $models = ["App\Attendee", "App\Activities", "App\Host", "App\Space", "App\Message", "App\ModelHasRole", "App\Order"];
+        foreach ($models as $model) {
+            $model::withTrashed()->where('event_id', $event_id)->restore();
+        }
 
-	return response()->json(['msg' => 'restored'], 200);
+        return response()->json(['msg' => 'restored'], 200);
     }
 
     public function showUserProperties(String $id)
@@ -982,7 +986,7 @@ class EventController extends Controller
      * }
      */
     public function addDocumentUserToEvent(Request $request, $event_id)
-    {      
+    {
         $data = $request->json()->all();
 
         $request->validate([
@@ -998,5 +1002,3 @@ class EventController extends Controller
         return $event;
     }
 }
-
-
