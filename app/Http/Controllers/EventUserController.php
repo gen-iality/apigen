@@ -91,8 +91,8 @@ class EventUserController extends Controller
      */
     public function ListEventUsersWithBingoCards(Request $request, $event)
     {
-	// Cantidad de elementos que se quieren paginar
-	$numberItems = $request->query('numberItems') ? $request->query('numberItems'): 10;
+        // Cantidad de elementos que se quieren paginar
+        $numberItems = $request->query('numberItems') ? $request->query('numberItems') : 10;
 
         $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email', 'account_id')->paginate($numberItems);
 
@@ -126,17 +126,17 @@ class EventUserController extends Controller
             array_push($attendeesist, $dataEventUser);
         }
 
-	//$response = new Paginator($attendeesist, 10);
+        //$response = new Paginator($attendeesist, 10);
 
-	return response()->json([
-	    'data' => $attendeesist,
-	    'current_page' => $eventUsers->currentPage(),
-	    //'first_page_url' => $eventUsers->firstPage(),
-	    'last_page_url' => $eventUsers->lastPage(),
-	    'next_page_url' => $eventUsers->nextPageUrl(),
-	    'prev_page_url' => $eventUsers->previousPageUrl(),
-	    'total' => $eventUsers->total()
-	]);
+        return response()->json([
+            'data' => $attendeesist,
+            'current_page' => $eventUsers->currentPage(),
+            //'first_page_url' => $eventUsers->firstPage(),
+            'last_page_url' => $eventUsers->lastPage(),
+            'next_page_url' => $eventUsers->nextPageUrl(),
+            'prev_page_url' => $eventUsers->previousPageUrl(),
+            'total' => $eventUsers->total()
+        ]);
     }
 
     /**
@@ -169,7 +169,7 @@ class EventUserController extends Controller
                 ['event_id', $event],
                 ['event_user_id', $eventUser->_id],
             ])->exists()
-            && UserEventService::generateBingoCardForAttendee($event, $eventUser->_id);
+                && UserEventService::generateBingoCardForAttendee($event, $eventUser->_id);
         }
 
         return response()->json(['message' => 'bingo cards created'], 201);
@@ -246,7 +246,6 @@ class EventUserController extends Controller
         $response = new EventUserResource($eventUser);
         $response->additional(['status' => UserEventService::UPDATED, 'message' => UserEventService::MESSAGE]);
         return $response;
-
     }
 
     /**
@@ -311,7 +310,6 @@ class EventUserController extends Controller
                     $datafromform['cargo'] = $answer[$answer["type"]];
                     break;
             }
-
         }
         $datafromform['properties'] = [
             'charge' => $datafromform['charge'],
@@ -439,8 +437,16 @@ class EventUserController extends Controller
         $noSendMail = $request->query('no_send_mail');
 
         // 🟠🟠🟠 ELIMINAR 25/08/23 🟠🟠🟠
-        if($event_id === '64e676ab1ff4cdc604097852') {
+        if ($event_id === '64e676ab1ff4cdc604097852') {
             $noSendMail = true;
+        }
+
+        // 🟠🟠🟠 Crear usuarios WOM eliminar 🟠🟠🟠
+        if ($event_id === '64ef6e94ffaaef008308e9b3') { // event_id espejo
+            // Cambiar event_id por el del evento original
+            $event_id = '64ef6e4b96c586fe0a0524d2';
+            // Crear field para usuarios WOM
+            $eventUserData['properties']['wom_user'] = true;
         }
 
         $eventUserData['event_id'] = $event_id;
@@ -464,7 +470,6 @@ class EventUserController extends Controller
                 ]);
             }
             $eventUserData['account_id'] = $user->_id;
-
         } else {
             return response()->json([
                 "message" => "The user is already registered in the event",
@@ -509,7 +514,6 @@ class EventUserController extends Controller
         }
 
         return $eventUser;
-
     }
 
     /**
@@ -539,8 +543,8 @@ class EventUserController extends Controller
             'password' => 'string|min:6',
             'rol_name' => 'exists:roles,name|string', // por default se asigna rol asistente
         ]);
-	$overwritePassword = $request->query('overwritePassword') === 'true' ?
-	    true : false;
+        $overwritePassword = $request->query('overwritePassword') === 'true' ?
+            true : false;
 
         $eventUserData = $request->json()->all();
         $eventUserData["email"] = strtolower($eventUserData["email"]);
@@ -549,35 +553,35 @@ class EventUserController extends Controller
 
         try {
             // crear cuenta de usuario si no existe
-	    $user = Account::where("email", $email)->first();
+            $user = Account::where("email", $email)->first();
 
-	    if(isset($eventUserData['checkInField'])) {
-	        $pass = $eventUserData['checkInField'];
-	    } elseif (isset($eventUserData["password"])) {
-	        $pass = isset($eventUserData["password"]);
-	    } else {
-	        // Si no tiene password, se le asigna el email como password
-	        $pass = $eventUserData['email'];
-	    }
+            if (isset($eventUserData['checkInField'])) {
+                $pass = $eventUserData['checkInField'];
+            } elseif (isset($eventUserData["password"])) {
+                $pass = isset($eventUserData["password"]);
+            } else {
+                // Si no tiene password, se le asigna el email como password
+                $pass = $eventUserData['email'];
+            }
 
-	    if($overwritePassword  && isset($user)) {
-		$auth = resolve('Kreait\Firebase\Auth');
-        	$this->auth = $auth;
-		// crear nuevo usuario
-		//$user->fill([
-		    //"email" => $email,
-		    //"names" => $eventUserData["names"],
-		    //"password" => $pass,
-		//]);
-		// Paso extra para cambiar password
-        	$this->auth->changeUserPassword($user['uid'], $pass);
-	    } elseif(!isset($user)) {
+            if ($overwritePassword  && isset($user)) {
+                $auth = resolve('Kreait\Firebase\Auth');
+                $this->auth = $auth;
+                // crear nuevo usuario
+                //$user->fill([
+                //"email" => $email,
+                //"names" => $eventUserData["names"],
+                //"password" => $pass,
+                //]);
+                // Paso extra para cambiar password
+                $this->auth->changeUserPassword($user['uid'], $pass);
+            } elseif (!isset($user)) {
                 $user = Account::create([
                     "email" => $email,
                     "names" => $eventUserData["names"],
                     "password" => $pass,
                 ]);
-	    }
+            }
 
             // assign rol_id to attendee
             $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
@@ -619,10 +623,8 @@ class EventUserController extends Controller
 
             $additional = ['status' => $result->status, 'message' => $result->message];
             $response->additional($additional);
-
         } catch (\Exception $e) {
             return response()->json((object) ["message" => $e->getMessage()], 400);
-
         }
         return $response;
     }
@@ -660,7 +662,7 @@ class EventUserController extends Controller
         $newUserActivities = [];
         foreach ($userActivities as $userActivity) {
             $userActivity['activity_id'] !== $activity->_id &&
-            array_push($newUserActivities, $userActivity);
+                array_push($newUserActivities, $userActivity);
         }
 
         $eventUser->activityProperties = $newUserActivities;
@@ -686,8 +688,13 @@ class EventUserController extends Controller
         $encryption_key = config('app.encryption_key');
 
         // Use openssl_encrypt() function to encrypt the data
-        $encryption = openssl_encrypt($string, $ciphering,
-            $encryption_key, $options, $encryption_iv);
+        $encryption = openssl_encrypt(
+            $string,
+            $ciphering,
+            $encryption_key,
+            $options,
+            $encryption_iv
+        );
 
         // Display the encrypted string
         return $encryption;
@@ -755,7 +762,6 @@ class EventUserController extends Controller
             }
 
             $response->additional(['status' => $result->status, 'message' => $result->message]);
-
         } catch (\Exception $e) {
 
             $response = response()->json((object) ["message" => $e->getMessage()], 500);
@@ -812,12 +818,11 @@ class EventUserController extends Controller
         }
 
         return EventUserResource::collection(
-            Attendee::where("event_id", $event_id)->
-                where(function ($query) {
-                $query->where("account_id", auth()->user()->_id)
-                //Temporal fix for users that got different case in their email and thus firebase created different user
-                    ->orWhere('email', '=', strtolower(auth()->user()->email));
-            })->paginate(config("app.page_size"))
+            Attendee::where("event_id", $event_id)->where(function ($query) {
+                    $query->where("account_id", auth()->user()->_id)
+                        //Temporal fix for users that got different case in their email and thus firebase created different user
+                        ->orWhere('email', '=', strtolower(auth()->user()->email));
+                })->paginate(config("app.page_size"))
         );
     }
 
@@ -844,14 +849,12 @@ class EventUserController extends Controller
             $user["status"] = "Usuario existente en el evento";
             try {
                 $user["account_response"] = $auth->getUserByEmail($email);
-
             } catch (Exception $e) {
                 $user["account_response"] = "usuario existe en base de datos pero no tiene login a evius";
             }
             return $user;
         }
         return "Usuario no encontrado";
-
     }
 
     /**
@@ -873,10 +876,10 @@ class EventUserController extends Controller
         //url front dinamica
         $urlOrigin = $request->header('origin');
 
-	// Quitar esta validacion
-	if($event->_id === '64623516d0f7f7b59e0f77e2') {
-	    return new EventUserResource($eventUser);
-	}
+        // Quitar esta validacion
+        if ($event->_id === '64623516d0f7f7b59e0f77e2') {
+            return new EventUserResource($eventUser);
+        }
 
         Mail::to($eventUser->properties["email"])
             ->queue(
@@ -1145,7 +1148,6 @@ class EventUserController extends Controller
 
         $account = Account::whereIn('email', $email)->delete();
         return $account;
-
     }
 
     /**
@@ -1230,7 +1232,6 @@ class EventUserController extends Controller
             'total_checkIn' => $checkIn,
             'total_printouts' => $totalPrintouts,
         ]);
-
     }
 
     /**
@@ -1283,7 +1284,6 @@ class EventUserController extends Controller
                 'headers' => ['Content-Type' => 'application/json'],
             ]);
         } catch (\Exception $e) {
-
         }
         return $response;
     }
@@ -1349,7 +1349,6 @@ class EventUserController extends Controller
         }
 
         return $totalForDate;
-
     }
 
     /**
@@ -1399,9 +1398,9 @@ class EventUserController extends Controller
         $fieldsRequired = $event->user_properties;
 
         foreach ($fieldsRequired as $field) {
-	    if($field->visibleByAdmin) {
-		continue;
-	    }
+            if ($field->visibleByAdmin) {
+                continue;
+            }
 
             $isRequired = $field['mandatory'];
             $fieldName = $field['name'];
