@@ -71,10 +71,16 @@ class EventStatisticsController extends Controller
      * @urlParam organization organization id 
      * 
      */
-    public function eventsstadistics(string $id)
+    public function eventsstadistics(Request $request, string $id)
     {
+        // Orden del listado
+        $order = $request->query('order') === 'latest' ?
+            'latest' : 'oldest';
 
-        $events = Event::where('organizer_id', $id)->get();
+        $events = Event::where('organizer_id', $id)
+            ->$order()
+            ->get();
+
         $eventd_ids = $events->pluck('_id')->toArray();
 
         $events = $events->keyBy('_id');
@@ -82,7 +88,7 @@ class EventStatisticsController extends Controller
         $totals = Attendee::raw()->aggregate(array(
             ['$match' => ['event_id' => ['$in' => $eventd_ids]]],
             array('$group' => array(
-                '_id' =>'$event_id',
+                '_id' => '$event_id',
                 'count' => array('$sum' => 1),
                 'checked_in_not' => [
                     '$sum' => [
@@ -122,18 +128,18 @@ class EventStatisticsController extends Controller
 
         $output = [];
 
-        foreach ($events as $event){
+        foreach ($events as $event) {
             $output[$event->_id] = $event->toArray();
         }
         //Agregamos el nombre a cada evento
-        foreach($totals as $total) {
+        foreach ($totals as $total) {
             $event_totals = (iterator_to_array($total));
-            $output[$event_totals['_id']] = array_merge($output[$event_totals['_id']],$event_totals );
-        }    
+            $output[$event_totals['_id']] = array_merge($output[$event_totals['_id']], $event_totals);
+        }
         $output = array_values($output);
         //$array = json_decode(json_encode($totals->toArray()), true);
 
-        return JsonResource::collection(['data'=>$output]);
+        return JsonResource::collection(['data' => $output]);
 
         // foreach ($output as $result) {
         //     echo "<p>{$result['name']} {$result['_id']} {$result['count']} pending: {$result['course_status_pending']}  approved: {$result['course_status_approved']} failed: {$result['course_status_reproved']}</p>";
