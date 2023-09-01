@@ -25,7 +25,7 @@ use App\OrganizationUser;
  */
 class OrganizationController extends Controller
 {
-   
+
     /**
      * _index_:Display a listing of the organizations.
      * 
@@ -61,7 +61,7 @@ class OrganizationController extends Controller
     public function store(Request $request, EvaRol $RolService)
     {
         $data = $request->json()->all();
-        $dataUserProperties = $request->only('user_properties');        
+        $dataUserProperties = $request->only('user_properties');
 
         $model = new Organization($data);
         // return response($model);
@@ -70,12 +70,12 @@ class OrganizationController extends Controller
         $user = Auth::user();
         $model->save();
 
-        $styles = isset($data['styles']) ? $data['styles'] : null ;
+        $styles = isset($data['styles']) ? $data['styles'] : null;
         $RolService->createAuthorAsOrganizationAdmin($user->id, $model->_id);
-        $data['styles'] = OrganizationServices::createDefaultStyles($styles,$model);
+        $data['styles'] = OrganizationServices::createDefaultStyles($styles, $model);
 
 
-        
+
         if (isset($dataUserProperties['user_properties'])) {
             $organization = Organization::find($model->_id);
             for ($i = 0; $i < count($dataUserProperties['user_properties']); $i++) {
@@ -85,12 +85,12 @@ class OrganizationController extends Controller
             }
         }
         OrganizationServices::createDefaultUserProperties($model->_id);
-        
-        
+
+
         if (isset($data['category_ids'])) {
             $model->categories()->sync($data['category_ids']);
-        }              
-        
+        }
+
         return $model;
     }
 
@@ -121,17 +121,15 @@ class OrganizationController extends Controller
         $organization = Organization::findOrFail($organization_id);
         $data = $request->json()->all();
         $dataQuery = $request->input();
-       
-        if(isset($data['itemsMenu']) && ($dataQuery['update_events_itemsMenu'] == 'true'))
-        {
-            $events = Event::where('organizer_id' , $organization->_id)->get();
 
-            foreach($events as $event)
-            {
+        if (isset($data['itemsMenu']) && ($dataQuery['update_events_itemsMenu'] == 'true')) {
+            $events = Event::where('organizer_id', $organization->_id)->get();
+
+            foreach ($events as $event) {
                 $event->itemsMenu = $organization->itemsMenu;
                 $event->save();
             }
-        }   
+        }
 
         if (isset($data['category_ids'])) {
             $organization->categories()->sync($data['category_ids']);
@@ -140,15 +138,12 @@ class OrganizationController extends Controller
         //Convertir el id de string a ObjectId al hacer cambio con drag and drop
         if (isset($data["user_properties"])) {
             foreach ($data['user_properties'] as $key => $value) {
-                $data['user_properties'][$key]['_id']  = new \MongoDB\BSON\ObjectId();            
-
+                $data['user_properties'][$key]['_id']  = new \MongoDB\BSON\ObjectId();
             }
 
-            if(isset($dataQuery['update_events_user_properties']))
-            {
-                $events = Event::where('organizer_id' , $organization->_id)->get();
-                foreach($events as $event)
-                {
+            if (isset($dataQuery['update_events_user_properties'])) {
+                $events = Event::where('organizer_id', $organization->_id)->get();
+                foreach ($events as $event) {
                     $event->user_properties()->delete();
 
                     for ($i = 0; $i < count($data['user_properties']); $i++) {
@@ -158,10 +153,10 @@ class OrganizationController extends Controller
                 }
             }
         }
-        
+
         $organization->fill($data);
         $organization->save();
-        
+
         return new OrganizationResource($organization);
     }
 
@@ -196,65 +191,62 @@ class OrganizationController extends Controller
      * 
      */
     public function ordersUsersPoints(Request $request, $organization)
-    {   
+    {
         $data = $request->json()->all();
 
         $filters = $request->input();
         $templates = DiscountCodeTemplate::where('organization_id', $organization)->get()->keyBy('_id')->toArray();
-        
+
         $status = isset($filters["status"]) ? $filters["status"] : "pendiente";
 
         $status_id = "";
-        switch ($status)
-        {
+        switch ($status) {
             case 'pendiente':
                 $status = "5c4a299c5c93dc0eb199214a";
-            break;
+                break;
             case 'despachado':
                 $status = "5c423232c9a4c86123236dcd";
-            break;
+                break;
             case 'valida':
                 $status = "613ff0c1f1c6df84356b30c2";
-            break;
+                break;
         }
 
-        $ordersEmail = Order::where('order_status_id' , $status)->where('organization_id' , $organization)->pluck('email');
-        
-        $orderByUser = 
+        $ordersEmail = Order::where('order_status_id', $status)->where('organization_id', $organization)->pluck('email');
 
-        //Usuarios por cada orden
-        $usersTotal = Account::whereIn('email' , $ordersEmail);
-        $users = $usersTotal->get(['_id' , 'email' , 'points', 'document_number','names'])->keyBy('email');
+        $orderByUser =
 
-        
-        $orders = Order::where('order_status_id' , $status)->where('organization_id' , $organization);
+            //Usuarios por cada orden
+            $usersTotal = Account::whereIn('email', $ordersEmail);
+        $users = $usersTotal->get(['_id', 'email', 'points', 'document_number', 'names'])->keyBy('email');
+
+
+        $orders = Order::where('order_status_id', $status)->where('organization_id', $organization);
         $orderActual = isset($filters["date_from"]) ?
-                       
-                        $orders->whereBetween(
-                            'created_at',
-                            array(
-                                \Carbon\Carbon::parse($filters['date_from']),
-                                \Carbon\Carbon::parse($filters['date_to']),
-                            )
-                        )->orderBy('email', 'asc')->get() :
 
-                        $orders->orderBy('email', 'asc')->get();         
-        
-        $userFor = "";  
-        if(isset($filters['type_report']))
-        {
-            echo 'N° de documento, Nombres, Correo, Puntos al momento de la redención , Puntos de la prenda, Total de puntos redimidos, Total de tolas las prendas canjeadas, Estado, Fecha de redención, Prenda canjeada. <br/>';     
-        }               
-        
+            $orders->whereBetween(
+                'created_at',
+                array(
+                    \Carbon\Carbon::parse($filters['date_from']),
+                    \Carbon\Carbon::parse($filters['date_to']),
+                )
+            )->orderBy('email', 'asc')->get() :
+
+            $orders->orderBy('email', 'asc')->get();
+
+        $userFor = "";
+        if (isset($filters['type_report'])) {
+            echo 'N° de documento, Nombres, Correo, Puntos al momento de la redención , Puntos de la prenda, Total de puntos redimidos, Total de tolas las prendas canjeadas, Estado, Fecha de redención, Prenda canjeada. <br/>';
+        }
+
         $arrayUsers = [];
-        
-        $dataComplete = [];        
+
+        $dataComplete = [];
 
         $ordersByUser = DiscountCodeTemplate::where('organization_id', $organization)->get()->keyBy('_id')->toArray();
 
-        foreach ($orderActual as $order) 
-        {
-            $codes = DiscountCodeMarinela::where('number_uses' , 1)->where('account_id' , $order->account_id)->get(['discount_code_template_id', 'discount_code_template_id ']);
+        foreach ($orderActual as $order) {
+            $codes = DiscountCodeMarinela::where('number_uses', 1)->where('account_id', $order->account_id)->get(['discount_code_template_id', 'discount_code_template_id ']);
             // $totalOrders = 0;
             $fechaOrders = '';
             $productos = '';
@@ -264,54 +256,49 @@ class OrganizationController extends Controller
             $fechaOrders = $order->created_at;
             // $totalOrders = $totalOrders + $order->amount;
             $productos = $order->items[0];
-            $totalProductos =  $totalProductos +1;
-           
-            if(isset($orderActual))
-            {
-                foreach($codes as $code)
-                {   
+            $totalProductos =  $totalProductos + 1;
+
+            if (isset($orderActual)) {
+                foreach ($codes as $code) {
 
                     $template_id = $code->discount_code_template_id;
 
-                    if(!$template_id)   
-                    {
-                        $discount= "discount_code_template_id ";
+                    if (!$template_id) {
+                        $discount = "discount_code_template_id ";
                         $template_id = $code->$discount;
                     }
                     $template = $templates[$template_id];
-                                        
-                    $totalCodigosRedimidos = $totalCodigosRedimidos +  $template['discount'];                                    
+
+                    $totalCodigosRedimidos = $totalCodigosRedimidos +  $template['discount'];
                 }
 
-                $totalOrdersUser=0;
+                $totalOrdersUser = 0;
 
                 $user = $users[$order->email];
                 $ordersByUser = Order::where('email', $user->email)
-                ->where('order_status_id' ,'!=', '5c4f37a17aa633237e241643')
-                ->where('order_status_id' ,'!=', '5c4232c1477041612349941e')
-                ->get(['amount']); 
+                    ->where('order_status_id', '!=', '5c4f37a17aa633237e241643')
+                    ->where('order_status_id', '!=', '5c4232c1477041612349941e')
+                    ->get(['amount']);
 
-                foreach($ordersByUser as $orderByUser)
-                {
+                foreach ($ordersByUser as $orderByUser) {
                     $totalOrdersUser = $totalOrdersUser + $orderByUser->amount;
                     // echo $orderByUser->amount. '<br>';
                 }
-                
+
                 $estado = ($totalOrdersUser <= $totalCodigosRedimidos) ? "CORRECTO" : "Problema";
-                if(isset($filters['type_report']))
-                {
-                    echo $user->document_number .','. 
-                            $user->names .','. 
-                            $user->email .','. 
-                            $order->account_points . ',' .
-                            $order->amount .','.
-                            $totalCodigosRedimidos. ',' . 
-                            $totalOrdersUser .','.
-                            $estado. ',' .
-                            $fechaOrders.','. 
-                            $productos. '<br>';
-                }else{
-                    $dataByUserjson= response()->json([
+                if (isset($filters['type_report'])) {
+                    echo $user->document_number . ',' .
+                        $user->names . ',' .
+                        $user->email . ',' .
+                        $order->account_points . ',' .
+                        $order->amount . ',' .
+                        $totalCodigosRedimidos . ',' .
+                        $totalOrdersUser . ',' .
+                        $estado . ',' .
+                        $fechaOrders . ',' .
+                        $productos . '<br>';
+                } else {
+                    $dataByUserjson = response()->json([
                         "_id" => $order->_id,
                         "document_cumber" => $user->document_number,
                         "names" => $user->names,
@@ -325,61 +312,55 @@ class OrganizationController extends Controller
                         "product" => $productos,
                         "talla" => $order->properties['talla']
                     ])->original;
-                    array_push($dataComplete , $dataByUserjson);                                        
-                } 
-            }else{
+                    array_push($dataComplete, $dataByUserjson);
+                }
+            } else {
                 echo $user->email . ', NO TIENE ORDER<br>';
             }
-            
         }
-        if(!isset($filters['type_report']))
-        {
+        if (!isset($filters['type_report'])) {
             return $dataComplete;
         }
-
     }
 
     public function validateExistenceOfMembersByEvents(Request $request, Organization $organization, Event $event)
     {
-	// Cantidad de elementos que se quieren paginar
-	$numberItems = $request->query('numberItems') ? $request->query('numberItems'): 10;
+        // Cantidad de elementos que se quieren paginar
+        $numberItems = $request->query('numberItems') ? $request->query('numberItems') : 10;
 
-	// Traer miembros de la organizacion
-	$organizationUsers = OrganizationUser::where('organization_id', $organization->_id)->paginate($numberItems);
-	// Traer ids de cuenta de usuario
-	$eventUserAccountIds = Attendee::where('event_id', $event->_id)->pluck('account_id')->toArray();
+        // Traer miembros de la organizacion
+        $organizationUsers = OrganizationUser::where('organization_id', $organization->_id)->paginate($numberItems);
+        // Traer ids de cuenta de usuario
+        $eventUserAccountIds = Attendee::where('event_id', $event->_id)->pluck('account_id')->toArray();
 
-	$listOrganizationUsers = [];
-	// Validar si un miembro esta inscrito al evento
-	foreach($organizationUsers as $organizationUser) {
-	    // Crear estructura de informacion del miembro
-	    $dataOrganizarionUser = [
-		'_id' => $organizationUser->_id,
-		'properties' => [
-		    'names' => $organizationUser->properties['names'],
-		    'email' => $organizationUser->properties['email']
-		],
-		'existsInEvent' => null
-	    ];
+        $listOrganizationUsers = [];
+        // Validar si un miembro esta inscrito al evento
+        foreach ($organizationUsers as $organizationUser) {
+            // Crear estructura de informacion del miembro
+            $dataOrganizarionUser = [
+                '_id' => $organizationUser->_id,
+                'properties' => $organizationUser->properties,
+                'existsInEvent' => null
+            ];
 
-	    // Si account_id existe en el array significa que esta en el eventp
-	    in_array($organizationUser->account_id, $eventUserAccountIds ) ?
-		// Cambiar propiedad si existe el miembro en el evento
-		$dataOrganizarionUser['existsInEvent'] = true :
-		$dataOrganizarionUser['existsInEvent'] = false;
+            // Si account_id existe en el array significa que esta en el eventp
+            in_array($organizationUser->account_id, $eventUserAccountIds) ?
+                // Cambiar propiedad si existe el miembro en el evento
+                $dataOrganizarionUser['existsInEvent'] = true :
+                $dataOrganizarionUser['existsInEvent'] = false;
 
-	    // agregar miembro a la lista
-	    array_push($listOrganizationUsers, $dataOrganizarionUser);
-	}
+            // agregar miembro a la lista
+            array_push($listOrganizationUsers, $dataOrganizarionUser);
+        }
 
-	return response()->json([
-	    'data' => $listOrganizationUsers,
-	    'current_page' => $organizationUsers->currentPage(),
-	    //'first_page_url' => $organizationUsers->firstPage(),
-	    'last_page_url' => $organizationUsers->lastPage(),
-	    'next_page_url' => $organizationUsers->nextPageUrl(),
-	    'prev_page_url' => $organizationUsers->previousPageUrl(),
-	    'total' => $organizationUsers->total()
-	]);
+        return response()->json([
+            'data' => $listOrganizationUsers,
+            'current_page' => $organizationUsers->currentPage(),
+            //'first_page_url' => $organizationUsers->firstPage(),
+            'last_page_url' => $organizationUsers->lastPage(),
+            'next_page_url' => $organizationUsers->nextPageUrl(),
+            'prev_page_url' => $organizationUsers->previousPageUrl(),
+            'total' => $organizationUsers->total()
+        ]);
     }
 }
