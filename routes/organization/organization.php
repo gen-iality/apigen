@@ -53,6 +53,7 @@ Route::group(
         Route::delete('organizations/{organization}/organizationusers/{organizationuser}', 'OrganizationUserController@destroy')->middleware('permission:destroy');
         Route::get('me/organizations', 'OrganizationUserController@meOrganizations');
         Route::get('me/organizations/{organization}', 'OrganizationUserController@meInOrganization');
+        Route::get('organizations/{organization}/eventsstadistics/export', 'EventStatisticsController@eventsStadisticsExport');
     }
 );
 Route::post('organizations/{organization}/addorganizationuser', 'OrganizationUserController@store');

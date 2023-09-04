@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Activities;
 use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
 use App\Attendee;
+use App\Documents;
 use App\EventType;
 use App\Http\Resources\EventResource;
 use App\ModelHasRole;
@@ -143,6 +145,44 @@ class EventStatisticsController extends Controller
 
         // foreach ($output as $result) {
         //     echo "<p>{$result['name']} {$result['_id']} {$result['count']} pending: {$result['course_status_pending']}  approved: {$result['course_status_approved']} failed: {$result['course_status_reproved']}</p>";
-        // }
+        // }n
+    }
+
+    public function eventsStadisticsExport(string $organizer_id)
+    {
+        $events = Event::where('organizer_id', $organizer_id)->get();
+
+        // 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+        // REFACTOR OBLIGATORIO
+        // ESTO ES POR SALIR DEL PASO
+        // 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
+        foreach ($events as $event) {
+            // Numero de asistentes por evento
+            $countAttendees = Attendee::where('event_id', $event->_id)->count();
+            $event['count'] = $countAttendees;
+
+            // Documentos por evento
+            $documents = Documents::where("event_id", $event->_id)->where("state", "father")->get();
+            $event['documents'] = $documents;
+
+            // Host de cada actividad por evento
+            $hostsByActivities = Activities::where('event_id', $event->_id)
+                ->where('host_ids', 'exists', true)
+                ->get()
+                ->toArray();
+
+            $event['hosts'] = array_map(function ($activity) {
+                return $activity['hosts'][0];
+            }, (array)$hostsByActivities);
+
+            // Url de videos en cada actividad del evento
+            $urlVideosByActivities = Activities::where('event_id', $event->_id)
+                ->where('video', 'exists', true)
+                ->pluck('video')
+                ->toArray();
+            $event['url_videos'] = $urlVideosByActivities;
+        }
+
+        return $events;
     }
 }
