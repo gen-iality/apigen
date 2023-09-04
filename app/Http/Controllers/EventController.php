@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Storage;
 use Validator;
 use Mail;
+use Carbon\Carbon;
 
 /**
  * @group Event
@@ -111,7 +112,7 @@ class EventController extends Controller
      */
     public function index(Request $request, FilterQuery $filterQuery)
     {
-        $currentDate = new \Carbon\Carbon();
+        //$currentDate = new \Carbon\Carbon();
 
         $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
             ->whereNotNull('visibility')
@@ -122,6 +123,42 @@ class EventController extends Controller
         return EventResource::collection($results);
     }
 
+    private function orderEventDates($events1, $events2, $typeOrder)
+    {
+        $totalEvents = $events1 + $events2;
+        $orderEvents = [];
+
+        foreach ($totalEvents as $event) {
+            // crear campo estandar de fecha
+            $standarDateField = '';
+            if (isset($event['dates'][0]['start'])) {
+                $standarDateField = Carbon::createFromFormat(
+                    'd M Y H:i',
+                    $event['dates'][0]['start']
+                )->format('Y-m-d H:i:s');
+            } else {
+                // El formato de datetime_from sera el usado para organizar las fechas
+                $standarDateField = $event['datetime_from'];
+            }
+
+            $event['standar_date_field'] = $standarDateField;
+            !in_array($event, $orderEvents) && array_push($orderEvents, $event);
+        }
+
+        // Ordenar por campo standarDateField
+        if ($typeOrder === 'before') { // Eventos pasado descendiente
+            usort($orderEvents, function ($fecha1, $fecha2) {
+                return strtotime($fecha2['standar_date_field']) - strtotime($fecha1['standar_date_field']);
+            });
+        } else { // Eventos proximos ascendente
+            usort($orderEvents, function ($fecha1, $fecha2) {
+                return strtotime($fecha1['standar_date_field']) - strtotime($fecha2['standar_date_field']);
+            });
+        }
+
+        return $orderEvents;
+    }
+
     /**
      * _beforeToday:_ list finished events
      * This method allows dynamic querying of any property through the URL using FilterQuery services for example : Exmaple: [{"id":"event_type_id","value":["5bb21557af7ea71be746e98x","5bb21557af7ea71be746e98b"]}]
@@ -130,16 +167,33 @@ class EventController extends Controller
      */
     public function beforeToday(Request $request, FilterQuery $filterQuery)
     {
-        $currentDate = new \Carbon\Carbon();
+        $numberItems = $request->query('pageSize') ?
+            $request->query('pageSize') : 10;
 
-        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
-            ->whereNotNull('visibility') //not null
-            ->Where('datetime_to', '<', $currentDate)
-            ->orderBy('datetime_from', 'DESC');
+        $eventsWithDates = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC)
+            ->selectRaw('*, UNIX_TIMESTAMP(dates.0.start) as start_unix') // Aplicar strtotime() a 'dates.0.start'
+            ->where('start_unix', '<=', strtotime(Carbon::now()))
+            ->orderBy('start_unix', 'DESC')
+            ->paginate($numberItems)
+            ->toArray();
+        $eventsWithDateTimeFrom = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
+            ->whereNull('dates.0.start')
+            ->where('datetime_from', '<=', Carbon::now())
+            ->orderBy('datetime_from', 'DESC')
+            ->paginate($numberItems)
+            ->toArray();
 
-        $input = $request->all();
-        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
-        return EventResource::collection($results);
+        $orderEvents = $this->orderEventDates(
+            $eventsWithDates['data'],
+            $eventsWithDateTimeFrom['data'],
+            'before'
+        );
+        //return $orderEvents;
+
+        //$input = $request->all();
+        //$results = $filterQuery::addDynamicQueryFiltersFromUrl($orderEvents, $input);
+
+        return EventResource::collection(['data' => $orderEvents]);
     }
 
     /**
@@ -150,17 +204,42 @@ class EventController extends Controller
      */
     public function afterToday(Request $request, FilterQuery $filterQuery)
     {
-        $currentDate = new \Carbon\Carbon();
-        //$currentDate = $currentDate->subWeek(2);
+        //        $currentDate = new \Carbon\Carbon();
+        //        //$currentDate = $currentDate->subWeek(2);
+        //
+        //        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
+        //            ->whereNotNull('visibility') //not null
+        //            ->where('dates.0.start', '>=', $currentDate)
+        //            ->orderBy('dates.0.start', 'ASC');
+        //        //->Where('datetime_to', '>', $currentDate)
+        //
+        //        $input = $request->all();
+        //        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+        //        return EventResource::collection($results);
 
-        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
-            ->whereNotNull('visibility') //not null
-            ->Where('datetime_to', '>', $currentDate)
-            ->orderBy('datetime_from', 'ASC');
+        $numberItems = $request->query('pageSize') ?
+            $request->query('pageSize') : 10;
 
-        $input = $request->all();
-        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
-        return EventResource::collection($results);
+        $eventsWithDates = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC)
+            ->selectRaw('*, UNIX_TIMESTAMP(dates.0.start) as start_unix') // Aplicar strtotime() a 'dates.0.start'
+            ->where('start_unix', '>=', strtotime(Carbon::now()))
+            ->orderBy('start_unix', 'ASC')
+            ->paginate($numberItems)
+            ->toArray();
+        $eventsWithDateTimeFrom = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
+            ->whereNull('dates.0.start')
+            ->where('datetime_from', '>=', Carbon::now())
+            ->orderBy('datetime_from', 'ASC')
+            ->paginate($numberItems)
+            ->toArray();
+
+        $orderEvents = $this->orderEventDates(
+            $eventsWithDates['data'],
+            $eventsWithDateTimeFrom['data'],
+            'after'
+        );
+
+        return EventResource::collection(['data' => $orderEvents]);
     }
 
     /**
