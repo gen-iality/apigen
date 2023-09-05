@@ -437,7 +437,11 @@ class EventUserController extends Controller
         $noSendMail = $request->query('no_send_mail');
 
         // 🟠🟠🟠 ELIMINAR 25/08/23 🟠🟠🟠
-        if ($event_id === '64e676ab1ff4cdc604097852') {
+        $evntsWithoutMail = [
+            '64e8d6a2877b59d73c02e3d2',
+            '64e676ab1ff4cdc604097852'
+        ];
+        if (in_array($event_id, $evntsWithoutMail)) {
             $noSendMail = true;
         }
 
@@ -819,10 +823,10 @@ class EventUserController extends Controller
 
         return EventUserResource::collection(
             Attendee::where("event_id", $event_id)->where(function ($query) {
-                    $query->where("account_id", auth()->user()->_id)
-                        //Temporal fix for users that got different case in their email and thus firebase created different user
-                        ->orWhere('email', '=', strtolower(auth()->user()->email));
-                })->paginate(config("app.page_size"))
+                $query->where("account_id", auth()->user()->_id)
+                    //Temporal fix for users that got different case in their email and thus firebase created different user
+                    ->orWhere('email', '=', strtolower(auth()->user()->email));
+            })->paginate(config("app.page_size"))
         );
     }
 
