@@ -39,7 +39,7 @@
         }
 
         .imagen {
-            width: 3300px;
+            width: 100%;
             height: 2550px;
             /*width: 1920px;
         height: 1080px;*/
