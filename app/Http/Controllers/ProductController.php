@@ -115,7 +115,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'string|max:100',
             'type' => 'string|in:just-auction,just-store',
-            'description' => 'string',
+            //'description' => 'string',
             'price' => 'numeric',
             // Subasta
             'start_price' => 'numeric',
