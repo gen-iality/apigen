@@ -112,6 +112,9 @@ class OrganizationUserController extends Controller
             $data["rol_id"] = Rol::ID_ROL_ATTENDEE;
         }
 
+        // Asignar active = true
+        $data['active'] = true;
+
         if ($model) {
             //Si algun campo no se envia para importar, debe mantener los datos ya guardados en la base de datos
             $data["properties"] = array_merge($model->properties, $data["properties"]);
