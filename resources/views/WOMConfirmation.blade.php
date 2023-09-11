@@ -1,2 +1,4 @@
-<h1>Validación de datos WOM</h1>
-<p>Estamos validando tu registro. En las próximas 24 horas, si tu registro es aprobado, te llegará un nuevo correo con tu código QR de ingreso al evento.</p>
+<p>Dentro de las próximas 24 horas, recibirás a este mismo correo el código QR que te permitirá ingresar el día de la fiesta.
+¡Consérvalo!</p>
+
+<p>Si tienes problemas con tu código, escríbele a Maria Camila Londoño / maria.londono@wom.co</p>
