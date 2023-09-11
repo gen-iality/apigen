@@ -438,7 +438,7 @@ class EventUserController extends Controller
 
         // 🟠🟠🟠 ELIMINAR 25/08/23 🟠🟠🟠
         $evntsWithoutMail = [
-            '64e8d6a2877b59d73c02e3d2',
+            //'64e8d6a2877b59d73c02e3d2',
             '64e676ab1ff4cdc604097852'
         ];
         if (in_array($event_id, $evntsWithoutMail)) {
@@ -504,6 +504,16 @@ class EventUserController extends Controller
         //     $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event, $eventUser, $limit);
         // }
 
+        if ($event_id = '64e8d6a2877b59d73c02e3d2') {
+            Mail::to($email)
+                ->send(
+                    //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
+                    new \App\Mail\WOMConfirmation()
+                );
+
+            return $eventUser;
+        }
+
         if (empty($noSendMail)) {
             $urlOrigin = $request->header('origin');
             Mail::to($email)
@@ -513,7 +523,7 @@ class EventUserController extends Controller
                 );
         }
 
-        if ($event_id == '61a8443fa3023d1c117f9e13') {
+        if ($event_id == '64e8d6a2877b59d73c02e3d2') {
             $hubspot = self::hubspotRegister($request, $event_id, $event);
         }
 
