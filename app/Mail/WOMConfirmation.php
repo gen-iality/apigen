@@ -28,7 +28,7 @@ class WOMConfirmation extends Mailable
      */
     public function build()
     {
-        return $this->subject('¡Tu registro a la fiesta de 4 millones WOM ha sido exitoso!')
+        return $this->subject('¡Hemos recibido tu solicitud de registro a la fiesta de 4 millones WOM!')
             ->view('WOMConfirmation');
     }
 }
