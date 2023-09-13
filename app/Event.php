@@ -58,12 +58,13 @@ class Event extends ModelsEvent
         'view_range_price', // boolean para saber si se muestra el rango de precios
         'redirect_activity', // string para redireccionar a una actividad
         'redirect_landing', // Boolean: Saltar la prelanding
-	'boleteria_id', // boolean para saber si un evento tiene boleteria
-	'is_custom_password_label', // Boolean: Determina si evento tiene password name personalizado
-	'custom_password_label', // String: Nombre del campo password
-	'payment', // Boolean: si el evento tiene pago activado
-	'show_event_date', // Boolean: mostrar la fecha del evento
-	'hide_event_in_passed'
+        'boleteria_id', // boolean para saber si un evento tiene boleteria
+        'is_custom_password_label', // Boolean: Determina si evento tiene password name personalizado
+        'custom_password_label', // String: Nombre del campo password
+        'payment', // Boolean: si el evento tiene pago activado
+        'show_event_date', // Boolean: mostrar la fecha del evento
+        'hide_event_in_passed',
+        'group_organization_id', // String: Relaciona evento con un Group Organization
     ];
 
     protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
@@ -146,11 +147,11 @@ class Event extends ModelsEvent
         return $this->belongsTo('App\Account', 'author_id');
     }
 
-/**
- * get the possible organizers
- *
- * @return void
- */
+    /**
+     * get the possible organizers
+     *
+     * @return void
+     */
     /*   public function organiser()
     {
     // return $this->morphTo();
