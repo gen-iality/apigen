@@ -7,6 +7,7 @@ include "organization/organization.php";
 include "user/user.php";
 include "user/userEvent.php";
 include "traditionalBingo/index.php";
+include "groupOrganization/groupOrganization.php";
 include "mail.php";
 include "test.php";
 include "web.php";
