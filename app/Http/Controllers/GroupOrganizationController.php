@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use App\GroupOrganization;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,21 @@ class GroupOrganizationController extends Controller
      */
     public function index(string $organizationId)
     {
-        $groupsByOrganization = GroupOrganization::where('organization_id', $organizationId)
-            ->paginate();
+        // Grupos por organizacion
+        $groupsByOrganization = GroupOrganization::where(
+            'organization_id',
+            $organizationId
+        )->get();
+
+        // Contar cuantos evento pertenecen a ese grupo
+        foreach ($groupsByOrganization as $group) {
+            $countEvents = Event::where(
+                'group_organization_id',
+                $group->_id
+            )->count();
+
+            $group['amount_events'] = $countEvents;
+        }
 
         return $groupsByOrganization;
     }
