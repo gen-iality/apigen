@@ -2,6 +2,7 @@
 
 
 namespace App\evaLib\Services;
+
 use App\Organization;
 use App\Event;
 use App\UserProperties;
@@ -11,7 +12,7 @@ use App\RolesPermissions;
 
 
 
-class OrganizationServices 
+class OrganizationServices
 {
     public static function createDefaultUserProperties($organization_id)
     {
@@ -24,8 +25,6 @@ class OrganizationServices
         $email = array("name" => "names", "label" => "Nombres Y Apellidos", "unique" => false, "mandatory" => false, "type" => "text");
         $user_properties = new UserProperties($email);
         $model->user_properties()->save($user_properties);
-     
-
     }
 
     public static function createDefaultStyles($styles, $organization)
@@ -33,8 +32,7 @@ class OrganizationServices
 
         $default_event_styles = config('app.default_event_styles');
         $stlyes_validation = $default_event_styles;
-        if(isset($styles))
-        {   
+        if (isset($styles)) {
 
             $stlyes_validation = array_merge($default_event_styles, $styles);
         }
@@ -47,24 +45,22 @@ class OrganizationServices
      * This endpoint create an user in all events of the organization
      */
     public static function createMembers($user)
-    {   
+    {
         $events = Event::where('organizer_id', $user->organization_id)->get();
-        foreach ($events as $event)
-        {
+        foreach ($events as $event) {
             $attendee = Attendee::updateOrCreate(
                 [
                     "account_id" => $user->account_id,
                 ],
                 [
-                    "properties" => $user->properties,                    
+                    "properties" => $user->properties,
                     "rol_id" => $user->rol_id,
                     "event_id" => $event->_id
                 ]
             );
 
-            $rol = $user->rol_id; 
-            if ($user->rol_id !== Rol::ID_ROL_ADMINISTRATOR &&  $user->_id !== Rol::ID_ROL_ATTENDEE)    
-            {   
+            $rol = $user->rol_id;
+            if ($user->rol_id !== Rol::ID_ROL_ADMINISTRATOR &&  $user->_id !== Rol::ID_ROL_ATTENDEE) {
 
                 $newRol = Rol::updateOrCreate(
                     [
@@ -77,8 +73,7 @@ class OrganizationServices
 
                 $rolesPermissions = RolesPermissions::where('rol_id', $user->rol_id)->get();
 
-                foreach ($rolesPermissions as $rolPermission)
-                {
+                foreach ($rolesPermissions as $rolPermission) {
                     $newRolPermission = RolesPermissions::updateOrCreate(
                         [
                             "rol_id" => $newRol->_id,
@@ -87,12 +82,37 @@ class OrganizationServices
                     );
                     $newRolPermission->save();
                 }
+            }
 
-            }        
-            
             $attendee->save();
         }
-        
+
         return "Creating successful attendees";
+    }
+
+
+    /**
+     * Crear organization user dentro de los eventos
+     * que pertenescan a un grupo en especifico
+     */
+    public static function createOrganizationUserIntoGroups(array $group_ids, $userData)
+    {
+        foreach ($group_ids as $group_id) {
+            // buscar todos los eventos de este grupo
+            $event_ids = Event::where('group_organization_id', $group_id)
+                ->pluck('_id')
+                ->toArray();
+
+            // agregar el usuario a cada uno de los eventos
+            foreach ($event_ids as $event_id) {
+                Attendee::create(
+                    [
+                        'properties' => $userData['properties'],
+                        'account_id' => $userData['account_id'],
+                        'event_id' => $event_id
+                    ]
+                );
+            }
+        }
     }
 }

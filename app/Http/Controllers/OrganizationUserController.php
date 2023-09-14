@@ -115,6 +115,14 @@ class OrganizationUserController extends Controller
         // Asignar active = true
         $data['active'] = true;
 
+        // Crear organizationUser dentro de los eventos por grupos
+        if (isset($data['group_organization_ids'])) {
+            OrganizationServices::createOrganizationUserIntoGroups(
+                $data['group_organization_ids'],
+                $data // data del usuario
+            );
+        }
+
         if ($model) {
             //Si algun campo no se envia para importar, debe mantener los datos ya guardados en la base de datos
             $data["properties"] = array_merge($model->properties, $data["properties"]);
