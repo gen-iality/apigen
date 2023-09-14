@@ -7,8 +7,10 @@ use App\Organization;
 use App\Event;
 use App\UserProperties;
 use App\Attendee;
+use App\GroupOrganization;
 use App\Rol;
 use App\RolesPermissions;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 
 
@@ -90,16 +92,30 @@ class OrganizationServices
         return "Creating successful attendees";
     }
 
+    private static function validateGroupExists(array $groupIds)
+    {
+        foreach ($groupIds as $groupId) {
+            $exists = GroupOrganization::find($groupId);
+            if (!$exists) {
+                throw new HttpResponseException(
+                    response()->json(['message' => 'Group Organization not found'], 404),
+                );
+            }
+        }
+    }
+
 
     /**
      * Crear organization user dentro de los eventos
      * que pertenescan a un grupo en especifico
      */
-    public static function createOrganizationUserIntoGroups(array $group_ids, $userData)
+    public static function createOrganizationUserIntoGroups(array $groupIds, $userData)
     {
-        foreach ($group_ids as $group_id) {
+        self::validateGroupExists($groupIds);
+
+        foreach ($groupIds as $groupId) {
             // buscar todos los eventos de este grupo
-            $event_ids = Event::where('group_organization_id', $group_id)
+            $event_ids = Event::where('group_organization_id', $groupId)
                 ->pluck('_id')
                 ->toArray();
 
