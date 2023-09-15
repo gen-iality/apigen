@@ -12,9 +12,18 @@ use Moloquent;
  */
 class Category extends Moloquent
 {
+    protected $fillable = [
+        'name',
+        'image',
+        'event_ids',
+        'organization_id', // Ahora las categorias pertenecen a una organization
+        'created_at'
+    ];
+
     //protected $with = ['event'];
     //protected $table = 'category';
-    protected $hidden = ['event_ids','activities_ids'];
+    protected $hidden = ['event_ids', 'activities_ids'];
+
     /**
      * Category is owned by an event
      * @return void
@@ -28,8 +37,4 @@ class Category extends Moloquent
     {
         return $this->belongsToMany('App\Organization');
     }
-
-    protected $fillable = [
-        'name', 'image','event_ids', 'organization_ids', 'created_at'
-    ];
 }

@@ -151,18 +151,14 @@ Route::apiResource('events/{event}/sendcontent', 'SendContentController@index');
 /***************
  * categories
  ****************/
-// Route::group(
-//     ['middleware' => 'cacheResponse'], function () {
-Route::apiResource('categories', 'CategoryController', ['only' => ['index', 'show']]);
+Route::apiResource('organizations/{organization}/categories', 'CategoryController');
 
-//     }
-// );
-Route::group(
-    ['middleware' => 'auth:token'],
-    function () {
-        Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
-    }
-);
+//Route::group(
+//    ['middleware' => 'auth:token'],
+//    function () {
+//        Route::apiResource('categories', 'CategoryController', ['except' => ['index', 'show']]);
+//    }
+//);
 
 /***************
  * Mail

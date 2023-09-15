@@ -56,14 +56,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {   
-        // var_dump($request->json()->all());
+    public function index(string $organization)
+    {
         return CategoryResource::collection(
-            Category::paginate(config('app.page_size'))
+            Category::where('organization_id', $organization)
+                ->paginate(config('app.page_size'))
         );
-
-        //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
     /**
@@ -93,15 +91,19 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, string $organization)
     {
+        $request->validate([
+            'name' => 'required|string'
+        ]);
+
         $data = $request->json()->all();
-        $result = new Category($data);
-        $result->save();
-        // ResponseCache::clear();
+        $data['organization_id'] = $organization;
 
-        return $result;
+        $category = new Category($data);
+        $category->save();
 
+        return response()->json(compact('category'), 201);
     }
 
     /**
@@ -114,7 +116,7 @@ class CategoryController extends Controller
      */
     public function delete(Category $id)
     {
-        $res = $id->delete();       
+        $res = $id->delete();
         if ($res == true) {
             return 'True';
         } else {
@@ -135,11 +137,9 @@ class CategoryController extends Controller
      * @urlParam category required category Example: 5bb25243b6312771e92c8693
      * 
      */
-    public function show(String $id)
+    public function show(string $organization, Category $category)
     {
-        $category = Category::find($id);
-        $response = new CategoryResource($category);
-        return $response;
+        return $category;
     }
     /**
      * _update_: update a specific category
@@ -154,14 +154,17 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
-    {
+    public function update(
+        Request $request,
+        string $organization,
+        Category $category
+    ) {
         $data = $request->json()->all();
-        $category = Category::find($id);
+
         $category->fill($data);
         $category->save();
         // ResponseCache::clear();
-        return $data;
+        return $category;
     }
 
     /**
@@ -172,17 +175,17 @@ class CategoryController extends Controller
      * @urlParam category category Example: 5fb6e8d76dbaeb3738258092
      * 
      */
-    public function destroy($id)
-    {   
-        $category = Category::findOrFail($id);
-        $events = Event::where('category_ids' , $category->_id)->first();
+    public function destroy(string $organization, Category $category)
+    {
+        //$category = Category::findOrFail($id);
+        //$events = Event::where('category_ids', $category->_id)->first();
 
-        if($events){
-            abort(400,'Las categorías asociadas a un evento no se pueden eliminar');
-        }
+        //if ($events) {
+        //    abort(400, 'Las categorías asociadas a un evento no se pueden eliminar');
+        //}
 
-        return  (string) $category->delete();
-
+        $category->delete();
+        return response()->json([], 204);
     }
 
     /**
@@ -216,8 +219,9 @@ class CategoryController extends Controller
     public function indexByOrganization($organization_id)
     {
 
-        $categories = Category::where("organization_ids" , $organization_id)->get();
+        $categories = Category::where("organization_ids", $organization_id)->get();
 
         return $categories;
     }
 }
+
