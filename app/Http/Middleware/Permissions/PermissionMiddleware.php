@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Permissions;
 
+use App\Account;
 use Closure;
 use Auth;
 use App\OrganizationUser;
@@ -9,6 +10,7 @@ use App\ModelHasRole;
 use App\RolesPermissions;
 use App\Permission;
 use App\Attendee;
+use App\Event;
 use App\Rol;
 use Spatie\Permissionn\Exceptions\UnauthorizedException;
 use Illuminate\Auth\AuthenticationException;
@@ -16,58 +18,85 @@ use Illuminate\Auth\AuthenticationException;
 class PermissionMiddleware
 
 {
+
+    /**
+     * validateOrganizaerRol
+     *
+     * Si un miembro de la orgazacion tiene rol admin
+     * este puede editar el evento que pertenesca a la orgazacion
+     *
+     */
+    private function validateOrganizerRol(Account $user, Event $event)
+    {
+        // traer OrganizationUser
+        $organizationUserRol = OrganizationUser::where('account_id', $user->_id)
+            ->where('organization_id', $event->organizer_id)
+            ->pluck('rol_id');
+
+        // Verificar que sea admin
+        $rol = Rol::find($organizationUserRol[0]);
+        if ($rol->type !== 'admin') {
+            return false;
+        }
+
+        return true;
+    }
+
     public function handle($request, Closure $next, $permission)
-    {   
+    {
         //Usuario autenticado
         $user = Auth::user();
-        
+
         if ($user  === null) {
             throw new AuthenticationException("No token provided. Unauthenticated");
-        } 
-        
-        //Se valida el rol del usuario           
+        }
+
+        //Se valida el rol del usuario
         $userRol = '';
 
-            
         //Validar parámetros de url
         $urlParameter = $request->route();
-        
+
         //Separar los permisos para el endpoint
         $permissions = is_array($permission)
-        ? $permission
-        : explode('|', $permission);   
+            ? $permission
+            : explode('|', $permission);
 
         //Aquí se valida si se accede a una config de un evento o una irganización
         switch ($urlParameter->parameterNames()[0]) {
             case 'event':
-                $userRol = Attendee::where('account_id' , $user->_id)->where('event_id' ,$urlParameter->parameter('event'))->first(['rol_id', 'properties']);
+                $event = Event::findOrFail($urlParameter->parameter('event'));
+
+                // Validar si es admin OrganizationUser
+                $isAdminOrganizer = $this->validateOrganizerRol($user, $event);
+                if ($isAdminOrganizer) {
+                    return $next($request);
+                }
+
+                $userRol = Attendee::where('account_id', $user->_id)
+                    ->where('event_id', $event->_id)
+                    ->first(['rol_id', 'properties']);
                 break;
             case 'organization':
-                $userRol = OrganizationUser::where('account_id' , $user->_id)->where('organization_id' ,$urlParameter->parameter('organization'))->first(['rol_id', 'role_id']);            
+                $userRol = OrganizationUser::where('account_id', $user->_id)
+                    ->where('organization_id', $urlParameter->parameter('organization'))
+                    ->first(['rol_id', 'role_id']);
                 break;
-        }        
+        }
 
-        
         $rol = isset($userRol) ? Rol::find($userRol->rol_id) : null;
 
-        if(($rol) && $rol->type === 'admin')
-        {   
+        if (($rol) && $rol->type === 'admin') {
             //Busca el permiso por el nombre desde rolespermissions
-            $permissionsRolUser = RolesPermissions::whereHas('permission', function($query) use ($permissions)
-            {
+            $permissionsRolUser = RolesPermissions::whereHas('permission', function ($query) use ($permissions) {
                 $query->whereIn('name', $permissions);
-            
-            })->where('rol_id' , $userRol->rol_id)->first();
+            })->where('rol_id', $userRol->rol_id)->first();
 
-            if($permissionsRolUser ==! null)
-            {
+            if ($permissionsRolUser == !null) {
                 return $next($request);
             }
         }
-    
 
-        throw abort(401 , "You don't have permission for do this action.");    
-
-         
+        throw abort(401, "You don't have permission for do this action.");
     }
 }
