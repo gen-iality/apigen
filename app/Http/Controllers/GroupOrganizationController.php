@@ -111,8 +111,16 @@ class GroupOrganizationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($organizationId, GroupOrganization $groupOrganization)
-    {
+    public function destroy(
+        $organizationId,
+        GroupOrganization $groupOrganization
+    ) {
+        // Desasociar groupOrganization a todos los eventos
+        Event::where(
+            'group_organization_id',
+            $groupOrganization->_id
+        )->update(['group_organization_id' => null]);
+
         $groupOrganization->delete();
         return response()->json([], 204);
     }
