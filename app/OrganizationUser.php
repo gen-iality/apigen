@@ -13,7 +13,7 @@ class OrganizationUser extends Moloquent
         'properties', 
         'account_id', 
         'rol_id',
-        'active'
+        'active' // Boolean
     ];
     protected $with = ['user', 'organization', 'rol'];
 

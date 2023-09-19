@@ -16,6 +16,7 @@ use App\Http\Resources\EventUserResource;
 // use App\RolEvent;
 use App\Message;
 use App\Order;
+use App\OrganizationUser;
 use App\State;
 use Carbon\Carbon;
 use DateTime;
@@ -195,9 +196,42 @@ class EventUserController extends Controller
      */
     public function meEvents()
     {
-        $query = Attendee::with("event")->where("account_id", auth()->user()->_id)->get();
-        $results = $query->makeHidden(['activities', 'event']);
-        return EventUserResource::collection($results);
+        $meIntoEvents = Attendee::with("event")
+            ->where(
+                "account_id",
+                auth()->user()->_id
+            )->get()
+            ->makeHidden(['activities']);
+
+        foreach ($meIntoEvents as $meEvent) {
+            $meEvent['is_active'] = $this->validateStatusActive($meEvent, $meEvent->event);
+        }
+
+        return EventUserResource::collection($meIntoEvents);
+    }
+
+    private function validateStatusActive(Attendee $attendee, Event $event)
+    {
+        $organizationUser = OrganizationUser::where(
+            'account_id',
+            $attendee->account_id,
+        )->where(
+            'organization_id',
+            $event->organizer_id
+        )->first();
+
+        if (!$organizationUser) {
+            return true;
+        }
+
+        // Unicamente los usuario que existan en la organizacion
+        // y tengan active false no podran acceder al event
+        if ($organizationUser->active === false) {
+            return false;
+        }
+
+        // Usuario es activo en la organizacion
+        return true;
     }
 
     /**
