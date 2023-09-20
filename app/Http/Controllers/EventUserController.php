@@ -538,7 +538,7 @@ class EventUserController extends Controller
         //     $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event, $eventUser, $limit);
         // }
 
-        if ($event_id = '64e8d6a2877b59d73c02e3d2') {
+        if ($event_id === '64e8d6a2877b59d73c02e3d2') {
             Mail::to($email)
                 ->send(
                     //string $message, Event $event, $eventUser, string $image = null, $footer = null, string $subject = null)
