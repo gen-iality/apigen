@@ -94,9 +94,9 @@ class GroupOrganizationController extends Controller
      */
     public function update(Request $request, $organizationId, GroupOrganization $groupOrganization)
     {
-        $request->validate([
-            'name' => 'required|string'
-        ]);
+        //$request->validate([
+        //    'name' => 'required|string'
+        //]);
 
         $data = $request->json()->all();
         $groupOrganization->fill($data);
