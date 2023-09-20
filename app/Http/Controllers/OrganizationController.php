@@ -18,6 +18,7 @@ use Validator;
 use App\DiscountCodeMarinela;
 use App\DiscountCodeTemplate;
 use App\evaLib\Services\OrganizationServices;
+use App\GroupOrganization;
 use App\OrganizationUser;
 
 /**
@@ -362,5 +363,29 @@ class OrganizationController extends Controller
             'prev_page_url' => $organizationUsers->previousPageUrl(),
             'total' => $organizationUsers->total()
         ]);
+    }
+
+    public function eventsFreeAccess(string $organization_id)
+    {
+        // Traer grupos por organizacion de acceso libre
+        $groupsOrganizations = GroupOrganization::where(
+            'organization_id',
+            $organization_id
+        )->where('free_access_organization', true)
+            // obtener los eventos asociados
+            ->with('events')
+            ->get(['events'])
+            ->toArray();
+
+        // Unir todos los eventos de cada grupo
+        $freeAccessEvents = [];
+        foreach ($groupsOrganizations as $group) {
+            $freeAccessEvents = array_merge(
+                $freeAccessEvents,
+                $group['events']
+            );
+        }
+
+        return response()->json(['free_events' => $freeAccessEvents]);
     }
 }

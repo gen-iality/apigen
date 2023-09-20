@@ -12,8 +12,8 @@ class GroupOrganization extends MyBaseModel
         'free_access_organization', // Boolean: acceso libre de eventos
     ];
 
-    public function event()
+    public function events()
     {
-        return $this->belongsTo('App\Event');
+        return $this->hasMany('App\Event');
     }
 }
