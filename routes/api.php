@@ -51,7 +51,8 @@ Route::get('aws/test', 'AwsSnsController@testreqS3');
 /****************
  * Events
  ****************/
-Route::apiResource('events', 'EventController')->middleware('permission:getEvent');
+Route::apiResource('events', 'EventController');
+Route::get('events/{event}', 'EventController')->middleware('permission:getEvent');
 //Route::post('events/{event}/restore', 'EventController@restore');
 Route::group(
     ['middleware' => 'auth:token'],
