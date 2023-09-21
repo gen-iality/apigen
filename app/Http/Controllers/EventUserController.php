@@ -471,11 +471,12 @@ class EventUserController extends Controller
         $noSendMail = $request->query('no_send_mail');
 
         // 🟠🟠🟠 ELIMINAR 25/08/23 🟠🟠🟠
-        $evntsWithoutMail = [
+        $eventsWithoutMail = [
             //'64e8d6a2877b59d73c02e3d2',
-            '64e676ab1ff4cdc604097852'
+            '64e676ab1ff4cdc604097852',
+            '65035e1e18f62b38c40ca4d4'
         ];
-        if (in_array($event_id, $evntsWithoutMail)) {
+        if (in_array($event_id, $eventsWithoutMail)) {
             $noSendMail = true;
         }
 
