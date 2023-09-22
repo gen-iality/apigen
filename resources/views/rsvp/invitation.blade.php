@@ -46,13 +46,13 @@
 
 <div style="text-align: center">
 	<div style="text-align: center">
-		@if($event->type_event == "physicalEvent")
+		@if($event->type_event == "physicalEvent" && $event->_id != '65035e1e18f62b38c40ca4d4')
 			<img  src="{{$qr}}" />
-			@elseif($event->type_event == "onlineEvent")
+			@elseif($event->type_event == "onlineEvent" || $event->_id === '65035e1e18f62b38c40ca4d4')
 				@component('mail::button', ['url' => $link , 'color' => 'evius'])
 					{{ __ ('Mail.enter_event')}}
 				@endcomponent
-			@elseif($event->type_event == "hybridEvent")
+			@elseif($event->type_event == "hybridEvent" && $event->_id != '65035e1e18f62b38c40ca4d4')
 				<img  src="{{$qr}}" />
 				@component('mail::button', ['url' => $link , 'color' => 'evius'])
 					{{ __ ('Mail.enter_event')}}
