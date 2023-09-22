@@ -1,7 +1,9 @@
 <?php
+
 /**
  * @package App\EventInvitations
  */
+
 namespace App\Http\Controllers;
 
 use App\Attendee;
@@ -37,7 +39,8 @@ class RSVPController extends Controller implements ShouldQueue
 
     public function test()
     {
-        $actionCodeSettings = ['url' => 'http://localhost:3000/linklogin?email=esteban.sanchez@mocionsoft.com',
+        $actionCodeSettings = [
+            'url' => 'http://localhost:3000/linklogin?email=esteban.sanchez@mocionsoft.com',
             'handleCodeInApp' => false,
             //'dynamicLinkDomain' => 'evius.co'
         ];
@@ -67,7 +70,6 @@ class RSVPController extends Controller implements ShouldQueue
                     'headers' => ['Content-Type' => 'application/json'],
                 ]);
             } catch (\ClientErrorResponseException $e) {
-
             }
         }
 
@@ -76,7 +78,7 @@ class RSVPController extends Controller implements ShouldQueue
 
         $signInResult = $this->auth->signInWithEmailAndOobCode($request->input("email"), $query['oobCode']);
 
-        return Redirect::to(config('app.front_url')."/" . "landing/" . $innerpath . "?token=" . $signInResult->idToken());
+        return Redirect::to(config('app.front_url') . "/" . "landing/" . $innerpath . "?token=" . $signInResult->idToken());
     }
 
     /**
@@ -95,9 +97,7 @@ class RSVPController extends Controller implements ShouldQueue
                 Mail::to($user_receiver->properties["email"])->queue(
                     new wallActivity($data, $event_id, $user_sender, $user_receiver)
                 );
-
             }
-
         } elseif ($data["type"] == "comment") {
 
             $user_sender = Attendee::find($data["user_sender_id"]);
@@ -146,14 +146,14 @@ class RSVPController extends Controller implements ShouldQueue
      * @param Event $event  Event to which users are suscribed
      * @param Message $message auto injected
      * @return int Number of email sent
-    */
+     */
     public function createAndSendRSVP(Request $request, Event $event, Message $message)
     {
         $data = $request->json()->all();
-	$message->raw_data = $data; // Necesario para reenviar mails en caso de fallos
+        $message->raw_data = $data; // Necesario para reenviar mails en caso de fallos
 
-	// Enviar correos a todos los asistentes
-        if($data['eventUsersIds'] === 'all') {
+        // Enviar correos a todos los asistentes
+        if ($data['eventUsersIds'] === 'all') {
             $query = Attendee::where("event_id", $event->_id)->pluck('_id')->toArray();
             $data['eventUsersIds'] = $query;
         }
@@ -191,7 +191,11 @@ class RSVPController extends Controller implements ShouldQueue
         //var_dump($eventUsers);
         //Send RSVP
         self::_sendRSVPmail(
-            $eventUsers, $message, $event, $data, $request
+            $eventUsers,
+            $message,
+            $event,
+            $data,
+            $request
         );
 
         return $message;
@@ -214,7 +218,6 @@ class RSVPController extends Controller implements ShouldQueue
     {
         $messageUser = MessageUser::create($request->json()->all());
         return new MessageUserResource($book);
-
     }
 
     /**
@@ -234,13 +237,14 @@ class RSVPController extends Controller implements ShouldQueue
             //$eventUser->changeToInvite();
 
             //se puso aqui esto porque algunos usuarios se borraron es para que las pruebas no fallen
-            $email = (isset($eventUser->properties["email"])) ? $eventUser->properties["email"] : $eventUser->email ;
+            $email = (isset($eventUser->properties["email"])) ? $eventUser->properties["email"] : $eventUser->email;
 
-            $messageUser = new MessageUser([
-                'email' => $eventUser->email,
-                'user_id' => $eventUser->id,
-                'event_user_id' => $eventUser->id,
-            ]
+            $messageUser = new MessageUser(
+                [
+                    'email' => $eventUser->email,
+                    'user_id' => $eventUser->id,
+                    'event_user_id' => $eventUser->id,
+                ]
             );
             // $message->messageUsers()->save($messageUser);
 
@@ -271,8 +275,21 @@ class RSVPController extends Controller implements ShouldQueue
             $urlOrigin = $request->header('origin');
             Mail::to($email)
                 ->queue(
-                    new RSVP($data["message"], $event, $eventUser, $message->image, $message->footer,
-                    $message->subject, $urlOrigin, $image_header, $content_header, $image_footer, $include_date, $data, $messageLog)
+                    new RSVP(
+                        $data["message"],
+                        $event,
+                        $eventUser,
+                        $message->image,
+                        $message->footer,
+                        $message->subject,
+                        $urlOrigin,
+                        $image_header,
+                        $content_header,
+                        $image_footer,
+                        $include_date,
+                        $data,
+                        $messageLog
+                    )
                 );
         }
     }
@@ -347,43 +364,40 @@ class RSVPController extends Controller implements ShouldQueue
      * @urlParam event The ID of the event
      * @urlParam message The ID of the message
      */
-    public function updateStatusMessageUser($event_id ,$message_id)
-    {   
+    public function updateStatusMessageUser($event_id, $message_id)
+    {
         $message = Message::find($message_id);
-       
-        $total = MessageUser::where('message_id', '=', $message_id)->get(['history']);    
 
-        
+        $total = MessageUser::where('message_id', '=', $message_id)->get(['history']);
+
+
         $status = ["Send" => 0, "Delivery" => 0, "Open" => 0, "Click" => 0, "Bounce" => 0];
         $statusCount = [];
         $totalSend = count($total);
 
-        foreach($total as $history)
-        {   
-            if(isset($history->history) && $history->history !== "")
-            {   
-                
-                for($i = 0; $i < count($history->history); $i++)
-                {
-                    array_push($statusCount, $history->history[$i]['status']);                    
+        foreach ($total as $history) {
+            if (isset($history->history) && $history->history !== "") {
+
+                for ($i = 0; $i < count($history->history); $i++) {
+                    array_push($statusCount, $history->history[$i]['status']);
                 }
             }
         }
 
         $statusCount = array_count_values($statusCount);
-        $totales = array_merge($status , $statusCount);
+        $totales = array_merge($status, $statusCount);
 
-        $message->number_of_recipients =  $totalSend;      
-        $message->total_sent = $totales['Send'];   
-        $message->total_delivered = $totales['Delivery'];                
-        $message->total_opened = $totales['Open'];         
-        $message->total_clicked = $totales['Click']; 
+        $message->number_of_recipients =  $totalSend;
+        $message->total_sent = $totales['Send'];
+        $message->total_delivered = $totales['Delivery'];
+        $message->total_opened = $totales['Open'];
+        $message->total_clicked = $totales['Click'];
         $message->total_bounced = $totales['Bounce'];
         $message->save();
-              
+
         return  response()->json([
-                    'message' => 'Status actualizado exitosamente'
-                ]); 
+            'message' => 'Status actualizado exitosamente'
+        ]);
     }
 
     /**
@@ -394,29 +408,33 @@ class RSVPController extends Controller implements ShouldQueue
      */
     public function sendMissingMails(Request $request, Event $event, Message $message)
     {
-      if($message->raw_data['eventUsersIds'] === 'all')
-      {
-          $recipients = Attendee::where("event_id", $event->_id)->get();
-      } else {
-	$recipients = Attendee::find($message->raw_data['eventUsersIds']);
-      }
+        if ($message->raw_data['eventUsersIds'] === 'all') {
+            $recipients = Attendee::where("event_id", $event->_id)->get();
+        } else {
+            $recipients = Attendee::find($message->raw_data['eventUsersIds']);
+        }
 
-      $messagesDelivered = MessageUser::where('message_id', $message->_id)->pluck('event_user_id')->toArray();
-      $messagesToSend = [];
+        $messagesDelivered = MessageUser::where('message_id', $message->_id)->pluck('event_user_id')->toArray();
+        $messagesToSend = [];
 
-      foreach($recipients as $recipient) {
-	!in_array($recipient->_id, $messagesDelivered , true)
-	    && array_push($messagesToSend, $recipient);
-      }
+        foreach ($recipients as $recipient) {
+            !in_array($recipient->_id, $messagesDelivered, true)
+                && array_push($messagesToSend, $recipient);
+        }
 
-      self::_sendRSVPmail(
-	  $eventUsers=$messagesToSend, $message, $event, $data=$message->raw_data, $request
-      );
+        self::_sendRSVPmail(
+            $eventUsers = $messagesToSend,
+            $message,
+            $event,
+            $data = $message->raw_data,
+            $request
+        );
 
-      return response()->json(
-	[
-	  'message' => count($messagesToSend) . ' messages have been sent'
-	], 201
-      );
+        return response()->json(
+            [
+                'message' => count($messagesToSend) . ' messages have been sent'
+            ],
+            201
+        );
     }
 }
