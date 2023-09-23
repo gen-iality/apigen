@@ -210,7 +210,8 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
         $descripcion = $event->name . " Ver el evento en: " . $this->link;
 
         //Crear un ICAL que es un formato para agregar a calendarios y eso se adjunta al correo
-        if (!empty($event->dates)) {
+        // Eliminar validacion de evento, error con zona horaria y se opto por quemar codigo
+        if (!empty($event->dates) && $event->_id != '65035e1e18f62b38c40ca4d4') {
             foreach ($event->dates as $date) {
                 $cal = iCalCalendar::create($event->name)
                     ->appendProperty(
