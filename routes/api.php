@@ -169,6 +169,7 @@ Route::apiResource('events/{event}/mailing', 'MailController');
 /***************
  * CERTIFICATES
  ****************/
+Route::get('certificates-by-params', 'CertificateController@certificatesByParams');
 Route::post('send-certificates/{event}', 'CertificateController@sendCertificateForAll');
 Route::post('generatecertificate', 'CertificateController@generateCertificate');
 Route::post('generatecertificates', 'CertificateController@generateCertificates');

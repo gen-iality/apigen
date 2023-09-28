@@ -274,4 +274,35 @@ class CertificateController extends Controller
 
         return response()->json(['message' => count($attendees) . " correos enviados"], 200);
     }
+
+
+    /**
+     * _certificatesByParams_: get certificates by params
+     * 
+     * Traer todo los certificados que coincidan con el email
+     * 
+     * @param Request $request
+     * @return void
+     */
+    public function certificatesByParams(Request $request)
+    {
+        $email = $request->query('email');
+
+        $eventIds = Attendee::where('properties.email', $email)
+            ->pluck('event_id');
+
+        $certificates = [];
+        foreach ($eventIds as $eventId) {
+            $certs = Certificate::where('event_id', $eventId)->get();
+            if (count($certs) > 0) {
+                $event = Event::find($certs[0]->event_id);
+                array_push($certificates, [
+                    "$event->name" => $certs
+                ]);
+            }
+        }
+
+
+        return $certificates;
+    }
 }
