@@ -294,10 +294,13 @@ class CertificateController extends Controller
         $certificates = [];
         foreach ($eventIds as $eventId) {
             $certs = Certificate::where('event_id', $eventId)->get();
+
             if (count($certs) > 0) {
                 $event = Event::find($certs[0]->event_id);
                 array_push($certificates, [
-                    "$event->name" => $certs
+                    "_id" => $event->_id,
+                    "event_name" => $event->name,
+                    "certificates" => $certs
                 ]);
             }
         }
