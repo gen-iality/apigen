@@ -284,22 +284,28 @@ class CertificateController extends Controller
      * @param Request $request
      * @return void
      */
-    public function certificatesByParams(Request $request)
+    public function certificatesByParams(Request $request): array
     {
         $email = $request->query('email');
 
-        $eventIds = Attendee::where('properties.email', $email)
-            ->where('checked_in', true)
-            ->pluck('event_id');
+        $attendees = Attendee::where(
+            'properties.email',
+            $email
+        )->where('checked_in', true)
+            ->get(['_id', 'event_id']);
 
         $certificates = [];
-        foreach ($eventIds as $eventId) {
-            $certs = Certificate::where('event_id', $eventId)->get();
+        foreach ($attendees as $attendee) {
+            $certs = Certificate::where(
+                'event_id',
+                $attendee->event_id
+            )->get();
 
             if (count($certs) > 0) {
-                $event = Event::find($certs[0]->event_id);
+                $event = Event::find($attendee->event_id);
                 array_push($certificates, [
-                    "_id" => $event->_id,
+                    "event_user_id" => $attendee->_id,
+                    "event_id" => $event->_id,
                     "event_name" => $event->name,
                     "certificates" => $certs
                 ]);
@@ -308,5 +314,75 @@ class CertificateController extends Controller
 
 
         return $certificates;
+    }
+
+    private function ArrayToStringCerti($rows)
+    {
+        $CertificateHtml = '';
+        foreach ($rows as $row) {
+            if ($row['type'] === 'break' && $row['times']) {
+                $index = 0;
+                while ($index < $row['times']) {
+                    $CertificateHtml .= '<br>';
+                    $index++;
+                }
+            } else {
+                $CertificateHtml .= '<' . $row['type'] . ' class="ql-align-center">' . $row['content'] . '</' . $row['type'] . '>';
+            }
+        }
+        return $CertificateHtml;
+    }
+
+    public function generateCertificateByParams(
+        Certificate $certificate,
+        Attendee $attendee
+    ) {
+
+        $event = Event::findOrFail($attendee->event_id);
+
+        if (is_array($certificate->content)) {
+            $certificate->content = $this->ArrayToStringCerti($certificate->content);
+        } else {
+            $newContent = str_replace(
+                '<p',
+                "<p class=\"ql-align-center\"",
+                $certificate->content
+            );
+        }
+
+        $newContent = str_replace(
+            '[user.names]',
+            $attendee->properties['names'],
+            $certificate->content
+        );
+
+        $newContent = str_replace(
+            '[event.name]',
+            $event->name,
+            $newContent
+        );
+
+        $newContent = str_replace(
+            '[event.start]',
+            $event->datetime_from,
+            $newContent
+        );
+
+        $newContent = str_replace(
+            '[event.end]',
+            $event->datetime_to,
+            $newContent
+        );
+
+
+        $certificate->content = $newContent;
+        $certificate->image = $certificate->background;
+        // Generar solo un certificado
+        $certificate->many = false;
+
+        $pdf = PDF::loadview('Public.ViewEvent.Partials.certificate', $certificate);
+        $pdf->setPaper('legal', 'landscape');
+
+        return $pdf->download('Tickets.pdf');
     }
 }
