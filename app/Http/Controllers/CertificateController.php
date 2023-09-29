@@ -289,6 +289,7 @@ class CertificateController extends Controller
         $email = $request->query('email');
 
         $eventIds = Attendee::where('properties.email', $email)
+            ->where('checked_in', true)
             ->pluck('event_id');
 
         $certificates = [];
