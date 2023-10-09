@@ -55,9 +55,9 @@
 </div>
 
 @if(!empty($image))
-	<div class="centered">
-		<img alt="{{$event->name}}" src="{{ $image }}">
-	</div>
+<div class="centered">
+<img alt="{{$event->name}}" src="{{ $image }}">
+</div>
 @endif
 
 @if(!empty($message) && $message != '<p><br></p>')
