@@ -389,8 +389,12 @@ class OrganizationController extends Controller
     //    return response()->json(['free_events' => $freeAccessEvents]);
     //}
 
-    public function meEventsByGroups(Organization $organization)
+    public function meEventsByGroups(Request $request, Organization $organization)
     {
+        // eventos de libre acceso
+        $free = $request->query('free') ?
+            (bool) $request->query('free') : false;
+
         // Obtener el organizationUser
         $organizationUser = OrganizationUser::where(
             'account_id',
@@ -402,11 +406,12 @@ class OrganizationController extends Controller
         GroupOrganization::where(
             'organization_id',
             $organization->_id
-        )->where(
-            // Buscar dentro del array donde mi usuario este
-            'organization_user_ids',
-            $organizationUser->_id
-        )->get(['event_ids'])
+        )->where('free_access_organization', $free)
+            ->where(
+                // Buscar dentro del array donde mi usuario este
+                'organization_user_ids',
+                $organizationUser->_id
+            )->get(['event_ids'])
             ->each(function ($groups) use (&$eventIds) {
                 // Por cada grupo asignar los ids sin que se repitan
                 $eventIds = array_merge($eventIds, $groups->event_ids);
