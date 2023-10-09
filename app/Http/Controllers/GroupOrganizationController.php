@@ -53,7 +53,8 @@ class GroupOrganizationController extends Controller
     public function store(Request $request, $organizationId)
     {
         $request->validate([
-            'name' => 'required|string'
+            'name' => 'required|string',
+            'free_access_organization' => 'required|boolean'
         ]);
 
         $data = $request->json()->all();
@@ -116,10 +117,10 @@ class GroupOrganizationController extends Controller
         GroupOrganization $groupOrganization
     ) {
         // Desasociar groupOrganization a todos los eventos
-        Event::where(
-            'group_organization_id',
-            $groupOrganization->_id
-        )->update(['group_organization_id' => null]);
+        //Event::where(
+        //    'group_organization_id',
+        //    $groupOrganization->_id
+        //)->update(['group_organization_id' => null]);
 
         $groupOrganization->delete();
         return response()->json([], 204);
