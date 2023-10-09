@@ -14,7 +14,8 @@
  ****************/
 Route::get('organizations', 'OrganizationController@index');
 Route::get('organizations/{organization}', 'OrganizationController@show');
-Route::get('organizations/{organization}/events-free-access', 'OrganizationController@eventsFreeAccess');
+//Route::get('organizations/{organization}/events-free-access', 'OrganizationController@eventsFreeAccess');
+Route::get('organizations/{organization}/me/events-by-groups', 'OrganizationController@meEventsByGroups');
 Route::group(
     ['middleware' => 'auth:token'],
     function () {

@@ -365,27 +365,54 @@ class OrganizationController extends Controller
         ]);
     }
 
-    public function eventsFreeAccess(string $organization_id)
+    //public function eventsFreeAccess(string $organization_id)
+    //{
+    //    // Traer grupos por organizacion de acceso libre
+    //    $groupsOrganizations = GroupOrganization::where(
+    //        'organization_id',
+    //        $organization_id
+    //    )->where('free_access_organization', true)
+    //        // obtener los eventos asociados
+    //        ->with('events')
+    //        ->get(['events'])
+    //        ->toArray();
+
+    //    // Unir todos los eventos de cada grupo
+    //    $freeAccessEvents = [];
+    //    foreach ($groupsOrganizations as $group) {
+    //        $freeAccessEvents = array_merge(
+    //            $freeAccessEvents,
+    //            $group['events']
+    //        );
+    //    }
+
+    //    return response()->json(['free_events' => $freeAccessEvents]);
+    //}
+
+    public function meEventsByGroups(Organization $organization)
     {
-        // Traer grupos por organizacion de acceso libre
-        $groupsOrganizations = GroupOrganization::where(
+        // Obtener el organizationUser
+        $organizationUser = OrganizationUser::where(
+            'account_id',
+            Auth::user()->_id
+        )->first();
+
+        // traer grupos donde el usuario existe
+        $eventIds = [];
+        GroupOrganization::where(
             'organization_id',
-            $organization_id
-        )->where('free_access_organization', true)
-            // obtener los eventos asociados
-            ->with('events')
-            ->get(['events'])
-            ->toArray();
+            $organization->_id
+        )->where(
+            // Buscar dentro del array donde mi usuario este
+            'organization_user_ids',
+            $organizationUser->_id
+        )->get(['event_ids'])
+            ->each(function ($groups) use (&$eventIds) {
+                // Por cada grupo asignar los ids sin que se repitan
+                $eventIds = array_merge($eventIds, $groups->event_ids);
+            });
+        $events = Event::whereIn('_id', $eventIds)->get();
 
-        // Unir todos los eventos de cada grupo
-        $freeAccessEvents = [];
-        foreach ($groupsOrganizations as $group) {
-            $freeAccessEvents = array_merge(
-                $freeAccessEvents,
-                $group['events']
-            );
-        }
-
-        return response()->json(['free_events' => $freeAccessEvents]);
+        return $events;
     }
 }
