@@ -129,7 +129,7 @@ class GroupOrganizationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove delete organization user from group.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -148,7 +148,7 @@ class GroupOrganizationController extends Controller
 
         // Eliminar usuario de grupo
         $userIndex = array_search(
-            $organizationUser,
+            $organizationUser->_id,
             $groupOrganization->organization_user_ids
         );
 
