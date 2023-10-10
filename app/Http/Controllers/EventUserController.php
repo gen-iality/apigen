@@ -1187,17 +1187,6 @@ class EventUserController extends Controller
         return (string) $attendee->delete();
     }
 
-    //nunca usar usar otras alternativas si es posible
-    public function destroyAll($eventUser, Request $request)
-    {
-        $email = $request->json('emails');
-        $attendes = Attendee::whereIn('properties.email', $email)->where('event_id', $eventUser)
-            ->delete();
-
-        $account = Account::whereIn('email', $email)->delete();
-        return $account;
-    }
-
     /**
      * _transferEventuserAndEnrollToActivity_ : transfer Eventuser And Enroll To Activity
      *

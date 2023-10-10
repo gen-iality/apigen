@@ -160,4 +160,32 @@ class GroupOrganizationController extends Controller
 
         return response()->json([], 204);
     }
+
+    /**
+     * Remove delete organization user from group.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteEvent(
+        $organizationId,
+        GroupOrganization $groupOrganization,
+        Event $event
+    ) {
+        // Eliminar usuarios del evento
+
+        // Eliminar evento de grupo
+        $eventIndex = array_search(
+            $event->_id,
+            $groupOrganization->event_ids
+        );
+
+        $eventIds = $groupOrganization->event_ids;
+        array_splice($eventIds, $eventIndex, 1);
+
+        $groupOrganization['event_ids'] = $eventIds;
+        $groupOrganization->save();
+
+        return response()->json([], 204);
+    }
 }

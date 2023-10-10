@@ -20,5 +20,9 @@ Route::delete(
     'organizations/{organizationId}/groups/{groupOrganization}/organizationUsers/{organizationUser}',
     'GroupOrganizationController@deleteOrganizationUser'
 );
+Route::delete(
+    'organizations/{organizationId}/groups/{groupOrganization}/events/{event}',
+    'GroupOrganizationController@deleteEvent'
+);
 
 Route::delete('organizations/{organizationId}/groups/{groupOrganization}', 'GroupOrganizationController@destroy');
