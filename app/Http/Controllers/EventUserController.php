@@ -606,7 +606,7 @@ class EventUserController extends Controller
             if (isset($eventUserData['checkInField'])) {
                 $pass = $eventUserData['checkInField'];
             } elseif (isset($eventUserData["password"])) {
-                $pass = isset($eventUserData["password"]);
+                $pass = $eventUserData["password"];
             } else {
                 // Si no tiene password, se le asigna el email como password
                 $pass = $eventUserData['email'];
