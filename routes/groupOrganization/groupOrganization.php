@@ -15,4 +15,10 @@ Route::get('organizations/{organizationId}/groups', 'GroupOrganizationController
 Route::post('organizations/{organizationId}/groups', 'GroupOrganizationController@store');
 Route::get('organizations/{organizationId}/groups/{groupOrganization}', 'GroupOrganizationController@show');
 Route::put('organizations/{organizationId}/groups/{groupOrganization}', 'GroupOrganizationController@update');
+
+Route::delete(
+    'organizations/{organizationId}/groups/{groupOrganization}/organizationUsers/{organizationUser}',
+    'GroupOrganizationController@deleteOrganizationUser'
+);
+
 Route::delete('organizations/{organizationId}/groups/{groupOrganization}', 'GroupOrganizationController@destroy');

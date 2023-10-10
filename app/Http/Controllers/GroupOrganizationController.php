@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Attendee;
 use App\Event;
 use App\GroupOrganization;
+use App\OrganizationUser;
 use Illuminate\Http\Request;
 
 class GroupOrganizationController extends Controller
@@ -123,6 +125,39 @@ class GroupOrganizationController extends Controller
         //)->update(['group_organization_id' => null]);
 
         $groupOrganization->delete();
+        return response()->json([], 204);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteOrganizationUser(
+        $organizationId,
+        GroupOrganization $groupOrganization,
+        OrganizationUser $organizationUser
+    ) {
+        // Eliminar usuario de todos los eventos
+        foreach ($groupOrganization->event_ids as $id) {
+            Attendee::where('event_id', $id)
+                ->where('account_id', $organizationUser->account_id)
+                ->delete();
+        }
+
+        // Eliminar usuario de grupo
+        $userIndex = array_search(
+            $organizationUser,
+            $groupOrganization->organization_user_ids
+        );
+
+        $organizatorIds = $groupOrganization->organization_user_ids;
+        array_splice($organizatorIds, $userIndex, 1);
+
+        $groupOrganization['organization_user_ids'] = $organizatorIds;
+        $groupOrganization->save();
+
         return response()->json([], 204);
     }
 }
