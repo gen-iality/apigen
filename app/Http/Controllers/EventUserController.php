@@ -463,8 +463,14 @@ class EventUserController extends Controller
             'properties.email' => 'required|email:rfc,dns',
             'properties.names' => 'required|string|max:250',
         ]);
+        $freeAccess =
+            $request->query('free_access') === 'true' ?
+            true : false;
 
         $eventUserData = $request->json()->all();
+        // Determinar si fué creado desde flujo free access
+        $eventUserData['free_access'] = $freeAccess;
+
         unset($eventUserData['properties']['rol_id']); //eliminar el rol_id de la data
         $email = $eventUserData["properties"]["email"];
 
