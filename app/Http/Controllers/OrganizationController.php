@@ -397,9 +397,9 @@ class OrganizationController extends Controller
 
         // Obtener el organizationUser
         $organizationUser = OrganizationUser::where(
-            'account_id',
-            Auth::user()->_id
-        )->first();
+            'organization_id',
+            $organization->_id
+        )->where('account_id', Auth::user()->_id)->first();
 
         // traer grupos donde el usuario existe
         $eventIds = [];
