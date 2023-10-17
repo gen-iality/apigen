@@ -286,7 +286,7 @@ class CertificateController extends Controller
      */
     public function certificatesByParams(Request $request): array
     {
-        $email = $request->query('email');
+        $email = strtolower($request->query('email'));
 
         $attendees = Attendee::where(
             'properties.email',
