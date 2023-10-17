@@ -175,16 +175,22 @@ class GroupOrganizationController extends Controller
         Event $event
     ) {
         // Eliminar usuarios del evento
+        Attendee::where('event_id', $event->_id)
+            ->where('free_access', true)->delete();
 
-        // Eliminar evento de grupo
+        // Buscar evento dentro del grupo
         $eventIndex = array_search(
             $event->_id,
             $groupOrganization->event_ids
         );
 
+        // Crear nuevo array de ids de eventos
         $eventIds = $groupOrganization->event_ids;
+
+        // Eliminar evento de grupo
         array_splice($eventIds, $eventIndex, 1);
 
+        // Guardar nuevo array de ids de eventos
         $groupOrganization['event_ids'] = $eventIds;
         $groupOrganization->save();
 
