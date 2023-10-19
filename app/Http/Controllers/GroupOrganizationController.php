@@ -140,12 +140,14 @@ class GroupOrganizationController extends Controller
         OrganizationUser $organizationUser
     ) {
         // Eliminar usuario de todos los eventos
-        foreach ($groupOrganization->event_ids as $id) {
-            Attendee::where('event_id', $id)
-                // solo creado mediante free_access
-                ->where('free_access', true)
-                ->where('account_id', $organizationUser->account_id)
-                ->delete();
+        if ($groupOrganization->event_ids) {
+            foreach ($groupOrganization->event_ids as $id) {
+                Attendee::where('event_id', $id)
+                    // solo creado mediante free_access
+                    ->where('free_access', true)
+                    ->where('account_id', $organizationUser->account_id)
+                    ->delete();
+            }
         }
 
         // Eliminar usuario de grupo
