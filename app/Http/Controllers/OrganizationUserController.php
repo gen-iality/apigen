@@ -143,6 +143,21 @@ class OrganizationUserController extends Controller
         return $model;
     }
 
+    public function validateUserExists(Request $request, $organizationID)
+    {
+        $email = $request->json('email');
+
+        $organizationUser = OrganizationUser::where('organization_id', $organizationID)
+            ->where('properties.email', $email)
+            ->exists();
+
+        if (!$organizationUser) {
+            return response()->json(['message' => "Email $email not found"], 400);
+        }
+
+        return response()->json(['message' => "Email $email exists"]);
+    }
+
     private function addOrgUserToAllEvents(OrganizationUser $organizationUser)
     {
         $client = new Client;

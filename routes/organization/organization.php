@@ -58,6 +58,8 @@ Route::group(
         Route::get('organizations/{organization}/eventsstadistics/export', 'EventStatisticsController@eventsStadisticsExport');
     }
 );
+
+Route::get('organizations/{organization}/validate-user-exists', 'OrganizationUserController@validateUserExists');
 Route::post('organizations/{organization}/addorganizationuser', 'OrganizationUserController@store');
 Route::get('organizations/{organization}/events', 'EventController@EventbyOrganizations');
 Route::get('organizations/{organization}/eventsstadistics', 'EventStatisticsController@eventsstadistics');
