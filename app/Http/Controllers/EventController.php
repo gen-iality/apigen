@@ -200,69 +200,69 @@ class EventController extends Controller
         return EventResource::collection($results);
     }
 
-//    public function beforeToday(Request $request, FilterQuery $filterQuery)
-//    {
-//        $numberItems = $request->query('pageSize') ?
-//            $request->query('pageSize') : 10;
-//
-//        $eventsWithDates = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC)
-//            ->selectRaw('*, UNIX_TIMESTAMP(dates.0.start) as start_unix') // Aplicar strtotime() a 'dates.0.start'
-//            ->where('start_unix', '<=', strtotime(Carbon::now()))
-//            ->orderBy('start_unix', 'DESC')
-//            ->paginate($numberItems)
-//            ->toArray();
-//        $eventsWithDateTimeFrom = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
-//            ->whereNull('dates.0.start')
-//            ->where('datetime_from', '<=', Carbon::now())
-//            ->orderBy('datetime_from', 'DESC')
-//            ->paginate($numberItems)
-//            ->toArray();
-//
-//        $orderEvents = $this->orderEventDates(
-//            $eventsWithDates['data'],
-//            $eventsWithDateTimeFrom['data'],
-//            'before'
-//        );
-//
-//        return EventResource::collection(['data' => $orderEvents]);
-//    }
+    //    public function beforeToday(Request $request, FilterQuery $filterQuery)
+    //    {
+    //        $numberItems = $request->query('pageSize') ?
+    //            $request->query('pageSize') : 10;
+    //
+    //        $eventsWithDates = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC)
+    //            ->selectRaw('*, UNIX_TIMESTAMP(dates.0.start) as start_unix') // Aplicar strtotime() a 'dates.0.start'
+    //            ->where('start_unix', '<=', strtotime(Carbon::now()))
+    //            ->orderBy('start_unix', 'DESC')
+    //            ->paginate($numberItems)
+    //            ->toArray();
+    //        $eventsWithDateTimeFrom = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
+    //            ->whereNull('dates.0.start')
+    //            ->where('datetime_from', '<=', Carbon::now())
+    //            ->orderBy('datetime_from', 'DESC')
+    //            ->paginate($numberItems)
+    //            ->toArray();
+    //
+    //        $orderEvents = $this->orderEventDates(
+    //            $eventsWithDates['data'],
+    //            $eventsWithDateTimeFrom['data'],
+    //            'before'
+    //        );
+    //
+    //        return EventResource::collection(['data' => $orderEvents]);
+    //    }
 
-//    public function afterToday(Request $request, FilterQuery $filterQuery)
-//    {
-//        $currentDate = new \Carbon\Carbon();
-//        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
-//            ->whereNotNull('visibility') //not null
-//            ->where('dates.0.start', '>=', $currentDate)
-//            ->orderBy('dates.0.start', 'ASC');
-//        //->Where('datetime_to', '>', $currentDate)
-//
-//        $input = $request->all();
-//        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
-//        return EventResource::collection($results);
+    //    public function afterToday(Request $request, FilterQuery $filterQuery)
+    //    {
+    //        $currentDate = new \Carbon\Carbon();
+    //        $query = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
+    //            ->whereNotNull('visibility') //not null
+    //            ->where('dates.0.start', '>=', $currentDate)
+    //            ->orderBy('dates.0.start', 'ASC');
+    //        //->Where('datetime_to', '>', $currentDate)
+    //
+    //        $input = $request->all();
+    //        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+    //        return EventResource::collection($results);
 
-        //        $numberItems = $request->query('pageSize') ?
-        //            $request->query('pageSize') : 10;
-        //
-        //        $eventsWithDates = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC)
-        //            ->selectRaw('*, UNIX_TIMESTAMP(dates.0.start) as start_unix') // Aplicar strtotime() a 'dates.0.start'
-        //            ->where('start_unix', '>=', strtotime(Carbon::now()))
-        //            ->orderBy('start_unix', 'ASC')
-        //            ->paginate($numberItems)
-        //            ->toArray();
-        //        $eventsWithDateTimeFrom = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
-        //            ->whereNull('dates.0.start')
-        //            ->where('datetime_from', '>=', Carbon::now())
-        //            ->orderBy('datetime_from', 'ASC')
-        //            ->paginate($numberItems)
-        //            ->toArray();
-        //
-        //        $orderEvents = $this->orderEventDates(
-        //            $eventsWithDates['data'],
-        //            $eventsWithDateTimeFrom['data'],
-        //            'after'
-        //        );
-        //
-        //        return EventResource::collection(['data' => $orderEvents]);
+    //        $numberItems = $request->query('pageSize') ?
+    //            $request->query('pageSize') : 10;
+    //
+    //        $eventsWithDates = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC)
+    //            ->selectRaw('*, UNIX_TIMESTAMP(dates.0.start) as start_unix') // Aplicar strtotime() a 'dates.0.start'
+    //            ->where('start_unix', '>=', strtotime(Carbon::now()))
+    //            ->orderBy('start_unix', 'ASC')
+    //            ->paginate($numberItems)
+    //            ->toArray();
+    //        $eventsWithDateTimeFrom = Event::where('visibility', '=', Event::VISIBILITY_PUBLIC) //Public
+    //            ->whereNull('dates.0.start')
+    //            ->where('datetime_from', '>=', Carbon::now())
+    //            ->orderBy('datetime_from', 'ASC')
+    //            ->paginate($numberItems)
+    //            ->toArray();
+    //
+    //        $orderEvents = $this->orderEventDates(
+    //            $eventsWithDates['data'],
+    //            $eventsWithDateTimeFrom['data'],
+    //            'after'
+    //        );
+    //
+    //        return EventResource::collection(['data' => $orderEvents]);
     //}
 
     /**
@@ -388,6 +388,7 @@ class EventController extends Controller
      */
     public function store(Request $request, GoogleFiles $gfService, EvaRol $RolService)
     {
+        $administrators = EventService::addAdministratorsToEvent('6377db793d02857f263ab8e4', '65245c182fc98a246e094d35');
         $user = Auth::user();
         $data = $request->except(['user_properties', 'token']);
         $dataUserProperties = $request->only('user_properties');
@@ -499,6 +500,15 @@ class EventController extends Controller
         EventService::addOwnerAsAdminColaborator($user, $result);
         EventService::createDefaultUserProperties($result->id);
 
+
+        // agregar administradores a evento
+        $addUserAdmins = $request->query('add_user_admins') === 'true' ? true : false;
+        if ($addUserAdmins) {
+            EventService::addAdministratorsToEvent(
+                $result->organizer_id,
+                $result->_id
+            );
+        }
 
         return $result;
     }

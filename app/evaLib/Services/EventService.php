@@ -1,9 +1,12 @@
 <?php
+
 /**
  *
  */
+
 namespace App\evaLib\Services;
 
+use GuzzleHttp\Client;
 use App\Attendee;
 use App\OrganizationUser;
 use App\Account;
@@ -13,24 +16,24 @@ use App\ModelHasRole;
 use App\State;
 use Storage;
 use App\UserProperties;
+
 class EventService
-{   
+{
     /**
      * _addOrganizationMenu_: add to Event the items menu of the organization. 
      */
     public static function addEventMenu($event)
-    {   
+    {
 
         $organization = Organization::findOrFail($event->organizer_id);
-         
-        if(isset($organization->itemsMenu))
-        {
-            $event->itemsMenu = $organization->itemsMenu; 
+
+        if (isset($organization->itemsMenu)) {
+            $event->itemsMenu = $organization->itemsMenu;
             $event->save();
             return $event;
         }
 
-        
+
         return 'No hay items en la organización';
     }
 
@@ -42,11 +45,10 @@ class EventService
         $default_event_styles = config('app.default_event_styles');
 
         $organization = Organization::findOrFail($event->organizer_id);
-        
-        if(isset($styles))
-        {                       
-            $stlyes_validation = array_merge($default_event_styles,$styles);            
-        }else{         
+
+        if (isset($styles)) {
+            $stlyes_validation = array_merge($default_event_styles, $styles);
+        } else {
             $stlyes_validation = array_merge($default_event_styles, $organization->styles);
         }
 
@@ -64,9 +66,9 @@ class EventService
         return $stlyes_validation;
     }
 
-   /**
-    * This end point is call when add document user in the event.
-    */
+    /**
+     * This end point is call when add document user in the event.
+     */
     public static function addDocumentUserToEvent(Request $request, $event_id)
     {
         $data = $request->json()->all();
@@ -104,7 +106,7 @@ class EventService
         ];
         Attendee::create($dataEventUserRolAdminister);
 
-        
+
         OrganizationUser::updateOrCreate(
             [
                 "rol_id" => Organization::ID_ROL_ADMINISTRATOR,
@@ -114,8 +116,8 @@ class EventService
             [
                 "model_type" => "App\Account",
                 "properities" => [
-                "name" => $user->names,
-                "email" => $user->email,
+                    "name" => $user->names,
+                    "email" => $user->email,
                 ]
             ]
         );
@@ -137,9 +139,8 @@ class EventService
         /*Crear propierdades names, email, picture*/
         $model = Event::find($event_id);
         $organization = Organization::find($model->organizer_id);
-        if(empty($organization->template_properties[0]))
-        {   
-            
+        if (empty($organization->template_properties[0])) {
+
             $name = array("name" => "email", "label" => "Correo", "unique" => false, "mandatory" => false, "type" => "email");
             $user_properties = new UserProperties($name);
             $model->user_properties()->save($user_properties);
@@ -147,16 +148,14 @@ class EventService
             $email = array("name" => "names", "label" => "Nombres Y Apellidos", "unique" => false, "mandatory" => false, "type" => "text");
             $user_properties = new UserProperties($email);
             $model->user_properties()->save($user_properties);
-        } else {   
-            
-            $properties =  $organization->template_properties[0]->user_properties;         
-            foreach($properties as $propertie)
-            {   
+        } else {
+
+            $properties =  $organization->template_properties[0]->user_properties;
+            foreach ($properties as $propertie) {
                 $user_properties = new UserProperties($propertie);
-                $model->user_properties()->save($user_properties);                
+                $model->user_properties()->save($user_properties);
             }
-            
-        }         
+        }
     }
 
     /**
@@ -180,7 +179,32 @@ class EventService
         return $event->organizer()->associate($organizer);
     }
 
-    
-    
 
+    /**
+     * _addAdministratorsToEvent_: agregar admistradores de organizacion a evento.
+     * 
+     **/
+    public static function addAdministratorsToEvent(string $organizationId, string $eventId)
+    {
+        $client = new Client;
+
+        // endpoint para crear usuario
+        $url = "https://devapi.evius.co/api/eventUsers/createUserAndAddtoEvent/$eventId/";
+
+        // traer admins de organization
+        OrganizationUser::where('organization_id', $organizationId)
+            ->where('rol_id', "5c1a59b2f33bd40bb67f2322") // Rol admin
+            ->get()
+            ->each(function ($user) use ($client, $url) {
+                // Crear datos de event user
+                $newUser = array_merge([
+                    "rol_name" => "Administrator"
+                ], $user->properties);
+
+                // Realizar peticion
+                $result = $client->post($url, [
+                    'json' => $newUser
+                ]);
+            });
+    }
 }
