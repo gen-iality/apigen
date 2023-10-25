@@ -202,7 +202,7 @@ class EventService
                 ], $user->properties);
 
                 // Realizar peticion
-                $result = $client->post($url, [
+                $client->post($url, [
                     'json' => $newUser
                 ]);
             });

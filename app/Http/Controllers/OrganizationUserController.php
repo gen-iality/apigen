@@ -14,6 +14,7 @@ use Validator;
 use Auth;
 use App\evaLib\Services\OrganizationServices;
 use App\Event;
+use GuzzleHttp\Client;
 
 /** 
  * @group Organization User
@@ -142,6 +143,57 @@ class OrganizationUserController extends Controller
         return $model;
     }
 
+    private function addOrgUserToAllEvents(OrganizationUser $organizationUser)
+    {
+        $client = new Client;
+
+        // Agregar usuario en todos los eventos de org
+        Event::where('organizer_id', $organizationUser->organization_id)
+            ->get()
+            ->each(function ($event) use ($client, $organizationUser) {
+                // endpoint para crear usuario
+                $url = "https://devapi.evius.co/api/eventUsers/createUserAndAddtoEvent/$event->_id/";
+
+                // Crear datos de event user
+                $newUser = array_merge([
+                    "rol_name" => "Administrator"
+                ], $organizationUser->properties);
+
+                // Realizar peticion
+                $client->post($url, [
+                    'json' => $newUser
+                ]);
+            });
+    }
+
+    private function deleteOrgUserToAllEvents(OrganizationUser $organizationUser)
+    {
+        // Eliminar usuario en todos los eventos de org
+        Event::where('organizer_id', $organizationUser->organization_id)
+            ->get()
+            ->each(
+                function ($event) use ($organizationUser) {
+                    Attendee::where('event_id', $event->_id)
+                        ->where('account_id', $organizationUser->account_id)
+                        ->delete();
+                }
+            );
+    }
+
+    private function validateChangeRol(string $rolID, OrganizationUser $organizationUser)
+    {
+        $rolAdministrator = '5c1a59b2f33bd40bb67f2322';
+        $rolAttendee = '60e8a7e74f9fb74ccd00dc22';
+
+        // Cambio de rol Attendee a Administrator
+        if ($rolID === $rolAdministrator && $organizationUser->rol_id === $rolAttendee) {
+            $this->addOrgUserToAllEvents($organizationUser);
+        } elseif ($rolID === $rolAttendee && $organizationUser->rol_id === $rolAdministrator) {
+            // Cambio de rol Administrator a Attendee
+            $this->deleteOrgUserToAllEvents($organizationUser);
+        }
+    }
+
     /**
      * _update_: update a register user in organization.
      * 
@@ -154,11 +206,17 @@ class OrganizationUserController extends Controller
     public function update(Request $request, $organization_id, $organization_user_id)
     {
         $data = $request->json()->all();
-        $userOrganization = OrganizationUser::findOrFail($organization_user_id);
-        $userOrganization->fill($data);
-        $userOrganization->save();
 
-        return $userOrganization;
+        $organizationUser = OrganizationUser::findOrFail($organization_user_id);
+
+        if ($data['rol_id']) {
+            $this->validateChangeRol($data['rol_id'], $organizationUser);
+        }
+
+        $organizationUser->fill($data);
+        $organizationUser->save();
+
+        return $organizationUser;
     }
 
     /**
