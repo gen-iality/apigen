@@ -209,7 +209,8 @@ class OrganizationUserController extends Controller
 
         $organizationUser = OrganizationUser::findOrFail($organization_user_id);
 
-        if ($data['rol_id']) {
+        $changeRol = $request->query('validate_change_rol') === 'true' ? true : false;
+        if ($data['rol_id'] && $changeRol) {
             $this->validateChangeRol($data['rol_id'], $organizationUser);
         }
 
