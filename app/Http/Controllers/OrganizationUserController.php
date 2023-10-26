@@ -244,8 +244,10 @@ class OrganizationUserController extends Controller
      */
     public function destroy(Request $request, $organization_id, $organization_user_id)
     {
-        $userOrganization = OrganizationUser::findorfail($organization_user_id);
-        return (string) $userOrganization->delete();
+        $organizationUser = OrganizationUser::findorfail($organization_user_id);
+        $this->deleteOrgUserToAllEvents($organizationUser);
+
+        return response()->json([], 204);
     }
 
     /**
