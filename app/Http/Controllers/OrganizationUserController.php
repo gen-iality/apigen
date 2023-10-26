@@ -152,7 +152,7 @@ class OrganizationUserController extends Controller
             ->exists();
 
         if (!$organizationUser) {
-            return response()->json(['message' => "Email $email not found"], 400);
+            return response()->json(['message' => "Email $email not found"], 404);
         }
 
         return response()->json(['message' => "Email $email exists"]);
