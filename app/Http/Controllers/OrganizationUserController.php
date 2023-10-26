@@ -242,10 +242,17 @@ class OrganizationUserController extends Controller
      * @urlParam organization required organization id
      * @urlParam organizationuser  required organization user id
      */
-    public function destroy(Request $request, $organization_id, $organization_user_id)
-    {
+    public function destroy(
+        Request $request,
+        $organization_id,
+        $organization_user_id
+    ) {
         $organizationUser = OrganizationUser::findorfail($organization_user_id);
-        $this->deleteOrgUserToAllEvents($organizationUser);
+
+        $deleteAttendees = $request->query('delete_attendees') === 'true' ? true : false;
+        if ($deleteAttendees) {
+            $this->deleteOrgUserToAllEvents($organizationUser);
+        }
 
         return response()->json([], 204);
     }
