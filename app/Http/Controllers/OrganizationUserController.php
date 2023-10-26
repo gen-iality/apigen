@@ -145,7 +145,7 @@ class OrganizationUserController extends Controller
 
     public function validateUserExists(Request $request, $organizationID)
     {
-        $email = $request->json('email');
+        $email = $request->query('email');
 
         $organizationUser = OrganizationUser::where('organization_id', $organizationID)
             ->where('properties.email', $email)
