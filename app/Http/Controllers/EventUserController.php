@@ -600,6 +600,9 @@ class EventUserController extends Controller
         $overwritePassword = $request->query('overwritePassword') === 'true' ?
             true : false;
 
+        $notifyAdmin = $request->query('notify_admin') === 'false' ?
+            false : true;
+
         $eventUserData = $request->json()->all();
         $eventUserData["email"] = strtolower($eventUserData["email"]);
         $event = Event::findOrFail($event_id);
@@ -641,7 +644,9 @@ class EventUserController extends Controller
             // assign rol_id to attendee
             $rol_name = isset($eventUserData['rol_name']) ? $eventUserData['rol_name'] : null;
             $rol_id = UserEventService::asignRolToEventUser($rol_name, $event, $user);
-            if ($rol_name === "Administrator") {
+
+            // Notificar admin
+            if ($rol_name === "Administrator" && $notifyAdmin === true) {
                 AdministratorService::notificationAdmin($rol_id, $email, $event, $eventUserData["names"], $request);
             }
             unset($eventUserData['rol_name']);

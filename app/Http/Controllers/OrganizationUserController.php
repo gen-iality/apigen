@@ -167,7 +167,7 @@ class OrganizationUserController extends Controller
             ->get()
             ->each(function ($event) use ($client, $organizationUser) {
                 // endpoint para crear usuario
-                $url = "https://devapi.evius.co/api/eventUsers/createUserAndAddtoEvent/$event->_id/";
+                $url = "https://devapi.evius.co/api/eventUsers/createUserAndAddtoEvent/$event->_id/?notify_admin=false";
 
                 // Crear datos de event user
                 $newUser = array_merge([
