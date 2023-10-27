@@ -197,6 +197,10 @@ class OrganizationUserController extends Controller
                         ->delete();
                 }
             );
+
+        // Set is_admin true to user
+        Account::findorfail($organizationUser['account_id'])
+            ->update(['is_admin' => false]);
     }
 
     private function validateChangeRol(string $rolID, OrganizationUser $organizationUser)
