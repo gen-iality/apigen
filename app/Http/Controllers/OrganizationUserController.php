@@ -179,6 +179,10 @@ class OrganizationUserController extends Controller
                     'json' => $newUser
                 ]);
             });
+
+        // Set is_admin true to user
+        Account::findorfail($organizationUser['account_id'])
+            ->update(['is_admin' => true]);
     }
 
     private function deleteOrgUserToAllEvents(OrganizationUser $organizationUser)
