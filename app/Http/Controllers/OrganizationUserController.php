@@ -312,11 +312,11 @@ class OrganizationUserController extends Controller
      * 
      * @urlParam organization The id of the organization
      */
-    public function meInOrganization($organizaton_id)
+    public function meInOrganization(Organization $organization)
     {
         $user = Auth::user();
         $query =  OrganizationUser::where('account_id', $user->_id)
-            ->where('organization_id', $organizaton_id)
+            ->where('organization_id', $organization->_id)
             ->paginate(config('app.page_size'));
 
         return $query;

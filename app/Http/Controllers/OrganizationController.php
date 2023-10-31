@@ -432,12 +432,12 @@ class OrganizationController extends Controller
     public function eventsByOrganization(Request $request, string $organizatinID)
     {
         // Orden del listado
-        //$order = $request->query('order') === 'latest' ?
-        //    'latest' : 'oldest';
+        $order = $request->query('order') === 'desc' ?
+            'desc' : 'asc';
 
         return EventResource::collection(
             Event::where('organizer_id', $organizatinID)
-                ->orderBy('datetime_from', 'desc')
+                ->orderBy('datetime_from', $order)
                 ->get()
         );
     }
