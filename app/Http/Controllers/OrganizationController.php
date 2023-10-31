@@ -20,6 +20,7 @@ use App\DiscountCodeTemplate;
 use App\evaLib\Services\OrganizationServices;
 use App\GroupOrganization;
 use App\OrganizationUser;
+use Carbon\Carbon;
 
 /**
  * @group Organization
@@ -422,6 +423,30 @@ class OrganizationController extends Controller
     }
 
     /**
+     * sortEventsGTDate: Ordenar evento mayores a la fecha
+     * 
+     * @urlParam id required  organizer_id
+     *
+     * @param string $organizatinID
+     * @param Date $date
+     * @param string $order desc | asc
+     * @return Events
+     */
+    private function sortEventsGTDate($organizatinID, $date, $order) 
+    {
+        $result = [];
+
+        Event::where('organizer_id', $organizatinID)
+            ->orderBy('datetime_from', $order) 
+            // Buscar forma de hacerlo con el ORM
+            ->each(function ($event) use ($date, &$result) {
+                $event->datetime_from > $date && array_push($result, $event);
+            });
+
+        return $result;
+    }
+
+    /**
      * _eventsByOrganization_: search of events by user organizer.
      * 
      * @urlParam id required  organizer_id
@@ -434,6 +459,14 @@ class OrganizationController extends Controller
         // Orden del listado
         $order = $request->query('order') === 'desc' ?
             'desc' : 'asc';
+
+        $date = $request->query('date') ?
+            $request->query('date') : false;
+
+        if ($date) {
+            $date = Carbon::createFromFormat('Y-m-d', $date)->format('Y-m-d H:i:s');;
+            return $this->sortEventsGTDate($organizatinID, $date, $order);
+        }
 
         return EventResource::collection(
             Event::where('organizer_id', $organizatinID)
