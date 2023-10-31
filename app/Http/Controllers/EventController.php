@@ -306,27 +306,6 @@ class EventController extends Controller
     }
 
     /**
-     * _EventbyOrganizations_: search of events by user organizer.
-     * 
-     * @urlParam id required  organizer_id
-     *
-     * @param string $id
-     * @return void
-     */
-    public function EventbyOrganizations(Request $request, string $id)
-    {
-        // Orden del listado
-        $order = $request->query('order') === 'latest' ?
-            'latest' : 'oldest';
-
-        return EventResource::collection(
-            Event::where('organizer_id', $id)
-                ->$order() // listar ascendente o descendente
-                ->paginate(config('app.page_size'))
-        );
-    }
-
-    /**
      * _delete_: delete event.
      * 
      * @urlParam id required id del evento a eliminar.

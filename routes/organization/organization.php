@@ -14,6 +14,7 @@
  ****************/
 Route::get('organizations', 'OrganizationController@index');
 Route::get('organizations/{organization}', 'OrganizationController@show');
+Route::get('organizations/{organization}/events', 'OrganizationController@eventsByOrganization');
 //Route::get('organizations/{organization}/events-free-access', 'OrganizationController@eventsFreeAccess');
 Route::get('organizations/{organization}/me/events-by-groups', 'OrganizationController@meEventsByGroups');
 Route::group(
@@ -61,7 +62,6 @@ Route::group(
 
 Route::get('organizations/{organization}/validate-user-exists', 'OrganizationUserController@validateUserExists');
 Route::post('organizations/{organization}/addorganizationuser', 'OrganizationUserController@store');
-Route::get('organizations/{organization}/events', 'EventController@EventbyOrganizations');
 Route::get('organizations/{organization}/eventsstadistics', 'EventStatisticsController@eventsstadistics');
 
 

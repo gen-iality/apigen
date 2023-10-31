@@ -420,4 +420,25 @@ class OrganizationController extends Controller
 
         return $events;
     }
+
+    /**
+     * _eventsByOrganization_: search of events by user organizer.
+     * 
+     * @urlParam id required  organizer_id
+     *
+     * @param string $id
+     * @return void
+     */
+    public function eventsByOrganization(Request $request, string $organizatinID)
+    {
+        // Orden del listado
+        //$order = $request->query('order') === 'latest' ?
+        //    'latest' : 'oldest';
+
+        return EventResource::collection(
+            Event::where('organizer_id', $organizatinID)
+                ->orderBy('datetime_from', 'desc')
+                ->get()
+        );
+    }
 }
