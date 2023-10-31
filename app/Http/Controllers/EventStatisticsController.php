@@ -171,9 +171,13 @@ class EventStatisticsController extends Controller
                 ->get()
                 ->toArray();
 
-            $event['hosts'] = array_map(function ($activity) {
-                return $activity['hosts'][0];
-            }, (array)$hostsByActivities);
+            if (count($hostsByActivities[0]['hosts']) > 0) {
+                $event['hosts'] = array_map(function ($activity) {
+                    return $activity['hosts'][0];
+                }, (array)$hostsByActivities);
+            } else {
+                $event['hosts'] = 0;
+            }
 
             // Url de videos en cada actividad del evento
             $urlVideosByActivities = Activities::where('event_id', $event->_id)
