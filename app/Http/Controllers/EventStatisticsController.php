@@ -176,7 +176,7 @@ class EventStatisticsController extends Controller
                     return $activity['hosts'][0];
                 }, (array)$hostsByActivities);
             } else {
-                $event['hosts'] = 0;
+                $event['hosts'] = [];
             }
 
             // Url de videos en cada actividad del evento
