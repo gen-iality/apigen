@@ -83,7 +83,7 @@ class CertificateController extends Controller
      * @param  \App\Certificate  $Certificate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $event, Certificate $certificate)
+    public function update(Request $request, Certificate $certificate)
     {
         $data = $request->json()->all();
 
