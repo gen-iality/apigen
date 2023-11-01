@@ -11,6 +11,7 @@ use App\Event;
 use App\Attendee;
 use App\Documents;
 use App\EventType;
+use App\Host;
 use App\Http\Resources\EventResource;
 use App\ModelHasRole;
 use App\Organization;
@@ -150,7 +151,9 @@ class EventStatisticsController extends Controller
 
     public function eventsStadisticsExport(string $organizer_id)
     {
-        $events = Event::where('organizer_id', $organizer_id)->get();
+        $events = Event::where('organizer_id', $organizer_id)
+            ->withOut(['author', 'organizer', 'organiser'])
+            ->get();
 
         // 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
         // REFACTOR OBLIGATORIO
@@ -158,33 +161,23 @@ class EventStatisticsController extends Controller
         // 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
         foreach ($events as $event) {
             // Numero de asistentes por evento
-            $countAttendees = Attendee::where('event_id', $event->_id)->count();
-            $event['count'] = $countAttendees;
+            $event['amount_attendees'] = Attendee::where('event_id', $event->_id)
+                ->count();
 
             // Documentos por evento
-            $documents = Documents::where("event_id", $event->_id)->where("state", "father")->get();
-            $event['documents'] = $documents;
+            $event['documents'] = Documents::where("event_id", $event->_id)
+                ->where("state", "father")
+                ->get();
 
-            // Host de cada actividad por evento
-            $hostsByActivities = Activities::where('event_id', $event->_id)
-                ->where('host_ids', 'exists', true)
-                ->get()
-                ->toArray();
-
-            if (count($hostsByActivities[0]['hosts']) > 0) {
-                $event['hosts'] = array_map(function ($activity) {
-                    return $activity['hosts'][0];
-                }, (array)$hostsByActivities);
-            } else {
-                $event['hosts'] = [];
-            }
+            // Hosts by event
+            $event['hosts'] = Host::where('event_id', $event->_id)
+                ->get();
 
             // Url de videos en cada actividad del evento
-            $urlVideosByActivities = Activities::where('event_id', $event->_id)
+            $event['url_videos'] = Activities::where('event_id', $event->_id)
                 ->where('video', 'exists', true)
                 ->pluck('video')
                 ->toArray();
-            $event['url_videos'] = $urlVideosByActivities;
         }
 
         return $events;
