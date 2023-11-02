@@ -427,21 +427,31 @@ class OrganizationController extends Controller
      * 
      * @urlParam id required  organizer_id
      *
-     * @param string $organizatinID
+     * @param string $organizationID
      * @param Date $date
      * @param string $order desc | asc
+     * @param string $type past | future
      * @return Events
      */
-    private function sortEventsGTDate($organizatinID, $date, $order) 
+    private function sortEventsDate($organizationID, $date, $order, $type = 'future')
     {
         $result = [];
 
-        Event::where('organizer_id', $organizatinID)
-            ->orderBy('datetime_from', $order) 
-            // Buscar forma de hacerlo con el ORM
-            ->each(function ($event) use ($date, &$result) {
-                $event->datetime_from > $date && array_push($result, $event);
-            });
+        try {
+            Event::where('organizer_id', $organizationID)
+                ->orderBy('datetime_from', $order)
+                ->each(function ($event) use ($date, &$result, $type) {
+                    if ($type === 'future') {
+                        // Eventos mayor a la fecha
+                        $event->datetime_from > $date && array_push($result, $event);
+                    } else {
+                        // Eventos menores a la fecha
+                        $event->datetime_from < $date && array_push($result, $event);
+                    }
+                });
+        } catch (\Throwable $err) {
+            throw $err;
+        }
 
         return $result;
     }
@@ -454,7 +464,7 @@ class OrganizationController extends Controller
      * @param string $id
      * @return void
      */
-    public function eventsByOrganization(Request $request, string $organizatinID)
+    public function eventsByOrganization(Request $request, string $organizationID)
     {
         // Orden del listado
         $order = $request->query('order') === 'desc' ?
@@ -463,13 +473,23 @@ class OrganizationController extends Controller
         $date = $request->query('date') ?
             $request->query('date') : false;
 
-        if ($date) {
+        $type = $request->query('type') ?
+            $request->query('type') : false;
+
+        // Ordenamiento de eventos pasado y proximos
+        if ($date && $type === 'past' || $type === 'future') {
             $date = Carbon::createFromFormat('Y-m-d', $date)->format('Y-m-d H:i:s');;
-            return $this->sortEventsGTDate($organizatinID, $date, $order);
+
+            return $this->sortEventsDate(
+                $organizationID,
+                $date,
+                $order,
+                $type
+            );
         }
 
         return EventResource::collection(
-            Event::where('organizer_id', $organizatinID)
+            Event::where('organizer_id', $organizationID)
                 ->orderBy('datetime_from', $order)
                 ->get()
         );
