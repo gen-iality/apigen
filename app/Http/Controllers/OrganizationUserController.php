@@ -335,12 +335,13 @@ class OrganizationUserController extends Controller
         // devolver event_user en respuesta
         $eventUser = $request->query('event_user') === 'true' ?
             true : false;
+
         // Orden del listado
-        $order = $request->query('order') === 'latest' ?
-            'latest' : 'oldest';
+        $order = $request->query('order') === 'desc' ?
+            'desc' : 'asc';
 
         $eventsByOrganization = Event::where('organizer_id', $organization->_id)
-            ->$order() // listar ascendente o descendente
+            ->orderBy('datetime_from', $order) // listar ascendente o descendente
             ->get();
 
         $events = [];
