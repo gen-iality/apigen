@@ -47,6 +47,7 @@ Route::group(
 /****************
  * Users Organization
  ****************/
+Route::get('organizations/{organization}/organizationusers/get-names', 'OrganizationUserController@getOrgUserNameByOrg');
 Route::group(
     ['middleware' => 'auth:token'],
     function () {

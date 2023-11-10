@@ -35,6 +35,24 @@ class OrganizationUserController extends Controller
     }
 
     /**
+     * _index_: List all user of a organization  
+     */
+    public function getOrgUserNameByOrg(String $organizationID)
+    {
+        $OrganizationUsers = OrganizationUserResource::collection(
+            OrganizationUser::where('organization_id', $organizationID)
+                ->select('_id', 'properties.names')
+                ->withOut([
+                    'user',
+                    'organization',
+                    'rol',
+                ])
+                ->get()
+        );
+        return $OrganizationUsers;
+    }
+
+    /**
      * Display only organization of user.
      *
      * @return \Illuminate\Http\Response
