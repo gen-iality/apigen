@@ -494,4 +494,20 @@ class OrganizationController extends Controller
                 ->get()
         );
     }
+
+    public function getEventNameByOrg(string $organizationID)
+    {
+        return Event::where('organizer_id', $organizationID)
+            ->select('_id', 'name')
+            ->withOut([
+                'currency',
+                'author',
+                'categories',
+                'event_type',
+                'tickets',
+                'organizer',
+                'organiser'
+            ])
+            ->get();
+    }
 }
