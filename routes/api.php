@@ -605,6 +605,9 @@ Route::put('events/{event}/bingos/{bingo}/import-values', 'BingoController@impor
 //BingobyEvent
 Route::get('events/{event}/bingos', 'BingoController@bingobyEvent');
 
+// Eliminar cards de un bingo
+Route::delete('bingos/{bingo}/bingocards', 'BingoController@deleteBingCards');
+
 //BINGOCARD
 Route::get('bingos/{bingo}/bingocards', 'BingoCardController@index');
 Route::get('bingocards/{code}', 'BingoCardController@show');

@@ -32,31 +32,31 @@ class BingoController extends Controller
      */
     public function store(Request $request, Event $event)
     {
-      $request->validate([
-	      'name' => 'required|string|max:250',
-	      'dimensions.format' => 'required|string|in:3x3,4x4,5x5',
-	      'dimensions.amount' => 'required|numeric|in:9,16,25',
-	      'dimensions.minimun_values' => 'required|numeric'
-      ]);
+        $request->validate([
+            'name' => 'required|string|max:250',
+            'dimensions.format' => 'required|string|in:3x3,4x4,5x5',
+            'dimensions.amount' => 'required|numeric|in:9,16,25',
+            'dimensions.minimun_values' => 'required|numeric'
+        ]);
 
-      $data = $request->json()->all();
-      $data[ 'event_id' ] = $event->_id;
-      $bingo = Bingo::create($data);
+        $data = $request->json()->all();
+        $data['event_id'] = $event->_id;
+        $bingo = Bingo::create($data);
 
-      //Nuevo atributo para el bingo creado. $event->dynamics.
-      if(isset($event->dynamics)){
-          $dynamics = $event->dynamics;
-          $dynamics["bingo"] = true;
-      }else{
-          $dynamics["bingo"] = true;
-      }
-      $event->dynamics = $dynamics;
+        //Nuevo atributo para el bingo creado. $event->dynamics.
+        if (isset($event->dynamics)) {
+            $dynamics = $event->dynamics;
+            $dynamics["bingo"] = true;
+        } else {
+            $dynamics["bingo"] = true;
+        }
+        $event->dynamics = $dynamics;
 
-      // estado para determinar si el evento cuenta con bingo creado
-      $event->bingo = true;
-      $event->save();
+        // estado para determinar si el evento cuenta con bingo creado
+        $event->bingo = true;
+        $event->save();
 
-      return response()->json($bingo, 201);
+        return response()->json($bingo, 201);
     }
 
     /**
@@ -68,11 +68,11 @@ class BingoController extends Controller
 
     public function bingobyEvent(string $event_id)
     {
-      $bingo =  Bingo::where('event_id', $event_id)->first();
-      if(!$bingo) {
-	    return response()->json(['message' => 'Bingo not found'], 404);
-      }
-      return $bingo;
+        $bingo =  Bingo::where('event_id', $event_id)->first();
+        if (!$bingo) {
+            return response()->json(['message' => 'Bingo not found'], 404);
+        }
+        return $bingo;
     }
 
     /**
@@ -95,9 +95,9 @@ class BingoController extends Controller
      */
     public function update(Request $request, $event, Bingo $bingo)
     {
-	$data = $request->json()->all();
-	$bingo->fill($data);
-	$bingo->save();
+        $data = $request->json()->all();
+        $bingo->fill($data);
+        $bingo->save();
 
         if ($request->query('reset_bingo') === "yes") {
             UserEventService::resetBingoCardsForAttendees($bingo);
@@ -117,30 +117,39 @@ class BingoController extends Controller
      */
     public function destroy(Event $event, Bingo $bingo)
     {
-      // Eliminar todos los cartones de ese bingo
-      BingoCard::where('event_id', $event->_id)
-        ->where('bingo_id', $bingo->_id)
-        ->delete();
-      //if (isset($bingoCards)) {
+        // Eliminar todos los cartones de ese bingo
+        BingoCard::where('event_id', $event->_id)
+            ->where('bingo_id', $bingo->_id)
+            ->delete();
+        //if (isset($bingoCards)) {
         //foreach ($bingoCards as $bingoCard) {
-          //$bingoCard->delete();
+        //$bingoCard->delete();
         //}
-      //}
+        //}
 
-      if(isset($event->dynamics)){
-        $dynamics = $event->dynamics;
-        $dynamics["bingo"] = false;
-      }else{
-        $dynamics["bingo"] = false;
-      }
-      $event->dynamics = $dynamics;
-      $bingo->delete();
+        if (isset($event->dynamics)) {
+            $dynamics = $event->dynamics;
+            $dynamics["bingo"] = false;
+        } else {
+            $dynamics["bingo"] = false;
+        }
+        $event->dynamics = $dynamics;
+        $bingo->delete();
 
-      //Cambiar estado del bingo en el evento
-      $event->bingo = null;
-      $event->save();
+        //Cambiar estado del bingo en el evento
+        $event->bingo = null;
+        $event->save();
 
-      return response()->json([], 204);
+        return response()->json([], 204);
+    }
+
+    public function deleteBingCards(string $bingoID)
+    {
+        // Eliminar todos los cartones de ese bingo
+        BingoCard::where('bingo_id', $bingoID)
+            ->delete();
+
+        return response()->json([], 204);
     }
 
     /**
@@ -154,19 +163,19 @@ class BingoController extends Controller
      */
     public function createRandomBingoValues($event, Bingo $bingo)
     {
-      $bingoValues = $bingo->bingo_values;
-      $randomBingoValues = [];
+        $bingoValues = $bingo->bingo_values;
+        $randomBingoValues = [];
 
-      // generar valores aleatoreos para bingo ganador
-      while(count($randomBingoValues) < count($bingoValues)) {
-	      $randomValue = $bingoValues[rand(0, count($bingoValues) - 1)];
-	      !in_array($randomValue, $randomBingoValues, true)
-	        && array_push($randomBingoValues, $randomValue);
-      }
-      $bingo->random_bingo_values = $randomBingoValues;
-      $bingo->save();
+        // generar valores aleatoreos para bingo ganador
+        while (count($randomBingoValues) < count($bingoValues)) {
+            $randomValue = $bingoValues[rand(0, count($bingoValues) - 1)];
+            !in_array($randomValue, $randomBingoValues, true)
+                && array_push($randomBingoValues, $randomValue);
+        }
+        $bingo->random_bingo_values = $randomBingoValues;
+        $bingo->save();
 
-      return response()->json($bingo);
+        return response()->json($bingo);
     }
 
     /**
@@ -180,8 +189,8 @@ class BingoController extends Controller
      */
     public function resetBingoCards($event, Bingo $bingo)
     {
-	UserEventService::resetBingoCardsForAttendees($bingo);
-	return response()->json(['message' => 'New bingo cards generated for all attendees'], 200);
+        UserEventService::resetBingoCardsForAttendees($bingo);
+        return response()->json(['message' => 'New bingo cards generated for all attendees'], 200);
     }
 
     /**
@@ -205,58 +214,61 @@ class BingoController extends Controller
      */
     public function importBingoValues(Request $request, $event, Bingo $bingo)
     {
-      $request->validate([
-        'replace_data' => 'required|boolean',
-        'data' => 'required'
-      ]);
-      $valuesToImport = $request->json()->all();
-      //dd($valuesToImport['data']);
-      //eliminar la data de momento y a futuro un flag para identificar si se añaden a la data existente
-      if($valuesToImport['replace_data']){ //flag
-        $bingo->bingo_values = [];
+        $request->validate([
+            'replace_data' => 'required|boolean',
+            'data' => 'required'
+        ]);
+        $valuesToImport = $request->json()->all();
+        //dd($valuesToImport['data']);
+        //eliminar la data de momento y a futuro un flag para identificar si se añaden a la data existente
+        if ($valuesToImport['replace_data']) { //flag
+            $bingo->bingo_values = [];
+            $bingo->save();
+        }
+
+        $bingoValues = $bingo->bingo_values;
+        $success = [];
+        $bingoValues_fail = [];
+
+
+        foreach ($valuesToImport['data'] as $value) {
+            $count_fail = count($bingoValues_fail);
+            if (!isset($value['carton_value']) || !isset($value['ballot_value'])) {
+                array_push($bingoValues_fail, $value);
+            }
+            if (!isset($value['carton_value']['type']) || !isset($value['ballot_value']['type'])) {
+                array_push($bingoValues_fail, $value);
+            }
+            if (!isset($value['carton_value']['value']) || !isset($value['ballot_value']['value'])) {
+                array_push($bingoValues_fail, $value);
+            }
+            // validar que el type/value sea el correcto en carton_value y ballot_value => text, image.
+            if (
+                $value['carton_value']['type'] != 'text' && $value['carton_value']['type'] != 'image'
+                || $value['ballot_value']['type'] != 'text' && $value['ballot_value']['type'] != 'image'
+            ) {
+                array_push($bingoValues_fail, $value);
+            }
+
+            if ($count_fail == count($bingoValues_fail)) {
+                $value['id'] = uniqid('', true);
+                array_push($bingoValues, $value);
+                array_push($success, $value);
+            }
+        }
+
+        $bingo->bingo_values = $bingoValues;
         $bingo->save();
-      }
 
-      $bingoValues = $bingo->bingo_values;
-      $success = [];
-      $bingoValues_fail = [];
-
-
-      foreach($valuesToImport['data'] as $value) {
-        $count_fail = count($bingoValues_fail);
-        if(!isset($value['carton_value']) || !isset($value['ballot_value'])) {
-          array_push($bingoValues_fail, $value);
-        }
-        if(!isset($value['carton_value']['type']) || !isset($value['ballot_value']['type'])) {
-          array_push($bingoValues_fail, $value);
-        }
-        if(!isset($value['carton_value']['value']) || !isset($value['ballot_value']['value'])) {
-          array_push($bingoValues_fail, $value);
-        }
-        // validar que el type/value sea el correcto en carton_value y ballot_value => text, image.
-        if($value['carton_value']['type'] != 'text' && $value['carton_value']['type'] != 'image'
-          || $value['ballot_value']['type'] != 'text' && $value['ballot_value']['type'] != 'image') {
-          array_push($bingoValues_fail, $value);
-        }
-
-        if($count_fail == count($bingoValues_fail)) {
-          $value[ 'id' ] = uniqid('', true);
-          array_push($bingoValues, $value);
-          array_push($success, $value);
-        }
-      }
-
-      $bingo->bingo_values = $bingoValues;
-      $bingo->save();
-
-      return response()->json(
-        [
-          'success' => $success,
-          'count_success' => count($success),
-          'fail' => $bingoValues_fail,
-          'count_fail' => count($bingoValues_fail)
-        ], 201
-      );
+        return response()->json(
+            [
+                'success' => $success,
+                'count_success' => count($success),
+                'fail' => $bingoValues_fail,
+                'count_fail' => count($bingoValues_fail)
+            ],
+            201
+        );
     }
 
     /**
@@ -279,27 +291,27 @@ class BingoController extends Controller
      */
     public function addBingoValue(Request $request, $event, Bingo $bingo)
     {
-      $request->validate([
-	      'carton_value.type' => 'required|string|in:text,image',
-	      'carton_value.value' => 'required|string',
-	      'ballot_value.type' =>  'required|string|in:text,image',
-	      'ballot_value.value' =>  'required|string',
-      ]);
+        $request->validate([
+            'carton_value.type' => 'required|string|in:text,image',
+            'carton_value.value' => 'required|string',
+            'ballot_value.type' =>  'required|string|in:text,image',
+            'ballot_value.value' =>  'required|string',
+        ]);
 
-      $value = $request->json()->all();
-      $value['id'] = uniqid('', true);
-      $bingoValues = $bingo->bingo_values ?
-	    $bingo->bingo_values : [];
+        $value = $request->json()->all();
+        $value['id'] = uniqid('', true);
+        $bingoValues = $bingo->bingo_values ?
+            $bingo->bingo_values : [];
 
-      //if(in_array($value, $bingoValues, true)) {
-	      //return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
-      //}
+        //if(in_array($value, $bingoValues, true)) {
+        //return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
+        //}
 
-      array_push($bingoValues, $value);
-      $bingo->bingo_values = $bingoValues;
-      $bingo->save();
+        array_push($bingoValues, $value);
+        $bingo->bingo_values = $bingoValues;
+        $bingo->save();
 
-      return response()->json($bingo);
+        return response()->json($bingo);
     }
 
     /**
@@ -320,29 +332,29 @@ class BingoController extends Controller
      */
     public function editBingoValues(Request $request, $event, Bingo $bingo, $value_id)
     {
-      $request->validate([
-        'carton_value.type' => 'string|in:text,image',
-        //'carton_value.value' => 'string',
-        'ballot_value.type' =>  'string|in:text,image',
-        //'ballot_value.value' =>  'string',
-      ]);
+        $request->validate([
+            'carton_value.type' => 'string|in:text,image',
+            //'carton_value.value' => 'string',
+            'ballot_value.type' =>  'string|in:text,image',
+            //'ballot_value.value' =>  'string',
+        ]);
 
-      $value = $request->json()->all();
-      $value['id'] = $value_id;
-      //if(in_array($value, $bingo->bingo_values, true)) {
-              //return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
-      //}
-	    UserEventService::updateBingoValues($bingo, $value);
-      $bingoValues = [];
-      foreach($bingo->bingo_values as $bingoValue) {
-              if(isset($bingoValue['id']) && $bingoValue['id'] === $value_id) {
+        $value = $request->json()->all();
+        $value['id'] = $value_id;
+        //if(in_array($value, $bingo->bingo_values, true)) {
+        //return response()->json(['message' => "Value ${value['carton_value']} already exists in bingo values "], 403);
+        //}
+        UserEventService::updateBingoValues($bingo, $value);
+        $bingoValues = [];
+        foreach ($bingo->bingo_values as $bingoValue) {
+            if (isset($bingoValue['id']) && $bingoValue['id'] === $value_id) {
                 $bingoValue = $value;
-              }
-              array_push($bingoValues, $bingoValue);
-      }
-      $bingo->bingo_values = $bingoValues;
-      $bingo->save();
-      return response()->json($bingo);
+            }
+            array_push($bingoValues, $bingoValue);
+        }
+        $bingo->bingo_values = $bingoValues;
+        $bingo->save();
+        return response()->json($bingo);
     }
 
     /**
@@ -357,17 +369,17 @@ class BingoController extends Controller
      */
     public function deleteBingoValue($event, Bingo $bingo, $value_id)
     {
-      $bingoValues = $bingo->bingo_values;
+        $bingoValues = $bingo->bingo_values;
 
-      //se omite usar array_filter por la forma en que devuelve los datos, foreach como alternativa
-      $newBingoValues = [];
-      foreach($bingoValues as $value) {
-	      $value['id'] !== $value_id && array_push($newBingoValues, $value);
-      };
+        //se omite usar array_filter por la forma en que devuelve los datos, foreach como alternativa
+        $newBingoValues = [];
+        foreach ($bingoValues as $value) {
+            $value['id'] !== $value_id && array_push($newBingoValues, $value);
+        };
 
-      $bingo->bingo_values = $newBingoValues;
-      $bingo->save();
+        $bingo->bingo_values = $newBingoValues;
+        $bingo->save();
 
-      return response()->json($bingo);
+        return response()->json($bingo);
     }
 }
