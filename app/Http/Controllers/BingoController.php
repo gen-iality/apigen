@@ -143,13 +143,14 @@ class BingoController extends Controller
         return response()->json([], 204);
     }
 
-    public function deleteBingCards(string $bingoID)
+    public function deleteBingCards(Request $request, string $bingoID)
     {
-        // Eliminar todos los cartones de ese bingo
-        BingoCard::where('bingo_id', $bingoID)
-            ->delete();
+        $bingoCardIds = $request->json('bingoCardIds');
 
-        return response()->json([], 204);
+        // Eliminar todos los cartones de ese bingo
+        $bingoCards = BingoCard::whereIn('_id', $bingoCardIds)->delete();
+
+        return response()->json(['message' => "$bingoCards bingo cards deleted"], 200);
     }
 
     /**
