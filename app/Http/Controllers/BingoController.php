@@ -145,10 +145,21 @@ class BingoController extends Controller
 
     public function deleteBingCards(Request $request, string $bingoID)
     {
-        $bingoCardIds = $request->json('bingoCardIds');
+        $notAssociated = $request->query('not_associated') === 'true' ?
+            true : false;
+
+        // Eliminar todos los cartones sin event user
+        if ($notAssociated) {
+            $bingoCards = BingoCard::where('bingo_id', $bingoID)
+                ->where('event_user_id', null)
+                ->delete();
+
+            return response()->json(['message' => "$bingoCards bingo cards deleted"], 200);
+        }
 
         // Eliminar todos los cartones de ese bingo
-        $bingoCards = BingoCard::whereIn('_id', $bingoCardIds)->delete();
+        $bingoCards = BingoCard::where('bingo_id', $bingoID)
+            ->delete();
 
         return response()->json(['message' => "$bingoCards bingo cards deleted"], 200);
     }
