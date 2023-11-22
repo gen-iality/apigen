@@ -523,7 +523,7 @@ class OrganizationController extends Controller
 
         // Obtener el organizationUser
         $organizationUser = OrganizationUser::where('organization_id', $organizationID)
-            ->where('account_id', "651c859eda0e9ec55905a0a6")
+            ->where('account_id', Auth::user()->_id)
             ->first();
 
         $freeAccessGroup = GroupOrganization::where('organization_id', $organizationID)
@@ -538,7 +538,7 @@ class OrganizationController extends Controller
 
         // Filtrar eventos comunes por la existencia del usuario
         $events->each(function ($event) use (&$meEvents) {
-            $attendeeExists = Attendee::where('account_id', "651c859eda0e9ec55905a0a6")
+            $attendeeExists = Attendee::where('account_id', Auth::user()->_id)
                 ->where('event_id', $event->_id)
                 ->exists();
 

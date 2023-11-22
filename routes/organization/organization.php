@@ -25,11 +25,11 @@ Route::group(
         Route::get('organizations/{organization}/event/{event}/validate-existence-members-by-events', 'OrganizationController@validateExistenceOfMembersByEvents');
         Route::put('organizations/{organization}', 'OrganizationController@update')->middleware('permission:update');
         Route::delete('organizations/{organization}', 'OrganizationController@destroy')->middleware('permission:destroy');
+
+        // Endpoint para traer los eventos de la landing ceta
+        Route::get('organizations/{organization}/landing-ceta', 'OrganizationController@eventsLandingCeta');
     }
 );
-
-// Endpoint para traer los eventos de la landing ceta
-Route::get('organizations/{organization}/landing-ceta', 'OrganizationController@eventsLandingCeta');
 
 /***************
  * USER PROPERTIES ORGANIZATION
