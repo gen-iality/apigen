@@ -393,8 +393,8 @@ class OrganizationController extends Controller
     public function meEventsByGroups(Request $request, Organization $organization)
     {
         // eventos de libre acceso
-        $free = $request->query('free') ?
-            (bool) $request->query('free') : false;
+        $free = $request->query('free') === 'true' ?
+            true : false;
 
         // Obtener el organizationUser
         $organizationUser = OrganizationUser::where(
@@ -417,6 +417,7 @@ class OrganizationController extends Controller
                 // Por cada grupo asignar los ids sin que se repitan
                 $eventIds = array_merge($eventIds, $groups->event_ids);
             });
+
         $events = Event::whereIn('_id', $eventIds)->get();
 
         return $events;
@@ -508,8 +509,51 @@ class OrganizationController extends Controller
                     'tickets',
                     'organizer',
                     'organiser'
-                ])
-                ->get()
+                ])->get()
         );
+    }
+
+    public function eventsLandingCeta(string $organizationID)
+    {
+        // Obtener el organizationUser
+        $organizationUser = OrganizationUser::where('organization_id', $organizationID)
+            ->where('account_id', "651c859eda0e9ec55905a0a6")
+            ->first();
+
+        $freeAccessGroup = GroupOrganization::where('organization_id', $organizationID)
+            ->where('free_access_organization', true)
+            ->where('organization_user_ids', $organizationUser->_id)
+            ->first();
+
+        $meEvents = [];
+        // Obtener eventos usuario
+        $events = Event::where('organizer_id', $organizationID)
+            ->get();
+
+        // Filtrar eventos comunes por la existencia del usuario
+        $events->each(function ($event) use (&$meEvents) {
+            $attendeeExists = Attendee::where('account_id', "651c859eda0e9ec55905a0a6")
+                ->where('event_id', $event->_id)
+                ->exists();
+
+            if ($attendeeExists) {
+                array_push($meEvents, $event);
+            }
+        });
+
+        // Si el usuario tiene acceso gratuito, agregar esos eventos
+        if ($freeAccessGroup) {
+            $freeAccessEvents = Event::find($freeAccessGroup->event_ids);
+
+            foreach ($freeAccessEvents as $event) {
+                // No agregar eventos que ya existan en meEvents
+                if (!in_array($event, $meEvents)) {
+                    $event->free_access = true;
+                    array_push($meEvents, $event);
+                }
+            }
+        }
+
+        return $meEvents;
     }
 }

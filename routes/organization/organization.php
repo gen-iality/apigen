@@ -28,6 +28,8 @@ Route::group(
     }
 );
 
+// Endpoint para traer los eventos de la landing ceta
+Route::get('organizations/{organization}/landing-ceta', 'OrganizationController@eventsLandingCeta');
 
 /***************
  * USER PROPERTIES ORGANIZATION
