@@ -21,6 +21,7 @@ use App\evaLib\Services\OrganizationServices;
 use App\GroupOrganization;
 use App\OrganizationUser;
 use Carbon\Carbon;
+use DateTime;
 
 /**
  * @group Organization
@@ -513,8 +514,13 @@ class OrganizationController extends Controller
         );
     }
 
-    public function eventsLandingCeta(string $organizationID)
+    public function eventsLandingCeta(Request $request, string $organizationID)
     {
+
+        // Orden del listado
+        $order = $request->query('order') === 'desc' ?
+            'desc' : 'asc';
+
         // Obtener el organizationUser
         $organizationUser = OrganizationUser::where('organization_id', $organizationID)
             ->where('account_id', "651c859eda0e9ec55905a0a6")
@@ -553,6 +559,18 @@ class OrganizationController extends Controller
                 }
             }
         }
+
+        usort($meEvents, function ($event1, $event2) use ($order) {
+            $date1 = new DateTime($event1['datetime_from']);
+            $date2 = new DateTime($event2['datetime_from']);
+
+            // Compara las fechas de forma descendente
+            if ($order === 'desc') {
+                return $date2 <=> $date1;
+            }
+
+            return $date1 <=> $date2;
+        });
 
         return $meEvents;
     }
