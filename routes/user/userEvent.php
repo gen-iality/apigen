@@ -42,6 +42,7 @@ Route::get('events/{event}/eventusers/{eventuser}/validate-attendee-data', 'Even
 
 //BINGO
 Route::get('events/{event}/eventusers/bingocards', 'EventUserController@ListEventUsersWithBingoCards');
+Route::get('events/{event}/eventusers/search-bingocards', 'EventUserController@searchEventUserWithBingoCard');
 Route::post('events/{event}/eventusers/bingocards', 'EventUserController@createBingoCardToAllAttendees');
 Route::post('events/{event}/eventusers/{eventuser}/bingocards', 'EventUserController@createBingoCardToAttendee');
 Route::get('me/{eventuser}/bingocard', 'EventUserController@BingoCardbyEventUser');

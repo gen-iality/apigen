@@ -95,18 +95,24 @@ class EventUserController extends Controller
         // Cantidad de elementos que se quieren paginar
         $numberItems = $request->query('numberItems') ? $request->query('numberItems') : 10;
 
-        $eventUsers = Attendee::where("event_id", $event)->select('_id', 'properties.names', 'properties.email', 'account_id')->paginate($numberItems);
+        $eventUsers = Attendee::where("event_id", $event)
+            ->select('_id', 'properties.names', 'properties.email', 'account_id')
+            ->paginate($numberItems);
 
         $attendeesist = [];
         foreach ($eventUsers as $eventUser) {
-            $userImage = Account::where('email', $eventUser->properties['email'])->select('picture')->first();
+            $userImage = Account::where('email', $eventUser->properties['email'])
+                ->select('picture')
+                ->first();
+
             // estructura con datos necesarios
             $dataEventUser = [
                 '_id' => $eventUser->_id,
                 'properties' => [
                     'names' => $eventUser->properties['names'],
                     'email' => $eventUser->properties['email'],
-                    'picture' => isset($userImage->picture) ? $userImage->picture : 'https://www.gravatar.com/avatar/?d=mp&f=y',
+                    'picture' => isset($userImage->picture) ?
+                        $userImage->picture : 'https://www.gravatar.com/avatar/?d=mp&f=y',
                 ],
                 'bingo' => null,
             ];
@@ -139,6 +145,53 @@ class EventUserController extends Controller
             'total' => $eventUsers->total()
         ]);
     }
+
+    public function searchEventUserWithBingoCard(Request $request, string $eventID)
+    {
+        $name = $request->query('name');
+
+        $eventUsers = Attendee::where('event_id', $eventID)
+            ->where('properties.names', 'like', '%' . $name . '%')
+            ->select('_id', 'properties.names', 'properties.email', 'account_id')
+            ->get();
+
+        $eventUserIds = $eventUsers->pluck('_id');
+
+        $userImages = Account::whereIn('_id', $eventUsers->pluck('account_id'))
+            ->select('_id', 'picture')
+            ->get()
+            ->keyBy('_id');
+
+        $bingoCards = BingoCard::whereIn('event_user_id', $eventUserIds)
+            ->where('event_id', $eventID)
+            ->get()
+            ->keyBy('event_user_id');
+
+        $result = $eventUsers->map(function ($eventUser) use ($userImages, $bingoCards) {
+            $userImage = $userImages->get($eventUser->account_id, null);
+
+            $dataEventUser = [
+                '_id' => $eventUser->_id,
+                'properties' => [
+                    'names' => $eventUser->properties['names'],
+                    'email' => $eventUser->properties['email'],
+                    'picture' => optional($userImage)->picture ?: 'https://www.gravatar.com/avatar/?d=mp&f=y',
+                ],
+                'bingo' => false,
+            ];
+
+            $bingoCard = $bingoCards->get($eventUser->_id);
+            if ($bingoCard) {
+                $dataEventUser['bingo'] = true;
+                $dataEventUser['bingo_card'] = $bingoCard;
+            }
+
+            return $dataEventUser;
+        });
+
+        return $result;
+    }
+
 
     /**
      * createBingoCardToAttendee: create bingo cards for a user in the event
