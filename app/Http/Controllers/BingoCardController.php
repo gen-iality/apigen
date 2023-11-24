@@ -51,18 +51,24 @@ class BingoCardController extends Controller
      */
     public function show(string $code)
     {
-        $bingo_card = BingoCard::where('code', $code)->first();
-        $eventUser = Attendee::find($bingo_card->event_user_id);
+        $bingoCard = BingoCard::where('code', $code)->first();
+        if (!$bingoCard) {
+            return response()
+                ->json(['message' => 'Bingo Card not found'], 404);
+        }
 
+        $eventUser = Attendee::find($bingoCard->event_user_id);
+
+        // Carton sin asignacion de usuario
         if (!$eventUser) {
             return response()->json([
-                "bingo_card" => $bingo_card,
-                "name_owner" => ""
+                "bingo_card" => $bingoCard,
+                "name_owner" => "con código $code"
             ]);
         }
 
         return response()->json([
-            "bingo_card" => $bingo_card,
+            "bingo_card" => $bingoCard,
             "name_owner" => $eventUser["properties"]["names"]
         ]);
     }
