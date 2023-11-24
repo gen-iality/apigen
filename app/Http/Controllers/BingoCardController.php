@@ -57,7 +57,7 @@ class BingoCardController extends Controller
         if (!$eventUser) {
             return response()->json([
                 "bingo_card" => $bingo_card,
-                "name_owner" => "Usuario"
+                "name_owner" => ""
             ]);
         }
 
