@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use PDF;
+// use PDF;
 // models
 use App\BingoCard;
 use App\Attendee;
@@ -52,8 +52,19 @@ class BingoCardController extends Controller
     public function show(string $code)
     {
         $bingo_card = BingoCard::where('code', $code)->first();
-        $eventUser = Attendee::findOrFail($bingo_card->event_user_id);
-        return ["bingo_card" => $bingo_card, "name_owner" => $eventUser["properties"]["names"]];
+        $eventUser = Attendee::find($bingo_card->event_user_id);
+
+        if (!$eventUser) {
+            return response()->json([
+                "bingo_card" => $bingo_card,
+                "name_owner" => "Usuario"
+            ]);
+        }
+
+        return response()->json([
+            "bingo_card" => $bingo_card,
+            "name_owner" => $eventUser["properties"]["names"]
+        ]);
     }
 
     public function createBingoCardsWithoutAtteendes(Request $request, Bingo $bingo)
