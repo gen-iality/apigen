@@ -101,12 +101,12 @@ class UserController extends UserControllerWeb
      * 
      */
     public function store(Request $request)
-    {   
-          
+    {
+
         $data = $request->json()->all();
-        $email = strtolower($data['email']);        
+        $email = strtolower($data['email']);
         $request->merge(['email' => $email]);
-        
+
         $request->validate([
             'email' => 'required|unique:users,email|email:rfc,dns',
             'names' => 'required|string',
@@ -116,7 +116,7 @@ class UserController extends UserControllerWeb
         ]);
 
         $result = new Account($data);
-	$result->open_password = $data['password'];
+        $result->open_password = $data['password'];
         $result->save();
         $result = Account::find($result->_id);
 
@@ -149,14 +149,13 @@ class UserController extends UserControllerWeb
             'password' => 'string'
         ]);
         $data = $request->json()->all();
-        
+
         $auth = resolve('Kreait\Firebase\Auth');
         $this->auth = $auth;
         $Account = Account::find($id);
-        
+
         //If the user wants to change the password this will also be modified in firebase
-        if(isset($data['password']))
-        {               
+        if (isset($data['password'])) {
             $this->auth->changeUserPassword($Account['uid'], $data['password']);
         }
         // var_dump($auth);die;
@@ -225,7 +224,7 @@ class UserController extends UserControllerWeb
             $Account->save();
             return $Account;
         }
-        return response()->json(['message'=> 'Plan not found'], 404);
+        return response()->json(['message' => 'Plan not found'], 404);
     }
 
     /**
@@ -241,11 +240,11 @@ class UserController extends UserControllerWeb
                     $addon['is_active'] = true;
                     $addon->save();
                 }
-                return response()->json(['message'=> 'Addons update successfully'], 204);
+                return response()->json(['message' => 'Addons update successfully'], 204);
             }
-            return response()->json(['message'=> 'Addons not found'], 404);
+            return response()->json(['message' => 'Addons not found'], 404);
         }
-        return response()->json(['message'=> 'Billing not found'], 404);
+        return response()->json(['message' => 'Billing not found'], 404);
     }
 
 
@@ -259,7 +258,7 @@ class UserController extends UserControllerWeb
         $account = Account::find($user_id);
         $events = Event::where('author_id', $user_id)->latest()->get();
         $hours = $account->plan_id == "6285536ce040156b63d517e5" ? "2h" : "72h"; //Por el momento se toma 2h = free si no 72h
-        $user_billing = Billing::where('status','APPROVED')
+        $user_billing = Billing::where('status', 'APPROVED')
             ->where('user_id', $account->_id)
             ->where('action', '!=', 'ADDITIONAL')
             ->latest()
@@ -267,12 +266,12 @@ class UserController extends UserControllerWeb
         if (isset($user_billing)) {
             $table['start_date'] = $user_billing->billing['start_date'];
             $table['end_date'] = $user_billing->billing['end_date'];
-        }else{
+        } else {
             $table['plan'] = "El usuario no tiene un plan";
         }
 
         if (count($events) >= 1) {
-            for ($i=0; $i < count($events); $i++) { 
+            for ($i = 0; $i < count($events); $i++) {
                 $table['events'][$i]['ID'] = $events[$i]['_id'];
                 $table['events'][$i]['name'] = $events[$i]['name'];
                 $usersAtTheEvent = DB::table('event_users')->where('event_id', $events[$i]['_id'])
@@ -295,7 +294,7 @@ class UserController extends UserControllerWeb
      * @urlParam user required id user Example: 603d6af041e6f555591c95d5
      */
     public function destroy($id)
-    {   
+    {
         $Account = Account::find($id);
         $res = $Account->delete();
         if ($res == true) {
@@ -344,27 +343,27 @@ class UserController extends UserControllerWeb
      */
     public function findByEmail(Request $request, $email)
     {
-	$allData = $request->query('all-data') ?
-	    filter_var($request->query('all-data'), FILTER_VALIDATE_BOOLEAN)
-	    : false;
+        $allData = $request->query('all-data') ?
+            filter_var($request->query('all-data'), FILTER_VALIDATE_BOOLEAN)
+            : false;
 
         try {
-	    // En caso de necesitar toda la data
-	    if($allData) {
-		$account = Account::where('email', $email)->first();
+            // En caso de necesitar toda la data
+            if ($allData) {
+                $account = Account::where('email', $email)->first();
 
-		return $account;
-	    }
+                return $account;
+            }
 
             $Account = Account::where('email', '=', $email)
-		->get([
-		    'id',
-		    'email',
-		    'names',
-		    'name',
-		    'Nombres',
-		    'displayName'
-		]);
+                ->get([
+                    'id',
+                    'email',
+                    'names',
+                    'name',
+                    'Nombres',
+                    'displayName'
+                ]);
             //$response = new UsersResource($Account);
         } catch (\Exception $e) {
             return ["error" => $e->getMessage()];
@@ -382,7 +381,7 @@ class UserController extends UserControllerWeb
         $request->validate([
             'email' => 'required|unique:users,email|email:rfc,dns'
         ]);
-        
+
         return response()->json(['message' => 'Email valid'], 200);
     }
 
@@ -417,8 +416,12 @@ class UserController extends UserControllerWeb
              */
             //
 
-            if ($request->has('evius_token')) {$firebaseToken = $request->input('evius_token');}
-            if ($request->has('refresh_token')) {$refresh_token = $request->input('refresh_token');}
+            if ($request->has('evius_token')) {
+                $firebaseToken = $request->input('evius_token');
+            }
+            if ($request->has('refresh_token')) {
+                $refresh_token = $request->input('refresh_token');
+            }
 
             /**
              * Si el token no viene en la petición
@@ -460,15 +463,12 @@ class UserController extends UserControllerWeb
             }
 
             $url_final_params["token"] = $firebaseToken;
-
         } catch (\Exception $e) {
             $url_final_params["error"] = $e->getMessage();
-
         } finally {
             $destination = $request->has('destination') ? $request->input('destination') : config('app.front_url');
             return redirect()->away($destination . "?" . http_build_query($url_final_params));
         }
-
     }
 
 
@@ -526,15 +526,15 @@ class UserController extends UserControllerWeb
      * @queryParam  orderBy filter parameters Example: [{"field":"_id","order":"desc"}]    
      * 
      */
-    public function userOrganization(Request $request, String $organization_id, FilterQuery $filterQuery){
+    public function userOrganization(Request $request, String $organization_id, FilterQuery $filterQuery)
+    {
 
         $input = $request->all();
 
         $query = Account::where("organization_ids", $organization_id);
-        
-        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
-        return UsersResource::collection($results);          
 
+        $results = $filterQuery::addDynamicQueryFiltersFromUrl($query, $input);
+        return UsersResource::collection($results);
     }
 
     /**
@@ -545,43 +545,40 @@ class UserController extends UserControllerWeb
      * @bodyParam status string required the status update allows for two possible statuses **approved** or **rejected** Example: approved
      * 
      */
-    public function changeStatusUser(Request $request , $user_id)
-    {   
+    public function changeStatusUser(Request $request, $user_id)
+    {
         $validatedData = $request->validate([
             'status' => 'required',
         ]);
 
         $data = $request->json()->all();
-        
+
         $user = Auth::user();
 
         $userRol =  isset($user) ? $user->others_properties['role'] :  null;
-            
-        
-        if(isset($userRol) && $userRol == 'admin')
-        {
+
+
+        if (isset($userRol) && $userRol == 'admin') {
             $user = Account::find($user_id);
             $user->status = $data['status'];
             $user->save();
-            
-            foreach($user->organization_ids  as $organization)
-            {
+
+            foreach ($user->organization_ids  as $organization) {
                 $organizer = Organization::find($organization);
             }
-                              
+
 
             Mail::to($user->email)
-            ->queue(                
-                    new \App\Mail\ConfirmationStatusUserEmail($user , $organizer)
+                ->queue(
+                    new \App\Mail\ConfirmationStatusUserEmail($user, $organizer)
                 );
 
             return $user;
         }
-        
+
         return response()->json([
             'Error' => 'The user does not have the permissions to execute this action'
         ], 403);
-        
     }
 
     /**
@@ -592,52 +589,48 @@ class UserController extends UserControllerWeb
      * @bodyParam email email required  user email Example: correo@evius.co
      * 
      */
-    public function getAccessLink(Request $request) 
+    public function getAccessLink(Request $request)
     {
         $auth = resolve('Kreait\Firebase\Auth');
 
         $urlOrigin = $request->header('origin');
         $request->validate([
-            "email" => "required|email:rfc,dns",            
+            "email" => "required|email:rfc,dns",
         ]);
         $data = $request->all();
-        
-        $email = $data["email"];
-        
 
-	$urlOrigin = $request->header('origin');
+        $email = $data["email"];
+
+
+        $urlOrigin = $request->header('origin');
         $link = '';
         $event_id = null;
-        if(isset($data['event_id']))
-        {   
+        if (isset($data['event_id'])) {
             $event_id = $data['event_id'];
 
             $link = $auth->getSignInWithEmailLink(
                 $email,
                 [
-                    "url" => $urlOrigin . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event_id,
-                ]    
+                    "url" => $urlOrigin . "/loginWithCode?email=" . urlencode($email) . "&event_id=" . $event_id,
+                ]
             );
+        } else {
 
-        }else{  
-            
             $link = $auth->getSignInWithEmailLink(
                 $email,
                 [
-                    "url" => $urlOrigin . "/loginWithCode?email=". urlencode($email),
-                ]    
-            );
-
-        } 
-        if(!isset($data['refreshlink']))    
-        {
-            Mail::to($email)
-            ->queue(
-                new \App\Mail\LoginMail($link , $event_id, $email)
+                    "url" => $urlOrigin . "/loginWithCode?email=" . urlencode($email),
+                ]
             );
         }
-        
-        
+        if (!isset($data['refreshlink'])) {
+            Mail::to($email)
+                ->queue(
+                    new \App\Mail\LoginMail($link, $event_id, $email)
+                );
+        }
+
+
         return $link;
     }
 
@@ -651,30 +644,26 @@ class UserController extends UserControllerWeb
     {
         $auth = resolve('Kreait\Firebase\Auth');
         $data = $request->all();
-        
+
         $singin = '';
-        $redirect='';
+        $redirect = '';
 
         try {
-        $singin = $auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]);
-        if(isset($data['event_id']))
-        {   
-            $redirect =  config('app.front_url') . "/loginWithCode?email=". urlencode($data['event_id']) . "&event_id=" . $data['event_id'];
-
-            }else{
+            $singin = $auth->signInWithEmailAndOobCode($data["email"], $data["oobCode"]);
+            if (isset($data['event_id'])) {
+                $redirect =  config('app.front_url') . "/loginWithCode?email=" . urlencode($data['event_id']) . "&event_id=" . $data['event_id'];
+            } else {
 
                 $redirect =  config('app.front_url');
-            } 
+            }
 
-            return Redirect::to($redirect)->with($auth->signInWithEmailAndOobCode($data["email"],$data["oobCode"]));
-            
-
-        }catch(\Exception $e){
+            return Redirect::to($redirect)->with($auth->signInWithEmailAndOobCode($data["email"], $data["oobCode"]));
+        } catch (\Exception $e) {
             $link = $auth->getSignInWithEmailLink(
                 $data["email"],
                 [
-                    "url" => config('app.front_url') . "/loginWithCode?email=". urlencode($data['event_id']) . "&event_id=" . $data['event_id'],
-                ]    
+                    "url" => config('app.front_url') . "/loginWithCode?email=" . urlencode($data['event_id']) . "&event_id=" . $data['event_id'],
+                ]
             );
 
             return Redirect::to($link);
@@ -682,7 +671,6 @@ class UserController extends UserControllerWeb
             // Alert::html('El link ha caducado', 'Por favor ingrese al evento haciendo <a href="'.$redirect.'">clic aquí</a> para iniciar sesión o solicitar un nuevo link<br>', 'error');
             // return view('Public.Errors.loginLink');         
         }
-        
     }
 
 
@@ -694,60 +682,58 @@ class UserController extends UserControllerWeb
      * 
      */
     public function changeUserPassword(Request $request)
-    {   
+    {
         $auth = resolve('Kreait\Firebase\Auth');
 
         $request->validate([
-            "email" => "required|email:rfc,dns",                     
+            "email" => "required|email:rfc,dns",
         ]);
 
         $data = $request->json()->all();
         $email = $data['email'];
-        $user = Account::where('email' , $email)->first();
+        $user = Account::where('email', $email)->first();
 
-        if(!isset($user))
-        {
+        if (!isset($user)) {
             return response()->json([
                 "message" => "El usuario no está registrado en el sistema"
-            ] , 404);
+            ], 404);
         }
         //Algunos clientes prefieren que su marca este en todos los correos por eso se coloca la opción de evento     
         $event = null;
         $url = $data['hostName'] ? $data['hostName'] : $request->headers->get('referer'); // url front dinamica
-        if(isset($data['event_id']))
-        {
+        if (isset($data['event_id'])) {
             $event = Event::find($data['event_id']);
-            $url = $url . "/landing/". $event->_id ."/event";
+            $url = $url . "/landing/" . $event->_id . "/event";
         }
-        
-        $link = $auth->getPasswordResetLink($email, 
+
+        $link = $auth->getPasswordResetLink(
+            $email,
             [
                 "url" => $url,
             ]
-        );        
-        
-        Mail::to($email)
-        ->queue(            
-            new \App\Mail\ChangeUserPasswordEmail($user , $link, $event)
         );
-        
-        return response()->json(['data' => compact("link"), 'message' => 'Mail sent successfully']);
 
+        Mail::to($email)
+            ->queue(
+                new \App\Mail\ChangeUserPasswordEmail($user, $link, $event)
+            );
+
+        return response()->json(['data' => compact("link"), 'message' => 'Mail sent successfully']);
     }
 
     public function usersOfMyPlan(Request $request)
     {
         $user = Auth::user();
 
-	// fetch user events and get total number of registered users
+        // fetch user events and get total number of registered users
         $totalRegisteredUsers = $user->registered_users;
 
-	// get all addon users
-	$addonUsers = Addon::where('user_id', $user->_id)->where('is_active', true)->get();
-	$allowedUsers = $user->plan['availables']['users'];
-	foreach($addonUsers as $addonUser) {
-	  $allowedUsers+=$addonUser->amount;
-	}
+        // get all addon users
+        $addonUsers = Addon::where('user_id', $user->_id)->where('is_active', true)->get();
+        $allowedUsers = $user->plan['availables']['users'];
+        foreach ($addonUsers as $addonUser) {
+            $allowedUsers += $addonUser->amount;
+        }
 
         return response()->json([
             'totalRegisteredUsers' => $totalRegisteredUsers,
@@ -758,7 +744,7 @@ class UserController extends UserControllerWeb
     public function getMagicLink(Request $request, Event $event)
     {
         $request->validate([
-            "email" => "required|email:rfc,dns",            
+            "email" => "required|email:rfc,dns",
         ]);
         $email = $request->email;
         $host = $request->host;
@@ -767,16 +753,27 @@ class UserController extends UserControllerWeb
         $link = $auth->getSignInWithEmailLink(
             $email,
             [
-                "url" => $host . "/loginWithCode?email=". urlencode($email) . "&event_id=" . $event->_id,
-            ]    
+                "url" => $host . "/loginWithCode?email=" . urlencode($email) . "&event_id=" . $event->_id,
+            ]
         );
         $code = Shortid::generate();
         $code = strval($code);
-        $newUrl["long_url"] = $link; 
-        $newUrl["code"] =  $code; 
-        $newUrl["short_url"] = config('app.evius_api') . '/invitation/' .$code;
+        $newUrl["long_url"] = $link;
+        $newUrl["code"] =  $code;
+        $newUrl["short_url"] = config('app.evius_api') . '/invitation/' . $code;
         $saveUrl = Url::create($newUrl);
 
         return $saveUrl->short_url;
+    }
+
+    public function deleteUserBy(Request $request)
+    {
+        $email = $request->query('email');
+
+        Account::where('email', $email)
+            ->delete();
+
+        Attendee::where('properties.email', $email)
+            ->delete();
     }
 }
