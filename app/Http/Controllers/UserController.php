@@ -772,7 +772,7 @@ class UserController extends UserControllerWeb
 
     public function deleteUserBy(Request $request)
     {
-        $email = $request->query('email');
+        $email = $request->json('email');
 
         $auth = resolve('Kreait\Firebase\Auth');
         try {
