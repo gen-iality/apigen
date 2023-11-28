@@ -30,6 +30,10 @@ use Illuminate\Support\Facades\DB;
 use App\Url;
 use PUGX\Shortid\Shortid;
 
+use Kreait\Firebase;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
+
 
 
 /**
@@ -770,10 +774,22 @@ class UserController extends UserControllerWeb
     {
         $email = $request->query('email');
 
-        Account::where('email', $email)
-            ->delete();
+        $auth = resolve('Kreait\Firebase\Auth');
+        try {
+            $userFire = $auth->getUserByEmail($email);
 
-        Attendee::where('properties.email', $email)
-            ->delete();
+            // Eliminar el usuario
+            $auth->deleteUser($userFire->uid);
+
+            Account::where('email', $email)
+                ->delete();
+
+            Attendee::where('properties.email', $email)
+                ->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        return 'ok';
     }
 }

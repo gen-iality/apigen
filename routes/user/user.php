@@ -10,9 +10,9 @@
 /****************
  * Users
  ****************/
+Route::delete('users-by-email', 'UserController@deleteUserBy');
 Route::apiResource('users', 'UserController', ['only' => ['index', 'show', 'store']]);
 
-Route::delete('users/by-email', 'UserController@deleteUserBy');
 
 Route::get('users/loginorcreatefromtoken', 'UserController@loginorcreatefromtoken');
 //Se deja la ruta duplicada mientras en el front el cache se actualiza, con ruta 'users'
