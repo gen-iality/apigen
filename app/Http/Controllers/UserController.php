@@ -770,26 +770,41 @@ class UserController extends UserControllerWeb
         return $saveUrl->short_url;
     }
 
-    public function deleteUserBy(Request $request)
-    {
-        $email = $request->json('email');
+    //public function deleteUserBy()
+    //{
+    //    $auth = resolve('Kreait\Firebase\Auth');
+    //    $sourceEventId = "637c365b8bdd3a0ced67b642";
+    //    $targetEventId = "65563a9e95c70f04a50c6e62";
 
-        $auth = resolve('Kreait\Firebase\Auth');
-        try {
-            $userFire = $auth->getUserByEmail($email);
+    //    $emailsToExclude = ['orbia@evius.co', 'produccion@mocionsoft.com'];
 
-            // Eliminar el usuario
-            $auth->deleteUser($userFire->uid);
+    //    $attendeesToDelete = Attendee::where('event_id', $sourceEventId)
+    //        ->whereNotIn('properties.email', $emailsToExclude)
+    //        ->get();
 
-            Account::where('email', $email)
-                ->delete();
+    //    $attendeesToDelete->each(function ($attendee) use ($auth, $targetEventId) {
+    //        try {
+    //            $email = $attendee->properties['email'];
 
-            Attendee::where('properties.email', $email)
-                ->delete();
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
+    //            $intoOtherEvent = (bool) Attendee::where('event_id', $targetEventId)
+    //                ->where('properties.email', $email)
+    //                ->exists();
 
-        return 'ok';
-    }
+    //            if (!$intoOtherEvent) {
+    //                //$userFire = $auth->getUserByEmail($email);
+
+    //                // Eliminar el usuario
+    //                //$auth->deleteUser($userFire->uid);
+
+    //                // Eliminar la cuenta y el asistente
+    //                Account::find($attendee['account_id'])->delete();
+    //                $attendee->delete();
+    //            }
+    //        } catch (\Throwable $th) {
+    //            return $th;
+    //        }
+    //    });
+
+    //    return 'ok';
+    //}
 }

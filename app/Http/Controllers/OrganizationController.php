@@ -516,7 +516,6 @@ class OrganizationController extends Controller
 
     public function eventsLandingCeta(Request $request, string $organizationID)
     {
-
         // Orden del listado
         $order = $request->query('order') === 'desc' ?
             'desc' : 'asc';
@@ -525,6 +524,13 @@ class OrganizationController extends Controller
         $organizationUser = OrganizationUser::where('organization_id', $organizationID)
             ->where('account_id', Auth::user()->_id)
             ->first();
+
+        if (!$organizationUser) {
+            return response()->json(
+                ['message' => "Organization User doesn't exists into organization"],
+                404
+            );
+        }
 
         $freeAccessGroup = GroupOrganization::where('organization_id', $organizationID)
             ->where('free_access_organization', true)

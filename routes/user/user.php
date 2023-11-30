@@ -10,7 +10,7 @@
 /****************
  * Users
  ****************/
-Route::post('users-by-email', 'UserController@deleteUserBy');
+//Route::post('users-by-email', 'UserController@deleteUserBy');
 Route::apiResource('users', 'UserController', ['only' => ['index', 'show', 'store']]);
 
 
