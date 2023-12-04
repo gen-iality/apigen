@@ -68,6 +68,15 @@ Route::group(
     }
 );
 
+/****************
+ * Field Condition
+ ****************/
+
+Route::post('events/{event}/fields-conditions', 'EventController@createFieldCondition');
+Route::put('events/{event}/fields-conditions/{field}', 'EventController@updateFieldCondition');
+
+ /****************/
+
 Route::get('eventsbeforetoday', 'EventController@beforeToday');
 Route::get('eventsaftertoday', 'EventController@afterToday');
 Route::get('users/{user}/events', 'EventController@EventbyUsers');

@@ -1092,4 +1092,46 @@ class EventController extends Controller
 
         return $event;
     }
+
+    public function createFieldCondition(Request $request, Event $event)
+    {
+        $data = $request->validate([
+            'fields' => 'required',
+            'fieldToValidate' => 'required|string',
+            'value' => 'required',
+        ]);
+
+        $data['state'] = 'enabled';
+        $data['id'] = uniqid('', true);
+
+        $field = $data;
+
+        $fieldsConditions = collect($event->fields_conditions);
+        $fieldsConditions->push($field);
+        $event->fields_conditions = $fieldsConditions->all();
+
+        $event->save();
+
+        return $data;
+    }
+
+    public function updateFieldCondition(Request $request, Event $event, string $fieldId)
+    {
+        $data = $request->validate([
+            'fields' => 'required',
+            'fieldToValidate' => 'required|string',
+            'value' => 'required',
+        ]);
+
+        $fieldsConditions = collect($event->fields_conditions);
+        $field = $fieldsConditions->filter(function ($f) use ($fieldId) {
+            if ($f['id'] === $fieldId) {
+                return $f;
+            }
+        });
+
+        array_merge($field, $data);
+
+        return $field;
+    }
 }
