@@ -1101,37 +1101,80 @@ class EventController extends Controller
             'value' => 'required',
         ]);
 
-        $data['state'] = 'enabled';
-        $data['id'] = uniqid('', true);
+        try {
+            $data['state'] = 'enabled';
+            // Genarar id unico
+            $data['id'] = uniqid('', true);
 
-        $field = $data;
+            $field = $data;
 
-        $fieldsConditions = collect($event->fields_conditions);
-        $fieldsConditions->push($field);
-        $event->fields_conditions = $fieldsConditions->all();
+            // Agregar campo condicinal al evento
+            $fieldsConditions = collect($event->fields_conditions)
+                ->push($field);
+            $event->fields_conditions = $fieldsConditions->all();
 
-        $event->save();
+            // Guardar cambios
+            $event->save();
 
-        return $data;
+            return $fieldsConditions;
+        } catch (\Throwable $th) {
+            return response()->json(['message' => $th], 500);
+        }
     }
 
-    public function updateFieldCondition(Request $request, Event $event, string $fieldId)
-    {
+    public function updateFieldCondition(
+        Request $request,
+        Event $event,
+        string $fieldId
+    ) {
         $data = $request->validate([
             'fields' => 'required',
             'fieldToValidate' => 'required|string',
             'value' => 'required',
         ]);
 
-        $fieldsConditions = collect($event->fields_conditions);
-        $field = $fieldsConditions->filter(function ($f) use ($fieldId) {
-            if ($f['id'] === $fieldId) {
-                return $f;
-            }
-        });
+        try {
+            // Obtener los campos condicionales
+            $fieldsConditions = collect($event->fields_conditions)
+                ->map(
+                    function ($field) use ($fieldId, $data) {
+                        // Realizar actualizacion
+                        if ($field['id'] === $fieldId) {
+                            $field = array_merge((array) $field,  $data);
+                        }
+                        return $field;
+                    }
+                );
 
-        array_merge($field, $data);
+            // Guardar campo condicinal
+            $event->fields_conditions = $fieldsConditions;
+            $event->save();
 
-        return $field;
+            return $fieldsConditions;
+        } catch (\Throwable $th) {
+            return response()->json(['message' => $th], 500);
+        }
+    }
+
+    public function deleteFieldCondition(
+        Event $event,
+        string $fieldId
+    ) {
+        try {
+            // Obtener los campos condicionales
+            $fieldsConditions = collect($event->fields_conditions)
+            ->reject(function ($field) use ($fieldId) {
+                // Campo que cumpla la condicion sera eliminado
+                return $field['id'] == $fieldId;
+            });
+
+            // Guardar cambios
+            $event->fields_conditions = $fieldsConditions->all();
+            $event->save();
+
+            return response()->json([], 204);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => $th], 500);
+        }
     }
 }
