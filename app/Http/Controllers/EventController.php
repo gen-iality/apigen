@@ -1111,14 +1111,14 @@ class EventController extends Controller
             // Agregar campo condicinal al evento
             $fieldsConditions = collect($event->fields_conditions)
                 ->push($field);
-            $event->fields_conditions = $fieldsConditions->all();
+            $event->fields_conditions = $fieldsConditions->toArray();
 
             // Guardar cambios
             $event->save();
 
             return $fieldsConditions;
         } catch (\Throwable $th) {
-            return response()->json(['message' => $th], 500);
+            return response()->json(['message' => $th->getMessage()], 500);
         }
     }
 
@@ -1147,7 +1147,7 @@ class EventController extends Controller
                 );
 
             // Guardar campo condicinal
-            $event->fields_conditions = $fieldsConditions;
+            $event->fields_conditions = $fieldsConditions->toArray();
             $event->save();
 
             return $fieldsConditions;
@@ -1169,7 +1169,7 @@ class EventController extends Controller
             });
 
             // Guardar cambios
-            $event->fields_conditions = $fieldsConditions->all();
+            $event->fields_conditions = $fieldsConditions->toArray();
             $event->save();
 
             return response()->json([], 204);
