@@ -1150,7 +1150,7 @@ class EventController extends Controller
             $event->fields_conditions = $fieldsConditions->toArray();
             $event->save();
 
-            return $fieldsConditions;
+            return $event->fields_conditions;
         } catch (\Throwable $th) {
             return response()->json(['message' => $th], 500);
         }
@@ -1162,17 +1162,18 @@ class EventController extends Controller
     ) {
         try {
             // Obtener los campos condicionales
-            $fieldsConditions = collect($event->fields_conditions)
-            ->reject(function ($field) use ($fieldId) {
-                // Campo que cumpla la condicion sera eliminado
-                return $field['id'] == $fieldId;
-            });
+            $fieldsConditions = $event->fields_conditions;
+
+            $newFields = [];
+            foreach ($fieldsConditions as $field) {
+                $field['id'] != $fieldId && array_push($newFields, $field);
+            }
 
             // Guardar cambios
-            $event->fields_conditions = $fieldsConditions->toArray();
+            $event->fields_conditions = $newFields;
             $event->save();
 
-            return response()->json([], 204);
+            return $event->fields_conditions;
         } catch (\Throwable $th) {
             return response()->json(['message' => $th], 500);
         }
