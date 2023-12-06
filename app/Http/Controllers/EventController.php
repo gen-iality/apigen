@@ -1098,11 +1098,11 @@ class EventController extends Controller
         $data = $request->validate([
             'fields' => 'required',
             'fieldToValidate' => 'required|string',
+            'state' => 'required|string',
             'value' => 'required',
         ]);
 
         try {
-            $data['state'] = 'enabled';
             // Genarar id unico
             $data['id'] = uniqid('', true);
 
@@ -1130,6 +1130,7 @@ class EventController extends Controller
         $data = $request->validate([
             'fields' => 'required',
             'fieldToValidate' => 'required|string',
+            'state' => 'required|string',
             'value' => 'required',
         ]);
 
