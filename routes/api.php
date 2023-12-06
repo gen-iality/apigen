@@ -72,6 +72,7 @@ Route::group(
  * Field Condition
  ****************/
 
+Route::get('events/{event}/fields-conditions', 'EventController@getFieldsConditions');
 Route::post('events/{event}/fields-conditions', 'EventController@createFieldCondition');
 Route::put('events/{event}/fields-conditions/{field}', 'EventController@updateFieldCondition');
 Route::delete('events/{event}/fields-conditions/{field}', 'EventController@deleteFieldCondition');

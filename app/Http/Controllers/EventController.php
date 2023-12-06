@@ -1093,6 +1093,11 @@ class EventController extends Controller
         return $event;
     }
 
+    public function getFieldsConditions(Event $event)
+    {
+        return collect($event->fields_conditions);
+    }
+
     public function createFieldCondition(Request $request, Event $event)
     {
         $data = $request->validate([
