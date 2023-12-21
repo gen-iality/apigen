@@ -77,7 +77,7 @@ Route::post('events/{event}/fields-conditions', 'EventController@createFieldCond
 Route::put('events/{event}/fields-conditions/{field}', 'EventController@updateFieldCondition');
 Route::delete('events/{event}/fields-conditions/{field}', 'EventController@deleteFieldCondition');
 
- /****************/
+/****************/
 
 Route::get('eventsbeforetoday', 'EventController@beforeToday');
 Route::get('eventsaftertoday', 'EventController@afterToday');

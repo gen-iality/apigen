@@ -22,6 +22,9 @@ use App\GroupOrganization;
 use App\OrganizationUser;
 use Carbon\Carbon;
 use DateTime;
+use MongoDB\BSON\ObjectId;
+//use Jenssegers\Mongodb\Facades\MongoDB;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @group Organization
@@ -522,7 +525,7 @@ class OrganizationController extends Controller
 
         // Obtener el organizationUser
         $organizationUser = OrganizationUser::where('organization_id', $organizationID)
-            ->where('account_id', Auth::user()->_id)
+            ->where('account_id', Auth::user()->id)
             ->first();
 
         if (!$organizationUser) {
@@ -537,21 +540,29 @@ class OrganizationController extends Controller
             ->where('organization_user_ids', $organizationUser->_id)
             ->first();
 
-        $meEvents = [];
+        //$meEvents = [];
         // Obtener eventos usuario
-        $events = Event::where('organizer_id', $organizationID)
-            ->get();
+        //$events = Event::where('organizer_id', $organizationID)
+        //   ->get();
 
         // Filtrar eventos comunes por la existencia del usuario
-        $events->each(function ($event) use (&$meEvents) {
-            $attendeeExists = Attendee::where('account_id', Auth::user()->_id)
-                ->where('event_id', $event->_id)
-                ->exists();
+        //$events->each(function ($event) use (&$meEvents) {
+        //    $attendeeExists = Attendee::where('account_id', Auth::user()->_id)
+        //        ->where('event_id', $event->_id)
+        //        ->exists();
 
-            if ($attendeeExists) {
-                array_push($meEvents, $event);
-            }
-        });
+        //    if ($attendeeExists) {
+        //        array_push($meEvents, $event);
+        //    }
+        //});
+
+        $meEvents = Event::where('organizer_id', '653047d0b2b1aee7e00b57e2')
+            ->whereHas('eventUsers', function ($query) {
+                $query->where('account_id', '=', Auth::user()->id);
+            })
+            //->select('_id', 'name')
+            ->get()
+            ->toArray();
 
         // Si el usuario tiene acceso gratuito, agregar esos eventos
         if ($freeAccessGroup) {

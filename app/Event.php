@@ -297,4 +297,9 @@ class Event extends ModelsEvent
     {
         return $this->embedsMany('App\UserProperties');
     }
+
+    public function groupOrganization()
+    {
+        return $this->belongsTo('App\GroupOrganization ');
+    }
 }
