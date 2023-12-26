@@ -16,6 +16,7 @@ use App\ModelHasRole;
 use App\State;
 use Storage;
 use App\UserProperties;
+use Carbon\Carbon;
 
 class EventService
 {
@@ -206,5 +207,46 @@ class EventService
                     'json' => $newUser
                 ]);
             });
+    }
+
+    /**
+     * _validateFinalizedEvent_: Validar si el evento ya finalizo
+     * 
+     **/
+    public static function validateFinalizedEvent(Event $event)
+    {
+        // No aplica para cliente pasados
+        if (empty($event->is_finalized )) {
+            return false;
+        }
+
+        if ($event->is_finalized) {
+            return true;
+        }
+
+        // Validar expiracion campo datetime_to
+        $currentDate = Carbon::now()->toDateString();
+        $isFinalized = false; // default
+
+        if ($currentDate > $event->datetime_to->toDateString()) {
+            $isFinalized = true;
+        }
+
+        // Validar extencion de fecha
+        $hasExtendedDate = isset($event->extended_date);
+
+        if ($hasExtendedDate && $currentDate > $event->extended_date) {
+            $isFinalized = true;
+        } elseif ($hasExtendedDate && $currentDate < $event->extended_date) {
+            $isFinalized = false;
+        }
+
+        // Set valor de finalizacion
+        if ($isFinalized) {
+            $event->is_finalized = true;
+            $event->save();
+        }
+
+        return $isFinalized;
     }
 }

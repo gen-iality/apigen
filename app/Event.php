@@ -113,9 +113,17 @@ class Event extends ModelsEvent
         'show_event_date', // Boolean: mostrar la fecha del evento
         'hide_event_in_passed',
         'group_organization_id', // String: Relaciona evento con un Group Organization
+        'is_finalized', // Boolean: Estado para determinar si un evento ha finalizado
+        'extended_date', // Date: Fecha de extencion de finalizacion de un evento (aplica si el cliente pago)
     ];
 
-    protected $times = ['datetime_from', 'datetime_to', 'created_at', 'updated_at'];
+    protected $times = [
+        'datetime_from',
+        'datetime_to',
+        'created_at',
+        'updated_at',
+        'extended_date'
+    ];
 
     public function __construct($data = array())
     {

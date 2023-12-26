@@ -573,6 +573,13 @@ class EventController extends Controller
     public static function show(String $id)
     {
         $event = Event::findOrFail($id);
+
+        // Validar si el evento ya finalizo
+        $isFinalized = EventService::validateFinalizedEvent($event);
+        if ($isFinalized) {
+            return response()->json(['message' => 'Event was finalized'], 400);
+        }
+
         return $event;
     }
 
@@ -618,6 +625,7 @@ class EventController extends Controller
         /* Organizer:
         It could be "me"(current user) or an organization Id
         the relationship is polymorpic.
+// No aplica para cliente pasados
          */
 
         if (empty($data['itemsMenu']) && !empty($event->itemsMenu)) {
