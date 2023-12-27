@@ -216,7 +216,7 @@ class EventService
     public static function validateFinalizedEvent(Event $event)
     {
         // No aplica para cliente pasados
-        if (empty($event->is_finalized )) {
+        if (!isset($event->is_finalized)) {
             return false;
         }
 
