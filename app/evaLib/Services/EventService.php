@@ -217,11 +217,11 @@ class EventService
     {
         // No aplica para cliente pasados
         if (!isset($event->is_finalized)) {
-            return false;
+            return;
         }
 
         if ($event->is_finalized) {
-            return true;
+            return;
         }
 
         // Validar expiracion campo datetime_to
@@ -246,7 +246,5 @@ class EventService
             $event->is_finalized = true;
             $event->save();
         }
-
-        return $isFinalized;
     }
 }

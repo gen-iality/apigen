@@ -575,10 +575,7 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
 
         // Validar si el evento ya finalizo
-        $isFinalized = EventService::validateFinalizedEvent($event);
-        if ($isFinalized) {
-            return response()->json(['message' => 'Event was finalized'], 401);
-        }
+        EventService::validateFinalizedEvent($event);
 
         return $event;
     }
