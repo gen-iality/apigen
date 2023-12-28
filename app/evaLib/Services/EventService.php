@@ -215,36 +215,30 @@ class EventService
      **/
     public static function validateFinalizedEvent(Event $event)
     {
-        // No aplica para cliente pasados
-        if (!isset($event->is_finalized)) {
-            return;
-        }
-
-        if ($event->is_finalized) {
+        // No realizar validacion si es cliente antiguo o evento ya finalizo
+        if (!isset($event->is_finalized) || $event->is_finalized) {
             return;
         }
 
         // Validar expiracion campo datetime_to
-        $currentDate = Carbon::now()->toDateString();
+        $currentDate = Carbon::now();
         $isFinalized = false; // default
+        $extensionFree = 6; // Dias de prorroga para finalizar evento
 
-        if ($currentDate > $event->datetime_to->toDateString()) {
+        if ($currentDate > $event->datetime_to->addDays($extensionFree)) {
             $isFinalized = true;
         }
 
         // Validar extencion de fecha
         $hasExtendedDate = isset($event->extended_date);
 
-        if ($hasExtendedDate && $currentDate > $event->extended_date) {
-            $isFinalized = true;
-        } elseif ($hasExtendedDate && $currentDate < $event->extended_date) {
-            $isFinalized = false;
+        if ($hasExtendedDate) {
+            $isFinalized = $currentDate > $event->extended_date->addDays($extensionFree);
         }
 
         // Set valor de finalizacion
         if ($isFinalized) {
-            $event->is_finalized = true;
-            $event->save();
+            $event->update(['is_finalized' => true]);
         }
     }
 }
