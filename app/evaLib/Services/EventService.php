@@ -241,4 +241,14 @@ class EventService
             $event->update(['is_finalized' => true]);
         }
     }
+
+    public static function setDefaultAttendeeCapacity(Event $event)
+    {
+        // Aforo por defecto para cada evento
+        if (!isset($event->attendee_capacity)) {
+            $event->update([
+                'attendee_capacity' => 20
+            ]);
+        }
+    }
 }

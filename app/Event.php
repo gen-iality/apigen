@@ -115,6 +115,7 @@ class Event extends ModelsEvent
         'group_organization_id', // String: Relaciona evento con un Group Organization
         'is_finalized', // Boolean: Estado para determinar si un evento ha finalizado
         'extended_date', // Date: Fecha de extencion de finalizacion de un evento (aplica si el cliente pago)
+        'attendee_capacity', // Number: numero de aforo de asistentes permitidos en el evento
     ];
 
     protected $times = [

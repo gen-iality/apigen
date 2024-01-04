@@ -577,6 +577,9 @@ class EventController extends Controller
         // Validar si el evento ya finalizo
         EventService::validateFinalizedEvent($event);
 
+        // Set Attendee capacity en caso que no exista
+        EventService::setDefaultAttendeeCapacity($event);
+
         return $event;
     }
 
