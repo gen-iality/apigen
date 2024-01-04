@@ -223,7 +223,7 @@ class EventService
         // Validar expiracion campo datetime_to
         $currentDate = Carbon::now();
         $isFinalized = false; // default
-        $extensionFree = 6; // Dias de prorroga para finalizar evento
+        $extensionFree = 2; // Dias de prorroga para finalizar evento
 
         if ($currentDate > $event->datetime_to->addDays($extensionFree)) {
             $isFinalized = true;
