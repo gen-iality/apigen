@@ -583,6 +583,32 @@ class EventController extends Controller
         return $event;
     }
 
+    public function validateAttendeeCapacity(Event $event)
+    {
+        $quantityAttendees = Attendee::where('event_id', $event->_id)->count();
+        $attendeeCapacityAllowed = $event->attendee_capacity ?? 20; // Valor por defecto
+
+        if ($quantityAttendees >= $attendeeCapacityAllowed) {
+            return response()->json(
+                [
+                    'message' => "Event hasn't attendee capacity",
+                    'capacity' => $attendeeCapacityAllowed,
+                    'attendees' => $quantityAttendees
+                ],
+                401
+            );
+        }
+
+        return response()->json(
+            [
+                'message' => 'Event has attendee capacity',
+                'capacity' => $attendeeCapacityAllowed,
+                'attendees' => $quantityAttendees
+            ],
+            200
+        );
+    }
+
     /**
      * _test_:simply testing service providers
      *

@@ -52,6 +52,7 @@ Route::get('aws/test', 'AwsSnsController@testreqS3');
  * Events
  ****************/
 Route::get('events/{event}', 'EventController@show')->middleware('permission:getEvent');
+Route::get('events/{event}/validate-attendee-capacity', 'EventController@validateAttendeeCapacity');
 Route::apiResource('events', 'EventController');
 //Route::post('events/{event}/restore', 'EventController@restore');
 Route::group(
