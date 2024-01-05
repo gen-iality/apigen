@@ -1,7 +1,9 @@
 <?php
+
 /**
  *
  */
+
 namespace App\evaLib\Services;
 
 use App\Account;
@@ -76,7 +78,7 @@ class UserEventService
             $orderItem->save();
         }
 
-        
+
         /* Si no existe el correo le mostramos el error */
         if (!isset($userData['email'])) {
             throw new \Exception('email is missing and is required');
@@ -96,12 +98,12 @@ class UserEventService
 
         $matchAttributes = ['email' => $email];
 
-        
+
         $user = Account::updateOrCreate($matchAttributes, $userData);
 
         /* ya con el usuario actualizamos o creamos el eventUser */
         $matchAttributes = ["event_id" => $event->id, "account_id" => $user->_id];
-        
+
         /**** HACEMOS ALGUNOS AJUSTES A LOS CAMPOS antes de importar el eventUser */
         $eventUserFields += $matchAttributes;
 
@@ -121,7 +123,6 @@ class UserEventService
                 //Se supone este es un rol por defecto (asistente) si todo el resto falla
                 $eventUserFields["rol_id"] = "60e8a7e74f9fb74ccd00dc22";
             }
-
         }
 
         //esto por que se nos fue un error en el excel al princiopo
@@ -147,14 +148,13 @@ class UserEventService
             if (isset($eventUserFields["state"])) {
                 unset($eventUserFields["state"]);
             }
-
         }
 
         /* FINALMENTE */
         $eventUser = null;
         $model = Attendee::where($matchAttributes)->first();
 
-        
+
         if ($model) {
             //Si algun campo no se envia para importar, debe mantener los datos ya guardados en la base de datos
             $eventUserFields["properties"] = array_merge($model->properties, $eventUserFields["properties"]);
@@ -163,27 +163,27 @@ class UserEventService
         } else {
             $eventUser = Attendee::create($eventUserFields);
             // En caso de que el event posea document user
-            $document_user = isset($event->extra_config['document_user']) ?$event->extra_config['document_user'] : null ;
+            $document_user = isset($event->extra_config['document_user']) ? $event->extra_config['document_user'] : null;
             if (!empty($document_user)) {
                 $limit = $document_user['quantity'];
                 $eventUser = UserEventService::addDocumentUserToEventUserByEvent($event, $eventUser, $limit);
             }
         }
-       
+
 
         /* Si viene el id de la orden en la variable eventUserFields
         buscamos la orden  */
         if (isset($eventUserFields["order_id"])) {
             $order->save();
         }
-/*
+        /*
 array(2) {
 ["a"]=>
 string(24) "5f49421b1985d661d57af862"
 ["b"]=>
 string(10) "1030522402"
 5bef34f2854baf00995e018d
-}*/ 
+}*/
         $result_status = ($eventUser->wasRecentlyCreated) ? self::CREATED : self::UPDATED;
 
         //don't know why updateOrCreate doens't eager load related models
@@ -191,7 +191,7 @@ string(10) "1030522402"
 
         $user = Account::find($eventUser->account_id);
         $eventUser->user = $user;
-        
+
 
         return (object) [
             "status" => $result_status,
@@ -230,7 +230,6 @@ string(10) "1030522402"
         }
 
         return $eventAttendees;
-
     }
 
     /**
@@ -264,7 +263,6 @@ string(10) "1030522402"
         }
 
         return $eventAttendees;
-
     }
 
     /**
@@ -290,7 +288,6 @@ string(10) "1030522402"
             if (!$user) {
                 Log::debug('Account not found when trying to create. ' . $userId);
                 continue;
-
             }
             Log::debug('Account not found when trying to create. ' . $userId);
             //Crear Attendee
@@ -375,13 +372,12 @@ string(10) "1030522402"
 
     public static function addDocumentUserToEventUserByEvent($event, $eventUser, $limit)
     {
-        
+
         // asignar documents user a event user en properties
         $properties = $eventUser['properties'];
-        
 
-        if(isset($eventUser['properties']['documents_user']))
-        {   
+
+        if (isset($eventUser['properties']['documents_user'])) {
             $newDocument = DocumentUser::create([
                 "name" => $event->name,
                 "url" => $eventUser['properties']['documents_user'],
@@ -392,7 +388,7 @@ string(10) "1030522402"
             $properties_merge = array_merge($properties, ['documents_user' => ["url" => $newDocument->url, "name" => $newDocument->name]]);
             $eventUser['properties'] = $properties_merge;
             $eventUser->save();
-        }else{
+        } else {
             // traer document user sin asignar
             $get_documets_user = DocumentUser::where('assign', false)->where('event_id', $event->_id)->paginate($limit);
 
@@ -410,12 +406,11 @@ string(10) "1030522402"
             $documents_user_url = [];
             foreach ($documents_user as $doc) {
 
-                array_push($documents_user_url, ["name" => $doc['name'] , "url" =>  $doc['url']]);
+                array_push($documents_user_url, ["name" => $doc['name'], "url" =>  $doc['url']]);
             }
             $properties_merge = array_merge($properties, ['documents_user' => $documents_user_url]);
             $eventUser['properties'] = $properties_merge;
             $eventUser->save();
-
         }
 
         return $eventUser;
@@ -423,11 +418,10 @@ string(10) "1030522402"
 
     public static function asignRolToEventUser($rol_name, $event, $user)
     {
-	// If the attendee is the owner of this event, don't change admin rol
-	if($event->author_id === $user->_id)
-	{
-	  return '5c1a59b2f33bd40bb67f2322';
-	}
+        // If the attendee is the owner of this event, don't change admin rol
+        if ($event->author_id === $user->_id) {
+            return '5c1a59b2f33bd40bb67f2322';
+        }
 
         if ($rol_name) {
             $rol = Rol::where('name', $rol_name)->first();
@@ -446,70 +440,70 @@ string(10) "1030522402"
 
     public static function generateBingoCode()
     {
-	$randomCode = substr(str_shuffle(str_repeat($x='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(5/strlen($x)) )),1,5);
+        $randomCode = substr(str_shuffle(str_repeat($x = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(5 / strlen($x)))), 1, 5);
         //verificar que el codigo no se repita
         $bingoCard = BingoCard::where('code', $randomCode)->first();
-        if(!empty( $bingoCard )) { // si existe ya un carton con ese codigo
-	    self::generateBingoCode();
+        if (!empty($bingoCard)) { // si existe ya un carton con ese codigo
+            self::generateBingoCode();
         }
 
-	return $randomCode;
+        return $randomCode;
     }
 
     public static function createBingoCardToAttendee($eventUser, $bingo, $bingoValues)
     {
-      $randomBingoCardValues = [];
-      // asignacion de valores al carton segun las dimensiones del bingo
-      while(count($randomBingoCardValues) < $bingo->dimensions['amount']) {
-        $randomValue = $bingoValues[rand(0, count($bingoValues) -1)];
-        !in_array($randomValue, $randomBingoCardValues, true)
-            && array_push($randomBingoCardValues, $randomValue);
-      }
+        $randomBingoCardValues = [];
+        // asignacion de valores al carton segun las dimensiones del bingo
+        while (count($randomBingoCardValues) < $bingo->dimensions['amount']) {
+            $randomValue = $bingoValues[rand(0, count($bingoValues) - 1)];
+            !in_array($randomValue, $randomBingoCardValues, true)
+                && array_push($randomBingoCardValues, $randomValue);
+        }
 
-      $bingoCard = BingoCard::create(
-          [
-              'event_user_id' => isset($eventUser->_id) ? $eventUser->_id : null,
-              'event_id' => $bingo->event_id,
-              'bingo_id' => $bingo->_id,
-              'values_bingo_card' => $randomBingoCardValues,
-              'code' => self::generateBingoCode()
-          ]
-      );
+        $bingoCard = BingoCard::create(
+            [
+                'event_user_id' => isset($eventUser->_id) ? $eventUser->_id : null,
+                'event_id' => $bingo->event_id,
+                'bingo_id' => $bingo->_id,
+                'values_bingo_card' => $randomBingoCardValues,
+                'code' => self::generateBingoCode()
+            ]
+        );
 
-      return $bingoCard;
+        return $bingoCard;
     }
 
     public static function generateBingoCardForAttendee($event_id, $event_user_id)
     {
-      $bingo = Bingo::where('event_id', $event_id)->first();
+        $bingo = Bingo::where('event_id', $event_id)->first();
 
-      $bingoValues = $bingo->bingo_values;
+        $bingoValues = $bingo->bingo_values;
 
-      // Solo asignar cartones de bingo cuando el bingo tenga la cantidad de valores
-      // minima para poder jugar segun las dimensiones correspondientes
-      if(count($bingoValues) < $bingo->dimensions['minimun_values']) {
-	  return ['message' => 'Not enough values to generate bingo cards'];
-      }
+        // Solo asignar cartones de bingo cuando el bingo tenga la cantidad de valores
+        // minima para poder jugar segun las dimensiones correspondientes
+        if (count($bingoValues) < $bingo->dimensions['minimun_values']) {
+            return ['message' => 'Not enough values to generate bingo cards'];
+        }
 
-      // Crear cantidad de cartones segun usuario, por defecto es 1
-      if($event_user_id) {
-	$eventUser = Attendee::findOrFail($event_user_id);
-      	$qtyBingoCards = isset($eventUser->properties['qty_bingo_cards']) ?
-      	    $eventUser->properties['qty_bingo_cards'] : 1;
+        // Crear cantidad de cartones segun usuario, por defecto es 1
+        if ($event_user_id) {
+            $eventUser = Attendee::findOrFail($event_user_id);
+            $qtyBingoCards = isset($eventUser->properties['qty_bingo_cards']) ?
+                $eventUser->properties['qty_bingo_cards'] : 1;
 
-      	$bingoCardCreated = []; // Cartones creados
-      	for($i = 0; $i < $qtyBingoCards; $i++) {
-      	  $bingoCard = self::createBingoCardToAttendee($eventUser, $bingo, $bingoValues);
-      	  array_push($bingoCardCreated, $bingoCard);
-      	}
+            $bingoCardCreated = []; // Cartones creados
+            for ($i = 0; $i < $qtyBingoCards; $i++) {
+                $bingoCard = self::createBingoCardToAttendee($eventUser, $bingo, $bingoValues);
+                array_push($bingoCardCreated, $bingoCard);
+            }
 
-	return $bingoCardCreated;
-      }
+            return $bingoCardCreated;
+        }
 
-      // Crear bingo cards sin asignar asistentes
-      $bingoCard = self::createBingoCardToAttendee($eventUser=null, $bingo, $bingoValues);
+        // Crear bingo cards sin asignar asistentes
+        $bingoCard = self::createBingoCardToAttendee($eventUser = null, $bingo, $bingoValues);
 
-      return $bingoCard;
+        return $bingoCard;
     }
 
     /**
@@ -520,43 +514,43 @@ string(10) "1030522402"
      */
     public static function resetBingoCardsForAttendees(Bingo $bingo)
     {
-	$eventUsers = Attendee::where('event_id', $bingo->event_id)->get();
+        $eventUsers = Attendee::where('event_id', $bingo->event_id)->get();
 
-	foreach($eventUsers as $eventUser) {
-	    // Eliminar cartones
-	    $bingoCards = BingoCard::where('event_user_id', $eventUser->_id)->pluck('_id')->toArray();
-	    !empty($bingoCards) && BingoCard::destroy($bingoCards);
-	    // crear cartones nuevos
-	    self::generateBingoCardForAttendee($eventUser->event_id, $eventUser->_id);
-	}
+        foreach ($eventUsers as $eventUser) {
+            // Eliminar cartones
+            $bingoCards = BingoCard::where('event_user_id', $eventUser->_id)->pluck('_id')->toArray();
+            !empty($bingoCards) && BingoCard::destroy($bingoCards);
+            // crear cartones nuevos
+            self::generateBingoCardForAttendee($eventUser->event_id, $eventUser->_id);
+        }
     }
 
     // Cuando un valor de un bingo es actualizado
     // en los cartones de los usuarios este valor debe actualizarce
     public static function updateBingoValues($bingo, $value)
     {
-	// traer todos los bingo cards
-	$bingoCards = BingoCard::where('bingo_id', $bingo->_id)->get();
-	// verificar que existan cartones
-	if(!isset($bingoCards)) {
-	    return ['message' => 'There are no bingo cards to update'];
-	}
+        // traer todos los bingo cards
+        $bingoCards = BingoCard::where('bingo_id', $bingo->_id)->get();
+        // verificar que existan cartones
+        if (!isset($bingoCards)) {
+            return ['message' => 'There are no bingo cards to update'];
+        }
 
         $updatedBingoValues = [];
-	foreach($bingoCards as $bingoCard) {
-	    // filtrar todos los que tengan ese valor
-	    foreach($bingoCard->values_bingo_card as $bingoValue) {
-		// remplazar el valor actualizar
-                if($bingoValue['id'] === $value['id']) {
-		    $bingoValue = $value;
+        foreach ($bingoCards as $bingoCard) {
+            // filtrar todos los que tengan ese valor
+            foreach ($bingoCard->values_bingo_card as $bingoValue) {
+                // remplazar el valor actualizar
+                if ($bingoValue['id'] === $value['id']) {
+                    $bingoValue = $value;
                 }
                 array_push($updatedBingoValues, $bingoValue);
-	    }
+            }
 
-	    $bingoCard->values_bingo_card = $updatedBingoValues;
-	    $bingoCard->save();
-	    $updatedBingoValues = [];
-	}
+            $bingoCard->values_bingo_card = $updatedBingoValues;
+            $bingoCard->save();
+            $updatedBingoValues = [];
+        }
     }
 
     /**
@@ -569,28 +563,40 @@ string(10) "1030522402"
      */
     public static function assignFieldForCheckinByActivity($eventUser, $activity_id)
     {
-      $activityProperties = $eventUser->activityProperties ? $eventUser->activityProperties : [];
+        $activityProperties = $eventUser->activityProperties ? $eventUser->activityProperties : [];
 
-      if(count($activityProperties) > 0) {
-	$activityAlreadyExists = array_filter($activityProperties, function($checkin) use ($activity_id) {
-      	  return $checkin['activity_id'] === $activity_id;
-      	});
-	// En caso de volver a ser importado en la actividad no se recrea
-	// el objecto con los datos
-      	if ($activityAlreadyExists) {
-      	  return $eventUser;
-      	}
-      }
+        if (count($activityProperties) > 0) {
+            $activityAlreadyExists = array_filter($activityProperties, function ($checkin) use ($activity_id) {
+                return $checkin['activity_id'] === $activity_id;
+            });
+            // En caso de volver a ser importado en la actividad no se recrea
+            // el objecto con los datos
+            if ($activityAlreadyExists) {
+                return $eventUser;
+            }
+        }
 
-      array_push($activityProperties, [
-	'activity_id' => $activity_id,
-	'checked_in' => false,
-	'checked_at' => null,
-	'checkedin_type' => null
-      ]);
-      $eventUser->activityProperties = $activityProperties;
-      $eventUser->save();
+        array_push($activityProperties, [
+            'activity_id' => $activity_id,
+            'checked_in' => false,
+            'checked_at' => null,
+            'checkedin_type' => null
+        ]);
+        $eventUser->activityProperties = $activityProperties;
+        $eventUser->save();
 
-      return $eventUser;
+        return $eventUser;
+    }
+
+    public static function validateAttendeeCapacity(Event $event)
+    {
+        $quantityAttendees = Attendee::where('event_id', $event->_id)->count();
+        $attendeeCapacityAllowed = $event->attendee_capacity ?? 20; // Valor por defecto
+
+        if ($quantityAttendees >= $attendeeCapacityAllowed) {
+            return true;
+        }
+
+        return false;
     }
 }

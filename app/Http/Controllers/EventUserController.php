@@ -538,6 +538,17 @@ class EventUserController extends Controller
             $noSendMail = true;
         }
 
+
+        $event = Event::findOrFail($event_id);
+
+        // Validar capacidad
+        $isAttendeeCapacityCompleted = UserEventService::validateAttendeeCapacity($event);
+        if ($isAttendeeCapacityCompleted) {
+            return response()->json([
+                'message' => "Event hasn't attendee capacity",
+            ], 401);
+        }
+
         // 🟠🟠🟠 Crear usuarios WOM eliminar 🟠🟠🟠
         if ($event_id === '64ef6e94ffaaef008308e9b3') { // event_id espejo
             // Cambiar event_id por el del evento original
@@ -573,7 +584,6 @@ class EventUserController extends Controller
             ], 409);
         }
 
-        $event = Event::findOrFail($event_id);
         $image = null; //$event->picture;
 
         //Account rol assigned by default, this valor is constant because any user don't select their rol_id
@@ -660,6 +670,14 @@ class EventUserController extends Controller
         $eventUserData["email"] = strtolower($eventUserData["email"]);
         $event = Event::findOrFail($event_id);
         $email = $eventUserData["email"];
+
+        // Validar capacidad
+        $isAttendeeCapacityCompleted = UserEventService::validateAttendeeCapacity($event);
+        if ($isAttendeeCapacityCompleted) {
+            return response()->json([
+                'message' => "Event hasn't attendee capacity",
+            ], 401);
+        }
 
         try {
             // crear cuenta de usuario si no existe
