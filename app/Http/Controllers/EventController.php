@@ -5,24 +5,25 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\evaLib\Services\EvaRol;
 use App\evaLib\Services\EventService;
+use App\evaLib\Services\UserEventService;
 use App\evaLib\Services\FilterQuery;
 use App\evaLib\Services\GoogleFiles;
 use App\Event;
-use App\Plan;
+//use App\Plan;
 use App\EventType;
 use App\Attendee;
 use App\Http\Resources\EventResource;
-use App\ModelHasRole;
+//use App\ModelHasRole;
 use App\Organization;
 use App\Properties;
 use App\UserProperties;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Storage;
+//use Illuminate\Support\Facades\DB;
+//use Storage;
 use Validator;
 use Mail;
-use Carbon\Carbon;
+//use Carbon\Carbon;
 
 /**
  * @group Event
@@ -585,25 +586,18 @@ class EventController extends Controller
 
     public function validateAttendeeCapacity(Event $event)
     {
-        $quantityAttendees = Attendee::where('event_id', $event->_id)->count();
-        $attendeeCapacityAllowed = $event->attendee_capacity ?? 20; // Valor por defecto
-
-        if ($quantityAttendees >= $attendeeCapacityAllowed) {
-            return response()->json(
-                [
-                    'message' => "Event hasn't attendee capacity",
-                    'capacity' => $attendeeCapacityAllowed,
-                    'attendees' => $quantityAttendees
-                ],
-                401
-            );
+        $isAttendeeCapacityCompleted = UserEventService::validateAttendeeCapacity($event);
+        if ($isAttendeeCapacityCompleted) {
+            return response()->json([
+                'message' => "Event hasn't attendee capacity",
+            ], 401);
         }
 
         return response()->json(
             [
                 'message' => 'Event has attendee capacity',
-                'capacity' => $attendeeCapacityAllowed,
-                'attendees' => $quantityAttendees
+                //'capacity' => $attendeeCapacityAllowed,
+                //'attendees' => $quantityAttendees
             ],
             200
         );

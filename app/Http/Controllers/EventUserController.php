@@ -516,11 +516,13 @@ class EventUserController extends Controller
             'properties.email' => 'required|email:rfc,dns',
             'properties.names' => 'required|string|max:250',
         ]);
+
         $freeAccess =
             $request->query('free_access') === 'true' ?
             true : false;
 
         $eventUserData = $request->json()->all();
+
         // Determinar si fué creado desde flujo free access
         $eventUserData['free_access'] = $freeAccess;
 
@@ -528,16 +530,6 @@ class EventUserController extends Controller
         $email = $eventUserData["properties"]["email"];
 
         $noSendMail = $request->query('no_send_mail');
-
-        // 🟠🟠🟠 ELIMINAR 25/08/23 🟠🟠🟠
-        $eventsWithoutMail = [
-            //'64e8d6a2877b59d73c02e3d2',
-            '64e676ab1ff4cdc604097852',
-        ];
-        if (in_array($event_id, $eventsWithoutMail)) {
-            $noSendMail = true;
-        }
-
 
         $event = Event::findOrFail($event_id);
 
@@ -547,14 +539,6 @@ class EventUserController extends Controller
             return response()->json([
                 'message' => "Event hasn't attendee capacity",
             ], 401);
-        }
-
-        // 🟠🟠🟠 Crear usuarios WOM eliminar 🟠🟠🟠
-        if ($event_id === '64ef6e94ffaaef008308e9b3') { // event_id espejo
-            // Cambiar event_id por el del evento original
-            $event_id = '64ef6e4b96c586fe0a0524d2';
-            // Crear field para usuarios WOM
-            $eventUserData['properties']['wom_user'] = true;
         }
 
         $eventUserData['event_id'] = $event_id;

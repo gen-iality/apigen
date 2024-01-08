@@ -594,6 +594,7 @@ string(10) "1030522402"
         $attendeeCapacityAllowed = $event->attendee_capacity ?? 20; // Valor por defecto
 
         if ($quantityAttendees >= $attendeeCapacityAllowed) {
+            // Aforo completado
             return true;
         }
 
