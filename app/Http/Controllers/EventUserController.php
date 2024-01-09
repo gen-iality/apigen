@@ -521,6 +521,10 @@ class EventUserController extends Controller
             $request->query('free_access') === 'true' ?
             true : false;
 
+        $attendeeRestriction =
+            $request->query('attendee_restriction') === 'true' ?
+            true : false;
+
         $eventUserData = $request->json()->all();
 
         // Determinar si fué creado desde flujo free access
@@ -534,9 +538,11 @@ class EventUserController extends Controller
         $event = Event::findOrFail($event_id);
 
         // Validar capacidad
-        $attendeeCapacity = UserEventService::validateAttendeeCapacity($event);
-        if ($attendeeCapacity['is_completed']) {
-            return response()->json(compact('attendeeCapacity'), 401);
+        if ($attendeeRestriction) {
+            $attendeeCapacity = UserEventService::validateAttendeeCapacity($event);
+            if ($attendeeCapacity['is_completed']) {
+                return response()->json(compact('attendeeCapacity'), 401);
+            }
         }
 
         $eventUserData['event_id'] = $event_id;
