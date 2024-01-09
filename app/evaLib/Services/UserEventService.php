@@ -593,11 +593,17 @@ string(10) "1030522402"
         $quantityAttendees = Attendee::where('event_id', $event->_id)->count();
         $attendeeCapacityAllowed = $event->attendee_capacity ?? 20; // Valor por defecto
 
+        $result = [
+            'capacity_allowed' => $attendeeCapacityAllowed,
+            'quantity_attendees' => $quantityAttendees,
+            'is_completed' => false
+        ];
+
         if ($quantityAttendees >= $attendeeCapacityAllowed) {
             // Aforo completado
-            return true;
+            $result['is_completed'] = true;
         }
 
-        return false;
+        return $result;
     }
 }

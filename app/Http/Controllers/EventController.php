@@ -586,21 +586,9 @@ class EventController extends Controller
 
     public function validateAttendeeCapacity(Event $event)
     {
-        $isAttendeeCapacityCompleted = UserEventService::validateAttendeeCapacity($event);
-        if ($isAttendeeCapacityCompleted) {
-            return response()->json([
-                'message' => "Event hasn't attendee capacity",
-            ], 401);
-        }
+        $attendeeCapacity = UserEventService::validateAttendeeCapacity($event);
 
-        return response()->json(
-            [
-                'message' => 'Event has attendee capacity',
-                //'capacity' => $attendeeCapacityAllowed,
-                //'attendees' => $quantityAttendees
-            ],
-            200
-        );
+        return response()->json(compact('attendeeCapacity'));
     }
 
     /**

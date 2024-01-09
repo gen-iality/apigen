@@ -534,11 +534,9 @@ class EventUserController extends Controller
         $event = Event::findOrFail($event_id);
 
         // Validar capacidad
-        $isAttendeeCapacityCompleted = UserEventService::validateAttendeeCapacity($event);
-        if ($isAttendeeCapacityCompleted) {
-            return response()->json([
-                'message' => "Event hasn't attendee capacity",
-            ], 401);
+        $attendeeCapacity = UserEventService::validateAttendeeCapacity($event);
+        if ($attendeeCapacity['is_completed']) {
+            return response()->json(compact('attendeeCapacity'), 401);
         }
 
         $eventUserData['event_id'] = $event_id;
@@ -656,11 +654,9 @@ class EventUserController extends Controller
         $email = $eventUserData["email"];
 
         // Validar capacidad
-        $isAttendeeCapacityCompleted = UserEventService::validateAttendeeCapacity($event);
-        if ($isAttendeeCapacityCompleted) {
-            return response()->json([
-                'message' => "Event hasn't attendee capacity",
-            ], 401);
+        $attendeeCapacity = UserEventService::validateAttendeeCapacity($event);
+        if ($attendeeCapacity['is_completed']) {
+            return response()->json(compact('attendeeCapacity'), 401);
         }
 
         try {
