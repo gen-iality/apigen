@@ -654,18 +654,27 @@ class EventUserController extends Controller
         $notifyAdmin = $request->query('notify_admin') === 'false' ?
             false : true;
 
+        $attendeeRestriction =
+            $request->query('attendee_restriction') === 'true' ?
+            true : false;
+
         $eventUserData = $request->json()->all();
+
         $eventUserData["email"] = strtolower($eventUserData["email"]);
         $event = Event::findOrFail($event_id);
         $email = $eventUserData["email"];
 
-        // Validar capacidad
-        $attendeeCapacity = UserEventService::validateAttendeeCapacity($event);
-        if ($attendeeCapacity['is_completed']) {
-            return response()->json(compact('attendeeCapacity'), 401);
-        }
-
         try {
+            $eventUserExists = Attendee::where('event_id', $event_id)
+                ->where('properties.email', $email)->exists();
+
+            // Si no existe usuario se debe ejecutar validacion aforo
+            if (!$eventUserExists && $attendeeRestriction) {
+                $attendeeCapacity = UserEventService::validateAttendeeCapacity($event);
+                if ($attendeeCapacity['is_completed']) {
+                    return response()->json(compact('attendeeCapacity'), 401);
+                }
+            }
             // crear cuenta de usuario si no existe
             $user = Account::where("email", $email)->first();
 
@@ -679,16 +688,9 @@ class EventUserController extends Controller
                 $pass = $eventUserData['email'];
             }
 
-            if ($overwritePassword  && isset($user)) {
+            if ($overwritePassword && isset($user)) {
                 $auth = resolve('Kreait\Firebase\Auth');
                 $this->auth = $auth;
-                // crear nuevo usuario
-                //$user->fill([
-                //"email" => $email,
-                //"names" => $eventUserData["names"],
-                //"password" => $pass,
-                //]);
-                // Paso extra para cambiar password
                 $this->auth->changeUserPassword($user['uid'], $pass);
             } elseif (!isset($user)) {
                 $user = Account::create([
