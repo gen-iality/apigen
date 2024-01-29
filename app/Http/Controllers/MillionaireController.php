@@ -72,6 +72,11 @@ class MillionaireController extends Controller
     public function MillionairebyEvent(string $event_id)
     {
         $millionaire = Millionaire::where('event_id', $event_id)->first();
+
+        if (!$millionaire) {
+            return response()->json(['message' => 'Millionaire not found'], 404);
+        }
+
         return $millionaire;
     }
 
@@ -121,9 +126,9 @@ class MillionaireController extends Controller
                     unset($stages[$i - 1]);
                 }
                 $millionaire->stages = $stages;
-            break;
+                break;
         }
-        
+
         $millionaire->fill($data);
         $millionaire->save();
 
@@ -263,7 +268,7 @@ class MillionaireController extends Controller
         $data = $request->json()->all();
         $data['id'] = uniqid();
         $new_answers = [];
-        foreach($data['answers'] as $answer) {
+        foreach ($data['answers'] as $answer) {
             $answer['id'] = uniqid();
             array_push($new_answers, $answer);
         }
@@ -321,9 +326,9 @@ class MillionaireController extends Controller
     public function removeOneQuestion(Millionaire $millionaire, $question_id)
     {
         //comprobar si la pregunta esta asignada a una etapa
-        foreach($millionaire->stages as $stage) {
+        foreach ($millionaire->stages as $stage) {
             $stage_question = $stage['question'] ? $stage['question'] : null;
-            if($stage_question == $question_id) {
+            if ($stage_question == $question_id) {
                 return response()->json(['error' => 'The question is assigned to a stage'], 400);
             }
         }
@@ -337,7 +342,7 @@ class MillionaireController extends Controller
         }
         $millionaire->questions = $new_questions;
         $millionaire->save();
-        
+
         return response()->json($millionaire);
     }
 
@@ -373,8 +378,8 @@ class MillionaireController extends Controller
         $millionaire->questions = $questions;
         $millionaire->save();
         // comprobar si la respuesta es de una pregunta que esta asignada a un stage y actualizar el stage
-        foreach($millionaire->stages as $stage) {
-            if($stage['question']['id'] == $question_id) {
+        foreach ($millionaire->stages as $stage) {
+            if ($stage['question']['id'] == $question_id) {
                 App('App\Http\Controllers\MillionaireController')->assignQuestionToStage($millionaire, $stage['id'], $question_id);
             }
         }
@@ -415,8 +420,8 @@ class MillionaireController extends Controller
         $millionaire->questions = $questions;
         $millionaire->save();
         // comprobar si la respuesta es de una pregunta que esta asignada a un stage y actualizar el stage
-        foreach($millionaire->stages as $stage) {
-            if($stage['question']['id'] == $question_id) {
+        foreach ($millionaire->stages as $stage) {
+            if ($stage['question']['id'] == $question_id) {
                 App('App\Http\Controllers\MillionaireController')->assignQuestionToStage($millionaire, $stage['id'], $question_id);
             }
         }
@@ -448,8 +453,8 @@ class MillionaireController extends Controller
         $millionaire->questions = $questions;
         $millionaire->save();
         // comprobar si la respuesta es de una pregunta que esta asignada a un stage y actualizar el stage
-        foreach($millionaire->stages as $stage) {
-            if($stage['question']['id'] == $question_id) {
+        foreach ($millionaire->stages as $stage) {
+            if ($stage['question']['id'] == $question_id) {
                 App('App\Http\Controllers\MillionaireController')->assignQuestionToStage($millionaire, $stage['id'], $question_id);
             }
         }
@@ -511,7 +516,7 @@ class MillionaireController extends Controller
         ]);
         $valuesToImport = $request->json()->all();
 
-        if($valuesToImport['replace_questions']){ //flag
+        if ($valuesToImport['replace_questions']) { //flag
             $millionaire->questions = [];
             $millionaire->save();
         }
@@ -521,30 +526,30 @@ class MillionaireController extends Controller
         $questions_fail = [];
 
 
-        foreach($valuesToImport['questions'] as $value) {
+        foreach ($valuesToImport['questions'] as $value) {
             $count_fail = count($questions_fail);
-            if(!isset($value['question']) || !isset($value['time_limit']) || !isset($value['type']) || !isset($value['answers'])) {
+            if (!isset($value['question']) || !isset($value['time_limit']) || !isset($value['type']) || !isset($value['answers'])) {
                 array_push($questions_fail, $value);
             }
-            if($value['type'] != 'text' && $value['type'] != 'image') {
+            if ($value['type'] != 'text' && $value['type'] != 'image') {
                 array_push($questions_fail, $value);
             }
 
             $new_answers = [];
-            foreach($value['answers'] as $answer) {
-                if(!isset($answer['answer']) || !isset($answer['is_correct']) || !isset($answer['is_true_or_false']) || !isset($answer['type'])) {
+            foreach ($value['answers'] as $answer) {
+                if (!isset($answer['answer']) || !isset($answer['is_correct']) || !isset($answer['is_true_or_false']) || !isset($answer['type'])) {
                     array_push($questions_fail, $value);
                 }
-                if($answer['type'] != 'text' && $answer['type'] != 'image') {
+                if ($answer['type'] != 'text' && $answer['type'] != 'image') {
                     array_push($questions_fail, $value);
                 }
                 $answer['id'] = uniqid();
                 array_push($new_answers, $answer);
             }
 
-            if($count_fail == count($questions_fail)) {
-                $value[ 'id' ] = uniqid();
-                $value[ 'answers' ] = $new_answers;
+            if ($count_fail == count($questions_fail)) {
+                $value['id'] = uniqid();
+                $value['answers'] = $new_answers;
                 array_push($questions, $value);
                 array_push($success, $value);
             }
@@ -555,11 +560,12 @@ class MillionaireController extends Controller
 
         return response()->json(
             [
-            'success' => $success,
-            'count_success' => count($success),
-            'fail' => $questions_fail,
-            'count_fail' => count($questions_fail)
-            ], 201
+                'success' => $success,
+                'count_success' => count($success),
+                'fail' => $questions_fail,
+                'count_fail' => count($questions_fail)
+            ],
+            201
         );
     }
 }
