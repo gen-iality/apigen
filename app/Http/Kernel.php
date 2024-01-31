@@ -21,7 +21,6 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
 
-        
         \App\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\AuthenticateSession::class,
@@ -30,8 +29,10 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
 
+        \App\Http\Middleware\DomainMiddleware::class,
+
         // \App\Http\Middleware\ForceJsonResponse::class,
-        
+
         // \Illuminate\Session\Middleware\StartSession::class,
         // \Illuminate\View\Middleware\ShareErrorsFromSession::class
     ];
@@ -58,6 +59,7 @@ class Kernel extends HttpKernel
             // \Illuminate\Session\Middleware\StartSession::class,
             \App\Http\Middleware\ForceJsonResponse::class,
             'bindings',
+            \App\Http\Middleware\DomainMiddleware::class,
             // \Spatie\ResponseCache\Middlewares\CacheResponse::class,
         ],
         'token' => [
@@ -93,9 +95,9 @@ class Kernel extends HttpKernel
         'permission' => \App\Http\Middleware\Permissions\PermissionMiddleware::class,
         'permissionUser' => \App\Http\Middleware\Permissions\PermissionsManageUser::class,
         'permissionAttendee' => \App\Http\Middleware\Permissions\PermissionAttendeeMidleware::class,
+
         // Restriction plan
         'userRegistrationRestriction' => \App\Http\Middleware\RestrictionPlan\UserRegistrationRestriction::class,
         'OrganizersRestriction' => \App\Http\Middleware\RestrictionPlan\OrganizersRestriction::class
-
     ];
 }
