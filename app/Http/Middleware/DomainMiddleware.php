@@ -18,7 +18,7 @@ class DomainMiddleware
         $allowedDomains = config('app.domains');
         $allowedDomains = explode(',', $allowedDomains);
 
-        $requestDomain = $request->getHost();
+        $requestDomain = $request->header('origin');
 
         if (in_array($requestDomain, $allowedDomains)) {
             return $next($request);
