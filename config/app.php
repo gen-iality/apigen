@@ -44,6 +44,7 @@ return [
     'authorization' => env('AUTHORIZATION'), //whatsapp token
     'authorization_mmasivo' => env('AUTHORIZATION_MMASIVO'), //mmasivo token
     'rol_admin' => env('ROL_ADMIN', '5c1a59b2f33bd40bb67f2322'), //rol admin
+    'domains' => env('ALLOWED_DOMAINS', ''),
     // VIMEO
     'vimeo_folder' => env('VIMEO_FOLDER'),
     'vimeo_client' => env('VIMEO_CLIENT'),
