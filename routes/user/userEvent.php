@@ -56,7 +56,7 @@ Route::group(
         Route::delete('events/{event}/eventusers/{eventuser}', 'EventUserController@destroy')->middleware('permissionUser:destroy');
         Route::get('me/eventusers/event/{event}', 'EventUserController@indexByUserInEvent');
         Route::get('events/myevents', 'EventUserController@indexByEventUser');
-        
+        Route::get('events/byaccountid/{account_id}', 'EventUserController@ByAccountId');
         Route::get('events/{event}/searchinevent/', 'EventUserController@searchInEvent');
         Route::get('/eventusers/event/{event}/user/{user_id}', 'EventUserController@ByUserInEvent');
         Route::get('me/events/{event}/eventusers',  'EventUserController@meInEvent');

@@ -904,6 +904,17 @@ class EventUserController extends Controller
         return Event::find($events_id);
     }
 
+    public function ByAccountId(Request $request, $account_id)
+    {
+        $events = Attendee::with("event")->where("account_id", $account_id)->get();
+        $events_id = [];
+        foreach ($events as $key => $value) {
+            array_push($events_id, $value["event_id"]);
+        }
+        return Event::find($events_id);
+    }
+ 
+
     /**
      * _ByUserInEvent_ : list of users by events
      *
