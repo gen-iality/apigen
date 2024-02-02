@@ -15,15 +15,16 @@ class DomainMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $allowedDomains = config('app.domains');
-        $allowedDomains = explode(',', $allowedDomains);
+        return $next($request);
+        // $allowedDomains = config('app.domains');
+        // $allowedDomains = explode(',', $allowedDomains);
 
-        $requestDomain = $request->header('origin');
+        // $requestDomain = $request->header('origin');
 
-        if (in_array($requestDomain, $allowedDomains)) {
-            return $next($request);
-        }
+        // if (in_array($requestDomain, $allowedDomains)) {
+        //     return $next($request);
+        // }
 
-        return response()->json(['message' => 'access denied'], 401);
+        // return response()->json(['message' => 'access denied'], 401);
     }
 }
