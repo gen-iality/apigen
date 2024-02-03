@@ -184,6 +184,9 @@ Route::apiResource('events/{event}/mailing', 'MailController');
 Route::get('certificates-by-params', 'CertificateController@certificatesByParams');
 Route::get('certificates-by-params/{certificate}/attendees/{attendee}', 'CertificateController@generateCertificateByParams');
 
+Route::get('certificates/byOrganizationUser/{organizationuser_id}', 'CertificateController@byOrgUser');
+
+
 Route::post('send-certificates/{event}', 'CertificateController@sendCertificateForAll');
 Route::post('generatecertificate', 'CertificateController@generateCertificate');
 Route::post('generatecertificates', 'CertificateController@generateCertificates');

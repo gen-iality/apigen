@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Attendee as AppAttendee;
-use App\Certificate;
+
 use App\Event;
+use App\Certificate;
 use App\Models\Attendee;
+use App\OrganizationUser;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use PDF;
@@ -35,6 +37,76 @@ class CertificateController extends Controller
     {
         $query = Certificate::where('event_id', $event_id)->paginate(config('app.page_size'));
         return JsonResource::collection($query);
+        //$events = Event::where('visibility', $request->input('name'))->get();
+    }
+
+    /**
+     *  search certificates  for the specified organizationUser
+     *  the search is done using a certificate property called userTypes
+     *  if the  attendee of the event has the the same userType as the certificate, the certificate is selected
+     *  
+     *  $organizationuser_id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function byOrgUser(Request $request, string $organizationuser_id)
+    {
+
+        //Load Organization User;
+        // test $organizationuser_id = '653047d0b2b1aee7e00b57e3';
+        $orgUser = OrganizationUser::findOrFail($organizationuser_id);
+
+        /**
+         * LOAD CERTIFICATES
+         */
+        //Load all certificates of the organization
+        $certificates = Certificate::select('_id', 'name', 'event_id', 'userTypes')->with('event:organizer_id')
+            //->where('userTypes', 'Mixto')
+            ->whereHas('event', function ($q) use ($orgUser) {
+                $q->where('organizer_id', $orgUser->organization_id);
+            })->get();
+        //Group certificates by event to be easier to compare/relate with attendee userTypes conditions 
+        $arbol_cert = [];
+        foreach ($certificates as $cert) {
+            $arbol_cert[$cert['event_id']] = isset($arbol_cert[$cert['event_id']]) ? $arbol_cert[$cert['event_id']] : [];
+            $arbol_cert[$cert['event_id']][$cert['_id']] = $cert;
+        }
+
+        /**
+         * LOAD ATTENDESS of organization
+         */
+        $attendees = Attendee::select('_id', 'event_id', 'properties', 'account_id')->with('event:organizer_id')->whereHas('event', function ($q) use ($orgUser) {
+            $q->where('organizer_id', $orgUser->organization_id);
+        })
+            ->where('account_id', $orgUser->account_id)
+            //->where('organizer_id', $orgUser->organization_id)
+            ->get();
+
+        //Key by event_id to be easier to compare/relate with certificate userType conditions otherwise multiple foreach should be performed
+        $arbol_attendees = [];
+        foreach ($attendees as $attendee) {
+            $arbol_attendees[$attendee['event_id']] = isset($arbol_attendees[$attendee['event_id']]) ? $arbol_attendees[$attendee['event_id']] : [];
+            $arbol_attendees[$attendee['event_id']] = $attendee;
+        }
+
+
+        /**
+         *CHECK WHICH  attendess have the same userType as the certificates in the event
+         * in order to select the certificates that belongs to the attendee 
+        */
+        $cert_asignados = [];
+        foreach ($arbol_cert as $event_id => $grupo_certs) {
+            foreach ($grupo_certs as $cert_id => $cert) {
+                $attendee = $arbol_attendees[$event_id]; //list_type_user
+                if (!isset($cert['userTypes']) || (isset($attendee['properties']['list_type_user'])
+                    && in_array($attendee['properties']['list_type_user'], $cert['userTypes']))) {
+
+                    $cert_asignados[$cert['_id']] = $cert;
+                }
+            }
+        }
+        return $cert_asignados;
+        //return JsonResource::collection($query);
         //$events = Event::where('visibility', $request->input('name'))->get();
     }
 
