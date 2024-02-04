@@ -75,7 +75,10 @@ class CertificateController extends Controller
         /**
          * LOAD ALL EVENT INSCRIPTIONS for this organization_member
          */
-        $attendees = Attendee::select('_id', 'event_id', 'properties', 'account_id') //->with('event:organizer_id')
+        $attendees = Attendee::select('_id', 'event_id', 'properties', 'account_id')
+            ->with(['event' => function ($query) {
+                $query->select('_id', 'organizer_id', 'name', 'date_from');
+            }])
             ->whereHas('event', function ($q) use ($orgUser) {
                 $q->where('organizer_id', $orgUser->organization_id);
             })
@@ -108,6 +111,7 @@ class CertificateController extends Controller
                 if (!isset($cert['userTypes']) || (isset($attendee['properties']['list_type_user'])
                     && in_array($attendee['properties']['list_type_user'], $cert['userTypes']))) {
                     $cert['attendee'] = $attendee;
+                    $cert['event'] = $attendee['event'];
                     $cert_asignados[] = $cert;
                 }
             }
