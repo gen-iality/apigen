@@ -60,7 +60,7 @@ class CertificateController extends Controller
          * LOAD CERTIFICATES
          */
         //Load all certificates of the organization
-        $certificates = Certificate::select('_id', 'name', 'event_id', 'userTypes')//->with('event:organizer_id')
+        $certificates = Certificate::select('_id', 'name', 'event_id', 'userTypes') //->with('event:organizer_id')
             //->where('userTypes', 'Mixto')
             ->whereHas('event', function ($q) use ($orgUser) {
                 $q->where('organizer_id', $orgUser->organization_id);
@@ -75,10 +75,10 @@ class CertificateController extends Controller
         /**
          * LOAD ALL EVENT INSCRIPTIONS for this organization_member
          */
-        $attendees = Attendee::select('_id', 'event_id', 'properties', 'account_id')//->with('event:organizer_id')
-        ->whereHas('event', function ($q) use ($orgUser) {
-            $q->where('organizer_id', $orgUser->organization_id);
-        })
+        $attendees = Attendee::select('_id', 'event_id', 'properties', 'account_id') //->with('event:organizer_id')
+            ->whereHas('event', function ($q) use ($orgUser) {
+                $q->where('organizer_id', $orgUser->organization_id);
+            })
             ->where('account_id', $orgUser->account_id)
             //->where('organizer_id', $orgUser->organization_id)
             ->get();
@@ -94,20 +94,20 @@ class CertificateController extends Controller
         /**
          *CHECK WHICH  attendess have the same userType as the certificates in the event
          * in order to select the certificates that belongs to the attendee 
-        */
+         */
         $cert_asignados = [];
         foreach ($arbol_cert as $event_id => $certs_by_event) {
             foreach ($certs_by_event as $cert_id => $cert) {
 
                 //certificate but current user don't have  suscription for this event
-                if (!isset($arbol_attendees[$event_id])) 
-                continue;
+                if (!isset($arbol_attendees[$event_id]))
+                    continue;
 
                 $attendee = $arbol_attendees[$event_id]; //list_type_user
 
                 if (!isset($cert['userTypes']) || (isset($attendee['properties']['list_type_user'])
                     && in_array($attendee['properties']['list_type_user'], $cert['userTypes']))) {
-
+                    $cert['attendee'] = $attendee;
                     $cert_asignados[] = $cert;
                 }
             }
