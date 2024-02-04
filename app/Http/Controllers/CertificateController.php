@@ -111,6 +111,9 @@ class CertificateController extends Controller
                 if (!isset($cert['userTypes']) || (isset($attendee['properties']['list_type_user'])
                     && in_array($attendee['properties']['list_type_user'], $cert['userTypes']))) {
                     $cert['attendee'] = $attendee;
+
+                    $attendee['event']['datetime_from'] = $attendee['event']['datetime_from']->toDateTime();
+                    $attendee['event']['datetime_from'] = $attendee['event']['datetime_from']->format(DATE_ATOM);
                     $cert['event'] = $attendee['event'];
                     $cert_asignados[] = $cert;
                 }
