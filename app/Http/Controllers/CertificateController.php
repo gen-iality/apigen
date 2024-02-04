@@ -99,13 +99,16 @@ class CertificateController extends Controller
         foreach ($arbol_cert as $event_id => $certs_by_event) {
             foreach ($certs_by_event as $cert_id => $cert) {
 
-                if (!isset($arbol_attendees[$event_id]));continue;
+                //certificate but current user don't have  suscription for this event
+                if (!isset($arbol_attendees[$event_id])) 
+                continue;
+
                 $attendee = $arbol_attendees[$event_id]; //list_type_user
 
                 if (!isset($cert['userTypes']) || (isset($attendee['properties']['list_type_user'])
                     && in_array($attendee['properties']['list_type_user'], $cert['userTypes']))) {
 
-                    $cert_asignados[$cert['_id']] = $cert;
+                    $cert_asignados[] = $cert;
                 }
             }
         }
