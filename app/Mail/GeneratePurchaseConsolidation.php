@@ -35,7 +35,7 @@ class GeneratePurchaseConsolidation extends Mailable
     public function build()
     {
         return $this
-            ->from("alerts@evius.co", "Evius")
+            ->from("alerts@geniality.com.co", "Evius")
             ->subject('Nueva compra en Evius')
             ->view('Mailers.PurchaseConsolidation');
     }

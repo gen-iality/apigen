@@ -60,13 +60,13 @@ class DiscountCodeMail extends Mailable implements ShouldQueue
         if(isset($this->event->name))
         {   
             return $this
-            ->from("alerts@evius.co", $organization->name)
+            ->from("alerts@geniality.com.co", $organization->name)
             ->subject($this->event->name)
             ->markdown('Mailers.DiscountCode');
         }
 
         return $this
-            ->from("alerts@evius.co", $organization->name)
+            ->from("alerts@geniality.com.co", $organization->name)
             ->subject('Código de descuento')
             ->markdown('Mailers.DiscountCode');
         

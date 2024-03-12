@@ -41,7 +41,7 @@ class SendSesEmail extends Mailable
        
 
         return $this
-            ->from("alerts@evius.co", $from . " EVIUS")
+            ->from("alerts@geniality.com.co", $from . " EVIUS")
             ->subject($this->subject)
             ->markdown('rsvp.rsvpinvitation');
             

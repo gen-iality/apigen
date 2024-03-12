@@ -37,7 +37,7 @@ class CorreoMocion extends Mailable
       $subject = $this->subject;
 
       return $this
-          ->from("alerts@evius.co", "Quest")
+          ->from("alerts@geniality.com.co", "Quest")
           ->subject($subject)
           ->markdown('Mailers.CorreoMocion');
     }

@@ -39,7 +39,7 @@ class genericMail extends Mailable
 
 
         return $this
-        ->from("alerts@evius.co", 'Formulario de contacto Ucronio')
+        ->from("alerts@geniality.com.co", 'Formulario de contacto Ucronio')
         ->subject($this->subject)
         ->markdown('genericMail');
         //return $this->view('genericMail');

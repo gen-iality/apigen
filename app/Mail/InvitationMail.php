@@ -261,7 +261,7 @@ class InvitationMail extends Mailable implements ShouldQueue
         if($this->onlylink){
            
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@geniality.com.co", $from)
             ->subject($this->subject)
             ->markdown('rsvp.onetimelogin');
         }
@@ -272,13 +272,13 @@ class InvitationMail extends Mailable implements ShouldQueue
         if($this->changePassword)
         {
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@geniality.com.co", $from)
             ->subject($this->subject)
             ->markdown('rsvp.changepassword');
         }
         if($this->onetimelogin){
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@geniality.com.co", $from)
             ->subject($this->subject)
             ->markdown('rsvp.onetimelogin');
         }
@@ -286,7 +286,7 @@ class InvitationMail extends Mailable implements ShouldQueue
         {   
             
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@geniality.com.co", $from)
             ->subject($this->subject)
             // ->attachData($this->ical, 'ical.ics', [
             //     'mime' => 'text/calendar',
@@ -298,12 +298,12 @@ class InvitationMail extends Mailable implements ShouldQueue
         if($this->event->_id === '60c93174a85d8f027013691f' || $this->event->_id === "609ea39ca79e084e7602214c" || $this->event->_id === "60c9313f3e6e7a525514c3c7")
         {
             return $this
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@geniality.com.co", $from)
             ->subject($this->subject)
             ->markdown('rsvp.invitation');
         }
         return $this
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@geniality.com.co", $from)
             ->subject($this->subject)
             ->attachData($this->ical, 'ical.ics', [
                 'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',

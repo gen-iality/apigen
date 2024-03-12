@@ -57,7 +57,7 @@ class SendQRs extends Mailable
 
         $organization = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id) : null;
         $from = !empty($organization) ? $organization->name : "Evius Event ";
-        $emailOrganization = !empty($organization->email) ? $organization->email : "alerts@evius.co";
+        $emailOrganization = !empty($organization->email) ? $organization->email : "alerts@geniality.com.co";
 
         $mail = $this ->from($emailOrganization, $from);
         $mail->subject($subject);

@@ -54,7 +54,7 @@ class LoginMail extends Mailable
 
 
         return $this
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@geniality.com.co", $from)
             ->subject('Login Link')
             ->markdown('rsvp.onetimelogin');
     }

@@ -181,7 +181,7 @@ class UserToUserRequest extends Mailable implements ShouldQueue
         //     'mime' => 'image/png',
         // ])
         // ->attachData($pdf->download(),'boleta.pdf')
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@geniality.com.co", $from)
             ->subject($subject)
             ->markdown('usertouser_request');
 

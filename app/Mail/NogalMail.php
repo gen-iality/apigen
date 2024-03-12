@@ -30,7 +30,7 @@ class NogalMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        $mail = $this->from('alerts@evius.co', 'Fundación Científica LHA');
+        $mail = $this->from('alerts@geniality.com.co', 'Fundación Científica LHA');
 	$mail->subject('Segundo Congreso Internacional de Medicina Integrativa 2023');
 
 	$pdf = $this->pdf;

@@ -35,7 +35,7 @@ class AdministratorMail extends Mailable
      */
     public function build()
     {
-        return $this->from('alerts@evius.co', "Invitacion administrador")
+        return $this->from('alerts@geniality.com.co', "Invitacion administrador")
             ->subject('Invitacion administrador')
             ->markdown('rsvp.administratorInvitation');
     }

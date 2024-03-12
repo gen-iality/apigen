@@ -48,7 +48,7 @@ class ExceededUsers extends Mailable
 
         //return $this->view('view.name');
         return $this
-            ->from("alerts@evius.co", "Evius")
+            ->from("alerts@geniality.com.co", "Evius")
             ->subject('Usuarios excedidos')
             ->markdown('Mailers.ExceededUsers');
     }

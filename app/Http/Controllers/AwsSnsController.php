@@ -132,7 +132,7 @@ class AwsSnsController extends Controller
             $message
                 ->to($emails, 'dslfnsd')
                 ->subject('prueba')
-                ->from('alerts@evius.co'); 
+                ->from('alerts@geniality.com.co'); 
                                 
                 $headers = $message->getHeaders();       
 

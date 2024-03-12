@@ -56,7 +56,7 @@ class BurnedTicketMail extends Mailable
 	$this->qr = $qr;
 
 	// Mail config
-        $mail = $this->from('alerts@evius.co', $event->name);
+        $mail = $this->from('alerts@geniality.com.co', $event->name);
 	$subject = $lang === 'es' ? 'Compra exitosa' : 'Successful purchase';
         $mail->subject($subject);
 

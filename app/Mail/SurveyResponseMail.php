@@ -68,7 +68,7 @@ class SurveyResponseMail extends Mailable
      */
     public function build()
     {
-        return $this->from('alerts@evius.co', "Encuesta abierta")
+        return $this->from('alerts@geniality.com.co', "Encuesta abierta")
             ->subject('Encuesta abierta')
             ->markdown('rsvp.surveyResponse');
     }

@@ -40,7 +40,7 @@ class BuyCourseMail extends Mailable implements ShouldQueue
     {
         
         return $this
-            ->from("alerts@evius.co", $this->organization)
+            ->from("alerts@geniality.com.co", $this->organization)
             ->subject("Bienvenido a " . $this->event->name)
             ->markdown('rsvp.buyCourse');
 

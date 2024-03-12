@@ -114,7 +114,7 @@ $description = $activity->name." Ver el evento en: ".$this->event_link;
                     ->address(($activity->address) ? $activity->address : $this->event_link)
                     //->addressName(($activity->address) ? $activity->address : $event_link)
                 //->coordinates(51.2343, 4.4287)
-                    ->organizer('alerts@evius.co', $activity->organizer)
+                    ->organizer('alerts@geniality.com.co', $activity->organizer)
                     //->alertMinutesBefore(60, $activity->name . " empezará dentro de poco.")
             )
             
@@ -135,7 +135,7 @@ $description = $activity->name." Ver el evento en: ".$this->event_link;
 
         $subject = $this->subject;
         return $this
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@geniality.com.co", $from)
             ->subject($subject)
             ->attachData($this->ical, 'ical.ics', [
                 'mime' => 'text/calendar;charset="UTF-8";method=REQUEST',

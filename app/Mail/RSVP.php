@@ -210,7 +210,7 @@ class RSVP extends Mailable implements ShouldQueue
                     ->address(($event->address) ? $event->address : $this->urlconfirmacion)
                     // ->addressName(($event->address) ? $event->address : "Virtual en web evius.co")
                     //->coordinates(51.2343, 4.4287)
-                    ->organizer('alerts@evius.co', $event->organizer->name)
+                    ->organizer('alerts@geniality.com.co', $event->organizer->name)
                     ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
             )->get();
     }
@@ -269,7 +269,7 @@ class RSVP extends Mailable implements ShouldQueue
         $this->logo = url($logo_evius);
         $organization = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id) : null;
         $from = !empty($organization) ? $organization->name : "Evius Event ";
-        $emailOrganization = !empty($organization->email) ? $organization->email : "alerts@evius.co";
+        $emailOrganization = !empty($organization->email) ? $organization->email : "alerts@geniality.com.co";
 
         $event = $this->event;
 

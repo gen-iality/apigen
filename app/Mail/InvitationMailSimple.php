@@ -316,7 +316,7 @@ class InvitationMailSimple extends Mailable implements ShouldQueue
 
         $organization = !empty($this->event->organizer_id) ? Organization::find($this->event->organizer_id) : null;
         $from = !empty($organization) ? $organization->name : "Evius Event ";
-        $emailOrganization = !empty($organization->email) ? $organization->email : "alerts@evius.co";
+        $emailOrganization = !empty($organization->email) ? $organization->email : "alerts@geniality.com.co";
         $gfService = new GoogleFiles();
         $event = $this->event;
         try {

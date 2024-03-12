@@ -50,7 +50,7 @@ class UserRolChangeMail extends Mailable
         App::setLocale($locale);
 
         return $this
-                ->from("alerts@evius.co" , $this->organization->name)
+                ->from("alerts@geniality.com.co" , $this->organization->name)
                 ->subject('Actualización de usuario')
                 ->markdown('Mailers.userRolChange');
     }

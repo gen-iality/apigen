@@ -36,7 +36,7 @@ class UserRegistrationMail extends Mailable implements ShouldQueue
     {
         
         return $this
-            ->from("alerts@evius.co", "Evius")
+            ->from("alerts@geniality.com.co", "Evius")
             ->subject('Registro exitoso')
             ->markdown('Mailers.UserRegistration');
         //return $this->view('vendor.mail.html.message');

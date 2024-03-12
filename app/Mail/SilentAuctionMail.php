@@ -71,12 +71,12 @@ class SilentAuctionMail extends Mailable
         if($this->userAdmin)
         {   
             $this
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@geniality.com.co", $from)
             ->subject($this->event->name)
             ->markdown('Mailers.silentAuction');
         }else{
             $this
-            ->from("alerts@evius.co", $from)
+            ->from("alerts@geniality.com.co", $from)
             ->subject($this->event->name)
             ->markdown('Mailers.silentAuctionUserA');
         }
