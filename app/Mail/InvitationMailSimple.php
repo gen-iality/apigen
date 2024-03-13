@@ -15,6 +15,7 @@ use QRCode;
 use Spatie\IcalendarGenerator\Components\Calendar as iCalCalendar;
 use Spatie\IcalendarGenerator\Components\Event as iCalEvent;
 use Spatie\IcalendarGenerator\PropertyTypes\TextPropertyType as TextPropertyType;
+use Illuminate\Support\Facades\Log;
 
 class InvitationMailSimple extends Mailable implements ShouldQueue
 {
