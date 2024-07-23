@@ -117,25 +117,32 @@ class RSVP extends Mailable implements ShouldQueue
 
         $link = '';
         $this->urlOrigin = isset($urlOrigin) ? $urlOrigin : config('app.front_url');
-        if (!$eventUser->anonymous) {
-            // Admin SDK API to generate the sign in with email link.
-            $firebasaUser = $auth->getUserByEmail($email);
-            if ($firebasaUser->emailVerified) {
 
-                $link = $auth->getSignInWithEmailLink(
-                    $email,
-                    [
-                        "url" => $this->urlOrigin . "/loginWithCode?email=" . urlencode($email) . "&event_id=" . $event->_id,
-                    ]
-                );
-            } else {
-                $link = $auth->getEmailVerificationLink(
-                    $email,
-                    [
-                        "url" => $this->urlOrigin . "/loginWithCode?email=" . urlencode($email) . "&event_id=" . $event->_id,
-                    ]
-                );
-            }
+        // if (!$eventUser->anonymous) {
+        //     // Admin SDK API to generate the sign in with email link.
+        //     $firebasaUser = $auth->getUserByEmail($email);
+        //     if ($firebasaUser->emailVerified) {
+
+        //         $link = $auth->getSignInWithEmailLink(
+        //             $email,
+        //             [
+        //                 "url" => $this->urlOrigin . "/loginWithCode?email=" . urlencode($email) . "&event_id=" . $event->_id,
+        //             ]
+        //         );
+        //     } else {
+        //         $link = $auth->getEmailVerificationLink(
+        //             $email,
+        //             [
+        //                 "url" => $this->urlOrigin . "/loginWithCode?email=" . urlencode($email) . "&event_id=" . $event->_id,
+        //             ]
+        //         );
+        //     }
+        // } else {
+        //     $link = $this->urlOrigin . "/landing/" . $event->_id . "/evento&email=" . $email . "&names=" . $eventUser_name;
+        // }
+
+        if(!$eventUser->anonymous) {
+            $link = $this->urlOrigin . "/loginWithCode?email=" . urlencode($email) . "&event_id=" . $event->_id;
         } else {
             $link = $this->urlOrigin . "/landing/" . $event->_id . "/evento&email=" . $email . "&names=" . $eventUser_name;
         }
