@@ -141,6 +141,8 @@ class RSVP extends Mailable implements ShouldQueue
         //     $link = $this->urlOrigin . "/landing/" . $event->_id . "/evento&email=" . $email . "&names=" . $eventUser_name;
         // }
 
+        // Se deshabilito verificación de correo
+        // porque los usuarios perciben el link como ingreso más no como validación de correo
         if(!$eventUser->anonymous) {
             $link = $this->urlOrigin . "/loginWithCode?email=" . urlencode($email) . "&event_id=" . $event->_id;
         } else {
