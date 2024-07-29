@@ -74,7 +74,7 @@
             </tr>
             <tr>            
                 <td style="font-size:13px;text-align:center;padding:10px 0 8px 0;display:block"> 
-                    Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co
+                    Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo alerts@geniality.com.co
                </td>
             </tr>                       
             <tr>

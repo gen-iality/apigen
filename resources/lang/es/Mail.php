@@ -11,7 +11,7 @@ return [
     'date' => 'Fecha',
     'hora' => 'Hora',
     'successful_enrollment' => 'la inscripción ha sido exitosa al evento',
-    'support_mail' => 'Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co  ',
+    'support_mail' => 'Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo alerts@geniality.com.co',
     //==================================== Translations Email Change Password====================================//
     'password_change_successful' => 'su cambio de contraseña se ha realizado con éxito',
     'new_password' => 'Su nueva contraseña es',

@@ -51,7 +51,7 @@
             <tr>
                 <td style="font-size:13px;text-align:center;padding:10px;display:block">
                     Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al
-                    siguiente correo soporte@evius.co
+                    siguiente correo alerts@geniality.com.co
                 </td>
             </tr>
             <tr>

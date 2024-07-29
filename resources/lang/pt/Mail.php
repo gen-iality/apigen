@@ -10,5 +10,5 @@ return [
     'date' => 'Data',
     'hora' => 'Horário',
     'successful_enrollment' => 'sua inscrição para o evento foi realizada com sucesso',
-    'support_mail' => 'Caso tenha algum problema para acessar a plataforma durante o evento, envie um e-mail para soporte@evius.co',    
+    'support_mail' => 'Caso tenha algum problema para acessar a plataforma durante o evento, envie um e-mail para alerts@geniality.com.co',    
 ];

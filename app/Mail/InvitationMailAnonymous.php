@@ -107,7 +107,7 @@ class InvitationMailAnonymous extends Mailable implements ShouldQueue
                         ->uniqueIdentifier($event->_id)
                         ->createdAt(new \DateTime())
                         ->address(($event->address) ? $event->address :  $this->urlconfirmacion)
-                        ->organizer('soporte@evius.co', $event->organizer->name)
+                        ->organizer('alerts@geniality.com.co', $event->organizer->name)
                         ->alertMinutesBefore(60, $event->name . " empezará dentro de poco.")
                 )->get();
 

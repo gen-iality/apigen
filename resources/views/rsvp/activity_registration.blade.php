@@ -15,7 +15,7 @@
 
 <div style="font-size: 8px;color: gray;font-style: italic">
 <p >Si tiene alguna inquietud puede contactarnos por cualquiera de estos medios de soporte:</p>
-<p><a href="mail://soporte@evius.co  ">Correo electónico: soporte@evius.co </a></p>
+<p><a href="mail://alerts@geniality.com.co  ">Correo electónico: alerts@geniality.com.co </a></p>
 <p ><a href="tel:+5715451988">Linea teléfonica Bogotá (571)575451988</a></p>
 <p ><a href="https://api.whatsapp.com/send?phone=573002162757&text=Pregunta%20de%20EVIUS%20{{$activity->name}}&source=&data=&app_absent=">
 Vía whatsapp 

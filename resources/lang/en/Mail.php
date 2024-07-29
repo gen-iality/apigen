@@ -11,7 +11,7 @@ return [
     'date' => 'Date',
     'hora' => 'Hour',
     'successful_enrollment' => 'registration for the event has been successful',
-    'support_mail' => 'If you have an problems logging in to the platform or during the sessions, please do not hesitate to contact us at soporte@evius.co',
+    'support_mail' => 'If you have an problems logging in to the platform or during the sessions, please do not hesitate to contact us at alerts@geniality.com.co',
      //==================================== Translations Email Change Password====================================//
     'password_change_successful' => 'your password change was successful',
     'new_password' => 'Your new password is',

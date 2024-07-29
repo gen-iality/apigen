@@ -48,7 +48,7 @@
     algunas caracteristicas pueden no estar disponibles en navegadores no soportados.
 </p>
 <p style="font-size: 15px;color: gray;font-style: italic">
-    Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo soporte@evius.co  
+    Si tiene inconvenientes para ingresar a la plataforma o durante las sesiones, no dude en escribirnos al siguiente correo alerts@geniality.com.co  
 </p>
 
 {{-- <div class="centered">
