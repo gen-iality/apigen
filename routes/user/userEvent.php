@@ -68,6 +68,9 @@ Route::group(
     }
 );
 
+Route::put('events/{event}/eventuserscertificate/{eventuser}', 'EventUserController@update');
+Route::delete('events/{event}/eventuserscertificate/{eventuser}', 'EventUserController@destroy');
+
 /***************
  * ActivityAssistant asistentes a una actividad(charlas) dentro de un evento
  ****************/
